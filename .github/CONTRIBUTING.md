@@ -12,7 +12,7 @@ You can find the `.R` file that generates the `.Rd` by reading the comment in th
 
 ## Bigger changes
 
-If you want to make a bigger change, it's a good idea to first file an issue and make sure someone from the team agrees that it’s needed. 
+If you want to make a bigger change, please first file an issue and make sure someone from the team agrees that it’s needed. 
 If you’ve found a bug, please file an issue that illustrates the bug with a minimal 
 [reprex](https://www.tidyverse.org/help/#reprex) (this will also help you write a unit test, if needed).
 
@@ -30,6 +30,16 @@ If you’ve found a bug, please file an issue that illustrates the bug with a mi
 
 *  For user-facing changes, add a bullet to the top of `NEWS.md` (i.e. just below the first header). Follow the style described in <https://style.tidyverse.org/news.html>.
 
+*  Pull request should include unit testing of the new feature or bug fix.
+    * Unit tests will typically include testing using the testthat package, and testing of images (i.e. ggplots) using the vdiffr package.
+    * To test the structure of a ggplot object, you have want to first build the plot using `ggplot2::ggplot_build()`. Then you can programitcally test the contents of the plot.
+    
+*   Errors, warnings, and messages are created with `cli::cli_abort()`, `cli::cli_warn()`, `cli::cli_inform()`. We use the convention to first print the error message, then a helpful message when it applies. For example, 
+
+      ```r
+      cli::cli_abort(c("!" = "There was an error.",
+                       "i" = "a helpful message to resolve error"))
+      ```
 ### Code style
 
 *   New code should follow the tidyverse [style guide](https://style.tidyverse.org). 
