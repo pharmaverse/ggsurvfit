@@ -9,3 +9,47 @@ template:
     heading_font: {google: "Atkinson Hyperlegible"}
     text-muted: "#FFFFFF"
 
+authors:
+  Daniel D. Sjoberg:
+    href: "https://www.danieldsjoberg.com/"
+
+development:
+  mode: auto
+  version_label: default
+
+navbar:
+  bg: primary
+  structure:
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, github]
+
+reference:
+  - title: Build survfit
+  - contents:
+      - survfit2
+
+  - title: Build Plot
+  - contents:
+      - ggsurvfit
+
+  - title: Add to Plot
+  - contents:
+      - add_confidence_interval
+      - add_censor_mark
+      - add_quantile
+      - add_risktable
+
+  - title: Themes
+  - contents:
+      - theme_ggsurvfit_risktable
+      - theme_ggsurvfit_survfit
+
+  - title: Utilities
+  - contents:
+      - tidy_survfit
+      - stat_stepribbon
+      - survfit_pvalue
+
+  - title: Data
+  - contents:
+      - df_lung

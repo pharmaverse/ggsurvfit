@@ -1,18 +1,36 @@
 Package: ggsurvfit
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Version: 0.0.0
+Authors@R: c(
+    person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0003-0862-2018")),
+    person("Mark", "Baillie", , "bailliem@gmail.com", role = "aut")
+  )
 Description: What the package does (one paragraph).
 License: GPL (>= 3)
 URL: https://github.com/ddsjoberg/ggsurvfit,
     http://www.danieldsjoberg.com/ggsurvfit/
 BugReports: https://github.com/ddsjoberg/ggsurvfit/issues
+Depends: 
+    R (>= 2.10)
+Imports: 
+    broom (>= 1.0.0),
+    cli (>= 3.0.0),
+    cowplot,
+    dplyr (>= 1.0.0),
+    ggplot2 (>= 3.3.0),
+    gtable,
+    rlang (>= 1.0.0),
+    survival,
+    tidyr  (>= 1.0.0)
 Suggests: 
     covr,
-    testthat (>= 3.0.0)
+    spelling,
+    testthat (>= 3.0.0),
+    vdiffr (>= 1.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+Language: en-US

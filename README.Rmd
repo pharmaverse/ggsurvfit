@@ -22,38 +22,90 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of ggsurvfit is to ...
+## Introduction
+
+The {ggsurvfit} package eases the creation of time-to-event (aka survival) endpoint figures with ggplot.
+The concise and modular code creates images that are ready for sharing or publication.
+Each of the functions that add to or modify the existing ggplot are written as proper ggplot geoms or stat methods, allowing the functions from this package to be combined with functions from ggplot and other ggplot extensions.
+
+It's recommended to use the `survfit2()` function with this package, rather than `survival::survfit()` to ensure all quantities are able to be calculated from any environment the functions are called.
 
 ## Installation
 
-You can install the development version of ggsurvfit from [GitHub](https://github.com/) with:
+You can install the development version of ggsurvfit from [GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("ddsjoberg/ggsurvfit")
 ```
 
-## Example
+## Examples
 
-This is a basic example which shows you how to solve a common problem:
+Let's begin with an example illustrating a common Kaplan-Meier survival curve.
 
-```{r example}
+```{r example, fig.height=4.5}
 library(ggsurvfit)
-## basic example code
+library(ggplot2)
+
+p <- 
+  survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+  ggsurvfit() +
+  add_censor_mark() +
+  add_confidence_interval() +
+  add_risktable() +
+  add_quantile(color = "gray40")
+p
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+<hr>
+Because each of the functions are written as proper ggplot geoms, you can add any ggplot function to modify the figure.
 
-```{r cars}
-summary(cars)
+```{r example-styled}
+p +
+  theme_bw() + 
+  theme(legend.position = "bottom") +
+  labs(
+    y = "Probability of survival",
+    x = "Months since treatment",
+    title = "Kaplan-Meier Estimate of Survival by Sex",
+    # remove the fill and color legend labels (Sex appears in title)
+    fill = "", color = ""
+  ) + 
+  # reduce padding on edges of figure, and format axes
+  scale_y_continuous(label = scales::percent, expand = c(0.005, 0.005)) +
+  scale_x_continuous(breaks = 0:6*6, expand = expansion(mult = c(0.015, 0.085)))
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
+<hr>
+The package also supports unstratified models and you can add multiple quantile guidelines.
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r example-unstrat, fig.height=3.5}
+survfit2(Surv(time, status) ~ 1, data = df_lung) |>
+  ggsurvfit() +
+  add_quantile(linetype = 3) +
+  add_quantile(y_value = 0.25, linetype = 2) +
+  add_confidence_interval() +
+  add_risktable()
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+<hr>
+You can even facet...but you _cannot_ facet with the risktable, however.
+
+```{r example-facet, fig.height=3.5}
+survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+  ggsurvfit() +
+  add_censor_mark(shape = 4) +
+  add_quantile(linetype = 3) +
+  add_confidence_interval() +
+  ggplot2::facet_grid(~strata)
+```
+
+<hr>
+The package works seamlessly with other ggplot extension package, such as {gghighlight}.
+
+```{r example-gghighlight, fig.height=3.5}
+survfit2(Surv(time, status) ~ sex, data = df_lung) |> 
+  ggsurvfit() +
+  ggplot2::labs(color = "Gender") +
+  gghighlight::gghighlight(strata == "Female", calculate_per_facet = TRUE)
+```
