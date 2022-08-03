@@ -1,4 +1,11 @@
 url: http://www.danieldsjoberg.com/ggsurvfit/
+
 template:
   bootstrap: 5
+  bootswatch: simplex
+  bslib:
+    primary: "#3c523c"
+    base_font: {google: "Atkinson Hyperlegible"}
+    heading_font: {google: "Atkinson Hyperlegible"}
+    text-muted: "#FFFFFF"
 
