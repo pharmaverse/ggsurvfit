@@ -4,7 +4,7 @@
 \alias{ggcuminc}
 \title{Plot Cumulative Incidence}
 \usage{
-ggcuminc(x, outcome = NULL, theme = NULL, ...)
+ggcuminc(x, outcome = NULL, theme = theme_ggsurvfit_survfit(), ...)
 }
 \arguments{
 \item{x}{a 'cuminc' object created with \code{tidycmprsk::cuminc()}}

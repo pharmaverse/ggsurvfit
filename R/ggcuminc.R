@@ -16,7 +16,7 @@
 #'   ggcuminc(outcome = "death from cancer") +
 #'   add_confidence_interval() +
 #'   add_risktable()
-ggcuminc <- function(x, outcome = NULL, theme = NULL, ...) {
+ggcuminc <- function(x, outcome = NULL, theme = theme_ggsurvfit_survfit(), ...) {
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "tidycuminc")) {
     cli_abort(

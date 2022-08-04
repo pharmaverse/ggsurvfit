@@ -4,7 +4,7 @@
 \alias{ggsurvfit}
 \title{Plot Survival Probability}
 \usage{
-ggsurvfit(x, type = "survival", theme = NULL, ...)
+ggsurvfit(x, type = "survival", theme = theme_ggsurvfit_survfit(), ...)
 }
 \arguments{
 \item{x}{a 'survfit' object}

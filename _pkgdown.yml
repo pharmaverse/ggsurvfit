@@ -48,6 +48,7 @@ reference:
   - title: Utilities
   - contents:
       - tidy_survfit
+      - tidy_cuminc
       - stat_stepribbon
       - survfit_pvalue
 

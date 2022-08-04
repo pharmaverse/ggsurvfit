@@ -5,12 +5,15 @@
 #'
 #' @param theme must be one of `c("none")`
 #' - `"none"` no styling applied to risk table
-theme_ggsurvfit_survfit <- function(theme = c("none")) {
+theme_ggsurvfit_survfit <- function(theme = c("default", "none")) {
   theme <- match.arg(theme)
-
 
   themes_survfit <-
     list(
+      "default" =
+        list(
+          theme_bw()
+        ),
       "none" = list()
     )
 

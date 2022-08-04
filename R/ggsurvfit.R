@@ -32,7 +32,7 @@
 #'   add_confidence_interval() +
 #'   add_quantile() +
 #'   add_risktable()
-ggsurvfit <- function(x, type = "survival", theme = NULL, ...) {
+ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit_survfit(), ...) {
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "survfit")) {
     cli_abort(

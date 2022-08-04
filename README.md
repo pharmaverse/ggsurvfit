@@ -76,8 +76,8 @@ p +
     fill = "", color = ""
   ) + 
   # reduce padding on edges of figure, and format axes
-  scale_y_continuous(label = scales::percent, expand = c(0.005, 0.005)) +
-  scale_x_continuous(breaks = 0:6*6, expand = expansion(mult = c(0.015, 0.085)))
+  scale_y_continuous(label = scales::percent, expand = c(0.01, 0)) +
+  scale_x_continuous(breaks = 0:5*6, expand = c(0.02, 0))
 ```
 
 <img src="man/figures/README-example-styled-1.png" width="100%" />
@@ -119,10 +119,10 @@ The package works seamlessly with other ggplot extension package, such
 as {gghighlight}.
 
 ``` r
-survfit2(Surv(time, status) ~ sex, data = df_lung) |> 
+survfit2(Surv(time, status) ~ ph.ecog, data = df_lung) |> 
   ggsurvfit() +
   ggplot2::labs(color = "Gender") +
-  gghighlight::gghighlight(strata == "Female", calculate_per_facet = TRUE)
+  gghighlight::gghighlight(strata == "Asymptomatic", calculate_per_facet = TRUE)
 #> Warning: Tried to calculate with group_by(), but the calculation failed.
 #> Falling back to ungrouped filter operation...
 ```
@@ -143,8 +143,21 @@ cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
   add_quantile(y_value = 0.20) +
   add_risktable() +
   theme_bw() + 
+  labs(x = "Months Since Treatment") +
   theme(legend.position = "bottom") +
-  scale_x_continuous(breaks = 0:4 * 6)
+  scale_y_continuous(label = scales::percent, expand = c(0.02, 0)) +
+  scale_x_continuous(breaks = 0:4 * 6, expand = c(0.02, 0))
 ```
 
 <img src="man/figures/README-example-cuminc-1.png" width="100%" />
+
+## Related Packages
+
+| Package            | CRAN | Risk Table |
+|:-------------------|:-----|:-----------|
+| survminer          | X    | X          |
+| `galley::ggsurv()` | X    |            |
+| ggfortify          | X    |            |
+| visR               | X    | X          |
+| iwillsurvive       |      | X          |
+| KMunicate          | X    | X          |
