@@ -128,9 +128,13 @@ cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
   scale_x_continuous(breaks = 0:4 * 6, expand = c(0.02, 0))
 ```
 
+```{r, echo=FALSE}
+knitr::knit_exit()
+```
+
 ## Related Packages
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, size="tiny"}
 dplyr::tribble(
   ~Package,             ~CRAN, ~`Risk Table`,
   "survminer",          "X",   "X",

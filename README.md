@@ -150,14 +150,3 @@ cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
 ```
 
 <img src="man/figures/README-example-cuminc-1.png" width="100%" />
-
-## Related Packages
-
-| Package            | CRAN | Risk Table |
-|:-------------------|:-----|:-----------|
-| survminer          | X    | X          |
-| `galley::ggsurv()` | X    |            |
-| ggfortify          | X    |            |
-| visR               | X    | X          |
-| iwillsurvive       |      | X          |
-| KMunicate          | X    | X          |
