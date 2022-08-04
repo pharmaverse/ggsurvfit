@@ -122,8 +122,6 @@ survfit2(Surv(time, status) ~ ph.ecog, data = df_lung) |>
   ggsurvfit() +
   ggplot2::labs(color = "Gender") +
   gghighlight::gghighlight(strata == "Asymptomatic", calculate_per_facet = TRUE)
-#> Warning: Tried to calculate with group_by(), but the calculation failed.
-#> Falling back to ungrouped filter operation...
 ```
 
 <img src="man/figures/README-example-gghighlight-1.png" width="100%" />
