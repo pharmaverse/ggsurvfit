@@ -49,11 +49,11 @@ library(ggplot2)
 
 p <- 
   survfit2(Surv(time, status) ~ sex, data = df_lung) |>
-  ggsurvfit() +
+  ggsurvfit(size = 1) +
   add_censor_mark() +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(color = "gray40")
+  add_quantile(color = "gray40", size = 1)
 p
 ```
 
