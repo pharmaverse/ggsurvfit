@@ -5,13 +5,13 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 [![Codecov test
 coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
-[![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Introduction
@@ -88,9 +88,9 @@ quantile guidelines.
 
 ``` r
 survfit2(Surv(time, status) ~ 1, data = df_lung) |>
-  ggsurvfit() +
-  add_quantile(linetype = 3) +
-  add_quantile(y_value = 0.25, linetype = 2) +
+  ggsurvfit(size = 1) +
+  add_quantile(linetype = 3, size = 1) +
+  add_quantile(y_value = 0.25, linetype = 2, size = 1) +
   add_confidence_interval() +
   add_risktable()
 ```
@@ -103,9 +103,9 @@ You can even facet…but you *cannot* facet with the risktable, however.
 
 ``` r
 survfit2(Surv(time, status) ~ sex, data = df_lung) |>
-  ggsurvfit() +
+  ggsurvfit(size = 1) +
   add_censor_mark(shape = 4) +
-  add_quantile(linetype = 3) +
+  add_quantile(linetype = 3, size = 1) +
   add_confidence_interval() +
   ggplot2::facet_grid(~strata)
 ```
@@ -119,7 +119,7 @@ as {gghighlight}.
 
 ``` r
 survfit2(Surv(time, status) ~ ph.ecog, data = df_lung) |> 
-  ggsurvfit() +
+  ggsurvfit(size = 1) +
   ggplot2::labs(color = "Gender") +
   gghighlight::gghighlight(strata == "Asymptomatic", calculate_per_facet = TRUE)
 ```
@@ -135,9 +135,9 @@ competing events.
 library(tidycmprsk)
 
 cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
-  ggcuminc(outcome = "death from cancer") +
+  ggcuminc(outcome = "death from cancer", size = 1) +
   add_confidence_interval() +
-  add_quantile(y_value = 0.20) +
+  add_quantile(y_value = 0.20, size = 1) +
   add_risktable() +
   labs(x = "Months Since Treatment") +
   theme(legend.position = "bottom") +
