@@ -1,6 +1,5 @@
-#' Plot survfit object
+#' Plot Survival Probability
 #'
-#' @param x a survfit object
 #' @param theme a survfit theme typically returned from `theme_ggsurvfit_survfit()`
 #' @param ... arguments passed to `ggplot2::geom_step(...)`, e.g. `size = 2`
 #' @inheritParams tidy_survfit
@@ -46,12 +45,42 @@ ggsurvfit <- function(x, type = "survival", theme = NULL, ...) {
   df <-  tidy_survfit(x = x, type = type)
 
   # construct aes() call -------------------------------------------------------
+  aes_args <- .construct_aes(df)
+
+  # construction ggplot object -------------------------------------------------
+  gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)
+
+  # assign class and return object ---------------------------------------------
+  class(gg) <- c("ggsurvfit", class(gg))
+
+  gg
+}
+
+.construct_ggplot <- function(x, df, aes_args, theme, ...) {
+  rlang::inject(ggplot2::ggplot(data = df, ggplot2::aes(!!!aes_args))) +
+    list(
+      ggplot2::geom_step(...),
+      ggplot2::labs(
+        y = .default_y_axis_label(df),
+        x = .default_x_axis_label(x)
+      ),
+      switch("strata" %in% names(df),
+             ggplot2::labs(
+               color = df[["strata_label"]][1],
+               fill = df[["strata_label"]][1]
+             )
+      ),
+      theme
+    )
+}
+
+.construct_aes <- function(df) {
   aes_args <-
     list(
-    x = rlang::expr(.data$time),
-    y = rlang::expr(.data$estimate),
-    is_ggsurvfit = TRUE
-  )
+      x = rlang::expr(.data$time),
+      y = rlang::expr(.data$estimate),
+      is_ggsurvfit = TRUE
+    )
   if ("strata" %in% names(df)) {
     aes_args <- c(aes_args, list(
       color = rlang::expr(.data$strata),
@@ -73,36 +102,13 @@ ggsurvfit <- function(x, type = "survival", theme = NULL, ...) {
       censor_count = rlang::expr(.data$n.censor)
     ))
   }
-
-  # construction ggplot object -------------------------------------------------
-  gg <-
-    rlang::inject(ggplot2::ggplot(data = df, ggplot2::aes(!!!aes_args))) +
-    list(
-      ggplot2::geom_step(...),
-      ggplot2::labs(
-        y = .default_y_axis_label(type, df),
-        x = .default_x_axis_label(x)
-      ),
-      switch("strata" %in% names(df),
-        ggplot2::labs(
-          color = df[["strata_label"]][1],
-          fill = df[["strata_label"]][1]
-        )
-      ),
-      theme
-    )
-
-  # assign class and return object ---------------------------------------------
-  class(gg) <- c("ggsurvfit", class(gg))
-
-  gg
 }
 
 .is_ggsurvfit <- function(x, fun_name, required_aes_cols = NULL) {
   if (
     (any(!c(required_aes_cols, "is_ggsurvfit") %in% names(x))) ||
     (!isTRUE(x$is_ggsurvfit[1]))
-    ) {
+  ) {
     cli::cli_abort(c(
       "x" = "Cannot use {.code {fun_name}} in this context.",
       "i" = "Use {.code {fun_name}} after a call to {.code autofit.survfit()}"
@@ -113,29 +119,41 @@ ggsurvfit <- function(x, type = "survival", theme = NULL, ...) {
 }
 
 # function to assign default y-axis label from the statistic type
-.default_y_axis_label <- function(type, df) {
+.default_y_axis_label <- function(df) {
   df[["estimate_type_label"]][1] %||% "estimate"
 }
 
 # function to assign default x-axis label from the survfit() object
 .default_x_axis_label <- function(x) {
+  # extract formula and data ---------------------------------------------------
   if (inherits(x, "survfit2")) {
+    formula <- .extract_formula_from_surfit(x)
+    data <- .extract_data_from_surfit(x)
+  }
+  else if (inherits(x, "tidycuminc")) {
+    formula <- x$formula
+    data <- x$data
+  } else {
+    formula <- data <- NULL
+  }
+
+  # extract time variable ------------------------------------------------------
+  if (!is.null(formula)) {
     time_variable <-
-      .extract_formula_from_surfit(x) %>%
+      formula %>%
       all.vars() %>%
       `[`(1) %>%
       {
         switch(!is.na(.),
-          .
+               .
         )
       } # convert NA to NULL, otherwise, return varname
-    data <- .extract_data_from_surfit(x)
   } else {
-    time_variable <- data <- NULL
+    time_variable <- NULL
   }
 
-  x_label <-
-    attr(data[[time_variable]], "label") %||%
+  # return time label ----------------------------------------------------------
+  attr(data[[time_variable]], "label") %||%
     time_variable %||%
     "time"
 }

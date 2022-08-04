@@ -2,12 +2,12 @@
 % Please edit documentation in R/ggsurvfit.R
 \name{ggsurvfit}
 \alias{ggsurvfit}
-\title{Plot survfit object}
+\title{Plot Survival Probability}
 \usage{
 ggsurvfit(x, type = "survival", theme = NULL, ...)
 }
 \arguments{
-\item{x}{a survfit object}
+\item{x}{a 'survfit' object}
 
 \item{type}{type of statistic to report. Default is \code{"survival"}.
 Must be one of the following:\tabular{ll}{
@@ -25,7 +25,7 @@ Must be one of the following:\tabular{ll}{
 a ggplot
 }
 \description{
-Plot survfit object
+Plot Survival Probability
 }
 \section{Details}{
 

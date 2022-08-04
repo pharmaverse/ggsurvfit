@@ -21,17 +21,17 @@ survival) endpoint figures with ggplot. The concise and modular code
 creates images that are ready for sharing or publication. Each of the
 functions that add to or modify the existing ggplot are written as
 proper ggplot geoms or stat methods, allowing the functions from this
-package to be combined with functions from ggplot (and other ggplot
-extensions).
+package to be combined with functions from ggplot and other ggplot
+extensions.
 
 It’s recommended to use the `survfit2()` function with this package,
-rather than `survival::survfit()` to ensure that all quantities are able
-to be calculated from any environment the functions are called from.
+rather than `survival::survfit()` to ensure all quantities are able to
+be calculated from any environment the functions are called.
 
 ## Installation
 
 You can install the development version of ggsurvfit from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
 
 ``` r
 # install.packages("devtools")
@@ -94,7 +94,6 @@ survfit2(Surv(time, status) ~ 1, data = df_lung) |>
   add_quantile(y_value = 0.25, linetype = 2) +
   add_confidence_interval() +
   add_risktable()
-#> Warning: Ignoring unknown parameters: y_value
 ```
 
 <img src="man/figures/README-example-unstrat-1.png" width="100%" />
@@ -129,3 +128,23 @@ survfit2(Surv(time, status) ~ sex, data = df_lung) |>
 ```
 
 <img src="man/figures/README-example-gghighlight-1.png" width="100%" />
+
+<hr>
+
+The package also plots cumulative incidence estimates in the presence of
+competing events.
+
+``` r
+library(tidycmprsk)
+
+cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
+  ggcuminc(outcome = "death from cancer") +
+  add_confidence_interval() +
+  add_quantile(y_value = 0.20) +
+  add_risktable() +
+  theme_bw() + 
+  theme(legend.position = "bottom") +
+  scale_x_continuous(breaks = 0:4 * 6)
+```
+
+<img src="man/figures/README-example-cuminc-1.png" width="100%" />

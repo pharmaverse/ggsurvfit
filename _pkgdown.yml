@@ -31,6 +31,7 @@ reference:
   - title: Build Plot
   - contents:
       - ggsurvfit
+      - ggcuminc
 
   - title: Add to Plot
   - contents:

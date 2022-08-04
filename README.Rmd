@@ -109,3 +109,19 @@ survfit2(Surv(time, status) ~ sex, data = df_lung) |>
   ggplot2::labs(color = "Gender") +
   gghighlight::gghighlight(strata == "Female", calculate_per_facet = TRUE)
 ```
+
+<hr>
+The package also plots cumulative incidence estimates in the presence of competing events.
+
+```{r example-cuminc}
+library(tidycmprsk)
+
+cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
+  ggcuminc(outcome = "death from cancer") +
+  add_confidence_interval() +
+  add_quantile(y_value = 0.20) +
+  add_risktable() +
+  theme_bw() + 
+  theme(legend.position = "bottom") +
+  scale_x_continuous(breaks = 0:4 * 6)
+```

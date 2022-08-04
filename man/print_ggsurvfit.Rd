@@ -4,11 +4,17 @@
 \alias{print_ggsurvfit}
 \alias{print.ggsurvfit}
 \alias{knit_print.ggsurvfit}
+\alias{print.ggcuminc}
+\alias{knit_print.ggcuminc}
 \title{Print ggsurvfit object}
 \usage{
 \method{print}{ggsurvfit}(x, ...)
 
 knit_print.ggsurvfit(x, ...)
+
+\method{print}{ggcuminc}(x, ...)
+
+knit_print.ggcuminc(x, ...)
 }
 \arguments{
 \item{x}{an object of class 'ggsurvfit'}

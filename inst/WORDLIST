@@ -7,6 +7,7 @@ ORCID
 Surv
 Survfit
 behaviour
+cuminc
 depricated
 geoms
 gghighlight
@@ -18,4 +19,5 @@ stairstep
 surfit
 survfit
 tibble
+tidycmprsk
 unstratified

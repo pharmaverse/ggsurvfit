@@ -6,7 +6,7 @@
 #' survfit object is created with `survfit2()`.
 #' It's recommended to always use this function with `survfit2()`.
 #'
-#' @param x a survfit object
+#' @param x a 'survfit' object
 #' @param times numeric vector of times. Default is `NULL`,
 #' which returns all observed times.
 #' @param type type of statistic to report. Default is `"survival"`.
@@ -31,6 +31,10 @@ tidy_survfit <- function(x,
                          times = NULL,
                          type = c("survival", "risk", "cumhaz")) {
   # check inputs ---------------------------------------------------------------
+  if (!inherits(x, "survfit")) {
+    cli_abort(c("!" = "Argument {.code x} must be class {.cls survfit}.",
+                "i" = "Create the object with {.code survfit2()}"))
+  }
   if (is.character(type)) type <- match.arg(type)
   if (!is.null(times) && any(times < 0)) {
     cli_abort("The {.var times} cannot be negative.")
@@ -74,30 +78,25 @@ tidy_survfit <- function(x,
     return(x)
   }
 
-  # make the stratum a factor so it will sort properly later
-  x$strata <- factor(x$strata, levels = unique(x$strata))
+
 
   # if not a survift2 object, do not attempt to extract information from survfit object
-  if (!inherits(survfit, "survfit2")) {
+  if (!inherits(survfit, c("survfit2", "tidycuminc"))) {
     x$strata_label <- "strata"
+    # make the stratum a factor so it will sort properly later
+    x$strata <- factor(x$strata, levels = unique(x$strata))
     return(x)
   }
 
   # first extract needed item from survfit call
-  call_list <- survfit$call %>% as.list()
-  formula <-
-    rlang::eval_tidy(
-      call_list$formula,
-      env = survfit$.Environment
-    )
-  data <-
-    tryCatch(
-      rlang::eval_tidy(
-        call_list$data,
-        env = survfit$.Environment
-      ),
-      error = function(e) NULL
-    )
+  if (inherits(survfit, "survfit2")) {
+    formula <- .extract_formula_from_surfit(survfit)
+    data <- .extract_data_from_surfit(survfit)
+  }
+  else if (inherits(survfit, "tidycuminc")) {
+    formula <- survfit$formula
+    data <- survfit$data
+  }
 
   # get a list of the stratum variables
   formula_rhs <- formula
@@ -142,6 +141,9 @@ tidy_survfit <- function(x,
     }
   }
 
+  # make the stratum a factor so it will sort properly later
+  x$strata <- factor(x$strata, levels = unique(x$strata))
+
   # return tidy tibble
   x
 }
@@ -151,11 +153,11 @@ tidy_survfit <- function(x,
   if (rlang::is_string(type)) {
     .transfun <-
       switch(type,
-        survival = function(y) y,
-        risk = function(y) 1 - y,
-        # survfit object contains an estimate for Cumhaz and SE based on Nelson-Aalen with or without correction for ties
-        # However, no CI is calculated automatically. For plotting, the MLE estimator is used for convenience.
-        cumhaz = function(y) -log(y)
+             survival = function(y) y,
+             risk = function(y) 1 - y,
+             # survfit object contains an estimate for Cumhaz and SE based on Nelson-Aalen with or without correction for ties
+             # However, no CI is calculated automatically. For plotting, the MLE estimator is used for convenience.
+             cumhaz = function(y) -log(y)
       )
   } else {
     .transfun <- type
@@ -253,8 +255,8 @@ tidy_survfit <- function(x,
   # create tibble of times
   df_times <-
     switch(as.character("strata" %in% names(x)),
-      "TRUE" = dplyr::tibble(time = list(times), strata = unique(x$strata)),
-      "FALSE" = dplyr::tibble(time = list(times))
+           "TRUE" = dplyr::tibble(time = list(times), strata = unique(x$strata)),
+           "FALSE" = dplyr::tibble(time = list(times))
     ) %>%
     tidyr::unnest(cols = .data$time)
 

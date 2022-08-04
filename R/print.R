@@ -23,7 +23,7 @@ print.ggsurvfit <- function(x, ...) {
     x_eval <- rlang::inject(.construct_risktable(x, !!!risktable_args))
   } else {
     # remove ggsurvfit class, and print with default method
-    x_eval <- structure(x, class = setdiff(class(x), "ggsurvfit"))
+    x_eval <- structure(x, class = setdiff(class(x), c("ggsurvfit", "ggcuminc")))
   }
 
   # print and return object
@@ -34,5 +34,18 @@ print.ggsurvfit <- function(x, ...) {
 #' @export
 #' @rdname print_ggsurvfit
 knit_print.ggsurvfit <- function(x, ...) {
+  print(x, ...)
+}
+
+#' @export
+#' @rdname print_ggsurvfit
+print.ggcuminc <- function(x, ...) {
+  # print and return object
+  print.ggsurvfit(x)
+}
+
+#' @export
+#' @rdname print_ggsurvfit
+knit_print.ggcuminc <- function(x, ...) {
   print(x, ...)
 }
