@@ -12,7 +12,7 @@ theme_ggsurvfit <- function(theme = c("default", "none")) {
     list(
       "default" =
         list(
-          theme_bw()
+          ggplot2::theme_bw()
         ),
       "none" = list()
     )
