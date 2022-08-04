@@ -2,7 +2,7 @@
 #'
 #' @param outcome string indicating which outcome to include in plot.
 #' Default is to include the first competing event.
-#' @param theme a theme typically returned from `theme_ggsurvfit_survfit()`
+#' @param theme a theme typically returned from `theme_ggsurvfit()`
 #' @param ... arguments passed to `ggplot2::geom_step(...)`, e.g. `size = 2`
 #' @inheritParams tidy_cuminc
 #'
@@ -16,7 +16,7 @@
 #'   ggcuminc(outcome = "death from cancer") +
 #'   add_confidence_interval() +
 #'   add_risktable()
-ggcuminc <- function(x, outcome = NULL, theme = theme_ggsurvfit_survfit(), ...) {
+ggcuminc <- function(x, outcome = NULL, theme = theme_ggsurvfit(), ...) {
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "tidycuminc")) {
     cli_abort(

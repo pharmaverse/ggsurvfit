@@ -4,7 +4,7 @@
 \alias{ggcuminc}
 \title{Plot Cumulative Incidence}
 \usage{
-ggcuminc(x, outcome = NULL, theme = theme_ggsurvfit_survfit(), ...)
+ggcuminc(x, outcome = NULL, theme = theme_ggsurvfit(), ...)
 }
 \arguments{
 \item{x}{a 'cuminc' object created with \code{tidycmprsk::cuminc()}}
@@ -12,7 +12,7 @@ ggcuminc(x, outcome = NULL, theme = theme_ggsurvfit_survfit(), ...)
 \item{outcome}{string indicating which outcome to include in plot.
 Default is to include the first competing event.}
 
-\item{theme}{a theme typically returned from \code{theme_ggsurvfit_survfit()}}
+\item{theme}{a theme typically returned from \code{theme_ggsurvfit()}}
 
 \item{...}{arguments passed to \code{ggplot2::geom_step(...)}, e.g. \code{size = 2}}
 }

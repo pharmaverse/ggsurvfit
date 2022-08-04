@@ -43,7 +43,7 @@ reference:
   - title: Themes
   - contents:
       - theme_ggsurvfit_risktable
-      - theme_ggsurvfit_survfit
+      - theme_ggsurvfit
 
   - title: Utilities
   - contents:

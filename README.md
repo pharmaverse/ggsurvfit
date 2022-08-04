@@ -66,7 +66,6 @@ can add any ggplot function to modify the figure.
 
 ``` r
 p +
-  theme_bw() + 
   theme(legend.position = "bottom") +
   labs(
     y = "Probability of survival",
@@ -142,7 +141,6 @@ cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
   add_confidence_interval() +
   add_quantile(y_value = 0.20) +
   add_risktable() +
-  theme_bw() + 
   labs(x = "Months Since Treatment") +
   theme(legend.position = "bottom") +
   scale_y_continuous(label = scales::percent, expand = c(0.02, 0)) +

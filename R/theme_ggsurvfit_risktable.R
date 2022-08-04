@@ -16,7 +16,7 @@ theme_ggsurvfit_risktable <- function(theme = c("default", "boxed", "none")) {
       ggplot2::theme_bw(),
       ggplot2::theme(
         axis.title.x = ggplot2::element_text(
-          size = 8,
+          size = 9,
           vjust = 1,
           hjust = 1
         ),
