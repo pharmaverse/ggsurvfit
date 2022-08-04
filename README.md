@@ -18,11 +18,11 @@ coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)
 
 The {ggsurvfit} package eases the creation of time-to-event (aka
 survival) endpoint figures with ggplot. The concise and modular code
-creates images that are ready for sharing or publication. Each of the
+creates images that are ready for publication or sharing. Each of the
 functions that add to or modify the existing ggplot are written as
 proper ggplot geoms or stat methods, allowing the functions from this
-package to be combined with any functions/customizations from ggplot and
-other ggplot extensions.
+package to be combined with any functions or customization from ggplot
+and other ggplot extensions.
 
 It’s recommended to use the `survfit2()` function with this package,
 rather than `survival::survfit()` to ensure all quantities are able to

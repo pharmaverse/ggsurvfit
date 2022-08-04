@@ -1,18 +1,24 @@
 Package: ggsurvfit
-Title: What the Package Does (One Line, Title Case)
+Title: Easy and Flexible Time-To-Event Figures
 Version: 0.0.0
 Authors@R: c(
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-0862-2018")),
     person("Mark", "Baillie", , "bailliem@gmail.com", role = "aut")
   )
-Description: What the package does (one paragraph).
+Description: Ease the creation of time-to-event (aka survival) endpoint
+    figures with 'ggplot2'.  The concise and modular code creates images
+    that are ready for publication or sharing.  Each of the functions that
+    add to or modify the existing ggplot are written as proper 'ggplot2'
+    geoms or stat methods, allowing the functions from this package to be
+    combined with any functions or customization from 'ggplot2' and other
+    'ggplot2' extensions.
 License: GPL (>= 3)
 URL: https://github.com/ddsjoberg/ggsurvfit,
     http://www.danieldsjoberg.com/ggsurvfit/
 BugReports: https://github.com/ddsjoberg/ggsurvfit/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 3.4)
 Imports: 
     broom (>= 1.0.0),
     cli (>= 3.0.0),
@@ -31,7 +37,7 @@ Suggests:
     vdiffr (>= 1.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-Language: en-US
