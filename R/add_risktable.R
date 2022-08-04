@@ -180,7 +180,7 @@ lst_stat_labels_default <-
           ggtitle_group_lbl <- list()
         } else {
           ggtitle_group_lbl <-
-            list(ggplot2::ggtitle(dplyr::pull(df_group) |> as.character()))
+            list(ggplot2::ggtitle(dplyr::pull(df_group) %>% as.character()))
         }
 
         ggplot2::ggplot(
