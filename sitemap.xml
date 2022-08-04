@@ -19,6 +19,57 @@
     <loc>http://www.danieldsjoberg.com/ggsurvfit/news/index.html</loc>
   </url>
   <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/add_censor_mark.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/add_confidence_interval.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/add_quantile.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/add_risktable.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/df_lung.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/ggcuminc.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/ggsurvfit-package.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/ggsurvfit.html</loc>
+  </url>
+  <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/print_ggsurvfit.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/stepribbon.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/survfit2.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/survfit_pvalue.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/theme_ggsurvfit.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/theme_ggsurvfit_risktable.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/tidy_cuminc.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/tidy_survfit.html</loc>
   </url>
 </urlset>
