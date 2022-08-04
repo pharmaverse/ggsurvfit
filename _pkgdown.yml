@@ -12,6 +12,8 @@ template:
 authors:
   Daniel D. Sjoberg:
     href: "https://www.danieldsjoberg.com/"
+  Mark Baillie:
+    href: "https://graphicsprinciples.github.io/"
 
 development:
   mode: auto
