@@ -22,6 +22,18 @@ test_that("add_risktable() works with ggsurvfit()", {
   )
 
   expect_error(
+    list(sf1, sf2, sf3) %>%
+      lapply(
+        function(x) {
+          (ggsurvfit(x) +
+             add_risktable(risktable_stats = c("n.risk", "cum.event"), label = c("N RISK", "CUM EVENTS"))) %>%
+            print()
+        }
+      ),
+    NA,
+  )
+
+  expect_error(
     list(sf2, sf3) %>%
       lapply(function(x) (ggsurvfit(x) + add_risktable(risktable_group = "strata")) %>% print()),
     NA,
