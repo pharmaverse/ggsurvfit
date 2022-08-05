@@ -28,9 +28,14 @@ knitr::opts_chunk$set(
 
 The {ggsurvfit} package eases the creation of time-to-event (aka survival) endpoint figures with ggplot.
 The concise and modular code creates images that are ready for publication or sharing.
-Each of the functions that add to or modify the existing ggplot are written as proper ggplot geoms or stat methods, allowing the functions from this package to be combined with any functions or customization from ggplot and other ggplot extensions.
 
-It's recommended to use the `survfit2()` function with this package, rather than `survival::survfit()` to ensure all quantities are able to be calculated from any environment the functions are called.
+## Why ggsurvfit?
+
+- Raw variable names do not appear in the legend, e.g. `"sex=Female"`.
+
+- You can modify the x-axis scales and the risk table will still align with the plot.
+
+- Each add-on function (e.g. `add_confidence_interval()`, etc.) is written as a proper ggplot2 'geom', meaning that the package functions can be woven with ggplot2 functions seamlessly.
 
 ## Installation
 
@@ -44,6 +49,9 @@ devtools::install_github("ddsjoberg/ggsurvfit")
 ## Examples
 
 Let's begin with an example illustrating a common Kaplan-Meier survival curve.
+
+It's recommended to use the `survfit2()` function with this package, rather than `survival::survfit()` to ensure all quantities are able to be calculated from any environment the functions are called.
+
 
 ```{r example, fig.height=4.5}
 library(ggsurvfit)
