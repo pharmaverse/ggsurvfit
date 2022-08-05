@@ -12,7 +12,8 @@ theme_ggsurvfit <- function(theme = c("default", "none")) {
     list(
       "default" =
         list(
-          ggplot2::theme_bw()
+          ggplot2::theme_bw(),
+          ggplot2::theme(strip.background = ggplot2::element_blank())
         ),
       "none" = list()
     )
