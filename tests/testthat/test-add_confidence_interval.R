@@ -32,20 +32,20 @@ test_that("add_confidence_interval() errors with ggsurvfit()", {
 
 
 
-sf1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
-sf2 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
-sf3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidycmprsk::trial)
+cuminc1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
+cuminc2 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
+cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidycmprsk::trial)
 
 
 test_that("add_confidence_interval() works with ggcuminc()", {
   expect_error(
-    list(sf1, sf2, sf3) %>%
+    list(cuminc1, cuminc2, cuminc3) %>%
       lapply(function(x) ggcuminc(x) + add_confidence_interval()),
     NA
   )
 
   expect_error(
-    list(sf1, sf2, sf3) %>%
+    list(cuminc1, cuminc2, cuminc3) %>%
       lapply(function(x) ggcuminc(x) + add_confidence_interval(type = "lines")),
     NA
   )
@@ -53,6 +53,6 @@ test_that("add_confidence_interval() works with ggcuminc()", {
 
 test_that("add_confidence_interval() errors with ggcuminc()", {
   expect_error(
-    ggcuminc(sf1) + add_confidence_interval(type = "not_a_type"),
+    ggcuminc(cuminc1) + add_confidence_interval(type = "not_a_type"),
   )
 })

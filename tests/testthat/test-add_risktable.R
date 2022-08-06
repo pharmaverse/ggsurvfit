@@ -59,19 +59,19 @@ test_that("add_risktable() throws error messages", {
 })
 
 
-sf1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
-sf2 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
-sf3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidycmprsk::trial)
+cuminc1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
+cuminc2 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
+cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidycmprsk::trial)
 
 test_that("add_risktable() works with ggcuminc()", {
   expect_error(
-    list(sf1, sf2, sf3) %>%
+    list(cuminc1, cuminc2, cuminc3) %>%
       lapply(function(x) (ggcuminc(x) + add_risktable()) %>% print()),
     NA,
   )
 
   expect_error(
-    list(sf1, sf2, sf3) %>%
+    list(cuminc1, cuminc2, cuminc3) %>%
       lapply(
         function(x) {
           (ggcuminc(x) +
@@ -83,13 +83,13 @@ test_that("add_risktable() works with ggcuminc()", {
   )
 
   expect_error(
-    list(sf2, sf3) %>%
+    list(cuminc2, cuminc3) %>%
       lapply(function(x) (ggcuminc(x) + add_risktable(risktable_group = "strata")) %>% print()),
     NA,
   )
 
   expect_error(
-    list(sf2, sf3) %>%
+    list(cuminc2, cuminc3) %>%
       lapply(function(x) (ggcuminc(x) + add_risktable(combine_groups = TRUE)) %>% print()),
     NA,
   )
@@ -98,7 +98,7 @@ test_that("add_risktable() works with ggcuminc()", {
 
 test_that("add_risktable() throws error messages", {
   expect_error(
-    (ggcuminc(sf1) +
+    (ggcuminc(cuminc1) +
       add_risktable(
         risktable_stats = c("n.risk", "cum.event"),
         stats_label = "CUM EVENTS"

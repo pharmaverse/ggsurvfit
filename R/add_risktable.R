@@ -3,14 +3,19 @@
 #' @param times numeric vector of times where risk table values will be placed.
 #' Default are the times shown on the x-axis.
 #' @param risktable_stats character vector of statistics to show in the risk table.
-#' Must be one or more of `c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event")`.
-#' Default is `"n.risk"`
+#' Must be one or more of `c("n.risk", "cum.event", "cum.censor", "n.event", "n.censor")`.
+#' Default is `c("n.risk", "cum.event")`.
+#' - `"n.risk"` Number of patients at risk
+#' - `"cum.event"` Cumulative number of observed events
+#' - `"cum.censor"` Cumulative number of censored observations
+#' - `"n.event"` Number of events in time interval
+#' - `"n.censor"` Number of censored observations in time interval
 #' @param stats_label named vector or list of custom labels. Names are the statistics
 #' from `risktable_stats=` and the value is the custom label.
 #' @param risktable_group String indicating the grouping variable for the risk tables.
 #' Default is `"strata"`.
-#' - `"strata"`: groups the risk tables per stratum when present.
-#' - `"risktable_stats"`: groups the risk tables per risktable_stats.
+#' - `"strata"` groups the risk tables per stratum when present.
+#' - `"risktable_stats"` groups the risk tables per risktable_stats.
 #' @param combine_groups logical indicating whether to combine the statistics
 #' in the risk table across groups. Default is `FALSE`
 #' @param risktable_height A numeric value between 0 and 1 indicates the height used by the table versus the height

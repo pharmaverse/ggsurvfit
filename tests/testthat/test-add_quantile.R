@@ -34,19 +34,16 @@ test_that("add_quantile() errors with ggsurvfit()", {
 
 
 
-sf1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
-sf2 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
-sf3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidycmprsk::trial)
+cuminc1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
+cuminc2 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
+cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidycmprsk::trial)
 
 
 test_that("add_quantile() works with ggcuminc()", {
   expect_error(
-    list(sf1, sf2, sf3) %>%
+    list(cuminc1, cuminc2, cuminc3) %>%
       lapply(function(x) ggcuminc(x) + add_quantile()),
     NA
   )
 })
 
-test_that("add_quantile() errors with ggcuminc()", {
-
-})

@@ -19,14 +19,21 @@ add_risktable(
 Default are the times shown on the x-axis.}
 
 \item{risktable_stats}{character vector of statistics to show in the risk table.
-Must be one or more of \code{c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event")}.
-Default is \code{"n.risk"}}
+Must be one or more of \code{c("n.risk", "cum.event", "cum.censor", "n.event", "n.censor")}.
+Default is \code{c("n.risk", "cum.event")}.
+\itemize{
+\item \code{"n.risk"} Number of patients at risk
+\item \code{"cum.event"} Cumulative number of observed events
+\item \code{"cum.censor"} Cumulative number of censored observations
+\item \code{"n.event"} Number of events in time interval
+\item \code{"n.censor"} Number of censored observations in time interval
+}}
 
 \item{risktable_group}{String indicating the grouping variable for the risk tables.
 Default is \code{"strata"}.
 \itemize{
-\item \code{"strata"}: groups the risk tables per stratum when present.
-\item \code{"risktable_stats"}: groups the risk tables per risktable_stats.
+\item \code{"strata"} groups the risk tables per stratum when present.
+\item \code{"risktable_stats"} groups the risk tables per risktable_stats.
 }}
 
 \item{risktable_height}{A numeric value between 0 and 1 indicates the height used by the table versus the height
