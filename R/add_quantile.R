@@ -69,13 +69,18 @@ quantile_km_in_stat <- function(data, y_value) {
     dplyr::mutate(xend = .data$x, yend = 0)
 
   # add row for horizontal line segment
-  df_quantile %>%
-    dplyr::bind_rows(
-      dplyr::tibble(
-        x = 0, y = y_value,
-        xend = max(df_quantile$x), yend = y_value
+  if (nrow(df_quantile) > 0) {
+    df_quantile <-
+      df_quantile %>%
+      dplyr::bind_rows(
+        dplyr::tibble(
+          x = 0, y = y_value,
+          xend = max(df_quantile$x), yend = y_value
+        )
       )
-    )
+  }
+
+  df_quantile
 }
 
 
