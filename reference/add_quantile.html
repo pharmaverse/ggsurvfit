@@ -51,24 +51,17 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_quantile</span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.5</span>, linetype <span class="op">=</span> <span class="fl">2</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_quantile</span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.5</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>y_value</dt>
-<dd><p>numeric value where the line segment will be drawn. Default is <code>0.5</code></p></dd>
-
-
-<dt>linetype</dt>
-<dd><p>Default is <code>"dashed"</code>. Argument is passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">ggplot2::geom_segment()</a></code></p></dd>
+<dd><p>Numeric value where the line segment will be drawn. Default is <code>0.5</code></p></dd>
 
 
 <dt>...</dt>
-<dd><p>Other arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer()</a></code>. These are
-often aesthetics, used to set an aesthetic to a fixed value, like
-<code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
-to the paired geom/stat.</p></dd>
+<dd><p>Named arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">ggplot2::geom_segment()</a></code> with default <code>linetype = 2</code></p></dd>
 
 </dl></div>
     <div class="section level2">
