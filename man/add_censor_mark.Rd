@@ -4,11 +4,11 @@
 \alias{add_censor_mark}
 \title{Add Censor Marking}
 \usage{
-add_censor_mark(shape = 3, size = 2, ...)
+add_censor_mark(...)
 }
 \arguments{
-\item{shape, size, ...}{arguments passed to passed to
-\code{ggplot2::geom_point(shape, size, ...)}}
+\item{...}{arguments passed to passed to
+\code{ggplot2::geom_point(...)} with defaults \code{shape = 3} and \code{size = 2}}
 }
 \value{
 a ggplot

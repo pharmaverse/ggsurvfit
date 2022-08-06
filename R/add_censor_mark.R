@@ -1,7 +1,7 @@
 #' Add Censor Marking
 #'
-#' @param shape,size,... arguments passed to passed to
-#' `ggplot2::geom_point(shape, size, ...)`
+#' @param ... arguments passed to passed to
+#' `ggplot2::geom_point(...)` with defaults `shape = 3` and `size = 2`
 #'
 #' @return a ggplot
 #' @export
@@ -11,11 +11,15 @@
 #'   ggsurvfit() +
 #'   add_confidence_interval() +
 #'   add_censor_mark()
-add_censor_mark <- function(shape = 3, size = 2, ...) {
-  ggplot2::layer(
-    stat = StatCensorMark, data = NULL, mapping = NULL, geom = "point",
-    position = "identity", show.legend = NA, inherit.aes = TRUE,
-    params = list(na.rm = TRUE, size = size, shape = shape, ...),
+add_censor_mark <- function(...) {
+  rlang::inject(
+    ggplot2::layer(
+      stat = StatCensorMark, data = NULL, mapping = NULL, geom = "point",
+      position = "identity", show.legend = NA, inherit.aes = TRUE,
+      params =
+          utils::modifyList(x = list(na.rm = TRUE, size = 2, shape = 3),
+                            val = rlang::dots_list(...))
+    )
   )
 }
 
