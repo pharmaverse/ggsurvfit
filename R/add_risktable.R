@@ -48,12 +48,18 @@
 #'   )
 add_risktable <- function(times = NULL,
                           risktable_stats = "n.risk",
-                          label = NULL,
                           risktable_group = c("risktable_stats", "strata"),
                           risktable_height = 0.16,
+                          label = NULL,
                           combine_groups = FALSE,
                           theme = theme_ggsurvfit_risktable()) {
   risktable_group <- match.arg(risktable_group)
+  risktable_stats <-
+    match.arg(
+      risktable_stats,
+      choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
+      several.ok = TRUE
+    )
 
   ggplot2::geom_blank() %>%
     structure("risktable_args" = list(
@@ -109,8 +115,8 @@ add_risktable <- function(times = NULL,
 
 .construct_stat_labels <- function(risktable_stats, label) {
   if (!is.null(label) &&
-    !rlang::is_named(label) &&
-    length(risktable_stats) != length(label)) {
+      !rlang::is_named(label) &&
+      length(risktable_stats) != length(label)) {
     cli_abort(
       c("When {.var label} is not a named list, it must be the same length as {.var risktable_stats}.",
         "i" = "{.var label} is length {length(label)} and {.var risktable_stats} is length {length(risktable_stats)}."
@@ -124,7 +130,7 @@ add_risktable <- function(times = NULL,
         stat_name = factor(risktable_stats, levels = risktable_stats),
         stat_label =
           unlist(label) %>%
-            factor(x = ., levels = rev(.))
+          factor(x = ., levels = rev(.))
       )
     )
   }
@@ -133,9 +139,9 @@ add_risktable <- function(times = NULL,
     dplyr::mutate(
       stat_label =
         risktable_stats %>%
-          lapply(function(x) label[[x]] %||% lst_stat_labels_default[[x]] %||% x) %>%
-          unlist() %>%
-          factor(x = ., levels = rev(.))
+        lapply(function(x) label[[x]] %||% lst_stat_labels_default[[x]] %||% x) %>%
+        unlist() %>%
+        factor(x = ., levels = rev(.))
     )
 }
 
@@ -153,8 +159,8 @@ lst_stat_labels_default <-
                                            df_stat_labels, theme, risktable_group) {
   grouping_variable <-
     switch(risktable_group,
-      "strata" = "strata",
-      "risktable_stats" = "stat_label"
+           "strata" = "strata",
+           "risktable_stats" = "stat_label"
     )
 
   y_value <- c("strata", "stat_label") %>% setdiff(grouping_variable)

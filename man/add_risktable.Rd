@@ -7,9 +7,9 @@
 add_risktable(
   times = NULL,
   risktable_stats = "n.risk",
-  label = NULL,
   risktable_group = c("risktable_stats", "strata"),
   risktable_height = 0.16,
+  label = NULL,
   combine_groups = FALSE,
   theme = theme_ggsurvfit_risktable()
 )
@@ -22,9 +22,6 @@ Default are the times shown on the x-axis.}
 Must be one or more of \code{c("n.risk", "n.event", "n.censor", "cum.event", "cum.censor")}.
 Default is \code{"n.risk"}}
 
-\item{label}{named vector or list of custom labels. Names are the statistics
-from \verb{risktable_stats=} and the value is the custom label.}
-
 \item{risktable_group}{String indicating the grouping variable for the risk tables.
 Default is \code{"risktable_stats"}.
 \itemize{
@@ -34,6 +31,9 @@ Default is \code{"risktable_stats"}.
 
 \item{risktable_height}{A numeric value between 0 and 1 indicates the height used by the table versus the height
 used by the plot, as described in \code{cowplot::plot_grid(rel_heights=)}. The default is 0.16.}
+
+\item{label}{named vector or list of custom labels. Names are the statistics
+from \verb{risktable_stats=} and the value is the custom label.}
 
 \item{combine_groups}{logical indicating whether to combine the statistics
 in the risk table across groups. Default is \code{FALSE}}
