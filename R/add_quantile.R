@@ -2,9 +2,8 @@
 #'
 #' Add quantile information to the plot.
 #'
-#' @param y_value numeric value where the line segment will be drawn. Default is `0.5`
-#' @param linetype Default is `"dashed"`. Argument is passed to `ggplot2::geom_segment()`
-#' @inheritParams ggplot2::geom_segment
+#' @param y_value Numeric value where the line segment will be drawn. Default is `0.5`
+#' @param ... Named arguments passed to `ggplot2::geom_segment()` with default `linetype = 2`
 #'
 #' @return a ggplot
 #' @export
@@ -18,14 +17,16 @@
 #'   ggsurvfit() +
 #'   add_quantile(linetype = 2) +
 #'   add_quantile(y_value = 0.9, linetype = 3)
-add_quantile <- function(y_value = 0.5, linetype = 2, ...) {
+add_quantile <- function(y_value = 0.5, ...) {
   ggplot2::layer(
     stat = StatQuantile, data = NULL, mapping = NULL, geom = "segment",
     position = "identity", show.legend = NA, inherit.aes = TRUE,
-    params = list(
-      na.rm = FALSE, y_value = y_value,
-      linetype = linetype, ...
-    ),
+    params =
+      c(
+        list(y_value = y_value),
+        utils::modifyList(x = list(linetype = 2, na.rm = FALSE),
+                          val = rlang::dots_list(...))
+      ),
   )
 }
 
@@ -60,7 +61,7 @@ quantile_km_in_stat <- function(data, y_value) {
       row_number = dplyr::row_number(),
       rows_to_keep =
         (.data$monotonicity_type == "decreasing" & !.data$above_specified_quantile & dplyr::row_number() == 1L) |
-          (.data$monotonicity_type == "increasing" & .data$above_specified_quantile & dplyr::row_number() == 1L)
+        (.data$monotonicity_type == "increasing" & .data$above_specified_quantile & dplyr::row_number() == 1L)
     ) %>%
     dplyr::filter(.data$rows_to_keep) %>%
     dplyr::ungroup() %>%

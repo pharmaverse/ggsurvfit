@@ -22,7 +22,8 @@ creates images that are ready for publication or sharing.
 
 ## Why ggsurvfit?
 
--   Raw variable names do not appear in the legend, e.g. `"sex=Female"`.
+-   Raw variable names do not appear in the figure legend,
+    e.g. `"sex=Female"`.
 
 -   You can modify the x-axis scales and the risk table will still align
     with the plot.

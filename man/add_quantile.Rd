@@ -4,17 +4,12 @@
 \alias{add_quantile}
 \title{Add Quantile}
 \usage{
-add_quantile(y_value = 0.5, linetype = 2, ...)
+add_quantile(y_value = 0.5, ...)
 }
 \arguments{
-\item{y_value}{numeric value where the line segment will be drawn. Default is \code{0.5}}
+\item{y_value}{Numeric value where the line segment will be drawn. Default is \code{0.5}}
 
-\item{linetype}{Default is \code{"dashed"}. Argument is passed to \code{ggplot2::geom_segment()}}
-
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
-often aesthetics, used to set an aesthetic to a fixed value, like
-\code{colour = "red"} or \code{size = 3}. They may also be parameters
-to the paired geom/stat.}
+\item{...}{Named arguments passed to \code{ggplot2::geom_segment()} with default \code{linetype = 2}}
 }
 \value{
 a ggplot

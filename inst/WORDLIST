@@ -8,12 +8,10 @@ Surv
 Survfit
 behaviour
 cuminc
-customizations
-depricated
 geoms
+geom’
 gghighlight
 ggplot
-infinitesmal
 risktable
 roundoff
 stairstep
