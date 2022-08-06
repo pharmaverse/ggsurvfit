@@ -19,9 +19,8 @@
 #' @param combine_groups logical indicating whether to combine the statistics
 #' in the risk table across groups. Default is `FALSE`
 #' @param risktable_height A numeric value between 0 and 1 indicates the height used by the table versus the height
-#'  used by the plot, as described in `cowplot::plot_grid(rel_heights=)`. The default is 0.16.
+#'  used by the plot, as described in `patchwork::wrap_plots(heights=)`. The default is 0.14.
 #' @param theme A risktable theme typically returned from `theme_ggsurvfit_risktable()`
-#' @seealso [cowplot::plot_grid()]
 #'
 #' @export
 #' @examples
@@ -54,7 +53,7 @@
 add_risktable <- function(times = NULL,
                           risktable_stats = c("n.risk", "cum.event"),
                           risktable_group = c("strata", "risktable_stats"),
-                          risktable_height = 0.16,
+                          risktable_height = 0.14,
                           stats_label = NULL,
                           combine_groups = FALSE,
                           theme = theme_ggsurvfit_risktable()) {
@@ -104,11 +103,10 @@ add_risktable <- function(times = NULL,
 
   ## combine all plots into single figure
   gg_final <-
-    cowplot::plot_grid(
-      plotlist = gg_risktable_list_aligned,
-      align = "none",
-      nrow = length(gg_risktable_list_aligned),
-      rel_heights = c(1 - (risktable_height * (length(gg_risktable_list_aligned) - 1)), rep(risktable_height, length(gg_risktable_list_aligned) - 1))
+    gg_risktable_list_aligned %>%
+    patchwork::wrap_plots(
+      ncol = 1,
+      heights = c(1 - (risktable_height * (length(gg_risktable_list_aligned) - 1)), rep(risktable_height, length(gg_risktable_list_aligned) - 1))
     )
 
   gg_final

@@ -13,7 +13,7 @@ Description: Ease the creation of time-to-event (aka survival) endpoint
     geoms or stat methods, allowing the functions from this package to be
     combined with any functions or customization from 'ggplot2' and other
     'ggplot2' extensions.
-License: GPL (>= 3)
+License: MIT + file LICENSE
 URL: https://github.com/ddsjoberg/ggsurvfit,
     http://www.danieldsjoberg.com/ggsurvfit/
 BugReports: https://github.com/ddsjoberg/ggsurvfit/issues
@@ -22,13 +22,13 @@ Depends:
 Imports: 
     broom (>= 1.0.0),
     cli (>= 3.0.0),
-    cowplot,
     dplyr (>= 1.0.0),
     ggplot2 (>= 3.3.0),
     gtable,
+    patchwork,
     rlang (>= 1.0.0),
     survival,
-    tidyr  (>= 1.0.0)
+    tidyr (>= 1.0.0)
 Suggests: 
     covr,
     spelling,
