@@ -71,14 +71,19 @@ Default are the times shown on the x-axis.</p></dd>
 
 <dt>risktable_stats</dt>
 <dd><p>character vector of statistics to show in the risk table.
-Must be one or more of <code>c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event")</code>.
-Default is <code>"n.risk"</code></p></dd>
+Must be one or more of <code>c("n.risk", "cum.event", "cum.censor", "n.event", "n.censor")</code>.
+Default is <code>c("n.risk", "cum.event")</code>.</p><ul><li><p><code>"n.risk"</code> Number of patients at risk</p></li>
+<li><p><code>"cum.event"</code> Cumulative number of observed events</p></li>
+<li><p><code>"cum.censor"</code> Cumulative number of censored observations</p></li>
+<li><p><code>"n.event"</code> Number of events in time interval</p></li>
+<li><p><code>"n.censor"</code> Number of censored observations in time interval</p></li>
+</ul></dd>
 
 
 <dt>risktable_group</dt>
 <dd><p>String indicating the grouping variable for the risk tables.
-Default is <code>"strata"</code>.</p><ul><li><p><code>"strata"</code>: groups the risk tables per stratum when present.</p></li>
-<li><p><code>"risktable_stats"</code>: groups the risk tables per risktable_stats.</p></li>
+Default is <code>"strata"</code>.</p><ul><li><p><code>"strata"</code> groups the risk tables per stratum when present.</p></li>
+<li><p><code>"risktable_stats"</code> groups the risk tables per risktable_stats.</p></li>
 </ul></dd>
 
 
