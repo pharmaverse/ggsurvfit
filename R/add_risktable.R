@@ -3,13 +3,13 @@
 #' @param times numeric vector of times where risk table values will be placed.
 #' Default are the times shown on the x-axis.
 #' @param risktable_stats character vector of statistics to show in the risk table.
-#' Must be one or more of `c("n.risk", "n.event", "n.censor", "cum.event", "cum.censor")`.
+#' Must be one or more of `c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event")`.
 #' Default is `"n.risk"`
 #' @param stats_label named vector or list of custom labels. Names are the statistics
 #' from `risktable_stats=` and the value is the custom label.
 #' @param risktable_group String indicating the grouping variable for the risk tables.
-#' Default is `"risktable_stats"`.
-#' - `"strata"`: groups the risk tables per stratum.
+#' Default is `"strata"`.
+#' - `"strata"`: groups the risk tables per stratum when present.
 #' - `"risktable_stats"`: groups the risk tables per risktable_stats.
 #' @param combine_groups logical indicating whether to combine the statistics
 #' in the risk table across groups. Default is `FALSE`
@@ -47,8 +47,8 @@
 #'     combine_groups = TRUE
 #'   )
 add_risktable <- function(times = NULL,
-                          risktable_stats = "n.risk",
-                          risktable_group = c("risktable_stats", "strata"),
+                          risktable_stats = c("n.risk", "cum.event"),
+                          risktable_group = c("strata", "risktable_stats"),
                           risktable_height = 0.16,
                           stats_label = NULL,
                           combine_groups = FALSE,
@@ -74,20 +74,16 @@ add_risktable <- function(times = NULL,
 }
 
 
-.construct_risktable <- function(x,
-                                 times = NULL,
-                                 risktable_stats = "n.risk",
-                                 stats_label = NULL,
-                                 group = "strata",
-                                 combine_groups = FALSE,
-                                 risktable_group = c("strata", "risktable_stats"),
-                                 risktable_height = 0.16,
-                                 theme = NULL) {
+.construct_risktable <- function(x, times, risktable_stats, stats_label, group,
+                                 combine_groups, risktable_group,
+                                 risktable_height, theme) {
   times <- times %||% ggplot2::ggplot_build(x)$layout$panel_params[[1]]$x.sec$breaks
-  df_stat_labels <- .construct_stat_labels(risktable_stats, stats_label)
 
   df_times <-
-    .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups)
+    .prepare_data_for_risk_tables(data = x$data, times = times,
+                                  combine_groups = combine_groups)
+
+  df_stat_labels <- .construct_stat_labels(risktable_stats, stats_label)
 
   # create list of ggplots, one plot for each risktable
   gg_risktable_list <-
@@ -149,10 +145,10 @@ add_risktable <- function(times = NULL,
 lst_stat_labels_default <-
   list(
     n.risk = "At Risk",
-    n.event = "Events",
-    n.censor = "Censored",
-    cum.event = "Cumulative Events",
-    cum.censor = "Cumulative Censored"
+    n.event = "Interval Events",
+    n.censor = "Interval Censored",
+    cum.event = "Events",
+    cum.censor = "Censored"
   )
 
 .create_list_of_gg_risk_tables <- function(df_times, risktable_stats, times,
@@ -179,6 +175,9 @@ lst_stat_labels_default <-
       stat_name = factor(.data$stat_name, levels = .env$risktable_stats)
     ) %>%
     dplyr::left_join(df_stat_labels, by = "stat_name") %>%
+    dplyr::mutate(
+      "{y_value}" := factor(.data[[y_value]], levels = rev(levels(.data[[y_value]])))
+    ) %>%
     dplyr::group_by(dplyr::across(dplyr::any_of(grouping_variable))) %>%
     dplyr::group_map(
       function(data, df_group) {

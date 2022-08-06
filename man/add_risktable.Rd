@@ -6,8 +6,8 @@
 \usage{
 add_risktable(
   times = NULL,
-  risktable_stats = "n.risk",
-  risktable_group = c("risktable_stats", "strata"),
+  risktable_stats = c("n.risk", "cum.event"),
+  risktable_group = c("strata", "risktable_stats"),
   risktable_height = 0.16,
   stats_label = NULL,
   combine_groups = FALSE,
@@ -19,13 +19,13 @@ add_risktable(
 Default are the times shown on the x-axis.}
 
 \item{risktable_stats}{character vector of statistics to show in the risk table.
-Must be one or more of \code{c("n.risk", "n.event", "n.censor", "cum.event", "cum.censor")}.
+Must be one or more of \code{c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event")}.
 Default is \code{"n.risk"}}
 
 \item{risktable_group}{String indicating the grouping variable for the risk tables.
-Default is \code{"risktable_stats"}.
+Default is \code{"strata"}.
 \itemize{
-\item \code{"strata"}: groups the risk tables per stratum.
+\item \code{"strata"}: groups the risk tables per stratum when present.
 \item \code{"risktable_stats"}: groups the risk tables per risktable_stats.
 }}
 
