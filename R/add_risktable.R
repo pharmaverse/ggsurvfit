@@ -5,7 +5,7 @@
 #' @param risktable_stats character vector of statistics to show in the risk table.
 #' Must be one or more of `c("n.risk", "n.event", "n.censor", "cum.event", "cum.censor")`.
 #' Default is `"n.risk"`
-#' @param label named vector or list of custom labels. Names are the statistics
+#' @param stats_label named vector or list of custom labels. Names are the statistics
 #' from `risktable_stats=` and the value is the custom label.
 #' @param risktable_group String indicating the grouping variable for the risk tables.
 #' Default is `"risktable_stats"`.
@@ -34,7 +34,7 @@
 #' p +
 #'   add_risktable(
 #'     risktable_stats = c("n.risk", "cum.event"),
-#'     label = list(
+#'     stats_label = list(
 #'       cum.event = "Cumulative Observed Events",
 #'       n.risk = "Number at Risk"
 #'     ),
@@ -50,7 +50,7 @@ add_risktable <- function(times = NULL,
                           risktable_stats = "n.risk",
                           risktable_group = c("risktable_stats", "strata"),
                           risktable_height = 0.16,
-                          label = NULL,
+                          stats_label = NULL,
                           combine_groups = FALSE,
                           theme = theme_ggsurvfit_risktable()) {
   risktable_group <- match.arg(risktable_group)
@@ -65,7 +65,7 @@ add_risktable <- function(times = NULL,
     structure("risktable_args" = list(
       times = times,
       risktable_stats = risktable_stats,
-      label = label,
+      stats_label = stats_label,
       combine_groups = combine_groups,
       risktable_group = risktable_group,
       risktable_height = risktable_height,
@@ -77,14 +77,14 @@ add_risktable <- function(times = NULL,
 .construct_risktable <- function(x,
                                  times = NULL,
                                  risktable_stats = "n.risk",
-                                 label = NULL,
+                                 stats_label = NULL,
                                  group = "strata",
                                  combine_groups = FALSE,
                                  risktable_group = c("strata", "risktable_stats"),
                                  risktable_height = 0.16,
                                  theme = NULL) {
   times <- times %||% ggplot2::ggplot_build(x)$layout$panel_params[[1]]$x.sec$breaks
-  df_stat_labels <- .construct_stat_labels(risktable_stats, label)
+  df_stat_labels <- .construct_stat_labels(risktable_stats, stats_label)
 
   df_times <-
     .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups)
@@ -113,23 +113,23 @@ add_risktable <- function(times = NULL,
   gg_final
 }
 
-.construct_stat_labels <- function(risktable_stats, label) {
-  if (!is.null(label) &&
-      !rlang::is_named(label) &&
-      length(risktable_stats) != length(label)) {
+.construct_stat_labels <- function(risktable_stats, stats_label) {
+  if (!is.null(stats_label) &&
+      !rlang::is_named(stats_label) &&
+      length(risktable_stats) != length(stats_label)) {
     cli_abort(
-      c("When {.var label} is not a named list, it must be the same length as {.var risktable_stats}.",
-        "i" = "{.var label} is length {length(label)} and {.var risktable_stats} is length {length(risktable_stats)}."
+      c("When {.var stats_label} is not a named list, it must be the same length as {.var risktable_stats}.",
+        "i" = "{.var stats_label} is length {length(stats_label)} and {.var risktable_stats} is length {length(risktable_stats)}."
       )
     )
   }
 
-  if (!is.null(label) && !rlang::is_named(label)) {
+  if (!is.null(stats_label) && !rlang::is_named(stats_label)) {
     return(
       dplyr::tibble(
         stat_name = factor(risktable_stats, levels = risktable_stats),
         stat_label =
-          unlist(label) %>%
+          unlist(stats_label) %>%
           factor(x = ., levels = rev(.))
       )
     )
@@ -139,7 +139,7 @@ add_risktable <- function(times = NULL,
     dplyr::mutate(
       stat_label =
         risktable_stats %>%
-        lapply(function(x) label[[x]] %||% lst_stat_labels_default[[x]] %||% x) %>%
+        lapply(function(x) stats_label[[x]] %||% lst_stat_labels_default[[x]] %||% x) %>%
         unlist() %>%
         factor(x = ., levels = rev(.))
     )

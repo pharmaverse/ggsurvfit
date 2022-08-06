@@ -14,7 +14,7 @@ test_that("add_risktable() works with ggsurvfit()", {
       lapply(
         function(x) {
           (ggsurvfit(x) +
-             add_risktable(risktable_stats = c("n.risk", "cum.event"), label = list(cum.event = "CUM EVENTS"))) %>%
+             add_risktable(risktable_stats = c("n.risk", "cum.event"), stats_label = list(cum.event = "CUM EVENTS"))) %>%
             print()
         }
       ),
@@ -26,7 +26,7 @@ test_that("add_risktable() works with ggsurvfit()", {
       lapply(
         function(x) {
           (ggsurvfit(x) +
-             add_risktable(risktable_stats = c("n.risk", "cum.event"), label = c("N RISK", "CUM EVENTS"))) %>%
+             add_risktable(risktable_stats = c("n.risk", "cum.event"), stats_label = c("N RISK", "CUM EVENTS"))) %>%
             print()
         }
       ),
@@ -52,7 +52,7 @@ test_that("add_risktable() throws error messages", {
     (ggsurvfit(sf1) +
        add_risktable(
          risktable_stats = c("n.risk", "cum.event"),
-         label = "CUM EVENTS"
+         stats_label = "CUM EVENTS"
        )) %>%
       print()
   )
@@ -75,7 +75,7 @@ test_that("add_risktable() works with ggcuminc()", {
       lapply(
         function(x) {
           (ggcuminc(x) +
-            add_risktable(risktable_stats = c("n.risk", "cum.event"), label = list(cum.event = "CUM EVENTS"))) %>%
+            add_risktable(risktable_stats = c("n.risk", "cum.event"), stats_label = list(cum.event = "CUM EVENTS"))) %>%
             print()
         }
       ),
@@ -101,7 +101,7 @@ test_that("add_risktable() throws error messages", {
     (ggcuminc(sf1) +
       add_risktable(
         risktable_stats = c("n.risk", "cum.event"),
-        label = "CUM EVENTS"
+        stats_label = "CUM EVENTS"
       )) %>%
       print()
   )

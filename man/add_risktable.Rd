@@ -9,7 +9,7 @@ add_risktable(
   risktable_stats = "n.risk",
   risktable_group = c("risktable_stats", "strata"),
   risktable_height = 0.16,
-  label = NULL,
+  stats_label = NULL,
   combine_groups = FALSE,
   theme = theme_ggsurvfit_risktable()
 )
@@ -32,7 +32,7 @@ Default is \code{"risktable_stats"}.
 \item{risktable_height}{A numeric value between 0 and 1 indicates the height used by the table versus the height
 used by the plot, as described in \code{cowplot::plot_grid(rel_heights=)}. The default is 0.16.}
 
-\item{label}{named vector or list of custom labels. Names are the statistics
+\item{stats_label}{named vector or list of custom labels. Names are the statistics
 from \verb{risktable_stats=} and the value is the custom label.}
 
 \item{combine_groups}{logical indicating whether to combine the statistics
@@ -58,7 +58,7 @@ p + add_risktable()
 p +
   add_risktable(
     risktable_stats = c("n.risk", "cum.event"),
-    label = list(
+    stats_label = list(
       cum.event = "Cumulative Observed Events",
       n.risk = "Number at Risk"
     ),
