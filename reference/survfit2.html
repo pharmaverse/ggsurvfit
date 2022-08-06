@@ -141,6 +141,36 @@ all elements are calculable.</p>
 <p>surfit2 object</p>
     </div>
     <div class="section level2">
+    <h2 id="survfit-vs-survfit-"><code>survfit2()</code> vs <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code><a class="anchor" aria-label="anchor" href="#survfit-vs-survfit-"></a></h2>
+    
+
+
+<p>Both functions have identical inputs, so why do we need <code>survfit2()</code>?</p>
+<p>The <em>only</em> difference between <code>survfit2()</code> and <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code> is that the
+former tracks the environment from which the call to the function was made.</p>
+<p>The definition of <code>survfit2()</code> is unremarkably simple:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">survfit2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">formula</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># construct survfit object</span></span>
+<span>  <span class="va">survfit</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># add the environment</span></span>
+<span>  <span class="va">survfit</span><span class="op">$</span><span class="va">.Environment</span> <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">current_env</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># add class and return</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">survfit</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"survfit2"</span>, <span class="st">"survfit"</span><span class="op">)</span></span>
+<span>  <span class="va">survfit</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div>
+<p>The environment is needed to ensure the survfit call can be accurately
+reconstructed or parsed at any point post estimation.
+The call is parsed when p-values are reported and when labels are created.
+For example, the raw variable names appear in the output of a stratified
+<code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code> result, e.g. <code>"sex=Female"</code>. When using <code>survfit2()</code>, the
+originating data frame and formula may be parsed and the raw variable
+names removed.</p>
+<p>Most functions in the package work with both <code>survfit2()</code> and <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code>;
+however, the output will be styled in a preferable format with <code>survfit2()</code>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/survival/man/survfit.formula.html" class="external-link">survival::survfit.formula()</a></code></p></div>
     </div>
