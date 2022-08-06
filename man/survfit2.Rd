@@ -72,6 +72,41 @@ included in the returned object.
 Use this function with all other functions in this package to ensure
 all elements are calculable.
 }
+\section{\code{survfit2()} vs \code{survfit()}}{
+
+
+Both functions have identical inputs, so why do we need \code{survfit2()}?
+
+The \emph{only} difference between \code{survfit2()} and \code{survival::survfit()} is that the
+former tracks the environment from which the call to the function was made.
+
+The definition of \code{survfit2()} is unremarkably simple:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{survfit2 <- function(formula, ...) \{
+  # construct survfit object
+  survfit <- survival::survfit(formula, ...)
+
+  # add the environment
+  survfit$.Environment = rlang::current_env()
+
+  # add class and return
+  class(survfit) <- c("survfit2", "survfit")
+  survfit
+\}
+}\if{html}{\out{</div>}}
+
+The environment is needed to ensure the survfit call can be accurately
+reconstructed or parsed at any point post estimation.
+The call is parsed when p-values are reported and when labels are created.
+For example, the raw variable names appear in the output of a stratified
+\code{survfit()} result, e.g. \code{"sex=Female"}. When using \code{survfit2()}, the
+originating data frame and formula may be parsed and the raw variable
+names removed.
+
+Most functions in the package work with both \code{survfit2()} and \code{survfit()};
+however, the output will be styled in a preferable format with \code{survfit2()}.
+}
+
 \examples{
 survfit2(Surv(time, status) ~ sex, data = df_lung)
 }
