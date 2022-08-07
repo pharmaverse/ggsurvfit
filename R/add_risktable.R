@@ -13,7 +13,7 @@
 #' @param stats_label named vector or list of custom labels. Names are the statistics
 #' from `risktable_stats=` and the value is the custom label.
 #' @param risktable_group String indicating the grouping variable for the risk tables.
-#' Default is `"strata"`.
+#' Default is `"auto"` and will select `"strata"` or `"risktable_stats"` based on context.
 #' - `"strata"` groups the risk tables per stratum when present.
 #' - `"risktable_stats"` groups the risk tables per risktable_stats.
 #' @param combine_groups logical indicating whether to combine the statistics
@@ -52,7 +52,7 @@
 #'   )
 add_risktable <- function(times = NULL,
                           risktable_stats = c("n.risk", "cum.event"),
-                          risktable_group = c("strata", "risktable_stats"),
+                          risktable_group = c("auto", "strata", "risktable_stats"),
                           risktable_height = 0.14,
                           stats_label = NULL,
                           combine_groups = FALSE,
@@ -100,8 +100,15 @@ StatBlankSurvfit <-
   times <- times %||% ggplot2::ggplot_build(x)$layout$panel_params[[1]]$x.sec$breaks
 
   df_times <-
-    .prepare_data_for_risk_tables(data = x$data, times = times,
-                                  combine_groups = combine_groups)
+    .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups = combine_groups)
+
+  if (risktable_group == "auto") {
+    risktable_group <-
+      dplyr::case_when(
+        "strata" %in% names(df_times) & length(risktable_stats) == 1L ~ "risktable_stats",
+        TRUE ~ "strata"
+      )
+  }
 
   df_stat_labels <- .construct_stat_labels(risktable_stats, stats_label)
 

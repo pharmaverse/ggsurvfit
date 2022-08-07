@@ -7,7 +7,7 @@
 add_risktable(
   times = NULL,
   risktable_stats = c("n.risk", "cum.event"),
-  risktable_group = c("strata", "risktable_stats"),
+  risktable_group = c("auto", "strata", "risktable_stats"),
   risktable_height = 0.14,
   stats_label = NULL,
   combine_groups = FALSE,
@@ -30,7 +30,7 @@ Default is \code{c("n.risk", "cum.event")}.
 }}
 
 \item{risktable_group}{String indicating the grouping variable for the risk tables.
-Default is \code{"strata"}.
+Default is \code{"auto"} and will select \code{"strata"} or \code{"risktable_stats"} based on context.
 \itemize{
 \item \code{"strata"} groups the risk tables per stratum when present.
 \item \code{"risktable_stats"} groups the risk tables per risktable_stats.
