@@ -14,9 +14,7 @@ NULL
 #' @export
 #' @rdname print_ggsurvfit
 print.ggsurvfit <- function(x, ...) {
-  risktable_args <-
-    lapply(x$layers, function(x) attr(x, "risktable_args")) %>%
-    unlist(recursive = FALSE)
+  risktable_args <- .extract_risktable_arguments(x)
 
   if (!is.null(risktable_args)) {
     # construct and add risktable

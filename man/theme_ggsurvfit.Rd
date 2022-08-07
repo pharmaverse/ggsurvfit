@@ -7,9 +7,10 @@
 theme_ggsurvfit(theme = c("default", "none"))
 }
 \arguments{
-\item{theme}{must be one of \code{c("none")}
+\item{theme}{must be one of \code{c("default", "none")}
 \itemize{
-\item \code{"none"} no styling applied to risk table
+\item \code{"default"} the default plot styling
+\item \code{"none"} no styling applied to risk table; equivalent to using \code{theme = NULL}
 }}
 }
 \description{

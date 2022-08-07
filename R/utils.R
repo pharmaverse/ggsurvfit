@@ -11,3 +11,8 @@
     `[[`("data") %>%
     rlang::eval_tidy(env = x$.Environment)
 }
+
+.extract_risktable_arguments <- function(x) {
+  lapply(x$layers, function(x) attr(x, "risktable_args")) %>%
+    unlist(recursive = FALSE)
+}

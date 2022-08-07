@@ -6,7 +6,7 @@
 #' @param theme must be one of `c("default", "boxed", "none")`
 #' - `"default"` a clean, simple default theme
 #' - `"boxed"` the default theme with box around risk table
-#' - `"none"` no styling applied to risk table
+#' - `"none"` no styling applied to risk table; equivalent to using `theme = NULL`
 
 theme_ggsurvfit_risktable <- function(theme = c("default", "boxed", "none")) {
   theme <- match.arg(theme)

@@ -11,7 +11,7 @@ theme_ggsurvfit_risktable(theme = c("default", "boxed", "none"))
 \itemize{
 \item \code{"default"} a clean, simple default theme
 \item \code{"boxed"} the default theme with box around risk table
-\item \code{"none"} no styling applied to risk table
+\item \code{"none"} no styling applied to risk table; equivalent to using \code{theme = NULL}
 }}
 }
 \description{

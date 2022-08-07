@@ -3,8 +3,9 @@
 #' @description
 #' Returns ggplot list of calls defining a theme.
 #'
-#' @param theme must be one of `c("none")`
-#' - `"none"` no styling applied to risk table
+#' @param theme must be one of `c("default", "none")`
+#' - `"default"` the default plot styling
+#' - `"none"` no styling applied to risk table; equivalent to using `theme = NULL`
 theme_ggsurvfit <- function(theme = c("default", "none")) {
   theme <- match.arg(theme)
 
