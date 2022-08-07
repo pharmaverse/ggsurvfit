@@ -34,7 +34,13 @@
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/add_risktable.html</loc>
   </url>
   <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/deprecated.html</loc>
+  </url>
+  <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/df_lung.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/format_p.html</loc>
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/ggcuminc.html</loc>
@@ -61,7 +67,7 @@
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/survfit2.html</loc>
   </url>
   <url>
-    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/survfit_pvalue.html</loc>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/survfit2_p.html</loc>
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/theme_ggsurvfit.html</loc>
