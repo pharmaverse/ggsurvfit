@@ -1,6 +1,13 @@
 #' Calculate p-value
 #'
+#' @description
 #' VERY EXPERIMENTAL! Will likely change or perhaps even disappear.
+#'
+#' The function `survfit2_p()` wraps `survival::survdiff()` and returns
+#' a formatted p-value.
+#'
+#' Function `logrank()` and `p_logrank()` are helper functions that
+#' return the p-value from a the log-rank test with or without the "p" pre-pended.
 #'
 #' @param x a 'survfit2' object
 #' @param pvalue_fun function to round and style p-value with
@@ -8,15 +15,21 @@
 #' @inheritDotParams survival::survdiff -data -formula
 #'
 #' @return a string
-#' @name survdiff2
+#' @name survfit2_p
 #'
 #' @examples
-#' # add exmaple
+#' sf <- survfit2(Surv(time, status) ~ sex, data = df_lung)
+#'
+#' sf %>%
+#'   ggsurvfit() +
+#'   add_confidence_interval() +
+#'   add_risktable() +
+#'   ggplot2::labs(caption = glue::glue("Log-rank {p_logrank(sf)}"))
 NULL
 
 #' @export
-#' @rdname survdiff2
-survdiff2 <- function(x, pvalue_fun = NULL, prepend_p = TRUE, ...) {
+#' @rdname survfit2_p
+survfit2_p <- function(x, pvalue_fun = NULL, prepend_p = TRUE, ...) {
   if (!inherits(x, "survfit2")) {
     cli_abort(
       c("!" = "Argument {.code x} must be class {.cls survfit2},",
@@ -43,13 +56,13 @@ survdiff2 <- function(x, pvalue_fun = NULL, prepend_p = TRUE, ...) {
 }
 
 #' @export
-#' @rdname survdiff2
+#' @rdname survfit2_p
 logrank <- function(x, pvalue_fun = NULL) {
-  survdiff2(x, pvalue_fun = pvalue_fun, prepend_p = FALSE, rho = 0)
+  survfit2_p(x, pvalue_fun = pvalue_fun, prepend_p = FALSE, rho = 0)
 }
 
 #' @export
-#' @rdname survdiff2
+#' @rdname survfit2_p
 p_logrank <- function(x, pvalue_fun = NULL) {
-  survdiff2(x, pvalue_fun = pvalue_fun, prepend_p = TRUE, rho = 0)
+  survfit2_p(x, pvalue_fun = pvalue_fun, prepend_p = TRUE, rho = 0)
 }
