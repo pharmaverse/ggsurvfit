@@ -90,8 +90,8 @@ tidy_survfit <- function(x,
 
   # first extract needed item from survfit call
   if (inherits(survfit, "survfit2")) {
-    formula <- .extract_formula_from_surfit(survfit)
-    data <- .extract_data_from_surfit(survfit)
+    formula <- .extract_formula_from_survfit(survfit)
+    data <- .extract_data_from_survfit(survfit)
   }
   else if (inherits(survfit, "tidycuminc")) {
     formula <- survfit$formula

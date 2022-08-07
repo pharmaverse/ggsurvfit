@@ -127,8 +127,8 @@ ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit(), ...) {
 .default_x_axis_label <- function(x) {
   # extract formula and data ---------------------------------------------------
   if (inherits(x, "survfit2")) {
-    formula <- .extract_formula_from_surfit(x)
-    data <- .extract_data_from_surfit(x)
+    formula <- .extract_formula_from_survfit(x)
+    data <- .extract_data_from_survfit(x)
   }
   else if (inherits(x, "tidycuminc")) {
     formula <- x$formula

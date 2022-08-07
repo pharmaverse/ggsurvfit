@@ -1,5 +1,6 @@
 #' Compare KM curves
 #'
+#' VERY EXPERIMENTAL! Will likely be modified majorily before release!
 #' Returns p-values calculated with `survival::survdiff()`
 #'
 #' @param x an object of class 'survfit'

@@ -18,6 +18,7 @@ the \verb{test=} argument is ignored.}
 a p-value
 }
 \description{
+VERY EXPERIMENTAL! Will likely be modified majorily before release!
 Returns p-values calculated with \code{survival::survdiff()}
 }
 \examples{
