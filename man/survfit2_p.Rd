@@ -45,7 +45,7 @@ a scalar parameter that controls the type of test.
 a string
 }
 \description{
-VERY EXPERIMENTAL! Will likely change or perhaps even disappear.
+EXPERIMENTAL! Will likely change or perhaps even disappear.
 
 The function \code{survfit2_p()} wraps \code{survival::survdiff()} and returns
 a formatted p-value.

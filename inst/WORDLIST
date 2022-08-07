@@ -12,6 +12,7 @@ geoms
 geom’
 gghighlight
 ggplot
+pre
 risktable
 roundoff
 stairstep

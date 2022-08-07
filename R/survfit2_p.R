@@ -1,7 +1,7 @@
 #' Calculate p-value
 #'
 #' @description
-#' VERY EXPERIMENTAL! Will likely change or perhaps even disappear.
+#' EXPERIMENTAL! Will likely change or perhaps even disappear.
 #'
 #' The function `survfit2_p()` wraps `survival::survdiff()` and returns
 #' a formatted p-value.

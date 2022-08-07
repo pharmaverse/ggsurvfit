@@ -58,7 +58,13 @@ add_risktable <- function(times = NULL,
                           combine_groups = FALSE,
                           theme = theme_ggsurvfit_risktable()) {
   rlang::inject(
-    ggplot2::geom_blank() %>%
+    ggplot2::layer(
+      data = NULL, mapping = NULL,
+      stat = StatBlankSurvfit, geom = "blank",
+      position = "identity",
+      show.legend = NA, inherit.aes = TRUE,
+      params = list()
+    ) %>%
       structure(
         "risktable_args" = list(
           times = times,
@@ -78,6 +84,15 @@ add_risktable <- function(times = NULL,
   )
 }
 
+
+StatBlankSurvfit <-
+  ggplot2::ggproto(
+    "StatBlankSurvfit", ggplot2::Stat,
+    compute_group = function(data, scales, ...) {
+      .is_ggsurvfit(data, fun_name = "add_risktable()", required_aes_cols = c("x", "y"))
+      data
+    }
+  )
 
 .construct_risktable <- function(x, times, risktable_stats, stats_label, group,
                                  combine_groups, risktable_group,
