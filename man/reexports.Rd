@@ -6,6 +6,7 @@
 \alias{survfit}
 \alias{Surv}
 \alias{\%>\%}
+\alias{\%+\%}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -14,6 +15,8 @@ below to see their documentation.
 
 \describe{
   \item{dplyr}{\code{\link[dplyr:reexports]{\%>\%}}}
+
+  \item{ggplot2}{\code{\link[ggplot2:gg-add]{\%+\%}}}
 
   \item{survival}{\code{\link[survival]{Surv}}, \code{\link[survival]{survfit}}}
 }}

@@ -1,12 +1,25 @@
 #' Risk Table Themes
 #'
 #' @description
-#' Returns ggplot list of calls defining a theme.
+#' Returns ggplot list of calls defining a theme meant to be applied to a risk table.
 #'
 #' @param theme must be one of `c("default", "boxed", "none")`
 #' - `"default"` a clean, simple default theme
 #' - `"boxed"` the default theme with box around risk table
 #' - `"none"` no styling applied to risk table; equivalent to using `theme = NULL`
+#'
+#' @export
+#' @examples
+#' p <- survfit2(Surv(time, status) ~ 1, data = df_lung) %>% ggsurvfit()
+#'
+#' # default ------------------------------------
+#' p + add_risktable(theme = theme_ggsurvfit_risktable("default"))
+#'
+#' # boxed --------------------------------------
+#' p + add_risktable(theme = theme_ggsurvfit_risktable("boxed"))
+#'
+#' # none ---------------------------------------
+#' p + add_risktable(theme = theme_ggsurvfit_risktable("none"))
 
 theme_ggsurvfit_risktable <- function(theme = c("default", "boxed", "none")) {
   theme <- match.arg(theme)

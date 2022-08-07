@@ -57,30 +57,31 @@ add_risktable <- function(times = NULL,
                           stats_label = NULL,
                           combine_groups = FALSE,
                           theme = theme_ggsurvfit_risktable()) {
-  risktable_group <- match.arg(risktable_group)
-  risktable_stats <-
-    match.arg(
-      risktable_stats,
-      choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
-      several.ok = TRUE
-    )
-
-  ggplot2::geom_blank() %>%
-    structure("risktable_args" = list(
-      times = times,
-      risktable_stats = risktable_stats,
-      stats_label = stats_label,
-      combine_groups = combine_groups,
-      risktable_group = risktable_group,
-      risktable_height = risktable_height,
-      theme = theme
-    ))
+  rlang::inject(
+    ggplot2::geom_blank() %>%
+      structure(
+        "risktable_args" = list(
+          times = times,
+          risktable_stats =
+            !!match.arg(
+              risktable_stats,
+              choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
+              several.ok = TRUE
+            ),
+          stats_label = stats_label,
+          combine_groups = combine_groups,
+          risktable_group = !!match.arg(risktable_group),
+          risktable_height = risktable_height,
+          theme = theme
+        )
+      )
+  )
 }
 
 
 .construct_risktable <- function(x, times, risktable_stats, stats_label, group,
                                  combine_groups, risktable_group,
-                                 risktable_height, theme) {
+                                 risktable_height, theme, combine_plots) {
   times <- times %||% ggplot2::ggplot_build(x)$layout$panel_params[[1]]$x.sec$breaks
 
   df_times <-
@@ -101,6 +102,8 @@ add_risktable <- function(times = NULL,
     c(list(x), gg_risktable_list) %>%
     align_plots()
 
+  if (isFALSE(combine_plots)) return(gg_risktable_list_aligned)
+
   ## combine all plots into single figure
   gg_final <-
     gg_risktable_list_aligned %>%
@@ -112,7 +115,7 @@ add_risktable <- function(times = NULL,
   gg_final
 }
 
-.construct_stat_labels <- function(risktable_stats, stats_label) {
+.construct_stat_labels <- function(risktable_stats, stats_label, combine_plots = TRUE) {
   if (!is.null(stats_label) &&
       !rlang::is_named(stats_label) &&
       length(risktable_stats) != length(stats_label)) {
