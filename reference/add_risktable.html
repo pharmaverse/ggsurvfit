@@ -54,7 +54,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_risktable</span><span class="op">(</span></span>
 <span>  times <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  risktable_stats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"n.risk"</span>, <span class="st">"cum.event"</span><span class="op">)</span>,</span>
-<span>  risktable_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"strata"</span>, <span class="st">"risktable_stats"</span><span class="op">)</span>,</span>
+<span>  risktable_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"strata"</span>, <span class="st">"risktable_stats"</span><span class="op">)</span>,</span>
 <span>  risktable_height <span class="op">=</span> <span class="fl">0.14</span>,</span>
 <span>  stats_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  combine_groups <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -82,7 +82,7 @@ Default is <code>c("n.risk", "cum.event")</code>.</p><ul><li><p><code>"n.risk"</
 
 <dt>risktable_group</dt>
 <dd><p>String indicating the grouping variable for the risk tables.
-Default is <code>"strata"</code>.</p><ul><li><p><code>"strata"</code> groups the risk tables per stratum when present.</p></li>
+Default is <code>"auto"</code> and will select <code>"strata"</code> or <code>"risktable_stats"</code> based on context.</p><ul><li><p><code>"strata"</code> groups the risk tables per stratum when present.</p></li>
 <li><p><code>"risktable_stats"</code> groups the risk tables per risktable_stats.</p></li>
 </ul></dd>
 
