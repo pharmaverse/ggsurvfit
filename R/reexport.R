@@ -10,3 +10,7 @@ survival::Surv
 #' @export
 dplyr::`%>%`
 
+#' @importFrom ggplot2 %+%
+#' @export
+ggplot2::`%+%`
+

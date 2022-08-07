@@ -18,7 +18,7 @@ print.ggsurvfit <- function(x, ...) {
 
   if (!is.null(risktable_args)) {
     # construct and add risktable
-    x_eval <- rlang::inject(.construct_risktable(x, !!!risktable_args))
+    x_eval <- rlang::inject(.construct_risktable(x, !!!risktable_args, combine_plots = TRUE))
   } else {
     # remove ggsurvfit class, and print with default method
     x_eval <- structure(x, class = setdiff(class(x), c("ggsurvfit", "ggcuminc")))
