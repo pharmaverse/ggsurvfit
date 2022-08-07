@@ -47,12 +47,16 @@ reference:
       - theme_ggsurvfit_risktable
       - theme_ggsurvfit
 
+  - title: P-values
+  - contents:
+      - survfit2_p
+      - format_p
+
   - title: Utilities
   - contents:
       - tidy_survfit
       - tidy_cuminc
       - stat_stepribbon
-      - survfit_pvalue
 
   - title: Data
   - contents:
