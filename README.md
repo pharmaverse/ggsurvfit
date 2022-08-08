@@ -74,14 +74,13 @@ can add any ggplot function to modify the figure.
 
 ``` r
 p +
-  theme(legend.position = "bottom") +
   labs(
     y = "Probability of survival",
     x = "Months since treatment",
     title = "Kaplan-Meier Estimate of Survival by Sex",
     # remove the fill and color legend labels (Sex appears in title)
-    fill = "", color = ""
-  ) + 
+    fill = NULL, color = NULL
+  ) +
   # reduce padding on edges of figure, and format axes
   scale_y_continuous(label = scales::percent, expand = c(0.01, 0)) +
   scale_x_continuous(breaks = 0:5*6, expand = c(0.02, 0))
