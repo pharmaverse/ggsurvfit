@@ -20,6 +20,26 @@ test_that("add_quantile() works with ggsurvfit()", {
       lapply(function(x) (ggsurvfit(x, type = function(x) x) + add_quantile()) %>% print()),
     NA
   )
+
+  expect_equal(
+    sf1 %>%
+      tidy_survfit() %>%
+      dplyr::select(x = time, y = estimate) %>%
+      quantile_km_in_stat(y_value = 0.5) %>%
+      dplyr::pull(x) %>%
+      `[`(1),
+    quantile(sf1, probs = 0.5, conf.int = FALSE) %>% as.numeric()
+  )
+
+  expect_equal(
+    sf2 %>%
+      tidy_survfit() %>%
+      dplyr::select(x = time, y = estimate, group = strata) %>%
+      quantile_km_in_stat(y_value = 0.5) %>%
+      dplyr::pull(x) %>%
+      setdiff(0),
+    quantile(sf2, probs = 0.5, conf.int = FALSE) %>% as.numeric()
+  )
 })
 
 test_that("add_quantile() errors with ggsurvfit()", {
