@@ -20,7 +20,7 @@
 #' in the risk table across groups. Default is `FALSE`
 #' @param risktable_height A numeric value between 0 and 1 indicates the height used by the table versus the height
 #'  used by the plot, as described in `patchwork::wrap_plots(heights=)`. The default is 0.14.
-#' @param theme A risktable theme typically returned from `theme_ggsurvfit_risktable()`
+#' @param theme A risktable theme. Default is `theme_risktable_default()`
 #' @param strata_as_color_block logical indicating whether to replace strata levels with color
 #'
 #' @export
@@ -58,7 +58,7 @@ add_risktable <- function(times = NULL,
                           stats_label = NULL,
                           strata_as_color_block = TRUE,
                           combine_groups = FALSE,
-                          theme = theme_ggsurvfit_risktable()) {
+                          theme = theme_risktable_default()) {
   rlang::inject(
     ggplot2::layer(
       data = NULL, mapping = NULL,

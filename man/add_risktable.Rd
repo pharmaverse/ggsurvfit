@@ -12,7 +12,7 @@ add_risktable(
   stats_label = NULL,
   strata_as_color_block = TRUE,
   combine_groups = FALSE,
-  theme = theme_ggsurvfit_risktable()
+  theme = theme_risktable_default()
 )
 }
 \arguments{
@@ -48,7 +48,7 @@ from \verb{risktable_stats=} and the value is the custom label.}
 \item{combine_groups}{logical indicating whether to combine the statistics
 in the risk table across groups. Default is \code{FALSE}}
 
-\item{theme}{A risktable theme typically returned from \code{theme_ggsurvfit_risktable()}}
+\item{theme}{A risktable theme. Default is \code{theme_risktable_default()}}
 }
 \description{
 Add risk tables

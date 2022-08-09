@@ -27,6 +27,7 @@
 .construct_color_block <- function() {
   if (!exists("color_block_mapping", envir = rlang::caller_env())) return(NULL)
   color_block_mapping <- get("color_block_mapping", envir = rlang::caller_env())
+  if (is.null(color_block_mapping)) return(NULL)
 
   list(
     ggplot2::scale_y_discrete(label = function(x) "\U25AC"), # https://cloford.com/resources/charcodes/utf-8_geometric.htm
