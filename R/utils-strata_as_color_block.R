@@ -24,7 +24,10 @@
   colors %>% stats::setNames(color_label)
 }
 
-.construct_color_block <- function(gg, color_block_mapping) {
+.construct_color_block <- function() {
+  if (!exists("color_block_mapping", envir = rlang::caller_env())) return(NULL)
+  color_block_mapping <- get("color_block_mapping", envir = rlang::caller_env())
+
   list(
     ggplot2::scale_y_discrete(label = function(x) "\U25AC"), # https://cloford.com/resources/charcodes/utf-8_geometric.htm
     ggplot2::theme(
