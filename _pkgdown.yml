@@ -44,7 +44,7 @@ reference:
 
   - title: Themes
   - contents:
-      - theme_ggsurvfit_risktable
+      - theme_risktable
       - theme_ggsurvfit
 
   - title: P-values

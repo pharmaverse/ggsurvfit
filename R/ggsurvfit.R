@@ -1,6 +1,6 @@
 #' Plot Survival Probability
 #'
-#' @param theme a survfit theme typically returned from `theme_ggsurvfit()`
+#' @param theme a survfit theme. Default is `theme_ggsurvfit_default()`
 #' @param ... arguments passed to `ggplot2::geom_step(...)`, e.g. `size = 2`
 #' @inheritParams tidy_survfit
 #'
@@ -32,7 +32,7 @@
 #'   add_confidence_interval() +
 #'   add_quantile() +
 #'   add_risktable()
-ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit(), ...) {
+ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit_default(), ...) {
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "survfit")) {
     cli_abort(
