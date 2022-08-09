@@ -1,7 +1,7 @@
 #' Use Symbol for Strata in Risktable
 #'
 #' @param symbol UTF-8 code of shape to replace strata level with.
-#' Default is a rectable (`"\U25AC"`).
+#' Default is a rectangle (`"\U25AC"`).
 #' Other common options are circle (`"\U25CF"`) and diamond (`"\U25C6"`)
 #' @param size,face,vjust,... arguments passed to `ggtext::element_markdown()`
 #' to style the symbol

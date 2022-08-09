@@ -14,7 +14,7 @@ add_risktable_strata_symbol(
 }
 \arguments{
 \item{symbol}{UTF-8 code of shape to replace strata level with.
-Default is a rectable (\code{"\\U25AC"}).
+Default is a rectangle (\code{"\\U25AC"}).
 Other common options are circle (\code{"\\U25CF"}) and diamond (\code{"\\U25C6"})}
 
 \item{size, face, vjust, ...}{arguments passed to \code{ggtext::element_markdown()}
