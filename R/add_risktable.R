@@ -233,19 +233,24 @@ lst_stat_labels_default <-
             list(ggplot2::ggtitle(dplyr::pull(df_group) %>% as.character()))
         }
 
-        ggplot2::ggplot(
-          data,
-          ggplot2::aes(
-            x = .data$time,
-            y = .data[[y_value]],
-            label = .data$stat_value
-          )
-        ) +
+        # construct the risktable ggplot
+        gg <-
+          ggplot2::ggplot(
+            data,
+            ggplot2::aes(
+              x = .data$time,
+              y = .data[[y_value]],
+              label = .data$stat_value
+            )
+          ) +
           ggplot2::geom_text(size = 3.0, hjust = 0.5, vjust = 0.5, angle = 0, show.legend = FALSE) +
-          ggplot2::scale_y_discrete(limits = rev) +
+          ggplot2::scale_y_discrete(limits = rev)
+
+        # apply styling to the plot
+        gg +
           ggtitle_group_lbl +
           theme +
-          switch(!is.null(color_block_mapping), .construct_color_block())
+          switch(!is.null(color_block_mapping), .construct_color_block(gg, color_block_mapping))
       }
     )
 }
