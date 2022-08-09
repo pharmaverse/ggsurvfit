@@ -1,5 +1,5 @@
 Package: ggsurvfit
-Title: Easy and Flexible Time-To-Event Figures
+Title: Easy and Flexible Time-to-Event Figures
 Version: 0.0.0
 Authors@R: c(
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre", "cph"),

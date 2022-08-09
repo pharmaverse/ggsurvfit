@@ -3,10 +3,14 @@
 #' @description
 #' Returns ggplot list of calls defining a theme.
 #'
-#' @export
+#' @name theme_ggsurvfit
 #' @examples
 #' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit(theme = theme_ggsurvfit_default())
+NULL
+
+#' @export
+#' @rdname theme_ggsurvfit
 theme_ggsurvfit_default <- function() {
   list(
     ggplot2::theme_bw(),
