@@ -4,7 +4,7 @@
 \name{ggsurvfit-package}
 \alias{ggsurvfit-package}
 \alias{_PACKAGE}
-\title{ggsurvfit: Easy and Flexible Time-To-Event Figures}
+\title{ggsurvfit: Easy and Flexible Time-to-Event Figures}
 \description{
 Ease the creation of time-to-event (aka survival) endpoint figures with 'ggplot2'. The concise and modular code creates images that are ready for publication or sharing. Each of the functions that add to or modify the existing ggplot are written as proper 'ggplot2' geoms or stat methods, allowing the functions from this package to be combined with any functions or customization from 'ggplot2' and other 'ggplot2' extensions.
 }
