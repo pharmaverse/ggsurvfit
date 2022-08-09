@@ -242,7 +242,7 @@ lst_stat_labels_default <-
         gg +
           ggtitle_group_lbl +
           theme +
-          switch(!is.null(color_block_mapping), .construct_color_block(gg, color_block_mapping))
+          switch(!is.null(color_block_mapping), .construct_color_block())
       }
     )
 }
