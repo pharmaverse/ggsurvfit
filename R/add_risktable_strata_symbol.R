@@ -40,8 +40,8 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
 
 
 # function returns a named vector the the strata level as the name and the hex color as the value
-.match_strata_level_to_color <- function(plot_build, risktable_group) {
-  if (risktable_group == "strata" || !"colour" %in% names(plot_build$data[[1]])) {
+.match_strata_level_to_color <- function(plot_build, risktable_group, risktable_symbol_args) {
+  if (rlang::is_empty(risktable_symbol_args) || risktable_group == "strata" || !"colour" %in% names(plot_build$data[[1]])) {
     return(NULL)
   }
 
