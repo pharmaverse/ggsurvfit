@@ -25,22 +25,12 @@
 }
 
 .construct_color_block <- function(gg, color_block_mapping) {
-  plot_range <-
-    ggplot2::ggplot_build(gg)$layout$panel_params[[1]]$x.range
-
   list(
-    # ggplot2::coord_cartesian(clip = "off"),
+    ggplot2::scale_y_discrete(label = function(x) paste("\U25CF")),
     ggplot2::theme(
-      axis.text.y.left = ggplot2::element_text(color = color_block_mapping, fill = color_block_mapping)
-    ),
-
-    # ggplot2::geom_label(
-    #   ggplot2::aes(fill = .data[[y_value]]),
-    #   label = "BLUE",
-    #   hjust = 1,
-    #   label.r = ggplot2::unit(0.25, "lines"),
-    #   x = plot_range[1] - .05 * diff(plot_range) - .25,
-    #   color = "transparent"
-    # )
+      axis.text.y.left =
+        ggplot2::element_text(color = rev(color_block_mapping),
+                              size = 15, face = "bold", vjust = 0.4)
+    )
   )
 }
