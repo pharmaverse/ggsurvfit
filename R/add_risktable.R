@@ -244,7 +244,7 @@ lst_stat_labels_default <-
           ggtitle_group_lbl +
           theme +
           switch(
-            !rlang::is_empty(color_block_mapping),
+            !rlang::is_empty(risktable_symbol_args),
             rlang::inject(.construct_color_block(color_block_mapping, !!!risktable_symbol_args))
           )
       }
