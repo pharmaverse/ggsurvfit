@@ -25,16 +25,19 @@
 }
 
 .construct_color_block <- function() {
+  rlang::check_installed(pkg = "ggtext")
+
   if (!exists("color_block_mapping", envir = rlang::caller_env())) return(NULL)
   color_block_mapping <- get("color_block_mapping", envir = rlang::caller_env())
   if (is.null(color_block_mapping)) return(NULL)
 
   list(
-    ggplot2::scale_y_discrete(label = function(x) "\U25AC"), # https://cloford.com/resources/charcodes/utf-8_geometric.htm
+    ggplot2::scale_y_discrete(
+      label = Vectorize(function(x) paste0("<span style='color: ", color_block_mapping[[x]],"'>\U25AC</span>"), "x")
+    ), # https://cloford.com/resources/charcodes/utf-8_geometric.htm
     ggplot2::theme(
       axis.text.y.left =
-        ggplot2::element_text(color = rev(color_block_mapping),
-                              size = 15, face = "bold", vjust = 0.4)
+        ggtext::element_markdown(size = 15, face = "bold", vjust = 0.45)
     )
   )
 }
