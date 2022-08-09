@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' p <-
-#' survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+#' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit(size = 1) +
 #'   add_confidence_interval() +
 #'   add_risktable(risktable_group = "risktable_stats")
