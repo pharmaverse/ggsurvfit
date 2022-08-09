@@ -20,13 +20,13 @@
     levels()
 
   # i hope this will work 100% of the time!
-  # waht modifications could a use make the the figures that could break this connection?
-  colors %>% setNames(color_label)
+  # what modifications could a use make the the figures that could break this connection?
+  colors %>% stats::setNames(color_label)
 }
 
 .construct_color_block <- function(gg, color_block_mapping) {
   list(
-    ggplot2::scale_y_discrete(label = function(x) paste("\U25CF")),
+    ggplot2::scale_y_discrete(label = function(x) "\U25AC"), # https://cloford.com/resources/charcodes/utf-8_geometric.htm
     ggplot2::theme(
       axis.text.y.left =
         ggplot2::element_text(color = rev(color_block_mapping),
