@@ -119,7 +119,8 @@ StatBlankSurvfit <-
     .create_list_of_gg_risk_tables(
       df_times, risktable_stats, times,
       df_stat_labels, theme, risktable_group,
-      color_block_mapping = .match_strata_level_to_color(plot_build, risktable_group),
+      color_block_mapping =
+        .match_strata_level_to_color(plot_build, risktable_group, risktable_symbol_args),
       risktable_symbol_args = risktable_symbol_args
     )
 
