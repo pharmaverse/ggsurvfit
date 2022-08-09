@@ -61,7 +61,7 @@ p <-
   add_censor_mark() +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(color = "gray40", size = 1)
+  add_quantile(color = "gray50", size = 1)
 p
 ```
 
@@ -112,7 +112,7 @@ You can even facet…but you *cannot* facet with the risktable, however.
 survfit2(Surv(time, status) ~ sex, data = df_lung) |>
   ggsurvfit(size = 1) +
   add_censor_mark(shape = 4) +
-  add_quantile(linetype = 3, size = 1) +
+  add_quantile(linetype = 3, size = 1, color = "gray50") +
   add_confidence_interval() +
   ggplot2::facet_grid(~strata)
 ```
@@ -144,7 +144,7 @@ library(tidycmprsk)
 cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
   ggcuminc(outcome = "death from cancer", size = 1) +
   add_confidence_interval() +
-  add_quantile(y_value = 0.20, size = 1) +
+  add_quantile(y_value = 0.20, size = 1, color = "gray50") +
   add_risktable() +
   labs(x = "Months Since Treatment") +
   theme(legend.position = "bottom") +
