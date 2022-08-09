@@ -10,7 +10,6 @@ add_risktable(
   risktable_group = c("auto", "strata", "risktable_stats"),
   risktable_height = 0.14,
   stats_label = NULL,
-  strata_as_color_block = TRUE,
   combine_groups = FALSE,
   theme = theme_risktable_default()
 )
@@ -42,8 +41,6 @@ used by the plot, as described in \code{patchwork::wrap_plots(heights=)}. The de
 
 \item{stats_label}{named vector or list of custom labels. Names are the statistics
 from \verb{risktable_stats=} and the value is the custom label.}
-
-\item{strata_as_color_block}{logical indicating whether to replace strata levels with color}
 
 \item{combine_groups}{logical indicating whether to combine the statistics
 in the risk table across groups. Default is \code{FALSE}}

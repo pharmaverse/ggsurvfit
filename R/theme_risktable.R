@@ -52,3 +52,4 @@ theme_risktable_boxed <- function() {
     ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA))
   )
 }
+
