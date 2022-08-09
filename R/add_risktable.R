@@ -21,7 +21,6 @@
 #' @param risktable_height A numeric value between 0 and 1 indicates the height used by the table versus the height
 #'  used by the plot, as described in `patchwork::wrap_plots(heights=)`. The default is 0.14.
 #' @param theme A risktable theme. Default is `theme_risktable_default()`
-#' @param strata_as_color_block logical indicating whether to replace strata levels with color
 #'
 #' @export
 #' @examples
@@ -56,7 +55,6 @@ add_risktable <- function(times = NULL,
                           risktable_group = c("auto", "strata", "risktable_stats"),
                           risktable_height = 0.14,
                           stats_label = NULL,
-                          strata_as_color_block = TRUE,
                           combine_groups = FALSE,
                           theme = theme_risktable_default()) {
   rlang::inject(
@@ -68,16 +66,15 @@ add_risktable <- function(times = NULL,
       params = list()
     ) %>%
       structure(
-        "risktable_args" = list(
+        "add_risktable" = list(
           times = times,
           risktable_stats =
             !!match.arg(
-              risktable_stats,
+              rev(risktable_stats),
               choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
               several.ok = TRUE
             ),
           stats_label = stats_label,
-          strata_as_color_block = strata_as_color_block,
           combine_groups = combine_groups,
           risktable_group = !!match.arg(risktable_group),
           risktable_height = risktable_height,
@@ -98,8 +95,9 @@ StatBlankSurvfit <-
   )
 
 .construct_risktable <- function(x, times, risktable_stats, stats_label, group,
-                                 combine_groups, risktable_group, strata_as_color_block,
-                                 risktable_height, theme, combine_plots) {
+                                 combine_groups, risktable_group,
+                                 risktable_height, theme, combine_plots,
+                                 risktable_symbol_args) {
   plot_build <- ggplot2::ggplot_build(x)
   times <- times %||% plot_build$layout$panel_params[[1]]$x.sec$breaks
 
@@ -121,7 +119,8 @@ StatBlankSurvfit <-
     .create_list_of_gg_risk_tables(
       df_times, risktable_stats, times,
       df_stat_labels, theme, risktable_group,
-      color_block_mapping = .match_strata_level_to_color(plot_build, risktable_group)
+      color_block_mapping = .match_strata_level_to_color(plot_build, risktable_group),
+      risktable_symbol_args = risktable_symbol_args
     )
 
   # align all the plots
@@ -186,7 +185,9 @@ lst_stat_labels_default <-
 
 .create_list_of_gg_risk_tables <- function(df_times, risktable_stats, times,
                                            df_stat_labels, theme,
-                                           risktable_group, color_block_mapping) {
+                                           risktable_group,
+                                           color_block_mapping,
+                                           risktable_symbol_args) {
   grouping_variable <-
     switch(risktable_group,
            "strata" = "strata",
@@ -242,7 +243,10 @@ lst_stat_labels_default <-
         gg +
           ggtitle_group_lbl +
           theme +
-          switch(!is.null(color_block_mapping), .construct_color_block())
+          switch(
+            !rlang::is_empty(color_block_mapping),
+            rlang::inject(.construct_color_block(color_block_mapping, !!!risktable_symbol_args))
+          )
       }
     )
 }
