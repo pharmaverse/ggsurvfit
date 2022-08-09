@@ -210,15 +210,6 @@ lst_stat_labels_default <-
     ) %>%
     dplyr::left_join(df_stat_labels, by = "stat_name")
 
-  # re-coding y_values to the underlying hex color, if requested
-  if (!is.null(color_block_mapping)) {
-    df_risktable[[y_value]] <-
-      dplyr::recode_factor(
-        df_risktable[[y_value]],
-        !!!color_block_mapping
-      )
-  }
-
   df_risktable %>%
     dplyr::mutate(
       "{y_value}" := factor(.data[[y_value]], levels = rev(levels(.data[[y_value]])))
@@ -243,8 +234,7 @@ lst_stat_labels_default <-
               label = .data$stat_value
             )
           ) +
-          ggplot2::geom_text(size = 3.0, hjust = 0.5, vjust = 0.5, angle = 0, show.legend = FALSE) +
-          ggplot2::scale_y_discrete(limits = rev)
+          ggplot2::geom_text(size = 3.0, hjust = 0.5, vjust = 0.5, angle = 0, show.legend = FALSE)
 
         # apply styling to the plot
         gg +
