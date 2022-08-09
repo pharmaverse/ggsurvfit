@@ -127,7 +127,7 @@ as {gghighlight}.
 ``` r
 survfit2(Surv(time, status) ~ ph.ecog, data = df_lung) |> 
   ggsurvfit(size = 1) +
-  ggplot2::labs(color = "Gender") +
+  ggplot2::labs(color = "ECOG") +
   gghighlight::gghighlight(strata == "Asymptomatic", calculate_per_facet = TRUE)
 ```
 
