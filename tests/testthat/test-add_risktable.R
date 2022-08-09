@@ -4,10 +4,20 @@ sf3 <- survfit2(Surv(time, status) ~ sex + ph.ecog, data = df_lung)
 
 test_that("add_risktable() works with ggsurvfit()", {
   expect_error(
-    list(sf1, sf2, sf3) %>%
-      lapply(function(x) (ggsurvfit(x) + add_risktable()) %>% print()),
+    lst_survfit2_risktable <-
+      list(sf1, sf2, sf3) %>%
+      lapply(function(x) ggsurvfit(x) + add_risktable()),
     NA,
   )
+  expect_error(
+    lst_survfit2_risktable %>%
+      lapply(function(x) print(x)),
+    NA,
+  )
+  vdiffr::expect_doppelganger("sf1-risktable", lst_survfit2_risktable[[1]])
+  vdiffr::expect_doppelganger("sf2-risktable", lst_survfit2_risktable[[2]])
+  vdiffr::expect_doppelganger("sf3-risktable", lst_survfit2_risktable[[3]])
+
 
   expect_error(
     list(sf1, sf2, sf3) %>%
@@ -65,17 +75,26 @@ cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidy
 
 test_that("add_risktable() works with ggcuminc()", {
   expect_error(
-    list(cuminc1, cuminc2, cuminc3) %>%
-      lapply(function(x) (ggcuminc(x) + add_risktable()) %>% print()),
+    lst_cuminc_risktable <-
+      list(cuminc1, cuminc2, cuminc3) %>%
+      lapply(function(x) ggcuminc(x) + add_risktable()),
     NA,
   )
+  expect_error(
+    lst_cuminc_risktable %>%
+      lapply(function(x) print(x)),
+    NA,
+  )
+  vdiffr::expect_doppelganger("cuminc1-risktable", lst_cuminc_risktable[[1]])
+  vdiffr::expect_doppelganger("cuminc2-risktable", lst_cuminc_risktable[[2]])
+  vdiffr::expect_doppelganger("cuminc3-risktable", lst_cuminc_risktable[[3]])
 
   expect_error(
     list(cuminc1, cuminc2, cuminc3) %>%
       lapply(
         function(x) {
           (ggcuminc(x) +
-            add_risktable(risktable_stats = c("n.risk", "cum.event"), stats_label = list(cum.event = "CUM EVENTS"))) %>%
+             add_risktable(risktable_stats = c("n.risk", "cum.event"), stats_label = list(cum.event = "CUM EVENTS"))) %>%
             print()
         }
       ),
@@ -99,10 +118,10 @@ test_that("add_risktable() works with ggcuminc()", {
 test_that("add_risktable() throws error messages", {
   expect_error(
     (ggcuminc(cuminc1) +
-      add_risktable(
-        risktable_stats = c("n.risk", "cum.event"),
-        stats_label = "CUM EVENTS"
-      )) %>%
+       add_risktable(
+         risktable_stats = c("n.risk", "cum.event"),
+         stats_label = "CUM EVENTS"
+       )) %>%
       print()
   )
 })
