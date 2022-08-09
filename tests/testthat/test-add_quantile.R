@@ -4,10 +4,14 @@ sf3 <- survfit2(Surv(time, status) ~ sex + ph.ecog, data = df_lung)
 
 test_that("add_quantile() works with ggsurvfit()", {
   expect_error(
-    list(sf1, sf2, sf3) %>%
+    lst_survfit2_quantile <-
+      list(sf1, sf2, sf3) %>%
       lapply(function(x) ggsurvfit(x) + add_quantile()),
     NA
   )
+  vdiffr::expect_doppelganger("sf1-quantile", lst_survfit2_quantile[[1]])
+  vdiffr::expect_doppelganger("sf2-quantile", lst_survfit2_quantile[[2]])
+  vdiffr::expect_doppelganger("sf3-quantile", lst_survfit2_quantile[[3]])
 
   expect_error(
     list(sf1, sf2, sf3) %>%
@@ -60,10 +64,16 @@ cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidy
 
 
 test_that("add_quantile() works with ggcuminc()", {
-  expect_error(
-    list(cuminc1, cuminc2, cuminc3) %>%
-      lapply(function(x) ggcuminc(x) + add_quantile()),
-    NA
-  )
+  lst_cuminc_quantile <-
+    expect_error(
+      list(cuminc1, cuminc2, cuminc3) %>%
+        lapply(function(x) ggcuminc(x) + add_quantile()),
+      NA
+    )
+
+  vdiffr::expect_doppelganger("cuminc1-quantile", lst_cuminc_quantile[[1]])
+  vdiffr::expect_doppelganger("cuminc2-quantile", lst_cuminc_quantile[[2]])
+  vdiffr::expect_doppelganger("cuminc3-quantile", lst_cuminc_quantile[[3]])
+
 })
 

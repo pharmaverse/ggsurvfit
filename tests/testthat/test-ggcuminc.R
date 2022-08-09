@@ -4,9 +4,13 @@ cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidy
 
 test_that("ggcuminc() works", {
   expect_error(
-    list(cuminc1, cuminc2, cuminc3) %>% lapply(ggcuminc),
+    lst_ggcuminc <- list(cuminc1, cuminc2, cuminc3) %>% lapply(ggcuminc),
     NA
   )
+
+  vdiffr::expect_doppelganger("cuminc1-ggcuminc", lst_ggcuminc[[1]])
+  vdiffr::expect_doppelganger("cuminc2-ggcuminc", lst_ggcuminc[[2]])
+  vdiffr::expect_doppelganger("cuminc3-ggcuminc", lst_ggcuminc[[3]])
 
   expect_error(ggcuminc(mtcars))
 })
