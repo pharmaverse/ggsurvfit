@@ -24,7 +24,7 @@ test_that("add_risktable_strata_symbol() works", {
     "must be run before"
   )
   expect_message(
-    print(survfit2(Surv(time, status) ~ 1, data = df_lung) |>
+    print(survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
             ggsurvfit() +
             add_risktable() +
             add_risktable_strata_symbol()),
