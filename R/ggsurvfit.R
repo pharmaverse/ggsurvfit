@@ -3,7 +3,7 @@
 #' @param theme a survfit theme. Default is `theme_ggsurvfit_default()`
 #' @param linetype_aes logical indicating whether to add `ggplot2::aes(linetype = strata)`
 #' to the `ggplot2::geom_step()` call. When strata are present, the resulting figure
-#' will be a mix a various linetypes ofr each stratum.
+#' will be a mix a various linetypes for each stratum.
 #' @param ... arguments passed to `ggplot2::geom_step(...)`, e.g. `size = 2`
 #' @inheritParams tidy_survfit
 #'
