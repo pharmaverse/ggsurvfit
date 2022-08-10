@@ -5,13 +5,7 @@
 \alias{adtte}
 \title{Example phase III clinical trial data set}
 \format{
-The data set adopts an abridged version of the CDISC ADaM ADTTE time to event
-data model. See here for more info on CDISC ADaM data standards
-\url{https://www.cdisc.org/standards/foundational/adam} and specifically the
-ADTTE time to event data model here
-\url{https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0}.
-
-The data set contains the following variables.
+The data set contains the following variables:
 \describe{
 \item{STUDYID}{The study identifier. A code unique to the clinical trial.}
 \item{SUBJID}{subject identifier. Numeric ID unique to each patient.}
@@ -68,5 +62,11 @@ such as age, hormone receptor status and prior radiotherapy treatment.
 
 Additional details on reasons for study discontinuation and censoring
 event description are also included.
+
+The data set adopts an abridged version of the CDISC ADaM ADTTE
+time to event data model. See here for more info on CDISC ADaM data standards
+\url{https://www.cdisc.org/standards/foundational/adam} and specifically the
+ADTTE time to event data model here
+\url{https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0}.
 }
 \keyword{datasets}
