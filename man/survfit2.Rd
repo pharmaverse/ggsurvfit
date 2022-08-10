@@ -46,7 +46,7 @@ survfit2(formula, ...)
     identifies individual subjects, when a given person can have multiple
     lines of data.
   }
-    \item{\code{cluster}}{used to group observations for the infinitesimal
+    \item{\code{cluster}}{used to group observations for the infinitesmal
     jackknife variance estimate, defaults to the value of id.}
     \item{\code{robust}}{logical, should the function compute a robust variance.
     For multi-state survival curves this is true by default.
@@ -57,7 +57,7 @@ survfit2(formula, ...)
   eliminate potential roundoff issues.}
     \item{\code{etype}}{
     a variable giving the type of event.  This has been superseded by
-    multi-state Surv objects and is deprecated; see example below.
+    multi-state Surv objects and is depricated; see example below.
   }
     \item{\code{error}}{this argument is no longer used}
   }}

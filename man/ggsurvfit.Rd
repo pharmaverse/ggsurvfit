@@ -10,12 +10,12 @@ ggsurvfit(x, type = "survival", theme = theme_ggsurvfit_default(), ...)
 \item{x}{a 'survfit' object}
 
 \item{type}{type of statistic to report. Default is \code{"survival"}.
-Must be one of the following:\tabular{ll}{
-   type \tab transformation \cr
-   \code{"survival"} \tab \code{x} \cr
-   \code{"risk"} \tab \code{1 - x} \cr
-   \code{"cumhaz"} \tab \code{-log(x)} \cr
-}}
+Must be one of the following:
+|type         |transformation |
+|:------------|:--------------|
+|\code{"survival"} |\code{x}            |
+|\code{"risk"}     |\code{1 - x}        |
+|\code{"cumhaz"}   |\code{-log(x)}      |}
 
 \item{theme}{a survfit theme. Default is \code{theme_ggsurvfit_default()}}
 
