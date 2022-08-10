@@ -4,7 +4,7 @@
 \alias{ggsurvfit}
 \title{Plot Survival Probability}
 \usage{
-ggsurvfit(x, type = "survival", theme = theme_ggsurvfit(), ...)
+ggsurvfit(x, type = "survival", theme = theme_ggsurvfit_default(), ...)
 }
 \arguments{
 \item{x}{a 'survfit' object}
@@ -17,7 +17,7 @@ Must be one of the following:\tabular{ll}{
    \code{"cumhaz"} \tab \code{-log(x)} \cr
 }}
 
-\item{theme}{a survfit theme typically returned from \code{theme_ggsurvfit()}}
+\item{theme}{a survfit theme. Default is \code{theme_ggsurvfit_default()}}
 
 \item{...}{arguments passed to \code{ggplot2::geom_step(...)}, e.g. \code{size = 2}}
 }

@@ -2,17 +2,15 @@
 % Please edit documentation in R/theme_ggsurvfit.R
 \name{theme_ggsurvfit}
 \alias{theme_ggsurvfit}
+\alias{theme_ggsurvfit_default}
 \title{Survfit Plot Themes}
 \usage{
-theme_ggsurvfit(theme = c("default", "none"))
-}
-\arguments{
-\item{theme}{must be one of \code{c("default", "none")}
-\itemize{
-\item \code{"default"} the default plot styling
-\item \code{"none"} no styling applied to risk table; equivalent to using \code{theme = NULL}
-}}
+theme_ggsurvfit_default()
 }
 \description{
 Returns ggplot list of calls defining a theme.
+}
+\examples{
+survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
+  ggsurvfit(theme = theme_ggsurvfit_default())
 }
