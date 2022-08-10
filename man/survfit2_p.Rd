@@ -6,11 +6,11 @@
 \alias{p_logrank}
 \title{Calculate p-value}
 \usage{
-survfit2_p(x, pvalue_fun = NULL, prepend_p = TRUE, ...)
+survfit2_p(x, pvalue_fun = format_p, prepend_p = TRUE, ...)
 
-logrank(x, pvalue_fun = NULL)
+logrank(x, pvalue_fun = format_p)
 
-p_logrank(x, pvalue_fun = NULL)
+p_logrank(x, pvalue_fun = format_p)
 }
 \arguments{
 \item{x}{a 'survfit2' object}
@@ -50,7 +50,7 @@ EXPERIMENTAL! Will likely change or perhaps even disappear.
 The function \code{survfit2_p()} wraps \code{survival::survdiff()} and returns
 a formatted p-value.
 
-Function \code{logrank()} and \code{p_logrank()} are helper functions that
+Functions \code{logrank()} and \code{p_logrank()} are helper functions that
 return the p-value from a the log-rank test with or without the "p" pre-pended.
 }
 \examples{

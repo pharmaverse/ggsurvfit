@@ -6,7 +6,7 @@
 #' The function `survfit2_p()` wraps `survival::survdiff()` and returns
 #' a formatted p-value.
 #'
-#' Function `logrank()` and `p_logrank()` are helper functions that
+#' Functions `logrank()` and `p_logrank()` are helper functions that
 #' return the p-value from a the log-rank test with or without the "p" pre-pended.
 #'
 #' @param x a 'survfit2' object
@@ -29,16 +29,13 @@ NULL
 
 #' @export
 #' @rdname survfit2_p
-survfit2_p <- function(x, pvalue_fun = NULL, prepend_p = TRUE, ...) {
+survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, ...) {
   if (!inherits(x, "survfit2")) {
     cli_abort(
       c("!" = "Argument {.code x} must be class {.cls survfit2},",
         "i" = "Create a {.cls survfit2} object with {.code survfit2()}.")
     )
   }
-
-  # TODO: this needs to be UDPATED! can't use gtsummary
-  pvalue_fun <- pvalue_fun %||% eval(rlang::parse_expr("gtsummary::style_pvalue"))
 
   survival::survdiff(
     formula = .extract_formula_from_survfit(x),
@@ -50,19 +47,19 @@ survfit2_p <- function(x, pvalue_fun = NULL, prepend_p = TRUE, ...) {
     pvalue_fun() %>%
     {dplyr::case_when(
       !prepend_p ~ .,
-      prepend_p & startsWith(., "<") ~ paste0("p", .),
-      prepend_p & !startsWith(., "<") ~ paste0("p=", .)
+      prepend_p & grepl(pattern = "^<|^>", x = .) ~ paste0("p", .),
+      prepend_p ~ paste0("p=", .)
     )}
 }
 
 #' @export
 #' @rdname survfit2_p
-logrank <- function(x, pvalue_fun = NULL) {
+logrank <- function(x, pvalue_fun = format_p) {
   survfit2_p(x, pvalue_fun = pvalue_fun, prepend_p = FALSE, rho = 0)
 }
 
 #' @export
 #' @rdname survfit2_p
-p_logrank <- function(x, pvalue_fun = NULL) {
+p_logrank <- function(x, pvalue_fun = format_p) {
   survfit2_p(x, pvalue_fun = pvalue_fun, prepend_p = TRUE, rho = 0)
 }
