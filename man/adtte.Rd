@@ -6,11 +6,12 @@
 \title{Example phase III clinical trial data set}
 \format{
 The data set contains the following variables:
+
 \describe{
-\item{STUDYID}{The study identifier. A code unique to the clinical trial.}
-\item{SUBJID}{subject identifier. Numeric ID unique to each patient.}
-\item{USUBJID}{unique subject identifier. Text ID combining study and patient IDs.}
-\item{AGE}{age at randomisation (years).}
+\item{STUDYID}{The study identifier. A code unique to the clinical trial}
+\item{SUBJID}{subject identifier. Numeric ID unique to each patient}
+\item{USUBJID}{unique subject identifier. Text ID combining study and patient IDs}
+\item{AGE}{age at randomisation (years)}
 \item{STR01}{Hormone receptor status at randomisation}
 \item{STR01N}{Hormone receptor positive (Numeric)}
 \item{STR01L}{Hormone receptor positive (Long format)}
@@ -19,13 +20,13 @@ The data set contains the following variables:
 \item{STR02L}{Prior Radiotherapy at randomisation (Long format)}
 \item{TRT01P}{Planned treatment assigned at randomisation}
 \item{TRT01PN}{Planned treatment assigned at randomisation (Numeric)}
-\item{PARAM}{Analysis parameter{Progression free survival}
+\item{PARAM}{Analysis parameter: Progression free survival}
 \item{PARAMCD}{Analysis parameter code}
 \item{AVAL}{Analysis value (time to event (days)}
 \item{CNSR}{Censoring (0 = Event, 1 = censored)}
 \item{EVNTDESC}{Event description}
 \item{CNSDTDSC}{Censoring description}
-\item{DCTREAS}{Discontinuation from study reason.}
+\item{DCTREAS}{Discontinuation from study reason}
 }
 }
 \source{
