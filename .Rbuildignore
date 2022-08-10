@@ -10,3 +10,4 @@
 ^pkgdown$
 ^data-raw$
 .covrignore
+codemeta.json
