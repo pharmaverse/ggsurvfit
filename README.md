@@ -17,20 +17,22 @@ coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)
 ## Introduction
 
 The {ggsurvfit} package eases the creation of time-to-event (aka
-survival) endpoint figures with ggplot. The concise and modular code
+survival) endpoint figures with ggplot2. The concise and modular code
 creates images that are ready for publication or sharing.
 
 ## Why ggsurvfit?
 
--   Raw variable names do not appear in the figure legend,
-    e.g. `"sex=Female"`.
+-   **Publishable Legends** Raw variable names do not appear in the
+    figure legend, e.g. `"sex=Female"`.
 
--   You can modify the x-axis scales and the risk table will still align
-    with the plot.
-
--   Each add-on function (e.g. `add_confidence_interval()`, etc.) is
+-   **Use ggplot2 functions** Each {ggsurvfit} add-on function
+    (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is
     written as a proper ggplot2 ‘geom’, meaning that the package
     functions can be woven with ggplot2 functions seamlessly.
+
+-   **Limitless Customization** You can modify the x-axis scales or any
+    other plot feature and the risk table will still align with the
+    plot.
 
 ## Installation
 
