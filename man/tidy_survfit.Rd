@@ -13,12 +13,12 @@ tidy_survfit(x, times = NULL, type = c("survival", "risk", "cumhaz"))
 which returns all observed times.}
 
 \item{type}{type of statistic to report. Default is \code{"survival"}.
-Must be one of the following:\tabular{ll}{
-   type \tab transformation \cr
-   \code{"survival"} \tab \code{x} \cr
-   \code{"risk"} \tab \code{1 - x} \cr
-   \code{"cumhaz"} \tab \code{-log(x)} \cr
-}}
+Must be one of the following:
+|type         |transformation |
+|:------------|:--------------|
+|\code{"survival"} |\code{x}            |
+|\code{"risk"}     |\code{1 - x}        |
+|\code{"cumhaz"}   |\code{-log(x)}      |}
 }
 \value{
 a tibble
