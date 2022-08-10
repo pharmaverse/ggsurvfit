@@ -41,10 +41,11 @@ reference:
       - add_censor_mark
       - add_quantile
       - add_risktable
+      - add_risktable_strata_symbol
 
   - title: Themes
   - contents:
-      - theme_ggsurvfit_risktable
+      - theme_risktable
       - theme_ggsurvfit
 
   - title: P-values

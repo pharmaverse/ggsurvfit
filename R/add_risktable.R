@@ -20,7 +20,7 @@
 #' in the risk table across groups. Default is `FALSE`
 #' @param risktable_height A numeric value between 0 and 1 indicates the height used by the table versus the height
 #'  used by the plot, as described in `patchwork::wrap_plots(heights=)`. The default is 0.14.
-#' @param theme A risktable theme typically returned from `theme_ggsurvfit_risktable()`
+#' @param theme A risktable theme. Default is `theme_risktable_default()`
 #'
 #' @export
 #' @examples
@@ -56,7 +56,7 @@ add_risktable <- function(times = NULL,
                           risktable_height = 0.14,
                           stats_label = NULL,
                           combine_groups = FALSE,
-                          theme = theme_ggsurvfit_risktable()) {
+                          theme = theme_risktable_default()) {
   rlang::inject(
     ggplot2::layer(
       data = NULL, mapping = NULL,
@@ -66,11 +66,11 @@ add_risktable <- function(times = NULL,
       params = list()
     ) %>%
       structure(
-        "risktable_args" = list(
+        "add_risktable" = list(
           times = times,
           risktable_stats =
             !!match.arg(
-              risktable_stats,
+              rev(risktable_stats),
               choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
               several.ok = TRUE
             ),
@@ -96,8 +96,10 @@ StatBlankSurvfit <-
 
 .construct_risktable <- function(x, times, risktable_stats, stats_label, group,
                                  combine_groups, risktable_group,
-                                 risktable_height, theme, combine_plots) {
-  times <- times %||% ggplot2::ggplot_build(x)$layout$panel_params[[1]]$x.sec$breaks
+                                 risktable_height, theme, combine_plots,
+                                 risktable_symbol_args) {
+  plot_build <- ggplot2::ggplot_build(x)
+  times <- times %||% plot_build$layout$panel_params[[1]]$x.sec$breaks
 
   df_times <-
     .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups = combine_groups)
@@ -116,7 +118,10 @@ StatBlankSurvfit <-
   gg_risktable_list <-
     .create_list_of_gg_risk_tables(
       df_times, risktable_stats, times,
-      df_stat_labels, theme, risktable_group
+      df_stat_labels, theme, risktable_group,
+      color_block_mapping =
+        .match_strata_level_to_color(plot_build, risktable_group, risktable_symbol_args),
+      risktable_symbol_args = risktable_symbol_args
     )
 
   # align all the plots
@@ -180,7 +185,10 @@ lst_stat_labels_default <-
   )
 
 .create_list_of_gg_risk_tables <- function(df_times, risktable_stats, times,
-                                           df_stat_labels, theme, risktable_group) {
+                                           df_stat_labels, theme,
+                                           risktable_group,
+                                           color_block_mapping,
+                                           risktable_symbol_args) {
   grouping_variable <-
     switch(risktable_group,
            "strata" = "strata",
@@ -193,7 +201,8 @@ lst_stat_labels_default <-
     df_times$strata_label <- factor("Overall")
   }
 
-  df_times %>%
+  df_risktable <-
+    df_times %>%
     dplyr::select(dplyr::any_of(c("time", "strata", risktable_stats))) %>%
     tidyr::pivot_longer(
       cols = -dplyr::any_of(c("time", "strata")),
@@ -203,7 +212,9 @@ lst_stat_labels_default <-
     dplyr::mutate(
       stat_name = factor(.data$stat_name, levels = .env$risktable_stats)
     ) %>%
-    dplyr::left_join(df_stat_labels, by = "stat_name") %>%
+    dplyr::left_join(df_stat_labels, by = "stat_name")
+
+  df_risktable %>%
     dplyr::mutate(
       "{y_value}" := factor(.data[[y_value]], levels = rev(levels(.data[[y_value]])))
     ) %>%
@@ -217,18 +228,26 @@ lst_stat_labels_default <-
             list(ggplot2::ggtitle(dplyr::pull(df_group) %>% as.character()))
         }
 
-        ggplot2::ggplot(
-          data,
-          ggplot2::aes(
-            x = .data$time,
-            y = .data[[y_value]],
-            label = .data$stat_value
-          )
-        ) +
-          ggplot2::geom_text(size = 3.0, hjust = 0.5, vjust = 0.5, angle = 0, show.legend = FALSE) +
-          ggplot2::scale_y_discrete(limits = rev) +
+        # construct the risktable ggplot
+        gg <-
+          ggplot2::ggplot(
+            data,
+            ggplot2::aes(
+              x = .data$time,
+              y = .data[[y_value]],
+              label = .data$stat_value
+            )
+          ) +
+          ggplot2::geom_text(size = 3.0, hjust = 0.5, vjust = 0.5, angle = 0, show.legend = FALSE)
+
+        # apply styling to the plot
+        gg +
           ggtitle_group_lbl +
-          theme
+          theme +
+          switch(
+            !rlang::is_empty(risktable_symbol_args),
+            rlang::inject(.construct_color_block(color_block_mapping, !!!risktable_symbol_args))
+          )
       }
     )
 }

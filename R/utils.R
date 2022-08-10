@@ -12,7 +12,8 @@
     rlang::eval_tidy(env = x$.Environment)
 }
 
-.extract_risktable_arguments <- function(x) {
-  lapply(x$layers, function(x) attr(x, "risktable_args")) %>%
+.extract_arguments_from_attr <- function(x, attr_name) {
+  lapply(x$layers, function(x) attr(x, attr_name, exact = TRUE)) %>%
     unlist(recursive = FALSE)
 }
+
