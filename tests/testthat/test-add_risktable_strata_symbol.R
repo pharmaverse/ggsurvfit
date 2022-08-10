@@ -20,6 +20,14 @@ test_that("add_risktable_strata_symbol() works", {
     print(survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
             ggsurvfit(size = 1) +
             add_confidence_interval() +
-            add_risktable_strata_symbol(risktable_group = "risktable_stats"))
+            add_risktable_strata_symbol(risktable_group = "risktable_stats")),
+    "must be run before"
+  )
+  expect_message(
+    print(survfit2(Surv(time, status) ~ 1, data = df_lung) |>
+            ggsurvfit() +
+            add_risktable() +
+            add_risktable_strata_symbol()),
+    "has been ignored"
   )
 })
