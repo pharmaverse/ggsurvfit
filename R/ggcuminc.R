@@ -2,8 +2,7 @@
 #'
 #' @param outcome string indicating which outcome to include in plot.
 #' Default is to include the first competing event.
-#' @param theme a theme . Default is `theme_ggsurvfit_default()`
-#' @param ... arguments passed to `ggplot2::geom_step(...)`, e.g. `size = 2`
+#' @inheritParams ggsurvfit
 #' @inheritParams tidy_cuminc
 #'
 #' @return a ggplot
@@ -16,7 +15,9 @@
 #'   ggcuminc(outcome = "death from cancer") +
 #'   add_confidence_interval() +
 #'   add_risktable()
-ggcuminc <- function(x, outcome = NULL, theme = theme_ggsurvfit_default(), ...) {
+ggcuminc <- function(x, outcome = NULL,
+                     linetype_aes = FALSE,
+                     theme = theme_ggsurvfit_default(), ...) {
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "tidycuminc")) {
     cli_abort(
@@ -39,7 +40,7 @@ ggcuminc <- function(x, outcome = NULL, theme = theme_ggsurvfit_default(), ...) 
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 
   # construct aes() call -------------------------------------------------------
-  aes_args <- .construct_aes(df)
+  aes_args <- .construct_aes(df, linetype_aes = linetype_aes)
 
   # construction ggplot object -------------------------------------------------
   gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)

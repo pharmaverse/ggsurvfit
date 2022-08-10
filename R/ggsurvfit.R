@@ -1,6 +1,9 @@
 #' Plot Survival Probability
 #'
 #' @param theme a survfit theme. Default is `theme_ggsurvfit_default()`
+#' @param linetype_aes logical indicating whether to add `ggplot2::aes(linetype = strata)`
+#' to the `ggplot2::geom_step()` call. When strata are present, the resulting figure
+#' will be a mix a various linetypes ofr each stratum.
 #' @param ... arguments passed to `ggplot2::geom_step(...)`, e.g. `size = 2`
 #' @inheritParams tidy_survfit
 #'
@@ -32,7 +35,9 @@
 #'   add_confidence_interval() +
 #'   add_quantile() +
 #'   add_risktable()
-ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit_default(), ...) {
+ggsurvfit <- function(x, type = "survival",
+                      linetype_aes = FALSE,
+                      theme = theme_ggsurvfit_default(), ...) {
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "survfit")) {
     cli_abort(
@@ -45,7 +50,7 @@ ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit_default(), .
   df <-  tidy_survfit(x = x, type = type)
 
   # construct aes() call -------------------------------------------------------
-  aes_args <- .construct_aes(df)
+  aes_args <- .construct_aes(df, linetype_aes = linetype_aes)
 
   # construction ggplot object -------------------------------------------------
   gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)
@@ -74,7 +79,7 @@ ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit_default(), .
     )
 }
 
-.construct_aes <- function(df) {
+.construct_aes <- function(df, linetype_aes) {
   aes_args <-
     list(
       x = rlang::expr(.data$time),
@@ -85,6 +90,11 @@ ggsurvfit <- function(x, type = "survival", theme = theme_ggsurvfit_default(), .
     aes_args <- c(aes_args, list(
       color = rlang::expr(.data$strata),
       fill = rlang::expr(.data$strata)
+    ))
+  }
+  if (isTRUE(linetype_aes) && "strata" %in% names(df)) {
+    aes_args <- c(aes_args, list(
+      linetype = rlang::expr(.data$strata)
     ))
   }
   if ("conf.low" %in% names(df)) {

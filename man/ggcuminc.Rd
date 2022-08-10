@@ -4,15 +4,25 @@
 \alias{ggcuminc}
 \title{Plot Cumulative Incidence}
 \usage{
-ggcuminc(x, outcome = NULL, theme = theme_ggsurvfit_default(), ...)
+ggcuminc(
+  x,
+  outcome = NULL,
+  linetype_aes = FALSE,
+  theme = theme_ggsurvfit_default(),
+  ...
+)
 }
 \arguments{
-\item{x}{a 'cuminc' object created with \code{tidycmprsk::cuminc()}}
+\item{x}{a 'survfit' object}
 
 \item{outcome}{string indicating which outcome to include in plot.
 Default is to include the first competing event.}
 
-\item{theme}{a theme . Default is \code{theme_ggsurvfit_default()}}
+\item{linetype_aes}{logical indicating whether to add \code{ggplot2::aes(linetype = strata)}
+to the \code{ggplot2::geom_step()} call. When strata are present, the resulting figure
+will be a mix a various linetypes ofr each stratum.}
+
+\item{theme}{a survfit theme. Default is \code{theme_ggsurvfit_default()}}
 
 \item{...}{arguments passed to \code{ggplot2::geom_step(...)}, e.g. \code{size = 2}}
 }

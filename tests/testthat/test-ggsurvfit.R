@@ -39,5 +39,12 @@ test_that("ggsurvfit() works", {
   vdiffr::expect_doppelganger("sf2-ggsurvfit_custom", lst_survfit2_custom[[2]])
   vdiffr::expect_doppelganger("sf3-ggsurvfit_custom", lst_survfit2_custom[[3]])
 
+  expect_error(
+    lst_survfit2_linetype <- list(sf2, sf3) %>% lapply(ggsurvfit, linetype_aes = TRUE),
+    NA
+  )
+  vdiffr::expect_doppelganger("sf2-ggsurvfit_linetype", lst_survfit2_linetype[[1]])
+  vdiffr::expect_doppelganger("sf3-ggsurvfit_linetype", lst_survfit2_linetype[[2]])
+
   expect_error(ggsurvfit(mtcars))
 })

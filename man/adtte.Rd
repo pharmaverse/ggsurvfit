@@ -23,7 +23,7 @@ The data set contains the following variables:
 \item{PARAM}{Analysis parameter: Progression free survival}
 \item{PARAMCD}{Analysis parameter code}
 \item{AVAL}{Analysis value (time to event (days)}
-\item{CNSR}{Censoring (0 = Event, 1 = censored)}
+\item{CNSR}{Censoring (0 = Event, 1 = Censored)}
 \item{EVNTDESC}{Event description}
 \item{CNSDTDSC}{Censoring description}
 \item{DCTREAS}{Discontinuation from study reason}

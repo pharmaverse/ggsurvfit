@@ -4,7 +4,13 @@
 \alias{ggsurvfit}
 \title{Plot Survival Probability}
 \usage{
-ggsurvfit(x, type = "survival", theme = theme_ggsurvfit_default(), ...)
+ggsurvfit(
+  x,
+  type = "survival",
+  linetype_aes = FALSE,
+  theme = theme_ggsurvfit_default(),
+  ...
+)
 }
 \arguments{
 \item{x}{a 'survfit' object}
@@ -16,6 +22,10 @@ Must be one of the following:\tabular{ll}{
    \code{"risk"} \tab \code{1 - x} \cr
    \code{"cumhaz"} \tab \code{-log(x)} \cr
 }}
+
+\item{linetype_aes}{logical indicating whether to add \code{ggplot2::aes(linetype = strata)}
+to the \code{ggplot2::geom_step()} call. When strata are present, the resulting figure
+will be a mix a various linetypes ofr each stratum.}
 
 \item{theme}{a survfit theme. Default is \code{theme_ggsurvfit_default()}}
 
