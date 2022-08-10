@@ -72,7 +72,8 @@ ggsurvfit <- function(x, type = "survival",
       switch("strata" %in% names(df),
              ggplot2::labs(
                color = df[["strata_label"]][1],
-               fill = df[["strata_label"]][1]
+               fill = df[["strata_label"]][1],
+               linetype = df[["strata_label"]][1]
              )
       ),
       theme
