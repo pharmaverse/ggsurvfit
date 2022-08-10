@@ -28,7 +28,7 @@ test_that("add_risktable() works with ggsurvfit()", {
             print()
         }
       ),
-    NA,
+    NA
   )
 
   expect_error(
@@ -54,6 +54,26 @@ test_that("add_risktable() works with ggsurvfit()", {
       lapply(function(x) (ggsurvfit(x) + add_risktable(combine_groups = TRUE)) %>% print()),
     NA,
   )
+
+  expect_error(
+    risktable_overall1 <-
+      sf1 %>%
+      ggsurvfit() +
+      add_risktable(risktable_stats = "n.risk",
+                    risktable_group = "risktable_stats"),
+    NA
+  )
+  vdiffr::expect_doppelganger("add_risktable-overall1", risktable_overall1)
+
+  expect_error(
+    risktable_overall2 <-
+      sf1 %>%
+      ggsurvfit() +
+      add_risktable(risktable_stats = c("n.risk", "cum.event"),
+                    risktable_group = "risktable_stats"),
+    NA
+  )
+  vdiffr::expect_doppelganger("add_risktable-overall2", risktable_overall2)
 
 })
 

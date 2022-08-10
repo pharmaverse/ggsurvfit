@@ -189,7 +189,8 @@ lst_stat_labels_default <-
 
   y_value <- c("strata", "stat_label") %>% setdiff(grouping_variable)
   if (y_value == "strata" && !"strata" %in% names(df_times)) {
-    df_times$strata <- "Overall"
+    df_times$strata <- factor("Overall")
+    df_times$strata_label <- factor("Overall")
   }
 
   df_times %>%
