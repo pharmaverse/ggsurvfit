@@ -20,7 +20,7 @@ Default is to include the first competing event.}
 
 \item{linetype_aes}{logical indicating whether to add \code{ggplot2::aes(linetype = strata)}
 to the \code{ggplot2::geom_step()} call. When strata are present, the resulting figure
-will be a mix a various linetypes for each stratum.}
+will be a mix a various line types for each stratum.}
 
 \item{theme}{a survfit theme. Default is \code{theme_ggsurvfit_default()}}
 

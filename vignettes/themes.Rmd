@@ -16,11 +16,10 @@ knitr::opts_chunk$set(
 
 ### Plot Themes
 
-Both `ggsurvfit()` and `ggcuminc()` use `theme_ggsurvfit_default()` as the default ggplot2 theme.
-The theme is similar to `ggplot2::theme_bw()`.
-While this general theme is provides a nice-looking figure, you may want to modify it.
+Both `ggsurvfit()` and `ggcuminc()` use `theme_ggsurvfit_default()` as the default ggplot2 theme, which is similar to `ggplot2::theme_bw()`.
+While this theme provides beautiful figures, you may want to modify it.
 
-You'll use the `ggsurvfit(theme=)` argument to change the default theme.
+You'll can use the `ggsurvfit(theme=)` argument to change the default theme.
 You can pass any ggplot2 theme to this argument, or simply add a theme using typical ggplot2 syntax.
 
 ```{r}
@@ -45,12 +44,12 @@ gg_theme_default1 + gg_theme_default2
 ```
 
 As you can see, either method of passing the theme results in an identical figure.
-You can easily apply any user-created theme or any theme that ships with the ggplot2 package.
+You can easily apply any user-created theme or any theme that exported with the ggplot2 package.
 To construct a custom theme, include ggplot2 calls in a list as in the example below.
 
 ```{r}
 km_estimate_sex %>%
-  ggsurvfit(theme = list(theme_classic(), theme(legend.position = "bottom"))) +
+  ggsurvfit(theme = list(theme_classic(), theme(legend.position = "top"))) +
   labs(title = "Custom Plot Theme")
 ```
 
@@ -71,7 +70,7 @@ km_estimate_sex %>%
   )
 ```
 
-A typical theme appropriate for a risk table plot will remove gridlines and provide a clean area to display the numbers at risk.
+A typical theme appropriate for a risk table plot will remove grid lines and provide a clean area to display the numbers at risk.
 In the risk table above, the strata levels are y-axis labels, and "At Risk" is the plot title.
 
 Another risk table theme adds a box around the statistics presented.
@@ -84,6 +83,7 @@ km_estimate_sex %>%
     theme = theme_risktable_boxed()
   )
 ```
+
 It's possible to replace the stratum levels with a symbol, which is particularly helpful when you have long group labels.
 
 ```{r}
@@ -93,7 +93,7 @@ km_estimate_sex %>%
   add_risktable_strata_symbol()
 ```
 
-When customizing the risk table themes and using `add_risktable_strata_symbol()`, note that the symbol is added with `ggplot2::scale_y_discrete()`; including a theme that uses the discreet y scale could cause a conflict.
+When customizing the risk table themes and using `add_risktable_strata_symbol()`, note that the symbol is added with `ggplot2::scale_y_discrete()`; including a theme that uses the discrete y scale could cause a conflict.
 
 If you need a risk table theme that is not currently available in ggsurvfit, community-based themes are welcome!
 Consider adding your theme to the package.
