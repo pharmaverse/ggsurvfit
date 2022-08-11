@@ -1,4 +1,4 @@
-#' Use Symbol for Strata in Risktable
+#' Use Symbol for Strata in Risk Table
 #'
 #' @param symbol UTF-8 code of shape to replace strata level with.
 #' Default is a rectangle (`"\U25AC"`).
