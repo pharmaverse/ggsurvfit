@@ -19,7 +19,7 @@
 #'  p + add_risktable_strata_symbol()
 #'  p + add_risktable_strata_symbol(symbol = "\U25CF")
 
-add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold", vjust = 0.45, ...) {
+add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold", vjust = 0.3, ...) {
   rlang::inject(
     ggplot2::layer(
       data = NULL, mapping = NULL,
@@ -74,17 +74,38 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
 
 .construct_color_block <- function(color_block_mapping, symbol, ...) {
   if (rlang::is_empty(color_block_mapping)) return(NULL)
-  rlang::check_installed(pkg = "ggtext")
-
 
   list(
     ggplot2::scale_y_discrete(
-      # label = symbol
-      label = Vectorize(function(x) paste0("<span style='color: ", color_block_mapping[[x]],"'>", symbol, "</span>"), "x")
-    ), # https://cloford.com/resources/charcodes/utf-8_geometric.htm
+      label = function(x) symbol # https://cloford.com/resources/charcodes/utf-8_geometric.htm
+    ),
     ggplot2::theme(
       axis.text.y.left =
-        ggtext::element_markdown(...)
+        element_text2(color = rev(color_block_mapping), ...)
     )
   )
+}
+
+# taken from SO https://stackoverflow.com/questions/73293798
+element_text2 <- function(..., color = NULL) {
+  # Explicitly don't pass colour
+  # Note: user can still pass `colour`, but I'm not here to write perfect code,
+  # just to give a working example
+  elem <- ggplot2::element_text(...)
+  elem$colour <- color # Assign after element is constructed
+  class(elem) <- c("element_text2", "element_text", "element") # Re-class
+  elem
+}
+
+# S3 Method for your custom class' drawing code
+element_grob.element_text2 <- function(element, label = "", ...,
+                                       colour = NULL) {
+  # Repeat colour to match length of label, if colour exists
+  if (length(colour)) {
+    colour <- rep_len(colour, length(label))
+  }
+  # Re-class to old class
+  class(element) <- c("element_text", "element")
+  # Call element_grob.element_text method
+  ggplot2::element_grob(element, label = label, ..., colour = colour)
 }

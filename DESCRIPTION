@@ -32,7 +32,6 @@ Imports:
 Suggests: 
     covr,
     glue,
-    ggtext,
     spelling,
     testthat (>= 3.0.0),
     tidycmprsk,

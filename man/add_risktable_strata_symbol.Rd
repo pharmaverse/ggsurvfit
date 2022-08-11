@@ -8,7 +8,7 @@ add_risktable_strata_symbol(
   symbol = NULL,
   size = 15,
   face = "bold",
-  vjust = 0.45,
+  vjust = 0.3,
   ...
 )
 }
