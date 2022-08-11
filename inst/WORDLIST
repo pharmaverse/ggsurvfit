@@ -5,11 +5,11 @@ Aalen
 CDISC
 CMD
 Codecov
+KMunicate
 Kaplan
 Lifecycle
 ORCID
 PFS
-Risktable
 Surv
 Survfit
 adjuvant
@@ -19,6 +19,7 @@ geoms
 geom’
 gghighlight
 ggplot
+grey
 neoadjuvant
 pathologic
 pre
