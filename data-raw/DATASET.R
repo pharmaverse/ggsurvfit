@@ -40,15 +40,14 @@ attr(df_lung$wt.loss, "label") <- "Weight loss, lbs"
 adtte <-
   readr::read_csv('data-raw/2020-04-08-psi-vissig-adtte.csv',
                   show_col_types = FALSE) |>
-  #janitor::clean_names() |>
-  dplyr::as_tibble()
-
+  dplyr::as_tibble() |>
+  dplyr::mutate(AVAL = AVAL / 365.25)
 
 # attach var labels
 attr(adtte$STUDYID, "label") <- "Study identifier"
 attr(adtte$USUBJID, "label") <- "Unique patient identifier"
 attr(adtte$AGE, "label") <- "Age at randomization [years]"
-attr(adtte$STR01, "label") <- "Hormone receptor status at randomization"
+attr(adtte$STR01, "label") <- "Hormone receptor"
 attr(adtte$STR01N, "label") <- "Hormone receptor positive (Numeric)"
 attr(adtte$STR01L, "label") <- "Hormone receptor positive at randomization"
 attr(adtte$STR02, "label") <- "Prior Radiotherapy at randomization"
@@ -58,7 +57,7 @@ attr(adtte$TRT01P, "label") <- "Planned treatment"
 attr(adtte$TRT01PN, "label") <- "Planned treatment group assigned at randomization (Numeric)"
 attr(adtte$PARAM, "label") <- "Progression free survival"
 attr(adtte$PARAMCD, "label") <- "PFS"
-attr(adtte$AVAL, "label") <- "Days since randomization"
+attr(adtte$AVAL, "label") <- "Years since randomization"
 attr(adtte$CNSR, "label") <- "Censoring flag (0 = Event, 1 = censored)"
 attr(adtte$EVNTDESC, "label") <- "Event description"
 attr(adtte$CNSDTDSC, "label") <- " Censoring description"

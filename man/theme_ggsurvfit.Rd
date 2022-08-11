@@ -3,9 +3,12 @@
 \name{theme_ggsurvfit}
 \alias{theme_ggsurvfit}
 \alias{theme_ggsurvfit_default}
+\alias{theme_ggsurvfit_KMunicate}
 \title{Survfit Plot Themes}
 \usage{
 theme_ggsurvfit_default()
+
+theme_ggsurvfit_KMunicate()
 }
 \description{
 Returns ggplot list of calls defining a theme.

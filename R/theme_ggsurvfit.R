@@ -18,3 +18,18 @@ theme_ggsurvfit_default <- function() {
     ggplot2::theme(strip.background = ggplot2::element_blank())
   )
 }
+
+#' @export
+#' @rdname theme_ggsurvfit
+theme_ggsurvfit_KMunicate <- function() {
+  list(
+    theme_ggsurvfit_default(),
+    ggplot2::theme_minimal(),
+    ggplot2::theme(
+      panel.grid.major.x = ggplot2::element_blank(),
+      panel.grid.minor.x = ggplot2::element_blank(),
+      panel.grid.minor.y = ggplot2::element_blank()
+    ),
+    ggplot2::labs(color = NULL, fill = NULL, linetype = NULL)
+  )
+}
