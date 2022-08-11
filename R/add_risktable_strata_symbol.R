@@ -1,4 +1,4 @@
-#' Use Symbol for Strata in Risktable
+#' Use Symbol for Strata in Risk Table
 #'
 #' @param symbol UTF-8 code of shape to replace strata level with.
 #' Default is a rectangle (`"\U25AC"`).
@@ -79,6 +79,7 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
 
   list(
     ggplot2::scale_y_discrete(
+      # label = symbol
       label = Vectorize(function(x) paste0("<span style='color: ", color_block_mapping[[x]],"'>", symbol, "</span>"), "x")
     ), # https://cloford.com/resources/charcodes/utf-8_geometric.htm
     ggplot2::theme(

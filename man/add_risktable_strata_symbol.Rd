@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_risktable_strata_symbol.R
 \name{add_risktable_strata_symbol}
 \alias{add_risktable_strata_symbol}
-\title{Use Symbol for Strata in Risktable}
+\title{Use Symbol for Strata in Risk Table}
 \usage{
 add_risktable_strata_symbol(
   symbol = NULL,
@@ -24,7 +24,7 @@ to style the symbol}
 a ggplot
 }
 \description{
-Use Symbol for Strata in Risktable
+Use Symbol for Strata in Risk Table
 }
 \examples{
 p <-
