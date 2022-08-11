@@ -83,7 +83,7 @@ km_estimate_sex %>%
     risktable_stats = "n.risk",
     theme = theme_risktable_boxed()
   )
-````
+```
 It's possible to replace the stratum levels with a symbol, which is particularly helpful when you have long group labels.
 
 ```{r}
@@ -91,7 +91,7 @@ km_estimate_sex %>%
   ggsurvfit() +
   add_risktable(risktable_stats = "n.risk") +
   add_risktable_strata_symbol()
-````
+```
 
 When customizing the risk table themes and using `add_risktable_strata_symbol()`, note that the symbol is added with `ggplot2::scale_y_discrete()`; including a theme that uses the discreet y scale could cause a conflict.
 
