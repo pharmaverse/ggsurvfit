@@ -37,6 +37,39 @@ test_that("tidy_survfit() works with survfit2()", {
     list(sf1, sf2, sf3) %>% lapply(tidy_survfit, times = 0),
     NA
   )
+
+  # checking calculation of n.risk at timepoints
+  times <- 0:4 * 10
+  expect_equal(
+    sf1 %>% tidy_survfit(times = times) %>% dplyr::pull(n.risk),
+    lapply(times, function(x) sum(df_lung$time >= x)) %>% unlist()
+  )
+
+  df_nrisk_check <- sf2 %>% tidy_survfit(times = times) %>% dplyr::select(strata, time, n.risk)
+  expect_equal(
+    df_nrisk_check %>% dplyr::filter(strata == "Female") %>% dplyr::pull(n.risk),
+    lapply(times, function(x) sum(df_lung$time >= x & df_lung$sex == "Female")) %>% unlist()
+  )
+  expect_equal(
+    df_nrisk_check %>% dplyr::filter(strata == "Male") %>% dplyr::pull(n.risk),
+    lapply(times, function(x) sum(df_lung$time >= x & df_lung$sex == "Male")) %>% unlist()
+  )
+
+  # checking calculation of event counts at timepoints
+  expect_equal(
+    sf1 %>% tidy_survfit(times = times) %>% dplyr::pull(cum.event),
+    lapply(times, function(x) sum(df_lung$time <= x & df_lung$status == 2)) %>% unlist()
+  )
+
+  df_event_check <- sf2 %>% tidy_survfit(times = times) %>% dplyr::select(strata, time, cum.event)
+  expect_equal(
+    df_event_check %>% dplyr::filter(strata == "Female") %>% dplyr::pull(cum.event),
+    lapply(times, function(x) sum(df_lung$time <= x & df_lung$status == 2 & df_lung$sex == "Female")) %>% unlist()
+  )
+  expect_equal(
+    df_event_check %>% dplyr::filter(strata == "Male") %>% dplyr::pull(cum.event),
+    lapply(times, function(x) sum(df_lung$time <= x & df_lung$status == 2 & df_lung$sex == "Male")) %>% unlist()
+  )
 })
 
 test_that("tidy_survfit() throws appropriate errors", {

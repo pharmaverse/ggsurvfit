@@ -277,8 +277,12 @@ tidy_survfit <- function(x,
       dplyr::across(c(.data$n.event, .data$n.censor), ~ ifelse(is.na(.), 0, .))
     ) %>%
     tidyr::fill(
-      -c(.data$n.event, .data$n.censor),
+      -c(.data$n.risk, .data$n.event, .data$n.censor),
       .direction = "down"
+    ) %>%
+    tidyr::fill(
+      .data$n.risk,
+      .direction = "up"
     ) %>%
     dplyr::mutate(
       n.risk = ifelse(.data$time > .data$time_max, 0, .data$n.risk)
