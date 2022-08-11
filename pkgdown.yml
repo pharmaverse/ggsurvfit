@@ -1,8 +1,9 @@
 pandoc: 2.14.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-08-11T01:47Z
+articles:
+  themes: themes.html
+last_built: 2022-08-11T02:17Z
 urls:
   reference: http://www.danieldsjoberg.com/ggsurvfit/reference
   article: http://www.danieldsjoberg.com/ggsurvfit/articles
