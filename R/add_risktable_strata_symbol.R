@@ -42,9 +42,9 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
 # function returns a named vector the the strata level as the name and the hex color as the value
 .match_strata_level_to_color <- function(plot_build, risktable_group, risktable_symbol_args) {
   if (rlang::is_empty(risktable_symbol_args) ||
-      risktable_group == "strata" ||
-      !"colour" %in% names(plot_build$data[[1]]) ||
-      !"strata" %in% names(plot_build$plot$data)) {
+      risktable_group == "strata"  ||
+      # !"strata" %in% names(plot_build$plot$data) ||
+      !"colour" %in% names(plot_build$data[[1]])) {
     if (!rlang::is_empty(risktable_symbol_args)) {
       cli_inform(
         c("!" = "Call to {.code add_risktable_strata_symbol()} has been ignored.",
@@ -63,9 +63,13 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
   # try to map group ID to the data strata
   # all strata should be factors and therefore can just extract the
   color_label <-
-    plot_build$plot$data %>%
-    dplyr::pull(.data$strata) %>%
-    levels()
+    switch(
+      "strata" %in% plot_build$plot$data,
+      plot_build$plot$data %>%
+        dplyr::pull(.data$strata) %>%
+        levels()
+    ) %||%
+    "Overall"
 
   # i hope this will work 100% of the time!
   # what modifications could a use make the the figures that could break this connection?

@@ -24,7 +24,7 @@ library(patchwork)
 km_estimate <- survfit2(Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte)
 ```
 
-## Modificatons with ggplot2
+## Modifications with ggplot2
 
 Let's begin with showing the default plot and common modifications that are made with ggplot2 functions.
 - Add the percent sign to the y-axis label
