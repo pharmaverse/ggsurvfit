@@ -19,7 +19,7 @@ test_that("add_risktable_strata_symbol() works", {
   # works with univariate model
   expect_error(
     ggsymbol_univariate <-
-      survfit2(Surv(time, status) ~ 1, data = df_lung) |>
+      survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
       ggsurvfit() +
       add_risktable(risktable_stats = "n.risk", risktable_group = "risktable_stats") +
       add_risktable_strata_symbol(vjust = 0.3),
