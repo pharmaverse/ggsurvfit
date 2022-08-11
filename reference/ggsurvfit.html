@@ -51,7 +51,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggsurvfit</span><span class="op">(</span><span class="va">x</span>, type <span class="op">=</span> <span class="st">"survival"</span>, theme <span class="op">=</span> <span class="fu"><a href="theme_ggsurvfit.html">theme_ggsurvfit_default</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggsurvfit</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"survival"</span>,</span>
+<span>  linetype_aes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  theme <span class="op">=</span> <span class="fu"><a href="theme_ggsurvfit.html">theme_ggsurvfit_default</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -63,6 +69,12 @@
 <dt>type</dt>
 <dd><p>type of statistic to report. Default is <code>"survival"</code>.
 Must be one of the following:</p><table class="table table"><tr><td>type</td><td>transformation</td></tr><tr><td><code>"survival"</code></td><td><code>x</code></td></tr><tr><td><code>"risk"</code></td><td><code>1 - x</code></td></tr><tr><td><code>"cumhaz"</code></td><td><code>-log(x)</code></td></tr></table></dd>
+
+
+<dt>linetype_aes</dt>
+<dd><p>logical indicating whether to add <code>ggplot2::aes(linetype = strata)</code>
+to the <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">ggplot2::geom_step()</a></code> call. When strata are present, the resulting figure
+will be a mix a various linetypes for each stratum.</p></dd>
 
 
 <dt>theme</dt>
