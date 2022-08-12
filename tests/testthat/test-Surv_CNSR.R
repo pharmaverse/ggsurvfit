@@ -10,8 +10,8 @@ test_that("The function is compatible with the survival package", {
   expect_error(survfit(Surv_CNSR() ~ 1, data = adtte), NA)
   expect_error(survfit(Surv_CNSR() ~ SEX, data = adtte), NA)
 
-  expect_error(adtte %>% estimate_KM(formula = Surv_CNSR() ~ 1), NA)
-  expect_error(adtte %>% estimate_KM(formula = Surv_CNSR() ~ SEX), NA)
+  expect_error(survfit(formula = Surv_CNSR() ~ 1, data = adtte), NA)
+  expect_error(survfit(formula = Surv_CNSR() ~ SEX, data = adtte), NA)
 
   expect_error(survfit(Surv_CNSR(AVAL, CNSR) ~ 1, data = adtte), NA)
   expect_error(survfit(Surv_CNSR(AVAL, CNSR) ~ SEX, data = adtte), NA)
@@ -26,13 +26,13 @@ test_that("The results of the estimation match between Surv_CNSR and Surv with i
     with(adtte, Surv(AVAL, 1 - CNSR))
   )
 
-  km1 <- adtte %>% estimate_KM(formula = Surv_CNSR() ~ 1)
-  km2 <- adtte %>% estimate_KM()
+  km1 <- survfit2(formula = Surv_CNSR() ~ 1, data = adtte)
+  km2 <- survfit2(formula = Surv(AVAL, 1 - CNSR) ~ 1, data = adtte)
   km1$call <- km2$call <- NULL
   expect_equal(km1, km2)
 
-  km1 <- adtte %>% estimate_KM(formula = Surv_CNSR() ~ SEX)
-  km2 <- adtte %>% estimate_KM(strata = "SEX")
+  km1 <- survfit2(formula = Surv_CNSR() ~ SEX, data = adtte)
+  km2 <- survfit2(formula = Surv(AVAL, 1 - CNSR) ~ SEX, data = adtte)
   km1$call <- km2$call <- NULL
   expect_equal(km1, km2)
 })
