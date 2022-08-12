@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_risktable.R
 \name{add_risktable}
 \alias{add_risktable}
-\title{Add risk tables}
+\title{Add risk table}
 \usage{
 add_risktable(
   times = NULL,
@@ -16,7 +16,9 @@ add_risktable(
 }
 \arguments{
 \item{times}{numeric vector of times where risk table values will be placed.
-Default are the times shown on the x-axis.}
+Default are the times shown on the x-axis. The times passed here will not
+modify the tick marks shown on the figure. To modify which tick marks are
+shown, use \code{ggplot2::scale_x_continuous(breaks=)}.}
 
 \item{risktable_stats}{character vector of statistics to show in the risk table.
 Must be one or more of \code{c("n.risk", "cum.event", "cum.censor", "n.event", "n.censor")}.
@@ -48,7 +50,8 @@ in the risk table across groups. Default is \code{FALSE}}
 \item{theme}{A risktable theme. Default is \code{theme_risktable_default()}}
 }
 \description{
-Add risk tables
+Add risk tables below the plot showing the number at risk, events observed, and
+number of censored observations.
 }
 \examples{
 library(ggplot2)

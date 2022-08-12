@@ -1,7 +1,12 @@
-#' Add risk tables
+#' Add risk table
+#'
+#' Add risk tables below the plot showing the number at risk, events observed, and
+#' number of censored observations.
 #'
 #' @param times numeric vector of times where risk table values will be placed.
-#' Default are the times shown on the x-axis.
+#' Default are the times shown on the x-axis. The times passed here will not
+#' modify the tick marks shown on the figure. To modify which tick marks are
+#' shown, use `ggplot2::scale_x_continuous(breaks=)`.
 #' @param risktable_stats character vector of statistics to show in the risk table.
 #' Must be one or more of `c("n.risk", "cum.event", "cum.censor", "n.event", "n.censor")`.
 #' Default is `c("n.risk", "cum.event")`.
