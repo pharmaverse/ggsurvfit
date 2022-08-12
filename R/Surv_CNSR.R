@@ -1,7 +1,6 @@
 #' Create a Survival Outcome from CDISC Data
 #'
 #' @description
-#' `r lifecycle::badge('experimental')`
 #'
 #' The aim of `Surv_CNSR()` is to map the inconsistency in convention between
 #' the [survival](https://cran.r-project.org/package=survival) package and
@@ -44,7 +43,7 @@
 #' @examples
 #' # Use the `Surv_CNSR()` function with ggsurvfit functions
 #' survfit2(formula = Surv_CNSR() ~ STR01, data = adtte) %>%
-#'   ggsurvfit() %>%
+#'   ggsurvfit() +
 #'   add_confidence_interval()
 #'
 #' # Use the `Surv_CNSR()` function with functions from other packages as well
