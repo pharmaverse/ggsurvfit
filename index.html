@@ -87,7 +87,7 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The {ggsurvfit} package eases the creation of time-to-event (aka survival) endpoint figures with ggplot2. The concise and modular code creates images that are ready for publication or sharing.</p>
+<p>The {ggsurvfit} package eases the creation of time-to-event (aka survival) endpoint figures with ggplot2. The concise and modular code creates images that are ready for publication or sharing. Competing risks cumulative incidence is also supported via <code><a href="reference/ggcuminc.html">ggcuminc()</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="why-ggsurvfit">Why ggsurvfit?<a class="anchor" aria-label="anchor" href="#why-ggsurvfit"></a>
@@ -110,78 +110,40 @@
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <p>Let’s begin with an example illustrating a common Kaplan-Meier survival curve.</p>
-<p>It’s recommended to use the <code><a href="reference/survfit2.html">survfit2()</a></code> function with this package, rather than <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code> to ensure all quantities are able to be calculated from any environment the functions are called.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/ggsurvfit" class="external-link">ggsurvfit</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="co"># build Kaplan-Meier plot</span></span>
+<span><span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">AVAL</span>, <span class="fl">1</span> <span class="op">-</span> <span class="va">CNSR</span><span class="op">)</span> <span class="op">~</span> <span class="va">STR01</span>, data <span class="op">=</span> <span class="va">adtte</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_censor_mark.html">add_censor_mark</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_risktable.html">add_risktable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">p</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-1.png" width="100%"></p>
-<hr>
-<p>Because each of the functions are written as proper ggplot geoms, you can add any ggplot function to modify the figure.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># use ggplot2 functions to style the plot, and update the labels</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="st">"Probability of survival"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Months since treatment"</span>,</span>
-<span>    title <span class="op">=</span> <span class="st">"Kaplan-Meier Estimate of Survival by Sex"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Kaplan-Meier Estimate of Survival by Hormone Receptor Status"</span>,</span>
 <span>    <span class="co"># remove the fill and color legend labels (Sex appears in title)</span></span>
 <span>    fill <span class="op">=</span> <span class="cn">NULL</span>, color <span class="op">=</span> <span class="cn">NULL</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># reduce padding on edges of figure, and format axes</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">*</span><span class="fl">6</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-styled-1.png" width="100%"></p>
-<hr>
-<p>The package also supports unstratified models and you can add multiple quantile guidelines.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">3</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.25</span>, linetype <span class="op">=</span> <span class="fl">2</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_risktable.html">add_risktable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-unstrat-1.png" width="100%"></p>
-<hr>
-<p>You can even facet…but you <em>cannot</em> facet with the risktable, however.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_censor_mark.html">add_censor_mark</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">3</span>, size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">"gray50"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="op">~</span><span class="va">strata</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-facet-1.png" width="100%"></p>
-<hr>
-<p>The package works seamlessly with other ggplot extension package, such as {gghighlight}.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">ph.ecog</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"ECOG"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu">gghighlight</span><span class="op">(</span><span class="va">strata</span> <span class="op">==</span> <span class="st">"Asymptomatic"</span>, calculate_per_facet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-gghighlight-1.png" width="100%"></p>
-<hr>
-<p>The package also plots cumulative incidence estimates in the presence of competing events.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mskcc-epi-bio.github.io/tidycmprsk/" class="external-link">tidycmprsk</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/cuminc.html" class="external-link">cuminc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">ttdeath</span>, <span class="va">death_cr</span><span class="op">)</span> <span class="op">~</span> <span class="va">trt</span>, <span class="va">trial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/ggcuminc.html">ggcuminc</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="st">"death from cancer"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.20</span>, size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">"gray50"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_risktable.html">add_risktable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Months Since Treatment"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span> <span class="op">*</span> <span class="fl">6</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-cuminc-1.png" width="100%"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.015</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">5</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.015</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-1.png" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="survfit2-vs-survfit">
+<code>survfit2()</code> vs <code>survfit()</code>
+<a class="anchor" aria-label="anchor" href="#survfit2-vs-survfit"></a>
+</h2>
+<p>Both functions have identical inputs, so why do we need <code><a href="reference/survfit2.html">survfit2()</a></code>?</p>
+<p>It’s recommended to use the <code><a href="reference/survfit2.html">survfit2()</a></code> function with this package, rather than <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code> to ensure all quantities are able to be calculated from any environment the functions are called.</p>
+<p>Both functions have identical inputs, so why do we need <code><a href="reference/survfit2.html">survfit2()</a></code>?</p>
+<p>The <em>only</em> difference between <code><a href="reference/survfit2.html">survfit2()</a></code> and <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code> is that the former tracks the environment from which the call to the function was made.</p>
+<p>The environment is needed to ensure the survfit call can be accurately reconstructed or parsed at any point post estimation. The call is parsed when p-values are reported and when labels are created. For example, the raw variable names appear in the output of a stratified <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code> result, e.g. <code>"sex=Female"</code>. When using <code><a href="reference/survfit2.html">survfit2()</a></code>, the originating data frame and formula may be parsed and the raw variable names removed.</p>
+<p>Most functions in the package work with both <code><a href="reference/survfit2.html">survfit2()</a></code> and <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code>; however, the output will be styled in a preferable format with <code><a href="reference/survfit2.html">survfit2()</a></code>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
