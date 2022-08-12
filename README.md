@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 [![Codecov test
@@ -54,23 +54,22 @@ curve.
 library(ggsurvfit)
 library(ggplot2)
 
-# build Kaplan-Meier plot
 survfit2(Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte) |>
+  # build Kaplan-Meier plot ----------------------------------------------------
   ggsurvfit(size = 1) +
   add_confidence_interval() +
   add_risktable() +
   add_quantile(color = "gray50", size = 0.9) +
-  # use ggplot2 functions to style the plot, and update the labels
+  # use ggplot2 functions to style the plot and update the labels --------------
   labs(
     y = "Probability of survival",
-    x = "Months since treatment",
     title = "Kaplan-Meier Estimate of Survival by Hormone Receptor Status",
     # remove the fill and color legend labels (Sex appears in title)
     fill = NULL, color = NULL
   ) +
   # reduce padding on edges of figure, and format axes
   scale_y_continuous(label = scales::percent, expand = c(0.015, 0)) +
-  scale_x_continuous(breaks = 0:5, expand = c(0.015, 0))
+  scale_x_continuous(breaks = 0:5, expand = c(0.02, 0))
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
