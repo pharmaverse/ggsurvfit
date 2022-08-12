@@ -58,7 +58,7 @@
 #'     \item{TRT01PN}{Planned treatment assigned at randomisation (Numeric)}
 #'     \item{PARAM}{Analysis parameter: Progression free survival}
 #'     \item{PARAMCD}{Analysis parameter code}
-#'     \item{AVAL}{Analysis value (time to event (days)}
+#'     \item{AVAL}{Analysis value (time to event (years)}
 #'     \item{CNSR}{Censoring (0 = Event, 1 = Censored)}
 #'     \item{EVNTDESC}{Event description}
 #'     \item{CNSDTDSC}{Censoring description}
