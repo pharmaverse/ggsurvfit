@@ -288,9 +288,6 @@ lst_stat_labels_default <-
 }
 
 
-
-
-# # this is a near copy from visR, except the `scale_x_continuous() piece has been removed`
 align_plots <- function(pltlist) {
   # set all x axis ranges to be the same
   x_range <-

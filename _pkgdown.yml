@@ -57,6 +57,7 @@ reference:
   - contents:
       - tidy_survfit
       - tidy_cuminc
+      - Surv_CNSR
       - stat_stepribbon
 
   - title: Data

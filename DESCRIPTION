@@ -27,7 +27,7 @@ Imports:
     gtable,
     patchwork,
     rlang (>= 1.0.0),
-    survival,
+    survival (>= 3.4-0),
     tidyr (>= 1.0.0)
 Suggests: 
     covr,
