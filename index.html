@@ -114,23 +114,22 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/ggsurvfit" class="external-link">ggsurvfit</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># build Kaplan-Meier plot</span></span>
 <span><span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">AVAL</span>, <span class="fl">1</span> <span class="op">-</span> <span class="va">CNSR</span><span class="op">)</span> <span class="op">~</span> <span class="va">STR01</span>, data <span class="op">=</span> <span class="va">adtte</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># build Kaplan-Meier plot ----------------------------------------------------</span></span>
 <span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_risktable.html">add_risktable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># use ggplot2 functions to style the plot, and update the labels</span></span>
+<span>  <span class="co"># use ggplot2 functions to style the plot and update the labels --------------</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="st">"Probability of survival"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Months since treatment"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Kaplan-Meier Estimate of Survival by Hormone Receptor Status"</span>,</span>
 <span>    <span class="co"># remove the fill and color legend labels (Sex appears in title)</span></span>
 <span>    fill <span class="op">=</span> <span class="cn">NULL</span>, color <span class="op">=</span> <span class="cn">NULL</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># reduce padding on edges of figure, and format axes</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.015</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">5</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.015</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">5</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
 </div>
 <div class="section level2">
