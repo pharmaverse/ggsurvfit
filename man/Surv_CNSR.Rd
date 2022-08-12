@@ -52,13 +52,13 @@ is named \code{'CNSR'} and uses the following coding: \code{censor = 1}, \code{s
 
 \examples{
 # Use the `Surv_CNSR()` function with ggsurvfit functions
-survfit2(formula = Surv_CNSR() ~ SEX, data = adtte) \%>\%
+survfit2(formula = Surv_CNSR() ~ STR01, data = adtte) \%>\%
   ggsurvfit() \%>\%
   add_confidence_interval()
 
 # Use the `Surv_CNSR()` function with functions from other packages as well
-survival::survfit(Surv_CNSR() ~ SEX, data = adtte)
-survival::survreg(Surv_CNSR() ~ SEX + AGE, data = adtte) \%>\%
+survival::survfit(Surv_CNSR() ~ STR01, data = adtte)
+survival::survreg(Surv_CNSR() ~ STR01 + AGE, data = adtte) \%>\%
   broom::tidy()
 }
 \seealso{
