@@ -28,12 +28,12 @@ test_that("The results of the estimation match between Surv_CNSR and Surv with i
 
   km1 <- survfit2(formula = Surv_CNSR() ~ 1, data = adtte)
   km2 <- survfit2(formula = Surv(AVAL, 1 - CNSR) ~ 1, data = adtte)
-  km1$call <- km2$call <- NULL
+  km1$call <- km2$call <- km1$.Environment <- km2$.Environment <- NULL
   expect_equal(km1, km2)
 
   km1 <- survfit2(formula = Surv_CNSR() ~ STR01, data = adtte)
   km2 <- survfit2(formula = Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte)
-  km1$call <- km2$call <- NULL
+  km1$call <- km2$call <- km1$.Environment <- km2$.Environment <- NULL
   expect_equal(km1, km2)
 })
 
