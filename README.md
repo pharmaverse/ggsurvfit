@@ -18,7 +18,8 @@ coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)
 
 The {ggsurvfit} package eases the creation of time-to-event (aka
 survival) endpoint figures with ggplot2. The concise and modular code
-creates images that are ready for publication or sharing.
+creates images that are ready for publication or sharing. Competing
+risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Why ggsurvfit?
 
@@ -49,109 +50,52 @@ devtools::install_github("ddsjoberg/ggsurvfit")
 Let’s begin with an example illustrating a common Kaplan-Meier survival
 curve.
 
-It’s recommended to use the `survfit2()` function with this package,
-rather than `survival::survfit()` to ensure all quantities are able to
-be calculated from any environment the functions are called.
-
 ``` r
 library(ggsurvfit)
 library(ggplot2)
 
-p <- 
-  survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+# build Kaplan-Meier plot
+survfit2(Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte) |>
   ggsurvfit(size = 1) +
-  add_censor_mark() +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(color = "gray50", size = 1)
-p
-```
-
-<img src="man/figures/README-example-1.png" width="100%" />
-
-<hr>
-
-Because each of the functions are written as proper ggplot geoms, you
-can add any ggplot function to modify the figure.
-
-``` r
-p +
+  add_quantile(color = "gray50", size = 0.9) +
+  # use ggplot2 functions to style the plot, and update the labels
   labs(
     y = "Probability of survival",
     x = "Months since treatment",
-    title = "Kaplan-Meier Estimate of Survival by Sex",
+    title = "Kaplan-Meier Estimate of Survival by Hormone Receptor Status",
     # remove the fill and color legend labels (Sex appears in title)
     fill = NULL, color = NULL
   ) +
   # reduce padding on edges of figure, and format axes
-  scale_y_continuous(label = scales::percent, expand = c(0.01, 0)) +
-  scale_x_continuous(breaks = 0:5*6, expand = c(0.02, 0))
+  scale_y_continuous(label = scales::percent, expand = c(0.015, 0)) +
+  scale_x_continuous(breaks = 0:5, expand = c(0.015, 0))
 ```
 
-<img src="man/figures/README-example-styled-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" width="100%" />
 
-<hr>
+## `survfit2()` vs `survfit()`
 
-The package also supports unstratified models and you can add multiple
-quantile guidelines.
+Both functions have identical inputs, so why do we need `survfit2()`?
 
-``` r
-survfit2(Surv(time, status) ~ 1, data = df_lung) |>
-  ggsurvfit(size = 1) +
-  add_quantile(linetype = 3, size = 1) +
-  add_quantile(y_value = 0.25, linetype = 2, size = 1) +
-  add_confidence_interval() +
-  add_risktable()
-```
+It’s recommended to use the `survfit2()` function with this package,
+rather than `survival::survfit()` to ensure all quantities are able to
+be calculated from any environment the functions are called.
 
-<img src="man/figures/README-example-unstrat-1.png" width="100%" />
+Both functions have identical inputs, so why do we need `survfit2()`?
 
-<hr>
+The *only* difference between `survfit2()` and `survival::survfit()` is
+that the former tracks the environment from which the call to the
+function was made.
 
-You can even facet…but you *cannot* facet with the risktable, however.
+The environment is needed to ensure the survfit call can be accurately
+reconstructed or parsed at any point post estimation. The call is parsed
+when p-values are reported and when labels are created. For example, the
+raw variable names appear in the output of a stratified `survfit()`
+result, e.g. `"sex=Female"`. When using `survfit2()`, the originating
+data frame and formula may be parsed and the raw variable names removed.
 
-``` r
-survfit2(Surv(time, status) ~ sex, data = df_lung) |>
-  ggsurvfit(size = 1) +
-  add_censor_mark(shape = 4) +
-  add_quantile(linetype = 3, size = 1, color = "gray50") +
-  add_confidence_interval() +
-  ggplot2::facet_grid(~strata)
-```
-
-<img src="man/figures/README-example-facet-1.png" width="100%" />
-
-<hr>
-
-The package works seamlessly with other ggplot extension package, such
-as {gghighlight}.
-
-``` r
-survfit2(Surv(time, status) ~ ph.ecog, data = df_lung) |> 
-  ggsurvfit(size = 1) +
-  ggplot2::labs(color = "ECOG") +
-  gghighlight::gghighlight(strata == "Asymptomatic", calculate_per_facet = TRUE)
-```
-
-<img src="man/figures/README-example-gghighlight-1.png" width="100%" />
-
-<hr>
-
-The package also plots cumulative incidence estimates in the presence of
-competing events.
-
-``` r
-library(tidycmprsk)
-
-cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
-  ggcuminc(outcome = "death from cancer", size = 1) +
-  add_confidence_interval() +
-  add_quantile(y_value = 0.20, size = 1, color = "gray50") +
-  add_risktable() +
-  labs(x = "Months Since Treatment") +
-  theme(legend.position = "bottom") +
-  scale_y_continuous(label = scales::percent, expand = c(0.02, 0)) +
-  scale_x_continuous(breaks = 0:4 * 6, expand = c(0.02, 0))
-```
-
-<img src="man/figures/README-example-cuminc-1.png" width="100%" />
+Most functions in the package work with both `survfit2()` and
+`survfit()`; however, the output will be styled in a preferable format
+with `survfit2()`.
