@@ -24,7 +24,7 @@
 #'   ggsurvfit() +
 #'   add_confidence_interval() +
 #'   add_risktable() +
-#'   ggplot2::labs(caption = glue::glue("Log-rank {p_logrank(sf)}"))
+#'   ggplot2::labs(caption = glue::glue("Log-rank {survfit2_p(sf)}"))
 NULL
 
 #' @export
@@ -50,16 +50,4 @@ survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, ...) {
       prepend_p & grepl(pattern = "^<|^>", x = .) ~ paste0("p", .),
       prepend_p ~ paste0("p=", .)
     )}
-}
-
-#' @export
-#' @rdname survfit2_p
-logrank <- function(x, pvalue_fun = format_p) {
-  survfit2_p(x, pvalue_fun = pvalue_fun, prepend_p = FALSE, rho = 0)
-}
-
-#' @export
-#' @rdname survfit2_p
-p_logrank <- function(x, pvalue_fun = format_p) {
-  survfit2_p(x, pvalue_fun = pvalue_fun, prepend_p = TRUE, rho = 0)
 }

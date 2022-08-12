@@ -2,7 +2,8 @@
 #'
 #' @param symbol UTF-8 code of shape to replace strata level with.
 #' Default is a rectangle (`"\U25AC"`).
-#' Other common options are circle (`"\U25CF"`) and diamond (`"\U25C6"`)
+#' Other common options are circle (`"\U25CF"`) and diamond (`"\U25C6"`).
+#' While a symbol is the most common string to pass here, any string is acceptable.
 #' @param size,face,vjust,... arguments passed to `ggtext::element_markdown()`
 #' to style the symbol
 #'

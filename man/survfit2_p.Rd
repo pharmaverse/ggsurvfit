@@ -2,15 +2,9 @@
 % Please edit documentation in R/survfit2_p.R
 \name{survfit2_p}
 \alias{survfit2_p}
-\alias{logrank}
-\alias{p_logrank}
 \title{Calculate p-value}
 \usage{
 survfit2_p(x, pvalue_fun = format_p, prepend_p = TRUE, ...)
-
-logrank(x, pvalue_fun = format_p)
-
-p_logrank(x, pvalue_fun = format_p)
 }
 \arguments{
 \item{x}{a 'survfit2' object}
@@ -60,5 +54,5 @@ sf \%>\%
   ggsurvfit() +
   add_confidence_interval() +
   add_risktable() +
-  ggplot2::labs(caption = glue::glue("Log-rank {p_logrank(sf)}"))
+  ggplot2::labs(caption = glue::glue("Log-rank {survfit2_p(sf)}"))
 }
