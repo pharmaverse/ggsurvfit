@@ -157,6 +157,9 @@ km_estimate %>%
 Curves created with ggsurvfit can also later be faceted using ggplot2.
 Note, however, that faceted curves cannot include a risk table.
 
+The `ggsurvfit()` function calls `tidy_survfit()` to create the data frame that is used to create the figure.
+In the data frame, there is a column named `"strata"`, which we will facet over.
+
 ```{r}
 km_estimate %>%
   ggsurvfit() +
