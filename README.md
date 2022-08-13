@@ -16,7 +16,7 @@ coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)
 
 ## Introduction
 
-The {ggsurvfit} package eases the creation of time-to-event (aka
+The **ggsurvfit** package eases the creation of time-to-event (aka
 survival) endpoint figures with ggplot2. The concise and modular code
 creates images that are ready for publication or sharing. Competing
 risks cumulative incidence is also supported via `ggcuminc()`.
@@ -26,7 +26,7 @@ risks cumulative incidence is also supported via `ggcuminc()`.
 -   **Publishable Legends** Raw variable names do not appear in the
     figure legend, e.g. `"sex=Female"`.
 
--   **Use ggplot2 functions** Each {ggsurvfit} add-on function
+-   **Use ggplot2 functions** Each **ggsurvfit** add-on function
     (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is
     written as a proper ggplot2 ‘geom’, meaning that the package
     functions can be woven with ggplot2 functions seamlessly.
@@ -37,7 +37,7 @@ risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Installation
 
-You can install the development version of ggsurvfit from
+You can install the development version of **ggsurvfit** from
 [GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
 
 ``` r
@@ -89,3 +89,30 @@ called, resulting in the following benefits.
     utilizing the calling environment we are assured the correct
     elements are found, rather crossing your fingers that the search
     path contains the needed elements.
+
+## CDISC ADaM ADTTE
+
+The package also includes a gem for those using the [CDISC ADaM
+ADTTE](https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0)
+data model. The event indicator in ADTTE data sets is named `"CNSR"` and
+is coded in the opposite way the survival package expects
+outcomes—`1 = 'censored'` and `0 = 'event'`. This difference creates an
+opportunity for errors to be introduced in an analysis. The package
+exports a function called `Surv_CNSR()` to resolve this concern.
+
+The function creates a survival object (e.g. `survival::Surv()`) that
+uses CDISC ADaM ADTTE coding conventions and converts the arguments to
+the status/event variable convention used in the survival package for
+both the event indicator and the time component. The `"AVAL"` and
+`"CNSR"` arguments are passed to
+`survival::Surv(time = AVAL, event = 1 - CNSR, type = "right", origin = 0)`.
+The function can be used in **ggsurvfit** as well as any other package
+that uses `survival::Surv()`.
+
+``` r
+survfit(Surv_CNSR() ~ 1, adtte)
+#> Call: survfit(formula = Surv_CNSR() ~ 1, data = adtte)
+#> 
+#>         n events median 0.95LCL 0.95UCL
+#> [1,] 2199    755    3.2     3.1    3.56
+```
