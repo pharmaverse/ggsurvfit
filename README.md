@@ -47,8 +47,9 @@ devtools::install_github("ddsjoberg/ggsurvfit")
 
 ## Examples
 
-Let’s begin with an example illustrating a common Kaplan-Meier survival
-curve.
+Review the [**figure
+gallery**](http://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html)
+for many more examples.
 
 ``` r
 library(ggsurvfit)
