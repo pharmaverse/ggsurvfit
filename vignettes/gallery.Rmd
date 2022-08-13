@@ -151,3 +151,19 @@ km_estimate %>%
   ggsurvfit(type = "risk", size = 0.8) +
   add_confidence_interval()
 ```
+
+## Faceting
+
+Curves created with ggsurvfit can also later be faceted using ggplot2.
+Note, however, that faceted curves cannot include a risk table.
+
+```{r}
+km_estimate %>%
+  ggsurvfit() +
+  add_confidence_interval() +
+  facet_wrap(~strata, nrow = 1) +
+  theme(legend.position = "none") +
+  scale_x_continuous(n.breaks = 6) +
+  labs(title = "Survival by Hormone Receptor Status")
+```
+
