@@ -69,7 +69,7 @@ km_estimate %>%
 
 ## KMunicate
 
-To get figures that align with the guidelines outlined in [*Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate.*](http://dx.doi.org/10.1136/bmjopen-2019-030215), use the `theme_ggsurvfit_KMunicate()` theme along with these function options.
+To get figures that align with the guidelines outlined in ["Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate."](http://dx.doi.org/10.1136/bmjopen-2019-030215), use the `theme_ggsurvfit_KMunicate()` theme along with these function options.
 
 ```{r}
 km_estimate %>%
