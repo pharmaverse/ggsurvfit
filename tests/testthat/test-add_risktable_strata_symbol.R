@@ -45,3 +45,29 @@ test_that("add_risktable_strata_symbol() works", {
     "has been ignored"
   )
 })
+
+
+test_that(".match_strata_level_to_color() works", {
+  expect_equal(
+    survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+      ggsurvfit() %>%
+      ggplot2::ggplot_build() %>%
+      .match_strata_level_to_color(
+        risktable_group = "risktable_stats",
+        risktable_symbol_args = list(symbol = "\U25AC")
+      ),
+    c(Male = "#F8766D",   # red
+      Female = "#00BFC4") # blue
+  )
+
+  # Add more tests using the following:
+  # - survfit() and survfit2()
+  # - strata variables that are type numeric, character, glue,
+  #      factor, ordered factor, factors whose levels sort in alphabetical order,
+  #      factors whose levels do not sort alphabetically,
+  #      factors with unobserved levels
+  # - no strata level, e.g. sSurv(time, status) ~ 1
+  # - when the colors have been changed by the user with `scale_color_manual()`
+  # - when two or more levels have been assigned the same color
+
+})

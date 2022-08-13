@@ -65,7 +65,7 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
   # all strata should be factors and therefore can just extract the
   color_label <-
     switch(
-      "strata" %in% plot_build$plot$data,
+      "strata" %in% names(plot_build$plot$data),
       plot_build$plot$data %>%
         dplyr::pull(.data$strata) %>%
         levels()
