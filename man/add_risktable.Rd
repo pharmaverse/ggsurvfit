@@ -8,10 +8,11 @@ add_risktable(
   times = NULL,
   risktable_stats = c("n.risk", "cum.event"),
   risktable_group = c("auto", "strata", "risktable_stats"),
-  risktable_height = 0.14,
+  risktable_height = NULL,
   stats_label = NULL,
   combine_groups = FALSE,
-  theme = theme_risktable_default()
+  theme = theme_risktable_default(),
+  ...
 )
 }
 \arguments{
@@ -38,8 +39,8 @@ Default is \code{"auto"} and will select \code{"strata"} or \code{"risktable_sta
 \item \code{"risktable_stats"} groups the risk tables per risktable_stats.
 }}
 
-\item{risktable_height}{A numeric value between 0 and 1 indicates the height used by the table versus the height
-used by the plot, as described in \code{patchwork::wrap_plots(heights=)}. The default is 0.14.}
+\item{risktable_height}{A numeric value between 0 and 1 indicates the proportion of the
+final plot the risk table will occupy.}
 
 \item{stats_label}{named vector or list of custom labels. Names are the statistics
 from \verb{risktable_stats=} and the value is the custom label.}
@@ -47,7 +48,10 @@ from \verb{risktable_stats=} and the value is the custom label.}
 \item{combine_groups}{logical indicating whether to combine the statistics
 in the risk table across groups. Default is \code{FALSE}}
 
-\item{theme}{A risktable theme. Default is \code{theme_risktable_default()}}
+\item{theme}{A risk table theme. Default is \code{theme_risktable_default()}}
+
+\item{...}{arguments passed to \code{ggplot2::geom_text(...)}. Pass arguments like, \code{size = 3}
+to increase the size of the statistics presented in the table.}
 }
 \description{
 Add risk tables below the plot showing the number at risk, events observed, and
