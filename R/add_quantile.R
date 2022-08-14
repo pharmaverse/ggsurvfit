@@ -19,7 +19,7 @@
 #'   add_quantile(y_value = 0.9, linetype = 3)
 add_quantile <- function(y_value = 0.5, ...) {
   ggplot2::layer(
-    stat = StatQuantile, data = NULL, mapping = NULL, geom = "segment",
+    stat = StatQuantileSurvfit, data = NULL, mapping = NULL, geom = "segment",
     position = "identity", show.legend = NA, inherit.aes = TRUE,
     params =
       c(
@@ -30,9 +30,9 @@ add_quantile <- function(y_value = 0.5, ...) {
   )
 }
 
-StatQuantile <-
+StatQuantileSurvfit <-
   ggplot2::ggproto(
-    "StatQuantile",
+    "StatQuantileSurvfit",
     ggplot2::Stat,
     compute_panel =
       function(data, scales, params, y_value = 0.5) {

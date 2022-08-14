@@ -135,7 +135,7 @@ test_that("add_risktable() works with ggcuminc()", {
 
 })
 
-test_that("add_risktable() throws error messages", {
+test_that("add_risktable() throws messages", {
   expect_error(
     (ggcuminc(cuminc1) +
        add_risktable(
@@ -143,5 +143,15 @@ test_that("add_risktable() throws error messages", {
          stats_label = "CUM EVENTS"
        )) %>%
       print()
+  )
+
+  expect_message(
+    print(
+      survfit2(Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte) %>%
+        ggsurvfit() +
+        add_confidence_interval() +
+        add_risktable() +
+        ggplot2::facet_wrap(~strata, nrow = 1)
+    )
   )
 })

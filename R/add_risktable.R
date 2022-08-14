@@ -103,12 +103,21 @@ StatBlankSurvfit <-
                                  combine_groups, risktable_group,
                                  risktable_height, theme, combine_plots,
                                  risktable_symbol_args) {
+  # build the ggplot to inspect the internals ----------------------------------
   plot_build <- ggplot2::ggplot_build(x)
-  times <- times %||% plot_build$layout$panel_params[[1]]$x.sec$breaks
 
+  # if plot is faceted, return plot without risktable --------------------------
+  if (.is_faceted(plot_build)) {
+    return(structure(x, class = setdiff(class(x), c("ggsurvfit", "ggcuminc"))))
+  }
+
+  # get data to place in risktables --------------------------------------------
+  times <- times %||% plot_build$layout$panel_params[[1]]$x.sec$breaks
   df_times <-
     .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups = combine_groups)
 
+
+  # determine grouping if not specified ----------------------------------------
   if (risktable_group == "auto") {
     risktable_group <-
       dplyr::case_when(
@@ -117,9 +126,9 @@ StatBlankSurvfit <-
       )
   }
 
+  # create list of ggplots, one plot for each risktable ------------------------
   df_stat_labels <- .construct_stat_labels(risktable_stats, stats_label)
 
-  # create list of ggplots, one plot for each risktable
   gg_risktable_list <-
     .create_list_of_gg_risk_tables(
       df_times, risktable_stats, times,
@@ -129,14 +138,14 @@ StatBlankSurvfit <-
       risktable_symbol_args = risktable_symbol_args
     )
 
-  # align all the plots
+  # align all the plots --------------------------------------------------------
   gg_risktable_list_aligned <-
     c(list(x), gg_risktable_list) %>%
     align_plots()
 
+  # combine all plots into single figure ---------------------------------------
   if (isFALSE(combine_plots)) return(gg_risktable_list_aligned)
 
-  ## combine all plots into single figure
   gg_final <-
     gg_risktable_list_aligned %>%
     patchwork::wrap_plots(
@@ -348,4 +357,13 @@ align_plots <- function(pltlist) {
   plots_grobs_xcols[[1]]$grobs[[13]]$children[[1]]$x <- grid::unit(x, "cm")
 
   plots_grobs_xcols
+}
+
+.is_faceted <- function(ggbuild) {
+  if (!inherits(ggbuild$plot$facet, "FacetNull")) {
+    c("i" = "The {.code add_risktable()} function is not compatible with a faceted ggplot.") %>%
+      cli_inform()
+    return(TRUE)
+  }
+  FALSE
 }
