@@ -5,6 +5,14 @@
 #' numeric categorical variables are now factors with assigned levels.
 "df_lung"
 
+#' Formatted Copy of `survival::colon`
+#'
+#' This is a copy of the colon data set exported by the survival
+#' package. This data set, however, has column labels,
+#' numeric categorical variables are now factors with assigned levels,
+#' and we only include the recurrence outcome.
+"df_colon"
+
 
 #' Example phase III clinical trial data set
 #'
