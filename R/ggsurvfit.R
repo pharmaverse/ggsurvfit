@@ -67,7 +67,10 @@ ggsurvfit <- function(x, type = "survival",
       ggplot2::geom_step(...),
       ggplot2::labs(
         y = .default_y_axis_label(df),
-        x = .default_x_axis_label(x)
+        x = .default_x_axis_label(x),
+        alt = paste("Plot illustrating",
+                    shQuote(.default_y_axis_label(df)),
+                    "created with the ggsurvfit package.'")
       ),
       switch("strata" %in% names(df),
              ggplot2::labs(
