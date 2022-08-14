@@ -129,12 +129,13 @@ km_long_labels +
 ```
 
 You can further customize the risk table using themes and the `add_risktable(...)` arguments.
-For example, if you want to increase the font size of both the risk table text and the y-axis label.
+For example, use the following code to increase the font size of both the risk table text and the y-axis label.
 
 ```{r}
 km_estimate %>%
   ggsurvfit(size = 0.8) +
   add_risktable(
+    risktable_height = 0.33,
     size = 4, # increase font size of risk table statistics
     theme =   # increase font size of risk table title and y-axis label
       list(
