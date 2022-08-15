@@ -55,22 +55,25 @@ for many more examples.
 library(ggsurvfit)
 library(ggplot2)
 
-survfit2(Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte) |>
+survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   # build Kaplan-Meier plot ----------------------------------------------------
   ggsurvfit(size = 1) +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(color = "gray50", size = 0.9) +
+  add_quantile(y_value = 0.6, color = "gray50", size = 0.7) +
   # use ggplot2 functions to style the plot and update the labels --------------
   labs(
     y = "Probability of survival",
-    title = "Kaplan-Meier Estimate of Survival by Hormone Receptor Status",
+    title = "Recurrence by Time Since Surgery",
     # remove the fill and color legend labels (Sex appears in title)
     fill = NULL, color = NULL
   ) +
   # reduce padding on edges of figure, and format axes
-  scale_y_continuous(label = scales::percent, expand = c(0.015, 0)) +
-  scale_x_continuous(breaks = 0:5, expand = c(0.02, 0))
+  scale_y_continuous(label = scales::percent, 
+                     breaks = seq(0, 1, by = 0.2),
+                     expand = c(0.015, 0)) +
+  scale_x_continuous(breaks = 0:10, 
+                     expand = c(0.02, 0))
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
