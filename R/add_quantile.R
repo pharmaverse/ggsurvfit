@@ -47,25 +47,11 @@ quantile_km_in_stat <- function(data, y_value) {
   df_quantile <-
     data %>%
     .add_monotonicity_type() %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
-    dplyr::mutate(
-      time_max = max(.data$x),
-      quantile = .env$y_value,
-      above_specified_quantile =
-        .data$y >= .data$quantile & .data$x < .data$time_max
-    ) %>%
+    dplyr::select(dplyr::any_of(c("x", "y", "group", "monotonicity_type"))) %>%
+    .add_requested_y_value(y_value = y_value) %>%
+    dplyr::filter(.data$y %in% .env$y_value) %>%
     dplyr::ungroup() %>%
-    tidyr::fill(.data$monotonicity_type, .direction = "updown") %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of(c("group", "above_specified_quantile")))) %>%
-    dplyr::mutate(
-      row_number = dplyr::row_number(),
-      rows_to_keep =
-        (.data$monotonicity_type == "decreasing" & !.data$above_specified_quantile & dplyr::row_number() == 1L) |
-        (.data$monotonicity_type == "increasing" & .data$above_specified_quantile & dplyr::row_number() == 1L)
-    ) %>%
-    dplyr::filter(.data$rows_to_keep) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(.data$x, y = .data$quantile) %>%
+    dplyr::select(.data$x, .data$y) %>%
     dplyr::mutate(xend = .data$x, yend = 0)
 
   # add row for horizontal line segment
@@ -81,6 +67,39 @@ quantile_km_in_stat <- function(data, y_value) {
   }
 
   df_quantile
+}
+
+.add_requested_y_value <- function(data, y_value) {
+  data %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
+    dplyr::mutate(
+      y_extreme =
+        dplyr::case_when(
+          .data$monotonicity_type == "decreasing" ~ min(.data$y, na.rm = TRUE),
+          .data$monotonicity_type == "increasing" ~ max(.data$y, na.rm = TRUE)
+        )
+    ) %>%
+    {dplyr::rows_upsert(
+      .,
+      dplyr::select(., dplyr::any_of(c("group", "monotonicity_type", "y_extreme"))) %>%
+        dplyr::distinct() %>%
+        dplyr::mutate(y = .env$y_value),
+      by = intersect(c("group", "y"), names(.))
+    )} %>%
+    {dplyr::arrange(., !!!rlang::syms(intersect(c("group", "y"), names(.))), dplyr::desc(.data$x))} %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
+    tidyr::fill(.data$x, .direction = "down") %>%
+    dplyr::mutate(
+      x =
+        dplyr::case_when(
+          .data$monotonicity_type == "decreasing" ~
+            ifelse(.data$y < .data$y_extreme, NA, .data$x),
+          .data$monotonicity_type == "increasing" ~
+            ifelse(.data$y > .data$y_extreme, NA, .data$x)
+        )
+    ) %>%
+    tidyr::drop_na(.data$x) %>%
+    dplyr::arrange(dplyr::across(dplyr::any_of(c("group", "x", "y"))))
 }
 
 
