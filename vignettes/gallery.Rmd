@@ -21,12 +21,13 @@ library(ggsurvfit)
 library(ggplot2)
 library(patchwork)
 
-km_estimate <- survfit2(Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte)
+km_estimate <- survfit2(Surv(time, status) ~ surg, data = df_colon)
 ```
 
 ## Modifications with ggplot2
 
 Let's begin with showing the default plot and common modifications that are made with ggplot2 functions.
+- Expand axis to show probabilities from 0% to 100%
 - Add the percent sign to the y-axis label
 - Reduce padding in the plot area around the curves
 - Add additional tick marks on the x-axis
@@ -43,8 +44,12 @@ gg_default <-
 
 gg_styled <-
   gg_default +
-  scale_y_continuous(labels = scales::percent, expand = c(0.01, 0)) +
-  scale_x_continuous(breaks = 0:5, expand = c(0.02, 0)) +
+  scale_y_continuous(
+    limits = c(0, 1),
+    labels = scales::percent, 
+    expand = c(0.01, 0)
+  ) +
+  scale_x_continuous(breaks = 0:9, expand = c(0.02, 0)) +
   scale_color_manual(values = c('#54738E', '#82AC7C')) +
   scale_fill_manual(values = c('#54738E', '#82AC7C')) +
   theme_minimal() +
@@ -79,7 +84,8 @@ km_estimate %>%
     risktable_stats = c("n.risk", "cum.censor", "cum.event")
   ) +
   theme_ggsurvfit_KMunicate() +
-  scale_x_continuous(breaks = 0:5, expand = c(0.02, 0)) +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_x_continuous(expand = c(0.02, 0)) +
   theme(legend.position = c(0.85, 0.85))
 ```
 
@@ -116,6 +122,7 @@ km_long_labels <-
     risktable_group = "risktable_stats",
     risktable_height = 0.2
   ) +
+  scale_x_continuous(breaks = 0:5) +
   theme(legend.position = "right") +
   labs(color = NULL)
 km_long_labels
@@ -184,6 +191,6 @@ km_estimate %>%
   facet_wrap(~strata, nrow = 1) +
   theme(legend.position = "none") +
   scale_x_continuous(n.breaks = 6) +
-  labs(title = "Survival by Hormone Receptor Status")
+  labs(title = "PFS by Duration between Surgery and Treatment")
 ```
 

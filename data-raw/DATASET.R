@@ -1,3 +1,63 @@
+# COLON DATA -------------------------------------------------------------------
+df_colon <-
+  survival::colon |>
+  dplyr::filter(etype == 1) |>
+  dplyr::select(-study, -etype) |>
+  dplyr::mutate(
+    rx = factor(rx,
+                levels = c("Obs", "Lev", "Lev+5FU"),
+                labels = c("Observation", " Levamisole", "Levamisole+5-FU")),
+    sex = factor(sex, levels = 0:1, labels = c("Female", "Male")),
+    obstruct =
+      factor(
+        obstruct,
+        levels = 0:1,
+        labels = c("Not Obstructed", "Obstructed")
+      ),
+    adhere =
+      factor(
+        adhere,
+        levels = 0:1,
+        labels = c("Not Adhered", "Adhered")
+      ),
+    time = time / 365.25,
+    differ =
+      factor(
+        differ,
+        levels = 1:3,
+        labels = c("Well", "Moderate", "Poor")
+      ),
+    extent =
+      factor(
+        extent,
+        levels = 1:4,
+        labels = c("Submucosa", "Muscle", "Serosa", "Contiguous Structures")
+      ),
+    surg =
+      factor(
+        surg,
+        levels = 0:1,
+        labels = c("Short", "Long")
+      )
+  ) %>%
+  dplyr::as_tibble()
+
+attr(df_colon$id, "label") <- "ID"
+attr(df_colon$rx, "label") <- "Treatment"
+attr(df_colon$sex, "label") <- "Sex"
+attr(df_colon$age, "label") <- "Age, years"
+attr(df_colon$obstruct, "label") <- "Tumor-related Obstruction"
+attr(df_colon$perfor, "label") <- "Colon Perforated"
+attr(df_colon$adhere, "label") <- "Adherence to Nearby Organs"
+attr(df_colon$nodes, "label") <- "No. Positive Lymph Nodes"
+attr(df_colon$time, "label") <- "Follow-up time, years"
+attr(df_colon$status, "label") <- "Recurrence Status"
+attr(df_colon$differ, "label") <- "Tumor Differentiation"
+attr(df_colon$extent, "label") <- "Extent of Spread"
+attr(df_colon$surg, "label") <- "Time from Surgery to Treatment"
+attr(df_colon$node4, "label") <- "More than 4 Positive Nodes"
+
+
 # LUNG DATA --------------------------------------------------------------------
 
 # recode values and add labels to survival::lung
@@ -65,4 +125,4 @@ attr(adtte$DCTREAS, "label") <- "Discontinuation from study reason"
 
 
 
-usethis::use_data(adtte, df_lung, overwrite = TRUE, internal = FALSE)
+usethis::use_data(adtte, df_lung, df_colon, overwrite = TRUE, internal = FALSE)
