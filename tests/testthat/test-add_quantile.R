@@ -44,6 +44,26 @@ test_that("add_quantile() works with ggsurvfit()", {
       setdiff(0),
     quantile(sf2, probs = 0.5, conf.int = FALSE) %>% as.numeric()
   )
+
+  sf2_colon <- survfit2(Surv(time, status) ~ surg, data = df_colon)
+  expect_equal(
+    sf2_colon %>%
+      tidy_survfit() %>%
+      dplyr::select(x = time, y = estimate, group = strata) %>%
+      quantile_km_in_stat(y_value = 0.5) %>%
+      dplyr::pull(x) %>%
+      setdiff(0),
+    quantile(sf2_colon, probs = 0.5, conf.int = FALSE) %>%
+      as.numeric() %>%
+      na.omit(),
+    ignore_attr = TRUE
+  )
+  vdiffr::expect_doppelganger(
+    "sf2_colon-quantile",
+    sf2_colon %>%
+      ggsurvfit() +
+      add_quantile()
+  )
 })
 
 test_that("add_quantile() errors with ggsurvfit()", {
