@@ -148,7 +148,7 @@ km_estimate %>%
       list(
         theme_risktable_default(),
         theme(axis.text.y = element_text(size = 11),
-              plot.title = element_text(size = 11))
+              plot.title = element_text(size = 11, face = "bold"))
       )
   )
 ```
