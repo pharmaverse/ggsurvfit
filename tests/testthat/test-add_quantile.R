@@ -45,6 +45,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     quantile(sf2, probs = 0.5, conf.int = FALSE) %>% as.numeric()
   )
 
+  # a single quantile line is shown, because only one group reached median survival
   sf2_colon <- survfit2(Surv(time, status) ~ surg, data = df_colon)
   expect_equal(
     sf2_colon %>%
@@ -63,6 +64,14 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf2_colon %>%
       ggsurvfit() +
       add_quantile()
+  )
+
+  # no lines added, because 20% not reached
+  vdiffr::expect_doppelganger(
+    "sf2_colon-quantile-no-line",
+    sf2_colon %>%
+      ggsurvfit() +
+      add_quantile(y_value = 0.2)
   )
 })
 
