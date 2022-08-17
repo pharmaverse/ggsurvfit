@@ -38,10 +38,10 @@ reference:
   - title: Add to Plot
   - contents:
       - add_confidence_interval
-      - add_censor_mark
-      - add_quantile
       - add_risktable
       - add_risktable_strata_symbol
+      - add_censor_mark
+      - add_quantile
 
   - title: Themes
   - contents:
