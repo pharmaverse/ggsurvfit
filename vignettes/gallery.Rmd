@@ -62,7 +62,7 @@ gg_default + gg_styled
 
 ## Grey-scale Figures
 
-Commonly, you need a black and white figure, and that is achieved using grey-scale ggplot2 functions.
+You may need a black and white figure and that is achieved using grey-scale ggplot2 functions.
 
 ```{r}
 km_estimate %>%
