@@ -119,7 +119,7 @@
 <span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_risktable.html">add_risktable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.6</span>, color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.6</span>, color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># use ggplot2 functions to style the plot and update the labels --------------</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="st">"Probability of survival"</span>,</span>
@@ -141,9 +141,8 @@
 <p>Both functions have identical inputs, so why do we need <code><a href="reference/survfit2.html">survfit2()</a></code>? The <code><a href="reference/survfit2.html">survfit2()</a></code> tracks the environment from which the function was called, resulting in the following benefits.</p>
 <ul>
 <li>We can reliably remove the raw variable names from the figure legend, e.g. <code>SEX=Female</code>.</li>
-<li>The figure legend label can be extracted from the original data, providing a more informative figure.</li>
 <li>P-values can be calculated with <code>survfit_p()</code> and added to figures.</li>
-<li>The items above are often <em>possible</em> using <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code>. However, by utilizing the calling environment we are assured the correct elements are found, rather crossing your fingers that the search path contains the needed elements.</li>
+<li>The items above are often <em>possible</em> using <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code>. However, by utilizing the calling environment we are assured the correct elements are found, rather than crossing our fingers that the search path contains the needed elements.</li>
 </ul>
 </div>
 <div class="section level2">
