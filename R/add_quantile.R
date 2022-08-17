@@ -49,7 +49,8 @@ quantile_km_in_stat <- function(data, y_value) {
     .add_monotonicity_type() %>%
     dplyr::select(dplyr::any_of(c("x", "y", "group", "monotonicity_type"))) %>%
     .add_requested_y_value(y_value = y_value) %>%
-    dplyr::filter(.data$y %in% .env$y_value) %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of(c("group", "y")))) %>%
+    dplyr::filter(.data$y %in% .env$y_value, dplyr::row_number() == 1L) %>%
     dplyr::ungroup() %>%
     dplyr::select(.data$x, .data$y) %>%
     dplyr::mutate(xend = .data$x, yend = 0)
@@ -76,6 +77,7 @@ quantile_km_in_stat <- function(data, y_value) {
       monotonicity_type == "decreasing" ~ -1L,
       monotonicity_type == "increasing" ~ 1L
     )
+
   data %>%
     dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
     dplyr::mutate(

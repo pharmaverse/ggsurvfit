@@ -87,6 +87,32 @@ test_that("add_quantile() works with ggsurvfit()", {
       ggsurvfit(type = "risk") +
       add_quantile()
   )
+
+
+  vdiffr::expect_doppelganger(
+    "sf-mtcars-decreasing-many-quantiles",
+    survfit2(Surv(mpg, am) ~ cyl, mtcars) %>%
+      ggsurvfit() +
+      add_quantile(y_value = 0.75, linetype = "dotted") +
+      add_quantile(y_value = 0.25)
+  )
+  vdiffr::expect_doppelganger(
+    "sf-mtcars-increasing-many-quantiles",
+    survfit2(Surv(mpg, am) ~ cyl, mtcars) %>%
+      ggsurvfit(type = "risk") +
+      add_quantile(y_value = 0.75, linetype = "dotted") +
+      add_quantile(y_value = 0.25)
+  )
+
+
+  vdiffr::expect_doppelganger(
+    "sf-mtcars-timing",
+    survfit2(Surv(mpg, am) ~ 1, mtcars %>% dplyr::filter(cyl == 4)) %>%
+      ggsurvfit() +
+      add_quantile(y_value = 0.75) + # previous obs is a censor
+      add_quantile(y_value = 0.5) # previous obs is an event
+  )
+
 })
 
 test_that("add_quantile() errors with ggsurvfit()", {
