@@ -63,7 +63,7 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   ggsurvfit(size = 1) +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(y_value = 0.6, color = "gray50", size = 0.7) +
+  add_quantile(y_value = 0.6, color = "gray50", size = 0.75) +
   # use ggplot2 functions to style the plot and update the labels --------------
   labs(
     y = "Probability of survival",
@@ -87,12 +87,10 @@ called, resulting in the following benefits.
 
 -   We can reliably remove the raw variable names from the figure
     legend, e.g. `SEX=Female`.
--   The figure legend label can be extracted from the original data,
-    providing a more informative figure.
 -   P-values can be calculated with `survfit_p()` and added to figures.
 -   The items above are often *possible* using `survfit()`. However, by
     utilizing the calling environment we are assured the correct
-    elements are found, rather crossing your fingers that the search
+    elements are found, rather than crossing our fingers that the search
     path contains the needed elements.
 
 ## CDISC ADaM ADTTE
