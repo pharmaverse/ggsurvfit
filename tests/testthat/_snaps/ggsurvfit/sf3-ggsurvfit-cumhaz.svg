@@ -78,29 +78,28 @@
 <text x='616.81' y='499.62' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>30</text>
 <text x='371.21' y='511.76' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='105.16px' lengthAdjust='spacingAndGlyphs'>Survival time, months</text>
 <text transform='translate(13.05,255.71) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='93.56px' lengthAdjust='spacingAndGlyphs'>Cumulative Hazard</text>
-<rect x='-71.10' y='525.00' width='884.62' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='-65.62' y='551.55' style='font-size: 11.00px; font-family: sans;' textLength='215.24px' lengthAdjust='spacingAndGlyphs'>Sex, ECOG Performance Status (Physician)</text>
-<rect x='155.10' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='156.83' y1='539.12' x2='170.65' y2='539.12' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='155.10' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='156.83' y1='556.40' x2='170.65' y2='556.40' style='stroke-width: 1.07; stroke: #C49A00; stroke-linecap: butt;' />
-<rect x='321.29' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='323.02' y1='539.12' x2='336.84' y2='539.12' style='stroke-width: 1.07; stroke: #53B400; stroke-linecap: butt;' />
-<rect x='321.29' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='323.02' y1='556.40' x2='336.84' y2='556.40' style='stroke-width: 1.07; stroke: #00C094; stroke-linecap: butt;' />
-<rect x='474.04' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='475.77' y1='539.12' x2='489.59' y2='539.12' style='stroke-width: 1.07; stroke: #00B6EB; stroke-linecap: butt;' />
-<rect x='474.04' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='475.77' y1='556.40' x2='489.59' y2='556.40' style='stroke-width: 1.07; stroke: #A58AFF; stroke-linecap: butt;' />
-<rect x='650.50' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='652.23' y1='539.12' x2='666.05' y2='539.12' style='stroke-width: 1.07; stroke: #FB61D7; stroke-linecap: butt;' />
-<text x='177.86' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='113.47px' lengthAdjust='spacingAndGlyphs'>Male, Asymptomatic              </text>
-<text x='177.86' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='137.95px' lengthAdjust='spacingAndGlyphs'>Male, Symptomatic and ambulatory</text>
-<text x='344.05' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &lt;50% of the day    </text>
-<text x='344.05' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &gt; 50% of the day   </text>
-<text x='496.80' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='123.74px' lengthAdjust='spacingAndGlyphs'>Female, Asymptomatic              </text>
-<text x='496.80' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='148.22px' lengthAdjust='spacingAndGlyphs'>Female, Symptomatic and ambulatory</text>
-<text x='673.26' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='134.78px' lengthAdjust='spacingAndGlyphs'>Female, In bed &lt;50% of the day    </text>
+<rect x='36.52' y='525.00' width='669.38' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='47.48' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='49.21' y1='539.12' x2='63.03' y2='539.12' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='47.48' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='49.21' y1='556.40' x2='63.03' y2='556.40' style='stroke-width: 1.07; stroke: #C49A00; stroke-linecap: butt;' />
+<rect x='213.67' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='215.40' y1='539.12' x2='229.22' y2='539.12' style='stroke-width: 1.07; stroke: #53B400; stroke-linecap: butt;' />
+<rect x='213.67' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='215.40' y1='556.40' x2='229.22' y2='556.40' style='stroke-width: 1.07; stroke: #00C094; stroke-linecap: butt;' />
+<rect x='366.42' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='368.15' y1='539.12' x2='381.97' y2='539.12' style='stroke-width: 1.07; stroke: #00B6EB; stroke-linecap: butt;' />
+<rect x='366.42' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='368.15' y1='556.40' x2='381.97' y2='556.40' style='stroke-width: 1.07; stroke: #A58AFF; stroke-linecap: butt;' />
+<rect x='542.88' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='544.61' y1='539.12' x2='558.43' y2='539.12' style='stroke-width: 1.07; stroke: #FB61D7; stroke-linecap: butt;' />
+<text x='70.24' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='113.47px' lengthAdjust='spacingAndGlyphs'>Male, Asymptomatic              </text>
+<text x='70.24' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='137.95px' lengthAdjust='spacingAndGlyphs'>Male, Symptomatic and ambulatory</text>
+<text x='236.43' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &lt;50% of the day    </text>
+<text x='236.43' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &gt; 50% of the day   </text>
+<text x='389.18' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='123.74px' lengthAdjust='spacingAndGlyphs'>Female, Asymptomatic              </text>
+<text x='389.18' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='148.22px' lengthAdjust='spacingAndGlyphs'>Female, Symptomatic and ambulatory</text>
+<text x='565.64' y='542.15' style='font-size: 8.80px; font-family: sans;' textLength='134.78px' lengthAdjust='spacingAndGlyphs'>Female, In bed &lt;50% of the day    </text>
 <text x='27.90' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='125.48px' lengthAdjust='spacingAndGlyphs'>sf3-ggsurvfit_cumhaz</text>
 </g>
 </svg>

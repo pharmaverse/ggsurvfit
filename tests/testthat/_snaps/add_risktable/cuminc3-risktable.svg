@@ -205,26 +205,25 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHwxMjQuMDQ=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='196.82' y='73.04' width='369.23' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='202.30' y='99.58' style='font-size: 11.00px; font-family: sans;' textLength='162.04px' lengthAdjust='spacingAndGlyphs'>Chemotherapy Treatment, Grade</text>
-<rect x='369.82' y='78.52' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='371.55' y1='87.16' x2='385.37' y2='87.16' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='369.82' y='95.80' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='371.55' y1='104.44' x2='385.37' y2='104.44' style='stroke-width: 1.07; stroke: #B79F00; stroke-linecap: butt;' />
-<rect x='432.79' y='78.52' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='434.51' y1='87.16' x2='448.34' y2='87.16' style='stroke-width: 1.07; stroke: #00BA38; stroke-linecap: butt;' />
-<rect x='432.79' y='95.80' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='434.51' y1='104.44' x2='448.34' y2='104.44' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<rect x='498.20' y='78.52' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='499.92' y1='87.16' x2='513.75' y2='87.16' style='stroke-width: 1.07; stroke: #619CFF; stroke-linecap: butt;' />
-<rect x='498.20' y='95.80' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='499.92' y1='104.44' x2='513.75' y2='104.44' style='stroke-width: 1.07; stroke: #F564E3; stroke-linecap: butt;' />
-<text x='392.58' y='90.19' style='font-size: 8.80px; font-family: sans;' textLength='34.73px' lengthAdjust='spacingAndGlyphs'>Drug A, I</text>
-<text x='392.58' y='107.47' style='font-size: 8.80px; font-family: sans;' textLength='34.73px' lengthAdjust='spacingAndGlyphs'>Drug B, I</text>
-<text x='455.55' y='90.19' style='font-size: 8.80px; font-family: sans;' textLength='37.17px' lengthAdjust='spacingAndGlyphs'>Drug A, II</text>
-<text x='455.55' y='107.47' style='font-size: 8.80px; font-family: sans;' textLength='37.17px' lengthAdjust='spacingAndGlyphs'>Drug B, II</text>
-<text x='520.96' y='90.19' style='font-size: 8.80px; font-family: sans;' textLength='39.62px' lengthAdjust='spacingAndGlyphs'>Drug A, III</text>
-<text x='520.96' y='107.47' style='font-size: 8.80px; font-family: sans;' textLength='39.62px' lengthAdjust='spacingAndGlyphs'>Drug B, III</text>
+<rect x='277.84' y='73.04' width='207.19' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='288.80' y='78.52' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='290.53' y1='87.16' x2='304.35' y2='87.16' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='288.80' y='95.80' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='290.53' y1='104.44' x2='304.35' y2='104.44' style='stroke-width: 1.07; stroke: #B79F00; stroke-linecap: butt;' />
+<rect x='351.76' y='78.52' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='353.49' y1='87.16' x2='367.32' y2='87.16' style='stroke-width: 1.07; stroke: #00BA38; stroke-linecap: butt;' />
+<rect x='351.76' y='95.80' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='353.49' y1='104.44' x2='367.32' y2='104.44' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
+<rect x='417.17' y='78.52' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='418.90' y1='87.16' x2='432.73' y2='87.16' style='stroke-width: 1.07; stroke: #619CFF; stroke-linecap: butt;' />
+<rect x='417.17' y='95.80' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='418.90' y1='104.44' x2='432.73' y2='104.44' style='stroke-width: 1.07; stroke: #F564E3; stroke-linecap: butt;' />
+<text x='311.56' y='90.19' style='font-size: 8.80px; font-family: sans;' textLength='34.73px' lengthAdjust='spacingAndGlyphs'>Drug A, I</text>
+<text x='311.56' y='107.47' style='font-size: 8.80px; font-family: sans;' textLength='34.73px' lengthAdjust='spacingAndGlyphs'>Drug B, I</text>
+<text x='374.52' y='90.19' style='font-size: 8.80px; font-family: sans;' textLength='37.17px' lengthAdjust='spacingAndGlyphs'>Drug A, II</text>
+<text x='374.52' y='107.47' style='font-size: 8.80px; font-family: sans;' textLength='37.17px' lengthAdjust='spacingAndGlyphs'>Drug B, II</text>
+<text x='439.93' y='90.19' style='font-size: 8.80px; font-family: sans;' textLength='39.62px' lengthAdjust='spacingAndGlyphs'>Drug A, III</text>
+<text x='439.93' y='107.47' style='font-size: 8.80px; font-family: sans;' textLength='39.62px' lengthAdjust='spacingAndGlyphs'>Drug B, III</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHwxMjQuMDQ=)'>
 </g>

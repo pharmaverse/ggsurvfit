@@ -72,16 +72,15 @@
 <text x='618.55' y='516.90' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>30</text>
 <text x='377.33' y='529.04' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='105.16px' lengthAdjust='spacingAndGlyphs'>Survival time, months</text>
 <text transform='translate(13.05,264.35) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='93.55px' lengthAdjust='spacingAndGlyphs'>Survival Probability</text>
-<rect x='309.92' y='542.28' width='134.82' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='315.40' y='560.19' style='font-size: 11.00px; font-family: sans;' textLength='18.96px' lengthAdjust='spacingAndGlyphs'>Sex</text>
-<rect x='339.84' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='341.56' y1='556.40' x2='355.39' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<line x1='341.56' y1='556.40' x2='355.39' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
-<rect x='387.15' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='388.88' y1='556.40' x2='402.70' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<line x1='388.88' y1='556.40' x2='402.70' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
-<text x='362.60' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='19.08px' lengthAdjust='spacingAndGlyphs'>Male</text>
-<text x='409.91' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='29.35px' lengthAdjust='spacingAndGlyphs'>Female</text>
+<rect x='319.40' y='542.28' width='115.86' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='330.36' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='332.08' y1='556.40' x2='345.91' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<line x1='332.08' y1='556.40' x2='345.91' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
+<rect x='377.67' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='379.40' y1='556.40' x2='393.22' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
+<line x1='379.40' y1='556.40' x2='393.22' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
+<text x='353.12' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='19.08px' lengthAdjust='spacingAndGlyphs'>Male</text>
+<text x='400.43' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='29.35px' lengthAdjust='spacingAndGlyphs'>Female</text>
 <text x='40.13' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='68.25px' lengthAdjust='spacingAndGlyphs'>sf2-quantile</text>
 </g>
 </svg>
