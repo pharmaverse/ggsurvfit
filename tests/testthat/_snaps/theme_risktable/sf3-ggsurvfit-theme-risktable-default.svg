@@ -225,29 +225,28 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1OS42NA==)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='-60.88' y='36.64' width='884.62' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='-55.40' y='63.18' style='font-size: 11.00px; font-family: sans;' textLength='215.24px' lengthAdjust='spacingAndGlyphs'>Sex, ECOG Performance Status (Physician)</text>
-<rect x='165.32' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='167.05' y1='50.76' x2='180.87' y2='50.76' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='165.32' y='59.40' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='167.05' y1='68.04' x2='180.87' y2='68.04' style='stroke-width: 1.07; stroke: #C49A00; stroke-linecap: butt;' />
-<rect x='331.51' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='333.24' y1='50.76' x2='347.06' y2='50.76' style='stroke-width: 1.07; stroke: #53B400; stroke-linecap: butt;' />
-<rect x='331.51' y='59.40' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='333.24' y1='68.04' x2='347.06' y2='68.04' style='stroke-width: 1.07; stroke: #00C094; stroke-linecap: butt;' />
-<rect x='484.26' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='485.99' y1='50.76' x2='499.82' y2='50.76' style='stroke-width: 1.07; stroke: #00B6EB; stroke-linecap: butt;' />
-<rect x='484.26' y='59.40' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='485.99' y1='68.04' x2='499.82' y2='68.04' style='stroke-width: 1.07; stroke: #A58AFF; stroke-linecap: butt;' />
-<rect x='660.72' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='662.45' y1='50.76' x2='676.28' y2='50.76' style='stroke-width: 1.07; stroke: #FB61D7; stroke-linecap: butt;' />
-<text x='188.08' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='113.47px' lengthAdjust='spacingAndGlyphs'>Male, Asymptomatic              </text>
-<text x='188.08' y='71.06' style='font-size: 8.80px; font-family: sans;' textLength='137.95px' lengthAdjust='spacingAndGlyphs'>Male, Symptomatic and ambulatory</text>
-<text x='354.27' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &lt;50% of the day    </text>
-<text x='354.27' y='71.06' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &gt; 50% of the day   </text>
-<text x='507.02' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='123.74px' lengthAdjust='spacingAndGlyphs'>Female, Asymptomatic              </text>
-<text x='507.02' y='71.06' style='font-size: 8.80px; font-family: sans;' textLength='148.22px' lengthAdjust='spacingAndGlyphs'>Female, Symptomatic and ambulatory</text>
-<text x='683.48' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='134.78px' lengthAdjust='spacingAndGlyphs'>Female, In bed &lt;50% of the day    </text>
+<rect x='46.74' y='36.64' width='669.38' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='57.70' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='59.43' y1='50.76' x2='73.26' y2='50.76' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='57.70' y='59.40' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='59.43' y1='68.04' x2='73.26' y2='68.04' style='stroke-width: 1.07; stroke: #C49A00; stroke-linecap: butt;' />
+<rect x='223.89' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='225.62' y1='50.76' x2='239.44' y2='50.76' style='stroke-width: 1.07; stroke: #53B400; stroke-linecap: butt;' />
+<rect x='223.89' y='59.40' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='225.62' y1='68.04' x2='239.44' y2='68.04' style='stroke-width: 1.07; stroke: #00C094; stroke-linecap: butt;' />
+<rect x='376.64' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='378.37' y1='50.76' x2='392.20' y2='50.76' style='stroke-width: 1.07; stroke: #00B6EB; stroke-linecap: butt;' />
+<rect x='376.64' y='59.40' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='378.37' y1='68.04' x2='392.20' y2='68.04' style='stroke-width: 1.07; stroke: #A58AFF; stroke-linecap: butt;' />
+<rect x='553.10' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='554.83' y1='50.76' x2='568.66' y2='50.76' style='stroke-width: 1.07; stroke: #FB61D7; stroke-linecap: butt;' />
+<text x='80.46' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='113.47px' lengthAdjust='spacingAndGlyphs'>Male, Asymptomatic              </text>
+<text x='80.46' y='71.06' style='font-size: 8.80px; font-family: sans;' textLength='137.95px' lengthAdjust='spacingAndGlyphs'>Male, Symptomatic and ambulatory</text>
+<text x='246.65' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &lt;50% of the day    </text>
+<text x='246.65' y='71.06' style='font-size: 8.80px; font-family: sans;' textLength='124.51px' lengthAdjust='spacingAndGlyphs'>Male, In bed &gt; 50% of the day   </text>
+<text x='399.40' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='123.74px' lengthAdjust='spacingAndGlyphs'>Female, Asymptomatic              </text>
+<text x='399.40' y='71.06' style='font-size: 8.80px; font-family: sans;' textLength='148.22px' lengthAdjust='spacingAndGlyphs'>Female, Symptomatic and ambulatory</text>
+<text x='575.86' y='53.78' style='font-size: 8.80px; font-family: sans;' textLength='134.78px' lengthAdjust='spacingAndGlyphs'>Female, In bed &lt;50% of the day    </text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1OS42NA==)'>
 </g>

@@ -70,13 +70,13 @@ ggsurvfit <- function(x, type = "survival",
         x = .default_x_axis_label(x),
         alt = paste("Plot illustrating",
                     shQuote(.default_y_axis_label(df), type = "sh"),
-                    "created with the 'ggsurvfit' R package.'")
+                    "created with the 'ggsurvfit' R package.")
       ),
       switch("strata" %in% names(df),
              ggplot2::labs(
-               color = df[["strata_label"]][1],
-               fill = df[["strata_label"]][1],
-               linetype = df[["strata_label"]][1]
+               color = NULL,
+               fill = NULL,
+               linetype = NULL
              )
       ),
       theme

@@ -65,8 +65,6 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   labs(
     y = "Probability of survival",
     title = "Recurrence by Time Since Surgery",
-    # remove the fill and color legend labels (Sex appears in title)
-    fill = NULL, color = NULL
   ) +
   # reduce padding on edges of figure, and format axes
   scale_y_continuous(label = scales::percent, 
