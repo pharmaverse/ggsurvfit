@@ -20,8 +20,6 @@ The gallery exhibits the default plots as well as many modifications one can mak
 library(ggsurvfit)
 library(ggplot2)
 library(patchwork)
-
-km_estimate <- survfit2(Surv(time, status) ~ surg, data = df_colon)
 ```
 
 ## Modifications with ggplot2
@@ -38,7 +36,7 @@ Let's begin with showing the default plot and common modifications that are made
 
 ```{r}
 gg_default <-
-  km_estimate %>%
+  survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
   labs(title = "Default")
@@ -65,7 +63,7 @@ gg_default + gg_styled
 You may need a black and white figure and that is achieved using grey-scale ggplot2 functions.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
   scale_color_grey() +
@@ -78,7 +76,7 @@ km_estimate %>%
 To get figures that align with the guidelines outlined in ["Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate."](http://dx.doi.org/10.1136/bmjopen-2019-030215), use the `theme_ggsurvfit_KMunicate()` theme along with these function options.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(linetype_aes = TRUE) +
   add_confidence_interval() +
   add_risktable(
@@ -95,7 +93,7 @@ km_estimate %>%
 The default risk table styling is ready for publication.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
   add_risktable()
@@ -104,7 +102,7 @@ km_estimate %>%
 You can also group the risktable by the statistics rather than the stratum.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
   add_risktable(risktable_group = "risktable_stats")
@@ -115,7 +113,7 @@ Use `add_risktable_strata_symbol()` to replace long stratum labels with a color 
 Without `add_risktable_strata_symbol()`:
 
 ```{r}
-km_long_labels <- 
+km_long_labels <-
   survfit2(Surv(AVAL, 1 - CNSR) ~ TRT01P, data = adtte) %>%
   ggsurvfit() +
   add_risktable(
@@ -124,8 +122,7 @@ km_long_labels <-
     risktable_height = 0.2
   ) +
   scale_x_continuous(breaks = 0:5) +
-  theme(legend.position = "right") +
-  labs(color = NULL)
+  theme(legend.position = "right")
 km_long_labels
 ```
 
@@ -140,7 +137,7 @@ You can further customize the risk table using themes and the `add_risktable(...
 For example, use the following code to increase the font size of both the risk table text and the y-axis label.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(size = 0.8) +
   add_risktable(
     risktable_height = 0.33,
@@ -159,7 +156,7 @@ km_estimate %>%
 Add guidelines for survival quantiles and markings for censored patients using `add_quantile()` and `add_censor_mark()`.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(size = 0.8) +
   add_censor_mark(size = 2, alpha = 0.2) +
   add_quantile(y_value = 0.5, linetype = "dotted", color = "grey50", size = 0.8) +
@@ -172,7 +169,7 @@ Show the probability of an event rather than the probability of being free from 
 Custom transformations are also available.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(type = "risk", size = 0.8) +
   add_confidence_interval()
 ```
@@ -186,7 +183,7 @@ The `ggsurvfit()` function calls `tidy_survfit()` to create the data frame that 
 In the data frame, there is a column named `"strata"`, which we will facet over.
 
 ```{r}
-km_estimate %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
   facet_wrap(~strata, nrow = 1) +
