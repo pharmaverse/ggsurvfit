@@ -27,6 +27,7 @@ km_estimate <- survfit2(Surv(time, status) ~ surg, data = df_colon)
 ## Modifications with ggplot2
 
 Let's begin with showing the default plot and common modifications that are made with ggplot2 functions.
+
 - Expand axis to show probabilities from 0% to 100%
 - Add the percent sign to the y-axis label
 - Reduce padding in the plot area around the curves
