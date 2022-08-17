@@ -56,5 +56,12 @@ test_that("ggsurvfit() works", {
   vdiffr::expect_doppelganger("sf2-ggsurvfit-KMunicate", lst_survfit_KMunicate[[2]])
   vdiffr::expect_doppelganger("sf3-ggsurvfit-KMunicate", lst_survfit_KMunicate[[3]])
 
+  # test that the variable names are stripped when using transformations
+  vdiffr::expect_doppelganger(
+    "sf2-ggsurvfit-strata-transformation",
+    survfit2(Surv(time, status) ~ as.numeric(sex), df_lung) %>%
+      ggsurvfit()
+  )
+
   expect_error(ggsurvfit(mtcars))
 })

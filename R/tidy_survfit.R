@@ -126,7 +126,7 @@ tidy_survfit <- function(x,
     if (v == 1L) {
       x$strata <-
         sub(
-          pattern = paste0("^", strata_variables[v], "="),
+          pattern = paste0("^", .escape_regex_chars(strata_variables[v]), "\\="),
           replacement = "",
           x = x$strata
         )
@@ -146,6 +146,10 @@ tidy_survfit <- function(x,
 
   # return tidy tibble
   x
+}
+
+.escape_regex_chars <- function(x) {
+  gsub(pattern = "(\\W)", replacement = "\\\\\\1", x = x)
 }
 
 .transform_estimate <- function(x, type) {
