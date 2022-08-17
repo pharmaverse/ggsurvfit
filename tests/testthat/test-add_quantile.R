@@ -73,6 +73,20 @@ test_that("add_quantile() works with ggsurvfit()", {
       ggsurvfit() +
       add_quantile(y_value = 0.2)
   )
+
+  # testing that both increasing and decreasing function work
+  vdiffr::expect_doppelganger(
+    "sf-mtcars-decreasing",
+    survfit2(Surv(mpg, am) ~ cyl, mtcars %>% dplyr::filter(cyl %in% c(4, 6))) %>%
+      ggsurvfit() +
+      add_quantile()
+  )
+  vdiffr::expect_doppelganger(
+    "sf-mtcars-increasing",
+    survfit2(Surv(mpg, am) ~ cyl, mtcars %>% dplyr::filter(cyl %in% c(4, 6))) %>%
+      ggsurvfit(type = "risk") +
+      add_quantile()
+  )
 })
 
 test_that("add_quantile() errors with ggsurvfit()", {

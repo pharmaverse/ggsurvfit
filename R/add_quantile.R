@@ -70,13 +70,19 @@ quantile_km_in_stat <- function(data, y_value) {
 }
 
 .add_requested_y_value <- function(data, y_value) {
+  monotonicity_type <- data$monotonicity_type[1]
+  arrange_sign <-
+    dplyr::case_when(
+      monotonicity_type == "decreasing" ~ -1L,
+      monotonicity_type == "increasing" ~ 1L
+    )
   data %>%
     dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
     dplyr::mutate(
       y_extreme =
         dplyr::case_when(
-          .data$monotonicity_type == "decreasing" ~ min(.data$y, na.rm = TRUE),
-          .data$monotonicity_type == "increasing" ~ max(.data$y, na.rm = TRUE)
+          .env$monotonicity_type == "decreasing" ~ min(.data$y, na.rm = TRUE),
+          .env$monotonicity_type == "increasing" ~ max(.data$y, na.rm = TRUE)
         )
     ) %>%
     {dplyr::rows_upsert(
@@ -86,9 +92,21 @@ quantile_km_in_stat <- function(data, y_value) {
         dplyr::mutate(y = .env$y_value),
       by = intersect(c("group", "y"), names(.))
     )} %>%
-    {dplyr::arrange(., !!!rlang::syms(intersect(c("group", "y"), names(.))), dplyr::desc(.data$x))} %>%
+    # {dplyr::arrange(., !!!rlang::syms(intersect(c("group", "y"), names(.))), dplyr::desc(.data$x))} %>%
+    {dplyr::arrange(
+      .,
+      !!!rlang::syms(intersect(c("group", "y"), names(.))),
+      arrange_sign *.data$x # need to sort x based on the monotonicity of the curve
+    )} %>%
     dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
-    tidyr::fill(.data$x, .direction = "down") %>%
+    tidyr::fill(
+      .data$x,
+      .direction =
+        dplyr::case_when(
+          monotonicity_type == "decreasing" ~ "down",
+          monotonicity_type == "increasing" ~ "up"
+        )
+    ) %>%
     dplyr::mutate(
       x =
         dplyr::case_when(
