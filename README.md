@@ -8,10 +8,10 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 [![Codecov test
 coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 <!-- badges: end -->
 
 ## Introduction
@@ -23,13 +23,16 @@ risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Why ggsurvfit?
 
--   **Publishable Legends:** Raw variable names do not appear in the
-    figure legend, e.g. `"sex=Female"`.
-
 -   **Use ggplot2 functions:** Each **ggsurvfit** add-on function
     (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is
     written as a proper ggplot2 ‘geom’, meaning that the package
-    functions can be woven with ggplot2 functions seamlessly.
+    functions can be woven with ggplot2 functions seamlessly. You don’t
+    need to learn how to style the plot within the ggsurvfit functions:
+    you may rely on the suite ggplot2 functions you have already
+    learned.
+
+-   **Publishable Legends:** Raw variable names do not appear in the
+    figure legend, e.g. `"sex=Female"`.
 
 -   **Limitless Customization:** You can modify the x-axis scales or any
     other plot feature and the risk table will still align with the
