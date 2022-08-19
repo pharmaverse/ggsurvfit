@@ -18,13 +18,21 @@
 #' @name survfit2_p
 #'
 #' @examples
+#' library(ggplot2)
+#'
 #' sf <- survfit2(Surv(time, status) ~ sex, data = df_lung)
 #'
 #' sf %>%
 #'   ggsurvfit() +
 #'   add_confidence_interval() +
 #'   add_risktable() +
-#'   ggplot2::labs(caption = glue::glue("Log-rank {survfit2_p(sf)}"))
+#'   labs(caption = glue::glue("Log-rank {survfit2_p(sf)}"))
+#'
+#' sf %>%
+#'   ggsurvfit() +
+#'   add_confidence_interval() +
+#'   add_risktable() +
+#'   annotate("text", x = 2, y = 0.05, label = glue::glue("{survfit2_p(sf)}"))
 NULL
 
 #' @export

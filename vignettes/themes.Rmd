@@ -27,15 +27,13 @@ library(ggsurvfit)
 library(ggplot2)
 library(patchwork)
 
-km_estimate_sex <- survfit2(Surv(time, status) ~ sex, data = df_lung)
-
 gg_theme_default1 <- 
-  km_estimate_sex %>%
+  survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(theme = theme_ggsurvfit_default()) +
   labs(title = "Using `theme=` argument")
 
 gg_theme_default2 <- 
-  km_estimate_sex %>%
+  survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(theme = NULL) +
   theme_ggsurvfit_default() +
   labs(title = "Using ggplot `+`")
@@ -48,7 +46,7 @@ You can easily apply any user-created theme or any theme that exported with the 
 To construct a custom theme, include ggplot2 calls in a list as in the example below.
 
 ```{r}
-km_estimate_sex %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(theme = list(theme_classic(), theme(legend.position = "top"))) +
   labs(title = "Custom Plot Theme")
 ```
@@ -62,7 +60,7 @@ Each risk table that is placed below a plot is itself a ggplot created with `ggp
 Unlike the plot themes, the risk table themes can only be passed via `add_risktable(theme=)`.
 
 ```{r}
-km_estimate_sex %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_risktable(
     risktable_stats = "n.risk",
@@ -76,7 +74,7 @@ In the risk table above, the strata levels are y-axis labels, and "At Risk" is t
 Another risk table theme adds a box around the statistics presented.
 
 ```{r}
-km_estimate_sex %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_risktable(
     risktable_stats = "n.risk",
@@ -87,7 +85,7 @@ km_estimate_sex %>%
 It's possible to replace the stratum levels with a symbol, which is particularly helpful when you have long group labels.
 
 ```{r}
-km_estimate_sex %>%
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_risktable(risktable_stats = "n.risk") +
   add_risktable_strata_symbol()

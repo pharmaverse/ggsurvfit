@@ -85,11 +85,11 @@
     stat_n <- length(risktable_stats)
 
   -0.07383 +
-    0.09950 * group_n +
-    0.01949 * stat_n +
-    0.03547 * as.numeric(group_n > 1) +
-    0.01517 * group_n * stat_n
-
+      0.03500 * (group_n == 1 & risktable_group == "risktable_stats") +
+      0.09950 * group_n +
+      0.01949 * stat_n +
+      0.03547 * as.numeric(group_n > 1) +
+      0.01517 * group_n * stat_n
 }
 
 # this function returns a named list
