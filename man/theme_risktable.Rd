@@ -10,6 +10,9 @@ theme_risktable_default()
 
 theme_risktable_boxed()
 }
+\value{
+a ggplot2 figure
+}
 \description{
 Returns ggplot list of calls defining a theme meant to be applied to a risk table.
 }

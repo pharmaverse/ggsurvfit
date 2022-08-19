@@ -44,7 +44,7 @@
 #' Most functions in the package work with both `survfit2()` and `survfit()`;
 #' however, the output will be styled in a preferable format with `survfit2()`.
 #'
-#' @return surfit2 object
+#' @return survfit2 object
 #' @export
 #'
 #' @seealso [`survival::survfit.formula()`]

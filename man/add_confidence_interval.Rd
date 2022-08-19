@@ -17,7 +17,7 @@ Must be one of \code{c("ribbon", "lines")}}
 }}
 }
 \value{
-a ggplot
+a ggplot2 figure
 }
 \description{
 Add a confidence interval represented by either a ribbon or lines.

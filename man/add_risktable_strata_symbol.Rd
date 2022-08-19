@@ -22,7 +22,7 @@ While a symbol is the most common string to pass here, any string is acceptable.
 to style the symbol}
 }
 \value{
-a ggplot
+a ggplot2 figure
 }
 \description{
 Use Symbol for Strata in Risk Table

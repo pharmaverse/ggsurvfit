@@ -32,7 +32,7 @@ will be a mix a various line types for each stratum.}
 \item{...}{arguments passed to \code{ggplot2::geom_step(...)}, e.g. \code{size = 2}}
 }
 \value{
-a ggplot
+a ggplot2 figure
 }
 \description{
 Plot Survival Probability

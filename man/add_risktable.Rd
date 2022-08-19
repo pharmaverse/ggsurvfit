@@ -53,6 +53,9 @@ in the risk table across groups. Default is \code{FALSE}}
 \item{...}{arguments passed to \code{ggplot2::geom_text(...)}. Pass arguments like, \code{size = 3}
 to increase the size of the statistics presented in the table.}
 }
+\value{
+a ggplot2 figure
+}
 \description{
 Add risk tables below the plot showing the number at risk, events observed, and
 number of censored observations.

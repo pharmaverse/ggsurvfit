@@ -10,6 +10,9 @@ theme_ggsurvfit_default()
 
 theme_ggsurvfit_KMunicate()
 }
+\value{
+a ggplot2 theme
+}
 \description{
 Returns ggplot list of calls defining a theme.
 }
