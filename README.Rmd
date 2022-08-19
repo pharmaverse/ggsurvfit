@@ -61,10 +61,14 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   add_confidence_interval() +
   add_risktable() +
   add_quantile(y_value = 0.6, color = "gray50", size = 0.75) +
+  
   # use ggplot2 functions to style the plot and update the labels --------------
+  # limit plot to show 8 years and less
+  coord_cartesian(xlim = c(0, 8)) +
+  # update figure labels/titles
   labs(
     y = "Percentage survival",
-    title = "Recurrence by Time Since Surgery",
+    title = "Recurrence by Time Since Surgery to Randomization",
   ) +
   # reduce padding on edges of figure, and format axes
   scale_y_continuous(label = scales::percent, 
