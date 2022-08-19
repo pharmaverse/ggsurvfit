@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
-[![CRAN status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit) -->
 <!-- badges: end -->
 
 ## Introduction
@@ -39,7 +39,13 @@ Competing risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Installation
 
-You can install the development version of **ggsurvfit** from [GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
+Install **ggsurvfit** from CRAN with:
+
+```r
+install.packages("ggsurvfit")
+```
+
+You can install the development version from [GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
 
 ``` r
 # install.packages("devtools")

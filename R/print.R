@@ -3,12 +3,12 @@
 #' @param x an object of class 'ggsurvfit'
 #' @inheritParams rlang::args_dots_empty
 #'
-#' @return a printed ggplot
+#' @return a printed ggplot2 figure
 #' @name print_ggsurvfit
 #' @keywords internal
 #'
 #' @examples
-#' # add example
+#' print(survfit2(Surv(time, status) ~ surg, data = df_colon))
 NULL
 
 #' @export
@@ -40,19 +40,9 @@ print.ggsurvfit <- function(x, ...) {
 
 #' @export
 #' @rdname print_ggsurvfit
-knit_print.ggsurvfit <- function(x, ...) {
-  print(x, ...)
-}
-
-#' @export
-#' @rdname print_ggsurvfit
 print.ggcuminc <- function(x, ...) {
-  # print and return object
+  # print nd return object
   print.ggsurvfit(x)
 }
 
-#' @export
-#' @rdname print_ggsurvfit
-knit_print.ggcuminc <- function(x, ...) {
-  print(x, ...)
-}
+

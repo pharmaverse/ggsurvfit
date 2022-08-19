@@ -30,6 +30,7 @@
 #' to increase the size of the statistics presented in the table.
 #'
 #' @export
+#' @return a ggplot2 figure
 #' @examples
 #' library(ggplot2)
 #'

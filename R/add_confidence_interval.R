@@ -8,7 +8,7 @@
 #' - `type = 'ribbon'`: Defaults are `ggplot2::geom_ribbon(alpha = 0.2, color = NA, ...)`
 #' - `type = 'lines'`: Defaults are `ggplot2::geom_step(linetype = "dashed", na.rm = TRUE, ...)`
 #'
-#' @return a ggplot
+#' @return a ggplot2 figure
 #' @export
 #'
 #' @examples

@@ -12,7 +12,7 @@ add_quantile(y_value = 0.5, ...)
 \item{...}{Named arguments passed to \code{ggplot2::geom_segment()} with default \code{linetype = 2}}
 }
 \value{
-a ggplot
+a ggplot2 figure
 }
 \description{
 Add quantile information to the plot.

@@ -22,7 +22,7 @@
 #'   geom_step()
 #' ```
 #'
-#' @return a ggplot
+#' @return a ggplot2 figure
 #' @export
 #'
 #' @examples

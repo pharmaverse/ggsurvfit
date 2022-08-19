@@ -3,18 +3,12 @@
 \name{print_ggsurvfit}
 \alias{print_ggsurvfit}
 \alias{print.ggsurvfit}
-\alias{knit_print.ggsurvfit}
 \alias{print.ggcuminc}
-\alias{knit_print.ggcuminc}
 \title{Print ggsurvfit object}
 \usage{
 \method{print}{ggsurvfit}(x, ...)
 
-knit_print.ggsurvfit(x, ...)
-
 \method{print}{ggcuminc}(x, ...)
-
-knit_print.ggcuminc(x, ...)
 }
 \arguments{
 \item{x}{an object of class 'ggsurvfit'}
@@ -22,12 +16,12 @@ knit_print.ggcuminc(x, ...)
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
-a printed ggplot
+a printed ggplot2 figure
 }
 \description{
 Print ggsurvfit object
 }
 \examples{
-# add example
+print(survfit2(Surv(time, status) ~ surg, data = df_colon))
 }
 \keyword{internal}
