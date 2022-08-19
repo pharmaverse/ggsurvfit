@@ -37,7 +37,7 @@ df_colon <-
       factor(
         surg,
         levels = 0:1,
-        labels = c("Short", "Long")
+        labels = c("Limited Time Since Surgery", "Extended Time Since Surgery")
       )
   ) %>%
   dplyr::as_tibble()
