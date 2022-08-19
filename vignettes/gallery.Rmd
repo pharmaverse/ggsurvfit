@@ -27,6 +27,7 @@ library(patchwork)
 Let's begin with showing the default plot and common modifications that are made with ggplot2 functions.
 
 - Expand axis to show probabilities from 0% to 100%
+- Limit plot to show up to 8 years of follow-up
 - Add the percent sign to the y-axis label
 - Reduce padding in the plot area around the curves
 - Add additional tick marks on the x-axis
@@ -43,6 +44,7 @@ gg_default <-
 
 gg_styled <-
   gg_default +
+  coord_cartesian(xlim = c(0, 8)) +
   scale_y_continuous(
     limits = c(0, 1),
     labels = scales::percent, 
