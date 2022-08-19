@@ -63,7 +63,7 @@ survfit2(formula, ...)
   }}
 }
 \value{
-surfit2 object
+survfit2 object
 }
 \description{
 Simple wrapper for \code{survival::survfit.formula()} except the environment is also

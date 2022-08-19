@@ -5,7 +5,7 @@
 #' @param y_value Numeric value where the line segment will be drawn. Default is `0.5`
 #' @param ... Named arguments passed to `ggplot2::geom_segment()` with default `linetype = 2`
 #'
-#' @return a ggplot
+#' @return a ggplot2 figure
 #' @export
 #'
 #' @examples

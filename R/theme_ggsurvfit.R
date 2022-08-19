@@ -3,6 +3,7 @@
 #' @description
 #' Returns ggplot list of calls defining a theme.
 #'
+#' @return a ggplot2 theme
 #' @name theme_ggsurvfit
 #' @examples
 #' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%

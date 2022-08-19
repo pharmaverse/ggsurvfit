@@ -8,6 +8,8 @@
 #' @param direction `hv` for horizontal-vertical steps, `vh` for
 #'   vertical-horizontal steps
 #' @references [https://groups.google.com/forum/?fromgroups=#!topic/ggplot2/9cFWHaH1CPs]()
+#'
+#' @return a ggplot2 figure
 #' @examples
 #' library(ggplot2)
 #'

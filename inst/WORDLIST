@@ -17,7 +17,6 @@ behaviour
 cuminc
 geoms
 geom’
-gghighlight
 ggplot
 grey
 neoadjuvant
@@ -27,11 +26,10 @@ randomisation
 risktable
 roundoff
 stairstep
-surfit
 survfit
 tablemab
 tibble
 tidycmprsk
+tidycuminc
 unremarkably
-unstratified
 vismab

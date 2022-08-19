@@ -7,7 +7,7 @@
 #' @param size,face,vjust,... arguments passed to `ggtext::element_markdown()`
 #' to style the symbol
 #'
-#' @return a ggplot
+#' @return a ggplot2 figure
 #' @export
 #'
 #' @examples
