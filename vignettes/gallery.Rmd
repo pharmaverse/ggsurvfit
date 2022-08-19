@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The gallery exhibits the default plots as well as many modifications one can make.
+The gallery exhibits both default plots as well as the many modifications one can make.
 
 ```{r setup}
 library(ggsurvfit)
@@ -26,7 +26,7 @@ library(patchwork)
 
 Let's begin with showing the default plot and common modifications that are made with ggplot2 functions.
 
-- Expand axis to show probabilities from 0% to 100%
+- Expand axis to show percentages from 0% to 100%
 - Limit plot to show up to 8 years of follow-up
 - Add the percent sign to the y-axis label
 - Reduce padding in the plot area around the curves
@@ -55,7 +55,8 @@ gg_styled <-
   scale_fill_manual(values = c('#54738E', '#82AC7C')) +
   theme_minimal() +
   theme(legend.position = "top") +
-  labs(title = "Modified")
+  labs(title = "Modified",
+       y = "Percentage Survival")
 
 gg_default + gg_styled
 ```
