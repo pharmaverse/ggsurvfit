@@ -13,7 +13,7 @@ ggcuminc(
 )
 }
 \arguments{
-\item{x}{a 'survfit' object}
+\item{x}{a 'tidycuminc' object}
 
 \item{outcome}{string indicating which outcome to include in plot.
 Default is to include the first competing event.}
@@ -30,7 +30,7 @@ will be a mix a various line types for each stratum.}
 a ggplot
 }
 \description{
-Plot Cumulative Incidence
+Plot a cumulative incidence object created with \code{tidycmprsk::cuminc()}.
 }
 \examples{
 library(tidycmprsk)
