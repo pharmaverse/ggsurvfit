@@ -54,7 +54,8 @@ gg_styled <-
   scale_color_manual(values = c('#54738E', '#82AC7C')) +
   scale_fill_manual(values = c('#54738E', '#82AC7C')) +
   theme_minimal() +
-  theme(legend.position = "top") +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 1)) +
   labs(title = "Modified")
 
 gg_default + gg_styled
