@@ -31,7 +31,7 @@ Competing risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Why ggsurvfit?
 
-- **Use ggplot2 functions:** Each **ggsurvfit** add-on function (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is written as a proper ggplot2 'geom', meaning that the package functions can be woven with ggplot2 functions seamlessly. You don't need to learn how to style the plot within the ggsurvfit functions: you may rely on the suite ggplot2 functions you have already learned.
+- **Use ggplot2 functions:** Each **ggsurvfit** add-on function (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is written as a proper ggplot2 ['geom'](https://ggplot2.tidyverse.org/reference/index.html), meaning that the package functions can be woven with ggplot2 functions seamlessly. You don't need to learn how to style the plot within the ggsurvfit functions: you may rely on the suite ggplot2 functions you have already learned.
 
 - **Publishable Legends:** Raw variable names do not appear in the figure legend, e.g. `"sex=Female"`.
 
@@ -63,7 +63,7 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   add_quantile(y_value = 0.6, color = "gray50", size = 0.75) +
   # use ggplot2 functions to style the plot and update the labels --------------
   labs(
-    y = "Probability of survival",
+    y = "Percentage survival",
     title = "Recurrence by Time Since Surgery",
   ) +
   # reduce padding on edges of figure, and format axes
