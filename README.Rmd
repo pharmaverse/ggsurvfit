@@ -108,7 +108,7 @@ knitr::knit_exit()
 dplyr::tribble(
   ~Package,             ~CRAN, ~`Risk Table`,
   "survminer",          "X",   "X",
-  "`galley::ggsurv()`", "X",   "",
+  "`GGally::ggsurv()`", "X",   "",
   "ggfortify",          "X",   "",
   "visR",               "X",   "X",
   "iwillsurvive",       "",    "X",
