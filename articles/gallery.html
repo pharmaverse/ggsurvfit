@@ -93,6 +93,7 @@
 <p>Let’s begin with showing the default plot and common modifications that are made with ggplot2 functions.</p>
 <ul>
 <li>Expand axis to show probabilities from 0% to 100%</li>
+<li>Limit plot to show up to 8 years of follow-up</li>
 <li>Add the percent sign to the y-axis label</li>
 <li>Reduce padding in the plot area around the curves</li>
 <li>Add additional tick marks on the x-axis</li>
@@ -109,6 +110,7 @@
 <span></span>
 <span><span class="va">gg_styled</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">gg_default</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span></span>
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span>, </span>
