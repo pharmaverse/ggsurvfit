@@ -108,7 +108,19 @@ however, the output will be styled in a preferable format with \code{survfit2()}
 }
 
 \examples{
-survfit2(Surv(time, status) ~ sex, data = df_lung)
+# With `survfit()`
+fit <- survfit(Surv(time, status) ~ sex, data = df_lung)
+fit
+
+# With `survfit2()`
+fit2 <- survfit2(Surv(time, status) ~ sex, data = df_lung)
+fit2
+
+# Consistent behaviour with other functions
+fit \%>\% tidy_survfit()
+
+fit2 \%>\% tidy_survfit()
+
 }
 \seealso{
 \code{\link[survival:survfit.formula]{survival::survfit.formula()}}

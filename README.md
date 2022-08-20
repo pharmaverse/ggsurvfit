@@ -76,11 +76,7 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   coord_cartesian(xlim = c(0, 8)) +
   # update figure labels/titles
   labs(
-<<<<<<< HEAD
-    y = "Percentage survival",
-=======
-    y = "Probability of survival",
->>>>>>> 4f85983149afe492c31f56e7facc3936b0f6bdb3
+    y = "Percentage Survival",
     title = "Recurrence by Time Since Surgery to Randomization",
   ) +
   # reduce padding on edges of figure, and format axes
