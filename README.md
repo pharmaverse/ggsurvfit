@@ -76,9 +76,9 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   # update figure labels/titles
   labs(
     y = "Probability of survival",
-    title = "Recurrence by Time Since Surgery to Randomization",
+    title = "Recurrence by Time From Surgery to Randomization",
   ) +
-  # reduce padding on edges of figure, and format axes
+  # reduce padding on edges of figure and format axes
   scale_y_continuous(label = scales::percent, 
                      breaks = seq(0, 1, by = 0.2),
                      expand = c(0.015, 0)) +
