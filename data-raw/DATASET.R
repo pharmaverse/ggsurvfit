@@ -6,7 +6,7 @@ df_colon <-
   dplyr::mutate(
     rx = factor(rx,
                 levels = c("Obs", "Lev", "Lev+5FU"),
-                labels = c("Observation", " Levamisole", "Levamisole+5-FU")),
+                labels = c("Observation", "Levamisole", "Levamisole+5-FU")),
     sex = factor(sex, levels = 0:1, labels = c("Female", "Male")),
     obstruct =
       factor(
