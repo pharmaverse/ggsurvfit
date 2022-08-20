@@ -57,10 +57,10 @@
 #' fit2 <- survfit2(Surv(time, status) ~ sex, data = df_lung)
 #' fit2
 #'
-#' # Consistent behaviour with other functions
-#' fit %>% tidy_survfit()
+#' # Consistent behavior with other functions
+#' summary(fit, times = c(10, 20))
 #'
-#' fit2 %>% tidy_survfit()
+#' summary(fit2, times = c(10, 20))
 #'
 survfit2 <- function(formula, ...) {
   if (missing(formula)) {
