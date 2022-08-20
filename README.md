@@ -10,8 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit) -->
 <!-- badges: end -->
 
 ## Introduction
@@ -41,7 +40,13 @@ risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Installation
 
-You can install the development version of **ggsurvfit** from
+Install **ggsurvfit** from CRAN with:
+
+``` r
+install.packages("ggsurvfit")
+```
+
+You can install the development version from
 [GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
 
 ``` r
@@ -71,7 +76,11 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   coord_cartesian(xlim = c(0, 8)) +
   # update figure labels/titles
   labs(
+<<<<<<< HEAD
     y = "Percentage survival",
+=======
+    y = "Probability of survival",
+>>>>>>> 4f85983149afe492c31f56e7facc3936b0f6bdb3
     title = "Recurrence by Time Since Surgery to Randomization",
   ) +
   # reduce padding on edges of figure, and format axes

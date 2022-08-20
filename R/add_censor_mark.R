@@ -3,7 +3,7 @@
 #' @param ... arguments passed to passed to
 #' `ggplot2::geom_point(...)` with defaults `shape = 3` and `size = 2`
 #'
-#' @return a ggplot
+#' @return a ggplot2 figure
 #' @export
 #'
 #' @examples

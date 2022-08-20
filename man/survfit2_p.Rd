@@ -39,13 +39,8 @@ a scalar parameter that controls the type of test.
 a string
 }
 \description{
-EXPERIMENTAL! Will likely change or perhaps even disappear.
-
 The function \code{survfit2_p()} wraps \code{survival::survdiff()} and returns
 a formatted p-value.
-
-Functions \code{logrank()} and \code{p_logrank()} are helper functions that
-return the p-value from a the log-rank test with or without the "p" pre-pended.
 }
 \examples{
 library(ggplot2)

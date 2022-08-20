@@ -8,7 +8,7 @@
 #' @inheritParams ggsurvfit
 #' @inheritParams tidy_cuminc
 #'
-#' @return a ggplot
+#' @return a ggplot2 figure
 #' @export
 #'
 #' @examples

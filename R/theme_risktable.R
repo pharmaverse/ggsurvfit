@@ -4,6 +4,7 @@
 #' Returns ggplot list of calls defining a theme meant to be applied to a risk table.
 #'
 #' @name theme_risktable
+#' @return a ggplot2 figure
 #' @examples
 #' p <- survfit2(Surv(time, status) ~ 1, data = df_lung) %>% ggsurvfit()
 #'

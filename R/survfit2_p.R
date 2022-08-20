@@ -1,13 +1,7 @@
 #' Calculate p-value
 #'
-#' @description
-#' EXPERIMENTAL! Will likely change or perhaps even disappear.
-#'
 #' The function `survfit2_p()` wraps `survival::survdiff()` and returns
 #' a formatted p-value.
-#'
-#' Functions `logrank()` and `p_logrank()` are helper functions that
-#' return the p-value from a the log-rank test with or without the "p" pre-pended.
 #'
 #' @param x a 'survfit2' object
 #' @param pvalue_fun function to round and style p-value with

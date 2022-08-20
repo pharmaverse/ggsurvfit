@@ -11,7 +11,7 @@ add_censor_mark(...)
 \code{ggplot2::geom_point(...)} with defaults \code{shape = 3} and \code{size = 2}}
 }
 \value{
-a ggplot
+a ggplot2 figure
 }
 \description{
 Add Censor Marking

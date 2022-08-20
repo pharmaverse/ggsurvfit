@@ -11,7 +11,7 @@ NULL
 #' @rdname deprecated
 survfit_pvalue <- function(...) {
   cli_abort(c(
-    "!" = "The {.code survfit_pvalue()} function was a part of the pre-release and is now {.emph} deprecated.",
+    "!" = "The {.code survfit_pvalue()} function was a part of the pre-release and is now {.emph deprecated}.",
     "i" = "Use {.code survfit2_p()} instead."
   ))
 }
