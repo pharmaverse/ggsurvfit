@@ -25,11 +25,12 @@ risks cumulative incidence is also supported via `ggcuminc()`.
 
 -   **Use ggplot2 functions:** Each **ggsurvfit** add-on function
     (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is
-    written as a proper ggplot2 ‘geom’, meaning that the package
-    functions can be woven with ggplot2 functions seamlessly. You don’t
-    need to learn how to style the plot within the ggsurvfit functions:
-    you may rely on the suite ggplot2 functions you have already
-    learned.
+    written as a proper ggplot2
+    [‘geom’](https://ggplot2.tidyverse.org/reference/index.html),
+    meaning that the package functions can be woven with ggplot2
+    functions seamlessly. You don’t need to learn how to style the plot
+    within the ggsurvfit functions: you may rely on the suite ggplot2
+    functions you have already learned.
 
 -   **Publishable Legends:** Raw variable names do not appear in the
     figure legend, e.g. `"sex=Female"`.
@@ -64,10 +65,14 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   add_confidence_interval() +
   add_risktable() +
   add_quantile(y_value = 0.6, color = "gray50", size = 0.75) +
+  
   # use ggplot2 functions to style the plot and update the labels --------------
+  # limit plot to show 8 years and less
+  coord_cartesian(xlim = c(0, 8)) +
+  # update figure labels/titles
   labs(
-    y = "Probability of survival",
-    title = "Recurrence by Time Since Surgery",
+    y = "Percentage survival",
+    title = "Recurrence by Time Since Surgery to Randomization",
   ) +
   # reduce padding on edges of figure, and format axes
   scale_y_continuous(label = scales::percent, 
@@ -89,9 +94,10 @@ called, resulting in the following benefits.
     legend, e.g. `SEX=Female`.
 -   P-values can be calculated with `survfit_p()` and added to figures.
 -   The items above are often *possible* using `survfit()`. However, by
-    utilizing the calling environment we are assured the correct
-    elements are found, rather than crossing our fingers that the search
-    path contains the needed elements.
+    utilizing the calling
+    [environment](https://adv-r.hadley.nz/environments.html) we are
+    assured the correct elements are found, rather than crossing our
+    fingers that the search path contains the needed elements.
 
 ## CDISC ADaM ADTTE
 
