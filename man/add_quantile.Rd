@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_quantile.R
 \name{add_quantile}
 \alias{add_quantile}
-\title{Add Quantile}
+\title{Add Quantile annotations}
 \usage{
 add_quantile(y_value = 0.5, ...)
 }
@@ -15,7 +15,7 @@ add_quantile(y_value = 0.5, ...)
 a ggplot2 figure
 }
 \description{
-Add quantile information to the plot.
+Add quantile information annotated on to the plot.
 }
 \examples{
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
