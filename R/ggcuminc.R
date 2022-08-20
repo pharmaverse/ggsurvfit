@@ -3,7 +3,7 @@
 #' Plot a cumulative incidence object created with `tidycmprsk::cuminc()`.
 #'
 #' @param x a 'tidycuminc' object
-#' @param outcome string indicating which outcome to include in plot.
+#' @param outcome string indicating which outcome(s) to include in plot.
 #' Default is to include the first competing event.
 #' @inheritParams ggsurvfit
 #' @inheritParams tidy_cuminc
@@ -17,6 +17,11 @@
 #' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
 #'   ggcuminc(outcome = "death from cancer") +
 #'   add_confidence_interval() +
+#'   add_risktable()
+#'
+#'
+#' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
+#'   ggcuminc(outcome = c("death from cancer", "death other causes")) +
 #'   add_risktable()
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
@@ -37,7 +42,6 @@ ggcuminc <- function(x, outcome = NULL,
     outcome <- df$outcome[1]
     cli_inform("Plotting outcome {.val {outcome}}.")
   }
-  # if (!rlang::is_string(outcome) || !outcome %in% unique(df$outcome)) {
   if (any(!outcome %in% unique(df$outcome))) {
     cli_abort("Argument {.code outcome} must be in {.val {unique(df$outcome)}}")
   }

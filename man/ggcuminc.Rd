@@ -15,7 +15,7 @@ ggcuminc(
 \arguments{
 \item{x}{a 'tidycuminc' object}
 
-\item{outcome}{string indicating which outcome to include in plot.
+\item{outcome}{string indicating which outcome(s) to include in plot.
 Default is to include the first competing event.}
 
 \item{linetype_aes}{logical indicating whether to add \code{ggplot2::aes(linetype = strata)}
