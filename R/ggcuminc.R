@@ -18,6 +18,14 @@
 #'   ggcuminc(outcome = "death from cancer") +
 #'   add_confidence_interval() +
 #'   add_risktable()
+#'
+#' # Changing the outcome variable and theme
+#' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
+#'   ggcuminc(outcome = "death other causes",
+#'            theme = theme_ggsurvfit_KMunicate()) +
+#'   add_confidence_interval() +
+#'   add_risktable() +
+#'   labs(title = "Death from other causes")
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
                      theme = theme_ggsurvfit_default(), ...) {
