@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_quantile.R
 \name{add_quantile}
 \alias{add_quantile}
-\title{Add Quantile annotations}
+\title{Add Quantile Annotation}
 \usage{
 add_quantile(y_value = 0.5, ...)
 }

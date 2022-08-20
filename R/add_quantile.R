@@ -1,4 +1,4 @@
-#' Add Quantile annotations
+#' Add Quantile Annotation
 #'
 #' Add quantile information annotated on to the plot.
 #'
