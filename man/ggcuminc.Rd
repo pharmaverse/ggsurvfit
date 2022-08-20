@@ -46,5 +46,5 @@ cuminc(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
            theme = theme_ggsurvfit_KMunicate()) +
   add_confidence_interval() +
   add_risktable() +
-  labs(title = "Death from other causes")
+  ggplot2::labs(title = "Death from other causes")
 }
