@@ -19,10 +19,10 @@
 #'   add_confidence_interval() +
 #'   add_risktable()
 #'
-#'
 #' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
 #'   ggcuminc(outcome = c("death from cancer", "death other causes")) +
 #'   add_risktable()
+
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
                      theme = theme_ggsurvfit_default(), ...) {

@@ -31,7 +31,7 @@ Competing risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Why ggsurvfit?
 
-- **Use ggplot2 functions:** Each **ggsurvfit** add-on function (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is written as a proper ggplot2 'geom', meaning that the package functions can be woven with ggplot2 functions seamlessly. You don't need to learn how to style the plot within the ggsurvfit functions: you may rely on the suite ggplot2 functions you have already learned.
+- **Use ggplot2 functions:** Each **ggsurvfit** add-on function (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is written as a proper ggplot2 ['geom'](https://ggplot2.tidyverse.org/reference/index.html), meaning that the package functions can be woven with ggplot2 functions seamlessly. You don't need to learn how to style the plot within the ggsurvfit functions: you may rely on the suite ggplot2 functions you have already learned.
 
 - **Publishable Legends:** Raw variable names do not appear in the figure legend, e.g. `"sex=Female"`.
 
@@ -73,7 +73,7 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   coord_cartesian(xlim = c(0, 8)) +
   # update figure labels/titles
   labs(
-    y = "Probability of survival",
+    y = "Percentage Survival",
     title = "Recurrence by Time From Surgery to Randomization",
   ) +
   # reduce padding on edges of figure and format axes
@@ -91,7 +91,7 @@ The `survfit2()` tracks the environment from which the function was called, resu
 
   - We can reliably remove the raw variable names from the figure legend, e.g. `SEX=Female`.
   - P-values can be calculated with `survfit_p()` and added to figures.
-  - The items above are often *possible* using `survfit()`. However, by utilizing the calling environment we are assured the correct elements are found, rather than crossing our fingers that the search path contains the needed elements.
+  - The items above are often *possible* using `survfit()`. However, by utilizing the calling [environment](https://adv-r.hadley.nz/environments.html) we are assured the correct elements are found, rather than crossing our fingers that the search path contains the needed elements.
 
 ## CDISC ADaM ADTTE
 
@@ -118,7 +118,7 @@ knitr::knit_exit()
 dplyr::tribble(
   ~Package,             ~CRAN, ~`Risk Table`,
   "survminer",          "X",   "X",
-  "`galley::ggsurv()`", "X",   "",
+  "`GGally::ggsurv()`", "X",   "",
   "ggfortify",          "X",   "",
   "visR",               "X",   "X",
   "iwillsurvive",       "",    "X",

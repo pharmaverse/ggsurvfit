@@ -1,6 +1,6 @@
-#' Add Quantile
+#' Add Quantile Annotation
 #'
-#' Add quantile information to the plot.
+#' Add quantile information annotated on to the plot.
 #'
 #' @param y_value Numeric value where the line segment will be drawn. Default is `0.5`
 #' @param ... Named arguments passed to `ggplot2::geom_segment()` with default `linetype = 2`

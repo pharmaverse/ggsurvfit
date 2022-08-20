@@ -49,7 +49,19 @@
 #'
 #' @seealso [`survival::survfit.formula()`]
 #' @examples
-#' survfit2(Surv(time, status) ~ sex, data = df_lung)
+#' # With `survfit()`
+#' fit <- survfit(Surv(time, status) ~ sex, data = df_lung)
+#' fit
+#'
+#' # With `survfit2()`
+#' fit2 <- survfit2(Surv(time, status) ~ sex, data = df_lung)
+#' fit2
+#'
+#' # Consistent behavior with other functions
+#' summary(fit, times = c(10, 20))
+#'
+#' summary(fit2, times = c(10, 20))
+#'
 survfit2 <- function(formula, ...) {
   if (missing(formula)) {
     cli::cli_abort("The {.code formula} argument cannot be missing.")
