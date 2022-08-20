@@ -133,16 +133,27 @@ cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidy
 
 
 test_that("add_quantile() works with ggcuminc()", {
-  lst_cuminc_quantile <-
-    expect_error(
+  expect_error(
+    lst_cuminc_quantile <-
       list(cuminc1, cuminc2, cuminc3) %>%
-        lapply(function(x) ggcuminc(x) + add_quantile()),
-      NA
-    )
+      lapply(function(x) ggcuminc(x) + add_quantile(y_value = 0.2)),
+    NA
+  )
 
   vdiffr::expect_doppelganger("cuminc1-quantile", lst_cuminc_quantile[[1]])
   vdiffr::expect_doppelganger("cuminc2-quantile", lst_cuminc_quantile[[2]])
   vdiffr::expect_doppelganger("cuminc3-quantile", lst_cuminc_quantile[[3]])
 
+
+  expect_error(
+    lst_cuminc_quantile_outcomes <-
+      list(cuminc1, cuminc2, cuminc3) %>%
+      lapply(function(x) ggcuminc(x, outcome = c("death from cancer", "death other causes")) + add_quantile(y_value = 0.2)),
+    NA
+  )
+
+  vdiffr::expect_doppelganger("cuminc1-quantile-all-outcomes", lst_cuminc_quantile_outcomes[[1]])
+  vdiffr::expect_doppelganger("cuminc2-quantile-all-outcomes", lst_cuminc_quantile_outcomes[[2]])
+  vdiffr::expect_doppelganger("cuminc3-quantile-all-outcomes", lst_cuminc_quantile_outcomes[[3]])
 })
 

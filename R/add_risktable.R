@@ -100,7 +100,6 @@ add_risktable <- function(times = NULL,
   )
 }
 
-
 StatBlankSurvfit <-
   ggplot2::ggproto(
     "StatBlankSurvfit", ggplot2::Stat,

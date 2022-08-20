@@ -42,5 +42,15 @@ test_that("add_censor_mark() works with ggcuminc()", {
   vdiffr::expect_doppelganger("cuminc1-censor_mark", lst_cuminc_censor_mark[[1]])
   vdiffr::expect_doppelganger("cuminc2-censor_mark", lst_cuminc_censor_mark[[2]])
   vdiffr::expect_doppelganger("cuminc3-censor_mark", lst_cuminc_censor_mark[[3]])
+
+  expect_error(
+    lst_cuminc_censor_mark_outcome <-
+      list(cuminc1, cuminc2, cuminc3) %>%
+      lapply(function(x) ggcuminc(x, outcome = c("death from cancer", "death other causes")) + add_censor_mark()),
+    NA
+  )
+  vdiffr::expect_doppelganger("cuminc1-censor_mark-all-outcomes", lst_cuminc_censor_mark_outcome[[1]])
+  vdiffr::expect_doppelganger("cuminc2-censor_mark-all-outcomes", lst_cuminc_censor_mark_outcome[[2]])
+  vdiffr::expect_doppelganger("cuminc3-censor_mark-all-outcomes", lst_cuminc_censor_mark_outcome[[3]])
 })
 

@@ -60,6 +60,14 @@ a ggplot2 figure
 Add risk tables below the plot showing the number at risk, events observed, and
 number of censored observations.
 }
+\section{\code{ggcuminc()}}{
+
+
+The \code{ggcuminc()} can plot multiple competing events.
+The \code{"cum.event"} and \code{"n.event"} statistics are the sum of all events across
+outcomes \emph{shown on the plot}.
+}
+
 \examples{
 library(ggplot2)
 
