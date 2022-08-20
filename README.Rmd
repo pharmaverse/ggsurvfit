@@ -115,14 +115,16 @@ knitr::knit_exit()
 ## Related Packages
 
 ```{r, echo=FALSE, size="tiny"}
+# add some kind indicator that we allow all ggplot2 modifications
 dplyr::tribble(
-  ~Package,             ~CRAN, ~`Risk Table`,
-  "survminer",          "X",   "X",
-  "`GGally::ggsurv()`", "X",   "",
-  "ggfortify",          "X",   "",
-  "visR",               "X",   "X",
-  "iwillsurvive",       "",    "X",
-  "KMunicate",          "X",   "X"
+  ~Package,             ~CRAN,    ~`Kaplan-Meier`, ~`Risk Table for Kaplan-Meier`, ~`Competing Risks`, ~`Risk Table for Competing Risks`,
+  "ggsurvfit",            "X",                "X",                            "X",                "X",                               "X",
+  "survminer",            "X",                "X",                            "X",                "X",                                "",
+  "KMunicate",            "X",                "X",                            "X",                 "",                                "",
+  "`GGally::ggsurv()`",   "X",                "X",                             "",                 "",                                "",
+  "ggfortify",            "X",                "X",                             "",                 "",                                "",
+  "visR",                 "X",                "X",                            "X",                "X",                               "X",
+  "iwillsurvive",          "",                "X",                            "X",                 "",                                ""
 ) %>%
   knitr::kable()
 ```
