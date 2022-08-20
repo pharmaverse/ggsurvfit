@@ -37,13 +37,14 @@ ggcuminc <- function(x, outcome = NULL,
     outcome <- df$outcome[1]
     cli_inform("Plotting outcome {.val {outcome}}.")
   }
-  if (!rlang::is_string(outcome) || !outcome %in% unique(df$outcome)) {
-    cli_abort("Argument {.code outcome} must be one of {.val {unique(df$outcome)}}")
+  # if (!rlang::is_string(outcome) || !outcome %in% unique(df$outcome)) {
+  if (any(!outcome %in% unique(df$outcome))) {
+    cli_abort("Argument {.code outcome} must be in {.val {unique(df$outcome)}}")
   }
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 
   # construct aes() call -------------------------------------------------------
-  aes_args <- .construct_aes(df, linetype_aes = linetype_aes)
+  aes_args <- .construct_aes(df, linetype_aes = linetype_aes, outcome = outcome)
 
   # construction ggplot object -------------------------------------------------
   gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)

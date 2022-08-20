@@ -83,7 +83,12 @@ ggsurvfit <- function(x, type = "survival",
     )
 }
 
-.construct_aes <- function(df, linetype_aes) {
+.construct_aes <- function(df, linetype_aes, outcome = NULL) {
+  if (!is.null(outcome) && length(outcome) > 1 && isTRUE(linetype_aes)) {
+    cli_abort("Cannot specify multiple outcomes with {.code linetype_aes=TRUE}.")
+  }
+
+  # setting aes() --------------------------------------------------------------
   aes_args <-
     list(
       x = rlang::expr(.data$time),
@@ -96,11 +101,20 @@ ggsurvfit <- function(x, type = "survival",
       fill = rlang::expr(.data$strata)
     ))
   }
+
+  # setting linetype -----------------------------------------------------------
+  if (!is.null(outcome) && length(outcome) > 1) {
+    aes_args <- c(aes_args, list(
+      linetype = rlang::expr(.data$outcome)
+    ))
+  }
   if (isTRUE(linetype_aes) && "strata" %in% names(df)) {
     aes_args <- c(aes_args, list(
       linetype = rlang::expr(.data$strata)
     ))
   }
+
+  # setting confidence interval ------------------------------------------------
   if ("conf.low" %in% names(df)) {
     aes_args <- c(aes_args, list(
       ymin = rlang::expr(.data$conf.low)
@@ -111,6 +125,8 @@ ggsurvfit <- function(x, type = "survival",
       ymax = rlang::expr(.data$conf.high)
     ))
   }
+
+  # setting censoring ----------------------------------------------------------
   if ("n.censor" %in% names(df)) {
     aes_args <- c(aes_args, list(
       censor_count = rlang::expr(.data$n.censor)
