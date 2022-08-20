@@ -26,9 +26,19 @@
 #' @export
 #'
 #' @examples
+#' # Default publication ready plot
 #' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit()
 #'
+#' # Changing statistic type
+#' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+#'   ggsurvfit(type = "cumhaz")
+#'
+#' # Configuring KM line type to vary by strata
+#' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+#'   ggsurvfit(linetype_aes = TRUE)
+#'
+#' # Customizing the plot to your needs
 #' survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
 #'   ggsurvfit() +
 #'   add_censor_mark() +

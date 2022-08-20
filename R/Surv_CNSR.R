@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' The aim of `Surv_CNSR()` is to map the inconsistency in convention between
+#' The aim of `Surv_CNSR()` is to map the inconsistency in data convention between
 #' the [survival](https://cran.r-project.org/package=survival) package and
 #' [CDISC ADaM ADTTE data model](https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0).
 #'

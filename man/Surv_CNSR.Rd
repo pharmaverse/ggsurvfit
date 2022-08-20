@@ -17,7 +17,7 @@ When no argument is passed, the default value is a column/vector named \code{CNS
 Object of class 'Surv'
 }
 \description{
-The aim of \code{Surv_CNSR()} is to map the inconsistency in convention between
+The aim of \code{Surv_CNSR()} is to map the inconsistency in data convention between
 the \href{https://cran.r-project.org/package=survival}{survival} package and
 \href{https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0}{CDISC ADaM ADTTE data model}.
 
