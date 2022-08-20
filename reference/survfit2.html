@@ -184,12 +184,53 @@ however, the output will be styled in a preferable format with <code>survfit2()<
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">survfit2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># With `survfit()`</span></span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fit</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call: survfit(formula = Surv(time, status) ~ sex, data = df_lung)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              n events median 0.95LCL 0.95UCL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sex=Male   138    112   8.87    6.97    10.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sex=Female  90     53  14.00   11.43    18.1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With `survfit2()`</span></span></span>
+<span class="r-in"><span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu">survfit2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fit2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: survfit(formula = formula, data = ..1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              n events median 0.95LCL 0.95UCL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex=Male   138    112   8.87    6.97    10.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex=Female  90     53  14.00   11.43    18.1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Consistent behavior with other functions</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call: survfit(formula = Surv(time, status) ~ sex, data = df_lung)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 sex=Male </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  time n.risk n.event survival std.err lower 95% CI upper 95% CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    10     44      76    0.423  0.0440        0.344        0.518</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    20     13      27    0.145  0.0353        0.090        0.234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 sex=Female </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  time n.risk n.event survival std.err lower 95% CI upper 95% CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    10     43      27    0.674  0.0523        0.579        0.785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    20     11      18    0.343  0.0634        0.239        0.493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit2</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call: survfit(formula = formula, data = ..1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 sex=Male </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  time n.risk n.event survival std.err lower 95% CI upper 95% CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    10     44      76    0.423  0.0440        0.344        0.518</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    20     13      27    0.145  0.0353        0.090        0.234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 sex=Female </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  time n.risk n.event survival std.err lower 95% CI upper 95% CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    10     43      27    0.674  0.0523        0.579        0.785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    20     11      18    0.343  0.0634        0.239        0.493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

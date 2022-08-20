@@ -82,7 +82,7 @@
 
     
     
-<p>The gallery exhibits the default plots as well as many modifications one can make.</p>
+<p>The gallery exhibits both default plots as well as the many modifications one can make.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/ggsurvfit" class="external-link">ggsurvfit</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -92,7 +92,7 @@
 </h2>
 <p>Let’s begin with showing the default plot and common modifications that are made with ggplot2 functions.</p>
 <ul>
-<li>Expand axis to show probabilities from 0% to 100%</li>
+<li>Expand axis to show percentages from 0% to 100%</li>
 <li>Limit plot to show up to 8 years of follow-up</li>
 <li>Add the percent sign to the y-axis label</li>
 <li>Reduce padding in the plot area around the curves</li>
@@ -122,7 +122,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Modified"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Modified"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Percentage Survival"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gg_default</span> <span class="op">+</span> <span class="va">gg_styled</span></span></code></pre></div>
 <p><img src="gallery_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
