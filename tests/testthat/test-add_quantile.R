@@ -146,8 +146,6 @@ test_that("add_quantile() works with ggcuminc()", {
 })
 
 test_that("add_quantile() works with ggcuminc() and multiple outcomes", {
-  skip_on_os("linux")
-
   expect_error(
     lst_cuminc_quantile_outcomes <-
       list(cuminc1, cuminc2, cuminc3) %>%

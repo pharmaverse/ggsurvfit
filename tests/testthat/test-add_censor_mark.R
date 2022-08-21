@@ -55,8 +55,6 @@ test_that("add_censor_mark() works with ggcuminc()", {
 })
 
 test_that("add_censor_mark() works with ggcuminc()", {
-  skip_on_os("linux")
-
   expect_error(
     lst_cuminc_censor_mark_outcome <-
       list(cuminc1, cuminc2, cuminc3) %>%

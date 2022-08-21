@@ -28,7 +28,6 @@ test_that("ggcuminc() works", {
 })
 
 test_that("ggcuminc() works with multiple outcomes", {
-  skip_on_os("linux")
   expect_error(
     lst_ggcuminc_outcomes <-
       list(cuminc1, cuminc2, cuminc3) %>%

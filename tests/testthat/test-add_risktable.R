@@ -135,8 +135,6 @@ test_that("add_risktable() works with ggcuminc()", {
 })
 
 test_that("add_risktable() works with ggcuminc() and multiple outcomes", {
-  skip_on_os("linux")
-
   expect_error(
     lst_cuminc_risktable_outcomes <-
       list(cuminc1, cuminc2, cuminc3) %>%
