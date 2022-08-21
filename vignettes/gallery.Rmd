@@ -103,13 +103,15 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   add_risktable()
 ```
 
-You can also group the risktable by the statistics rather than the stratum.
+You can also group the risk table by the statistics rather than the stratum.
+Let's also add additional time points where the statistics are reported.
 
 ```{r}
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
-  add_risktable(risktable_group = "risktable_stats")
+  add_risktable(risktable_group = "risktable_stats") +
+  scale_x_continuous(breaks = 0:9, limits = c(0, 1))
 ```
 
 Use `add_risktable_strata_symbol()` to replace long stratum labels with a color symbol.
