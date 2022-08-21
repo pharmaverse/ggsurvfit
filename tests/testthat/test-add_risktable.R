@@ -132,6 +132,10 @@ test_that("add_risktable() works with ggcuminc()", {
       lapply(function(x) (ggcuminc(x) + add_risktable(combine_groups = TRUE)) %>% print()),
     NA,
   )
+})
+
+test_that("add_risktable() works with ggcuminc() and multiple outcomes", {
+  skip_on_os("linux")
 
   expect_error(
     lst_cuminc_risktable_outcomes <-
@@ -142,8 +146,6 @@ test_that("add_risktable() works with ggcuminc()", {
   vdiffr::expect_doppelganger("cuminc1-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[1]])
   vdiffr::expect_doppelganger("cuminc2-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[2]])
   vdiffr::expect_doppelganger("cuminc3-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[3]])
-
-
 })
 
 test_that("add_risktable() throws messages", {
