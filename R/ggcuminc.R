@@ -3,7 +3,7 @@
 #' Plot a cumulative incidence object created with `tidycmprsk::cuminc()`.
 #'
 #' @param x a 'tidycuminc' object
-#' @param outcome string indicating which outcome to include in plot.
+#' @param outcome string indicating which outcome(s) to include in plot.
 #' Default is to include the first competing event.
 #' @inheritParams ggsurvfit
 #' @inheritParams tidy_cuminc
@@ -19,13 +19,10 @@
 #'   add_confidence_interval() +
 #'   add_risktable()
 #'
-#' # Changing the outcome variable and theme
 #' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
-#'   ggcuminc(outcome = "death other causes",
-#'            theme = theme_ggsurvfit_KMunicate()) +
-#'   add_confidence_interval() +
-#'   add_risktable() +
-#'   ggplot2::labs(title = "Death from other causes")
+#'   ggcuminc(outcome = c("death from cancer", "death other causes")) +
+#'   add_risktable()
+
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
                      theme = theme_ggsurvfit_default(), ...) {
@@ -43,15 +40,16 @@ ggcuminc <- function(x, outcome = NULL,
   # subset on outcome of interest ----------------------------------------------
   if (is.null(outcome)) {
     outcome <- df$outcome[1]
-    cli_inform("Plotting outcome {.val {outcome}}.")
+    if (!identical(Sys.getenv("TESTTHAT"), "true"))
+      cli_inform("Plotting outcome {.val {outcome}}.")
   }
-  if (!rlang::is_string(outcome) || !outcome %in% unique(df$outcome)) {
-    cli_abort("Argument {.code outcome} must be one of {.val {unique(df$outcome)}}")
+  if (any(!outcome %in% unique(df$outcome))) {
+    cli_abort("Argument {.code outcome} must be in {.val {unique(df$outcome)}}")
   }
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 
   # construct aes() call -------------------------------------------------------
-  aes_args <- .construct_aes(df, linetype_aes = linetype_aes)
+  aes_args <- .construct_aes(df, linetype_aes = linetype_aes, outcome = outcome)
 
   # construction ggplot object -------------------------------------------------
   gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)

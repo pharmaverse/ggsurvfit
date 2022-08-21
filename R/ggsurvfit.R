@@ -78,32 +78,48 @@ ggsurvfit <- function(x, type = "survival",
       ggplot2::labs(
         y = .default_y_axis_label(df),
         x = .default_x_axis_label(x),
+        color = NULL,
+        fill = NULL,
+        linetype = NULL,
         alt = paste("Plot illustrating",
                     shQuote(.default_y_axis_label(df), type = "sh"),
                     "created with the 'ggsurvfit' R package.")
-      ),
-      switch("strata" %in% names(df),
-             ggplot2::labs(
-               color = NULL,
-               fill = NULL,
-               linetype = NULL
-             )
       ),
       theme
     )
 }
 
-.construct_aes <- function(df, linetype_aes) {
+.construct_aes <- function(df, linetype_aes, outcome = NULL) {
+  if (!is.null(outcome) && length(outcome) > 1 && isTRUE(linetype_aes)) {
+    cli_abort("Cannot specify multiple outcomes with {.code linetype_aes=TRUE}.")
+  }
+
+  # setting aes() --------------------------------------------------------------
   aes_args <-
     list(
       x = rlang::expr(.data$time),
       y = rlang::expr(.data$estimate),
       is_ggsurvfit = TRUE
     )
+
+  if ("monotonicity_type" %in% names(df)) {
+    aes_args <- c(aes_args, list(
+      monotonicity_type = rlang::expr(.data$monotonicity_type)
+    ))
+  }
+
   if ("strata" %in% names(df)) {
     aes_args <- c(aes_args, list(
       color = rlang::expr(.data$strata),
       fill = rlang::expr(.data$strata)
+    ))
+  }
+
+  # setting linetype -----------------------------------------------------------
+  if (!is.null(outcome) && length(outcome) > 1) {
+    aes_args <- c(aes_args, list(
+      linetype = rlang::expr(.data$outcome),
+      outcome = rlang::expr(.data$outcome)
     ))
   }
   if (isTRUE(linetype_aes) && "strata" %in% names(df)) {
@@ -111,6 +127,8 @@ ggsurvfit <- function(x, type = "survival",
       linetype = rlang::expr(.data$strata)
     ))
   }
+
+  # setting confidence interval ------------------------------------------------
   if ("conf.low" %in% names(df)) {
     aes_args <- c(aes_args, list(
       ymin = rlang::expr(.data$conf.low)
@@ -121,6 +139,8 @@ ggsurvfit <- function(x, type = "survival",
       ymax = rlang::expr(.data$conf.high)
     ))
   }
+
+  # setting censoring ----------------------------------------------------------
   if ("n.censor" %in% names(df)) {
     aes_args <- c(aes_args, list(
       censor_count = rlang::expr(.data$n.censor)

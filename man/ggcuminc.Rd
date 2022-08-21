@@ -15,7 +15,7 @@ ggcuminc(
 \arguments{
 \item{x}{a 'tidycuminc' object}
 
-\item{outcome}{string indicating which outcome to include in plot.
+\item{outcome}{string indicating which outcome(s) to include in plot.
 Default is to include the first competing event.}
 
 \item{linetype_aes}{logical indicating whether to add \code{ggplot2::aes(linetype = strata)}
@@ -40,11 +40,7 @@ cuminc(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
   add_confidence_interval() +
   add_risktable()
 
-# Changing the outcome variable and theme
 cuminc(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
-  ggcuminc(outcome = "death other causes",
-           theme = theme_ggsurvfit_KMunicate()) +
-  add_confidence_interval() +
-  add_risktable() +
-  ggplot2::labs(title = "Death from other causes")
+  ggcuminc(outcome = c("death from cancer", "death other causes")) +
+  add_risktable()
 }
