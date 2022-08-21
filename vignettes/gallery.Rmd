@@ -33,7 +33,6 @@ Let's begin with showing the default plot and common modifications that are made
 - Add additional tick marks on the x-axis
 - Update color of the lines
 - Using the ggplot2 minimal theme
-- Move legend to the top of plot
 
 ```{r}
 gg_default <-
@@ -104,14 +103,15 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
 ```
 
 You can also group the risk table by the statistics rather than the stratum.
-Let's also add additional time points where the statistics are reported.
+Let's also add additional time points where the statistics are reported and extend the y axis.
 
 ```{r}
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
   add_risktable(risktable_group = "risktable_stats") +
-  scale_x_continuous(breaks = 0:9, limits = c(0, 1))
+  scale_x_continuous(breaks = 0:9) +
+  scale_y_continuous(limits = c(0, 1))
 ```
 
 Use `add_risktable_strata_symbol()` to replace long stratum labels with a color symbol.

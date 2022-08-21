@@ -7,7 +7,7 @@
 tidy_survfit(x, times = NULL, type = c("survival", "risk", "cumhaz"))
 }
 \arguments{
-\item{x}{a 'survfit' object}
+\item{x}{a 'survfit' object created with \code{survfit2()}}
 
 \item{times}{numeric vector of times. Default is \code{NULL},
 which returns all observed times.}

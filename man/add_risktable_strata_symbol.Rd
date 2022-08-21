@@ -18,14 +18,15 @@ replace strata level with. Default is a rectangle (\code{"\\U25AC"}).
 Other common options are circle (\code{"\\U25CF"}) and diamond (\code{"\\U25C6"}).
 While a symbol is the most common string to pass here, any string is acceptable.}
 
-\item{size, face, vjust, ...}{arguments passed to \code{ggtext::element_markdown()}
-to style the symbol}
+\item{size, face, vjust, ...}{arguments passed to a function similar to
+\code{ggtext::element_markdown()}}
 }
 \value{
 a ggplot2 figure
 }
 \description{
-Use Symbol for Strata in Risk Table
+Replace the stratum level names with a color symbol in the risk tables.
+Use this function when stratum level names are long.
 }
 \examples{
 p <-

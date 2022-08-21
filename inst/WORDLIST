@@ -21,7 +21,6 @@ ggplot
 grey
 neoadjuvant
 pathologic
-pre
 randomisation
 risktable
 roundoff
@@ -30,6 +29,5 @@ survfit
 tablemab
 tibble
 tidycmprsk
-tidycuminc
 unremarkably
 vismab

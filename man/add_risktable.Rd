@@ -60,7 +60,7 @@ a ggplot2 figure
 Add risk tables below the plot showing the number at risk, events observed, and
 number of censored observations.
 }
-\section{\code{ggcuminc()}}{
+\section{Competing Risks}{
 
 
 The \code{ggcuminc()} can plot multiple competing events.

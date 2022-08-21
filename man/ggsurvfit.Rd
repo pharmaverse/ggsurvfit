@@ -13,7 +13,7 @@ ggsurvfit(
 )
 }
 \arguments{
-\item{x}{a 'survfit' object}
+\item{x}{a 'survfit' object created with \code{survfit2()}}
 
 \item{type}{type of statistic to report. Default is \code{"survival"}.
 Must be one of the following:\tabular{ll}{
@@ -35,7 +35,9 @@ will be a mix a various line types for each stratum.}
 a ggplot2 figure
 }
 \description{
-Plot Survival Probability
+Plot survival probabilities (and other transformations) using the results
+from \code{survfit2()} or \code{survival::survfit()}; although, we recommend the former
+to have the best experience with the \strong{ggsurvfit} package.
 }
 \section{Details}{
 

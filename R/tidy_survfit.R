@@ -6,7 +6,7 @@
 #' survfit object is created with `survfit2()`.
 #' It's recommended to always use this function with `survfit2()`.
 #'
-#' @param x a 'survfit' object
+#' @param x a 'survfit' object created with `survfit2()`
 #' @param times numeric vector of times. Default is `NULL`,
 #' which returns all observed times.
 #' @param type type of statistic to report. Default is `"survival"`.

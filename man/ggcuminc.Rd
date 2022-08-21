@@ -13,7 +13,7 @@ ggcuminc(
 )
 }
 \arguments{
-\item{x}{a 'tidycuminc' object}
+\item{x}{a 'survfit' object created with \code{survfit2()}}
 
 \item{outcome}{string indicating which outcome(s) to include in plot.
 Default is to include the first competing event.}

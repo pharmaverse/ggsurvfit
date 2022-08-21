@@ -53,11 +53,14 @@ reference:
       - survfit2_p
       - format_p
 
+  - title: CDISC
+  - contents:
+      - Surv_CNSR
+
   - title: Utilities
   - contents:
       - tidy_survfit
       - tidy_cuminc
-      - Surv_CNSR
       - stat_stepribbon
 
   - title: Data
