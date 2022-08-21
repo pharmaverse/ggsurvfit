@@ -1,5 +1,9 @@
 #' Plot Survival Probability
 #'
+#' Plot survival probabilities (and other transformations) using the results
+#' from `survfit2()` or `survival::survfit()`; although, we recommend the former
+#' to have the best experience with the **ggsurvfit** package.
+#'
 #' @param theme a survfit theme. Default is `theme_ggsurvfit_default()`
 #' @param linetype_aes logical indicating whether to add `ggplot2::aes(linetype = strata)`
 #' to the `ggplot2::geom_step()` call. When strata are present, the resulting figure

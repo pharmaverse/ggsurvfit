@@ -2,7 +2,6 @@
 #'
 #' Plot a cumulative incidence object created with `tidycmprsk::cuminc()`.
 #'
-#' @param x a 'tidycuminc' object
 #' @param outcome string indicating which outcome(s) to include in plot.
 #' Default is to include the first competing event.
 #' @inheritParams ggsurvfit

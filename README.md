@@ -16,7 +16,7 @@ coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)
 ## Introduction
 
 The **ggsurvfit** package eases the creation of time-to-event (aka
-survival) endpoint figures with ggplot2. The concise and modular code
+survival) summary figures with ggplot2. The concise and modular code
 creates images that are ready for publication or sharing. Competing
 risks cumulative incidence is also supported via `ggcuminc()`.
 
@@ -26,10 +26,10 @@ risks cumulative incidence is also supported via `ggcuminc()`.
     (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is
     written as a proper ggplot2
     [‘geom’](https://ggplot2.tidyverse.org/reference/index.html),
-    meaning that the package functions can be woven with ggplot2
-    functions seamlessly. You don’t need to learn how to style the plot
-    within the ggsurvfit functions: you may rely on the suite ggplot2
-    functions you have already learned.
+    meaning the package functions can be woven with ggplot2 functions
+    seamlessly. You don’t need to learn how to style the plot within the
+    ggsurvfit functions: rather, rely on the suite of ggplot2 functions
+    you already know.
 
 -   **Publishable Legends:** Raw variable names do not appear in the
     figure legend, e.g. `"sex=Female"`.
@@ -117,9 +117,7 @@ exports a function called `Surv_CNSR()` to resolve this concern.
 The function creates a survival object (e.g. `survival::Surv()`) that
 uses CDISC ADaM ADTTE coding conventions and converts the arguments to
 the status/event variable convention used in the survival package for
-both the event indicator and the time component. The `"AVAL"` and
-`"CNSR"` arguments are passed to
-`survival::Surv(time = AVAL, event = 1 - CNSR, type = "right", origin = 0)`.
+both the event indicator and the time component—`"CNSR"` and `"AVAL"`.
 The function can be used in **ggsurvfit** as well as any other package
 that uses `survival::Surv()`.
 

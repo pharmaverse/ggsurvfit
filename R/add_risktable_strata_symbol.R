@@ -1,11 +1,14 @@
 #' Use Symbol for Strata in Risk Table
 #'
+#' Replace the stratum level names with a color symbol in the risk tables.
+#' Use this function when stratum level names are long.
+#'
 #' @param symbol [UTF-8 code](https://en.wikipedia.org/wiki/UTF-8) of shape to
 #' replace strata level with. Default is a rectangle (`"\U25AC"`).
 #' Other common options are circle (`"\U25CF"`) and diamond (`"\U25C6"`).
 #' While a symbol is the most common string to pass here, any string is acceptable.
-#' @param size,face,vjust,... arguments passed to `ggtext::element_markdown()`
-#' to style the symbol
+#' @param size,face,vjust,... arguments passed to a function similar to
+#' `ggtext::element_markdown()`
 #'
 #' @return a ggplot2 figure
 #' @export

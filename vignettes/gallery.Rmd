@@ -33,7 +33,6 @@ Let's begin with showing the default plot and common modifications that are made
 - Add additional tick marks on the x-axis
 - Update color of the lines
 - Using the ggplot2 minimal theme
-- Move legend to the top of plot
 
 ```{r}
 gg_default <-

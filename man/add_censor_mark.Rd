@@ -14,7 +14,8 @@ add_censor_mark(...)
 a ggplot2 figure
 }
 \description{
-Add Censor Marking
+Add a marking on the figure to represent the time an observations was
+censored.
 }
 \examples{
 survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%

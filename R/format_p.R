@@ -1,5 +1,7 @@
 #' Format p-value
 #'
+#' Round and format p-values
+#'
 #' @param x numeric vector of p-values
 #' @param digits number of digits large p-values will be rounded to.
 #' Default is 2, and must be one of 1, 2, or 3.

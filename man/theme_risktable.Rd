@@ -26,5 +26,5 @@ p + add_risktable(theme = theme_risktable_default())
 p + add_risktable(theme = theme_risktable_boxed())
 
 # none ---------------------------------------
-p + add_risktable(theme = NULL)
+p + add_risktable(theme = NULL, risktable_height = 0.20)
 }

@@ -29,7 +29,7 @@
 #' @param ... arguments passed to `ggplot2::geom_text(...)`. Pass arguments like, `size = 3`
 #' to increase the size of the statistics presented in the table.
 #'
-#' @section `ggcuminc()`:
+#' @section Competing Risks:
 #'
 #' The `ggcuminc()` can plot multiple competing events.
 #' The `"cum.event"` and `"n.event"` statistics are the sum of all events across

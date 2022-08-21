@@ -1,5 +1,8 @@
 #' Add Censor Marking
 #'
+#' Add a marking on the figure to represent the time an observations was
+#' censored.
+#'
 #' @param ... arguments passed to passed to
 #' `ggplot2::geom_point(...)` with defaults `shape = 3` and `size = 2`
 #'
