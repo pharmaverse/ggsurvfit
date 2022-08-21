@@ -12,6 +12,11 @@ test_that("ggcuminc() works", {
   vdiffr::expect_doppelganger("cuminc2-ggcuminc", lst_ggcuminc[[2]])
   vdiffr::expect_doppelganger("cuminc3-ggcuminc", lst_ggcuminc[[3]])
 
+  expect_error(ggcuminc(mtcars))
+})
+
+test_that("ggcuminc() works with multiple outcomes", {
+  skip_on_os("linux")
   expect_error(
     lst_ggcuminc_outcomes <-
       list(cuminc1, cuminc2, cuminc3) %>%
@@ -22,7 +27,4 @@ test_that("ggcuminc() works", {
   vdiffr::expect_doppelganger("cuminc1-ggcuminc-all-outcomes", lst_ggcuminc_outcomes[[1]])
   vdiffr::expect_doppelganger("cuminc2-ggcuminc-all-outcomes", lst_ggcuminc_outcomes[[2]])
   vdiffr::expect_doppelganger("cuminc3-ggcuminc-all-outcomes", lst_ggcuminc_outcomes[[3]])
-
-
-  expect_error(ggcuminc(mtcars))
 })
