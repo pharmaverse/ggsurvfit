@@ -46,6 +46,7 @@ test_that("add_censor_mark() works with ggcuminc()", {
 
 test_that("add_censor_mark() works with ggcuminc()", {
   skip_on_os("linux")
+  skip_on_cran()
 
   expect_error(
     lst_cuminc_censor_mark_outcome <-
