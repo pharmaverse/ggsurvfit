@@ -13,6 +13,7 @@ test_that("ggcuminc() works", {
   vdiffr::expect_doppelganger("cuminc3-ggcuminc", lst_ggcuminc[[3]])
 
   expect_error(ggcuminc(mtcars))
+  expect_error(ggcuminc(cuminc1, outcome = "not an outcome"))
 })
 
 test_that("ggcuminc() works with multiple outcomes", {
