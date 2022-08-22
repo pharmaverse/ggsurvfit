@@ -14,6 +14,10 @@ test_that("ggcuminc() works", {
 
   expect_error(ggcuminc(mtcars))
   expect_error(ggcuminc(cuminc1, outcome = "not an outcome"))
+  expect_error(
+    ggcuminc(cuminc1,
+             outcome = c("death from cancer", "death other causes"),
+             linetype_aes = TRUE))
 })
 
 test_that("ggcuminc() works with multiple outcomes", {
