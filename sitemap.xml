@@ -55,9 +55,6 @@
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/adtte.html</loc>
   </url>
   <url>
-    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/deprecated.html</loc>
-  </url>
-  <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/df_colon.html</loc>
   </url>
   <url>
@@ -74,6 +71,9 @@
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/ggsurvfit.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/ggsurvfit_build.html</loc>
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/index.html</loc>
