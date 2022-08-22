@@ -115,15 +115,27 @@ knitr::knit_exit()
 
 ```{r, echo=FALSE, size="tiny"}
 # add some kind indicator that we allow all ggplot2 modifications
-dplyr::tribble(
-  ~Package,             ~CRAN,    ~`Kaplan-Meier`, ~`Risk Table for Kaplan-Meier`, ~`Competing Risks`, ~`Risk Table for Competing Risks`,
-  "ggsurvfit",            "X",                "X",                            "X",                "X",                               "X",
-  "survminer",            "X",                "X",                            "X",                "X",                                "",
-  "KMunicate",            "X",                "X",                            "X",                 "",                                "",
-  "`GGally::ggsurv()`",   "X",                "X",                             "",                 "",                                "",
-  "ggfortify",            "X",                "X",                             "",                 "",                                "",
-  "visR",                 "X",                "X",                            "X",                "X",                               "X",
-  "iwillsurvive",          "",                "X",                            "X",                 "",                                ""
-) %>%
+df_pkg <-
+  dplyr::tribble(
+    ~pkg,                 ~cran,   ~survfit,   ~survfit_risktable,   ~cmprsk,   ~cmprsk_risktable,    ~gh_owner,               ~gh_repo, ~gh_branch,
+    "ggsurvfit",            "X",        "X",                  "X",       "X",                 "X",  "ddsjoberg",            "ggsurvfit",     "main",
+    "survminer",            "X",        "X",                  "X",       "X",                  "", "kassambara",            "survminer",   "master",
+    "KMunicate",            "X",        "X",                  "X",        "",                  "", "ellessenne",    "KMunicate-package",   "master",
+    "`GGally::ggsurv()`",   "X",        "X",                   "",        "",                  "",      "ggobi",               "ggally",   "master",
+    "ggfortify",            "X",        "X",                   "",        "",                  "",    "sinhrks",            "ggfortify",   "master",
+    "visR",                 "X",        "X",                  "X",       "X",                 "X", "openpharma",                 "visR",     "main",
+    "iwillsurvive",          "",        "X",                  "X",        "",                  "", "ndphillips",         "iwillsurvive",   "master"
+  ) |> 
+  dplyr::mutate(
+    covr_badge = 
+      sprintf(
+        "![](%s)", 
+        glue::glue("https://codecov.io/gh/{gh_owner}/{gh_repo}/branch/{gh_branch}/graph/badge.svg")
+      )
+  ) |> 
+  dplyr::select(-dplyr::starts_with("gh_"))
+
+# set a conditional to print with gt if in pkgdown, and knitr otherwise
+df_pkg %>%
   knitr::kable()
 ```

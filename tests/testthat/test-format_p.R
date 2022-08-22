@@ -16,4 +16,6 @@ test_that("format_p() works", {
     format_p(p_vec, 3),
     c("<0.001", "0.011", "0.050", "0.140", "0.340", ">0.999")
   )
+
+  expect_error(format_p(p_vec, digits = 17))
 })

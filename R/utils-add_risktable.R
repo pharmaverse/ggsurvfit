@@ -59,7 +59,6 @@
       heights =
         c(1 - risktable_height,
           rep_len(risktable_height / risktable_n, length.out = risktable_n))
-      # heights = c(1 - (risktable_height * (length(gg_risktable_list_aligned) - 1)), rep(risktable_height, length(gg_risktable_list_aligned) - 1))
     )
 
   gg_final

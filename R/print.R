@@ -14,28 +14,12 @@ NULL
 #' @export
 #' @rdname print_ggsurvfit
 print.ggsurvfit <- function(x, ...) {
-  risktable_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable")
-  risktable_symbol_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable_strata_symbol")
+  # Build plots ----------------------------------------------------------------
+  built_x <- ggsurvfit_build(x, combine_plots = TRUE)
 
-  if (rlang::is_empty(risktable_args) && !rlang::is_empty(risktable_symbol_args)) {
-    cli_inform(c("i" = "{.code add_risktable()} must be run before {.code add_risktable_strata_symbol()}.",
-                 "i" = "{.code add_risktable_strata_symbol()} has been ignored."))
-    risktable_symbol_args <- NULL
-  }
-
-  if (!rlang::is_empty(risktable_args)) {
-    # construct and add risktable
-    x_eval <- rlang::inject(.construct_risktable(x, !!!risktable_args,
-                                                 combine_plots = TRUE,
-                                                 risktable_symbol_args = risktable_symbol_args))
-  } else {
-    # remove ggsurvfit class, and print with default method
-    x_eval <- structure(x, class = setdiff(class(x), c("ggsurvfit", "ggcuminc")))
-  }
-
-  # print and return object
-  print(x_eval)
-  return(invisible(x_eval))
+  # print and return object ----------------------------------------------------
+  print(built_x)
+  return(invisible(built_x))
 }
 
 #' @export

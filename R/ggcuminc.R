@@ -39,11 +39,10 @@ ggcuminc <- function(x, outcome = NULL,
   # subset on outcome of interest ----------------------------------------------
   if (is.null(outcome)) {
     outcome <- df$outcome[1]
-    if (!identical(Sys.getenv("TESTTHAT"), "true"))
-      cli_inform("Plotting outcome {.val {outcome}}.")
+    cli_inform("Plotting outcome {.val {outcome}}.")
   }
   if (any(!outcome %in% unique(df$outcome))) {
-    cli_abort("Argument {.code outcome} must be in {.val {unique(df$outcome)}}")
+    cli_abort("Argument {.code outcome} must be one or more of {.val {unique(df$outcome)}}")
   }
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 

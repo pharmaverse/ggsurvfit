@@ -16,7 +16,7 @@ Default is 2, and must be one of 1, 2, or 3.}
 a string
 }
 \description{
-Format p-value
+Round and format p-values
 }
 \examples{
 p_vec <- c(0.00001, 0.01111, 0.0500000, 0.15, 0.99999)

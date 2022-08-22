@@ -61,6 +61,7 @@ reference:
   - contents:
       - tidy_survfit
       - tidy_cuminc
+      - ggsurvfit_build
       - stat_stepribbon
 
   - title: Data
