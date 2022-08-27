@@ -28,7 +28,7 @@
 #'
 #' The trial has four treatment arms, patients with centrally confirmed human
 #' epidermal growth factor 2-positive early breast cancer were randomly assigned
-#' to 1 year of adjuvant therapy with V, T, their sequence (T→V), or their
+#' to 1 year of adjuvant therapy with V, T, their sequence (T to V), or their
 #' combination (T+V) for 52 weeks.
 #'
 #' The primary end point was progression-free survival (PFS) as defined by
