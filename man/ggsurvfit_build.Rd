@@ -24,6 +24,9 @@ prepares the plot for printing.
 If a plot also has a risk table, this function will build the risk table
 plots and return them either as list of plots or combined
 using \code{patchwork::wrap_plots()}.
+
+This can be particularly useful when you would like to place
+figures with risk tables side-by-side.
 }
 \examples{
 # construct plot
@@ -36,12 +39,21 @@ p <-
 # build plots
 built_p <- ggsurvfit_build(p)
 
-# combine plots
+# reconstruct original figure print with risktables
 patchwork::wrap_plots(
   built_p[[1]],
   built_p[[2]],
   built_p[[3]],
   ncol = 1,
+  heights = c(0.70, 0.15, 0.15)
+)
+
+# place plots side-by-side
+patchwork::wrap_plots(
+  built_p[[1]],  built_p[[1]],
+  built_p[[2]],  built_p[[2]],
+  built_p[[3]],  built_p[[3]],
+  ncol = 2,
   heights = c(0.70, 0.15, 0.15)
 )
 }
