@@ -61,8 +61,7 @@ add_pvalue <- function(location = c("caption", "annotation"),
 
   if (!inherits(survfit, "survfit2")) {
     cli_inform(
-      c("!" = "P-values are available for objects of class {.cls survfit2},",
-        "i" = "Create a {.cls survfit2} object with {.code survfit2()}.",
+      c("!" = "{.code add_pvalue()} works with {.code ggsurvfit()} objects created with {.code survfit2()}.",
         "i" = "{.code add_pvalue()} has been ignored.")
     )
     return(object)
