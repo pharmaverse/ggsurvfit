@@ -1,5 +1,12 @@
 #' Add p-value
 #'
+#' @description
+#' - `add_pvalue_caption()`: Add a p-value to the figure via `ggplot2::labs(caption=)`
+#' - `add_pvalue_annotation()`: Add a p-value text annotation via `ggplot2::annotation("text")`
+#'
+#' P-values are calculated with `survival::survdiff()`.
+#' Examples of custom placement located in the help file for `survfit_p()`.
+#'
 #' @param caption string to be placed as the caption/annotation. String will
 #' be processed with `glue::glue()`, and the default is "{p.value}"
 #' @inheritParams survfit2_p
@@ -14,6 +21,10 @@
 #' survfit2(Surv(time, status) ~ surg, df_colon) %>%
 #'   ggsurvfit() +
 #'   add_pvalue_caption()
+#'
+#' survfit2(Surv(time, status) ~ surg, df_colon) %>%
+#'   ggsurvfit() +
+#'   add_pvalue_annotation(x = 1, y = 0.4)
 NULL
 
 #' @export
@@ -69,7 +80,8 @@ add_pvalue_annotation <- function(caption = "{p.value}",
 
 .add_pvalue_caption <- function(object, caption, pvalue_fun, prepend_p, pvalue_type, rho, ...) {
   # extract survfit object
-  survfit <- ggplot2::ggplot_build(object)$data[[1]][["survfit"]][[1]]
+  build <- ggplot2::ggplot_build(object)
+  survfit <- build$data[[1]][["survfit"]][[1]]
 
   # calculate p-value
   p.value <- survfit2_p(survfit,
@@ -84,9 +96,32 @@ add_pvalue_annotation <- function(caption = "{p.value}",
       ggplot2::labs(caption = glue::glue(caption))
   }
   else if (pvalue_type == "annotation") {
+    location_args <-
+      modifyList(
+        x = .default_pvalue_annotation_placement(build),
+        val = rlang::dots_list(...)
+      )
+
     ret_object <-
       object +
-      ggplot2::annotate("text", label = glue::glue(caption), ...)
+      rlang::inject(ggplot2::annotate("text", label = glue::glue(caption), !!!location_args))
   }
   ret_object
+}
+
+.default_pvalue_annotation_placement <- function(build) {
+  x_range <- build$layout$panel_params[[1]]$x.range
+  y_range <- build$layout$panel_params[[1]]$y.range
+
+  x <- x_range[2] - diff(x_range) * 0.10
+
+  if (!"monotonicity_type" %in% names(build$data[[1]]) ||
+      build$data[[1]]$monotonicity_type[1] == "decreasing") {
+    y <- y_range[2] - diff(y_range) * 0.10
+  }
+  else {
+    y <- y_range[1] + diff(y_range) * 0.10
+  }
+
+  list(x = x, y = y)
 }
