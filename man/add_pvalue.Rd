@@ -2,23 +2,14 @@
 % Please edit documentation in R/add_pvalue.R
 \name{add_pvalue}
 \alias{add_pvalue}
-\alias{add_pvalue_caption}
-\alias{add_pvalue_annotation}
 \title{Add p-value}
 \usage{
-add_pvalue_caption(
+add_pvalue(
+  location = c("caption", "annotation"),
   caption = "{p.value}",
   prepend_p = TRUE,
   pvalue_fun = format_p,
   rho = 0
-)
-
-add_pvalue_annotation(
-  caption = "{p.value}",
-  prepend_p = TRUE,
-  pvalue_fun = format_p,
-  rho = 0,
-  ...
 )
 }
 \arguments{
@@ -38,8 +29,8 @@ a ggplot2 figure
 }
 \description{
 \itemize{
-\item \code{add_pvalue_caption()}: Add a p-value to the figure via \code{ggplot2::labs(caption=)}
-\item \code{add_pvalue_annotation()}: Add a p-value text annotation via \code{ggplot2::annotation("text")}
+\item \code{add_pvalue("caption")}: Add a p-value to the figure via \code{ggplot2::labs(caption=)}
+\item \code{add_pvalue("annotation")}: Add a p-value text annotation via \code{ggplot2::annotation("text")}
 }
 
 P-values are calculated with \code{survival::survdiff()}.
@@ -48,11 +39,11 @@ Examples of custom placement located in the help file for \code{survfit_p()}.
 \examples{
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
   ggsurvfit() +
-  add_pvalue_caption()
+  add_pvalue()
 
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
   ggsurvfit() +
-  add_pvalue_annotation(x = 1, y = 0.4)
+  add_pvalue("annotation", x = 1, y = 0.4)
 }
 \seealso{
 \code{survfit_p()}

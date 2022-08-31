@@ -1,8 +1,8 @@
 #' Add p-value
 #'
 #' @description
-#' - `add_pvalue_caption()`: Add a p-value to the figure via `ggplot2::labs(caption=)`
-#' - `add_pvalue_annotation()`: Add a p-value text annotation via `ggplot2::annotation("text")`
+#' - `add_pvalue("caption")`: Add a p-value to the figure via `ggplot2::labs(caption=)`
+#' - `add_pvalue("annotation")`: Add a p-value text annotation via `ggplot2::annotation("text")`
 #'
 #' P-values are calculated with `survival::survdiff()`.
 #' Examples of custom placement located in the help file for `survfit_p()`.
@@ -14,25 +14,23 @@
 #' @param ... arguments passed to `ggplot2::annotate()`
 #'
 #' @return a ggplot2 figure
-#' @name add_pvalue
+#' @export
 #'
 #' @seealso `survfit_p()`
 #' @examples
 #' survfit2(Surv(time, status) ~ surg, df_colon) %>%
 #'   ggsurvfit() +
-#'   add_pvalue_caption()
+#'   add_pvalue()
 #'
 #' survfit2(Surv(time, status) ~ surg, df_colon) %>%
 #'   ggsurvfit() +
-#'   add_pvalue_annotation(x = 1, y = 0.4)
-NULL
-
-#' @export
-#' @rdname add_pvalue
-add_pvalue_caption <- function(caption = "{p.value}",
-                               prepend_p = TRUE,
-                               pvalue_fun = format_p,
-                               rho = 0) {
+#'   add_pvalue("annotation", size = 5)
+add_pvalue <- function(location = c("caption", "annotation"),
+                       caption = "{p.value}",
+                       prepend_p = TRUE,
+                       pvalue_fun = format_p,
+                       rho = 0,
+                       ...) {
   rlang::inject(
     ggplot2::layer(
       data = NULL, mapping = NULL,
@@ -42,46 +40,31 @@ add_pvalue_caption <- function(caption = "{p.value}",
       params = list()
     ) %>%
       structure(
-        "add_pvalue_caption" = list(caption = caption,
-                                    pvalue_fun = pvalue_fun,
-                                    prepend_p = prepend_p,
-                                    rho = rho,
-                                    pvalue_type = "caption")
-      )
-  )
-}
-
-#' @export
-#' @rdname add_pvalue
-add_pvalue_annotation <- function(caption = "{p.value}",
-                                  prepend_p = TRUE,
-                                  pvalue_fun = format_p,
-                                  rho = 0,
-                                  ...) {
-  rlang::inject(
-    ggplot2::layer(
-      data = NULL, mapping = NULL,
-      stat = StatBlankSurvfit, geom = "blank",
-      position = "identity",
-      show.legend = NA, inherit.aes = TRUE,
-      params = list()
-    ) %>%
-      structure(
-        "add_pvalue_annotation" = list(caption = caption,
-                                       pvalue_fun = pvalue_fun,
-                                       prepend_p = prepend_p,
-                                       rho = rho,
-                                       pvalue_type = "annotation", ...)
+        "add_pvalue" = c(list(location = !!match.arg(location),
+                            caption = caption,
+                            pvalue_fun = pvalue_fun,
+                            prepend_p = prepend_p,
+                            rho = rho),
+                         rlang::dots_list(...))
       )
   )
 }
 
 
 
-.add_pvalue_caption <- function(object, caption, pvalue_fun, prepend_p, pvalue_type, rho, ...) {
+.add_pvalue_caption <- function(object, location, caption, pvalue_fun, prepend_p, pvalue_type, rho, ...) {
   # extract survfit object
   build <- ggplot2::ggplot_build(object)
   survfit <- build$data[[1]][["survfit"]][[1]]
+
+  if (!inherits(survfit, "survfit2")) {
+    cli_inform(
+      c("!" = "P-values are available for objects of class {.cls survfit2},",
+        "i" = "Create a {.cls survfit2} object with {.code survfit2()}.",
+        "i" = "{.code add_pvalue()} has been ignored.")
+    )
+    return(object)
+  }
 
   # calculate p-value
   p.value <- survfit2_p(survfit,
@@ -90,12 +73,12 @@ add_pvalue_annotation <- function(caption = "{p.value}",
                         rho = rho)
 
   # add caption, and return ggplot
-  if (pvalue_type == "caption") {
+  if (location == "caption") {
     ret_object <-
       object +
       ggplot2::labs(caption = glue::glue(caption))
   }
-  else if (pvalue_type == "annotation") {
+  else if (location == "annotation") {
     location_args <-
       modifyList(
         x = .default_pvalue_annotation_placement(build),

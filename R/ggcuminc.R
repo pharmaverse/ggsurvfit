@@ -34,7 +34,8 @@ ggcuminc <- function(x, outcome = NULL,
   }
 
   # prep data to be passed to ggplot() -----------------------------------------
-  df <- tidy_cuminc(x = x)
+  df <- tidy_cuminc(x = x) %>%
+    dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
 
   # subset on outcome of interest ----------------------------------------------
   if (is.null(outcome)) {
