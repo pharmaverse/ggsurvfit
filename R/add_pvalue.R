@@ -7,6 +7,8 @@
 #' P-values are calculated with `survival::survdiff()`.
 #' Examples of custom placement located in the help file for `survfit_p()`.
 #'
+#' @param location string indicating where to place p-value. Must be one of
+#' `c("caption", "annotation")`
 #' @param caption string to be placed as the caption/annotation. String will
 #' be processed with `glue::glue()`, and the default is "{p.value}"
 #' @inheritParams survfit2_p
@@ -80,7 +82,7 @@ add_pvalue <- function(location = c("caption", "annotation"),
   }
   else if (location == "annotation") {
     location_args <-
-      modifyList(
+      utils::modifyList(
         x = .default_pvalue_annotation_placement(build),
         val = rlang::dots_list(...)
       )

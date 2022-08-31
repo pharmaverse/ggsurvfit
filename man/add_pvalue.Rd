@@ -14,6 +14,9 @@ add_pvalue(
 )
 }
 \arguments{
+\item{location}{string indicating where to place p-value. Must be one of
+\code{c("caption", "annotation")}}
+
 \item{caption}{string to be placed as the caption/annotation. String will
 be processed with \code{glue::glue()}, and the default is "{p.value}"}
 
