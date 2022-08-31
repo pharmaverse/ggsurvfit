@@ -12,3 +12,4 @@
 .covrignore
 codemeta.json
 ^CRAN-SUBMISSION$
+^vignettes/articles$
