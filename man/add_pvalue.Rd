@@ -9,7 +9,8 @@ add_pvalue(
   caption = "{p.value}",
   prepend_p = TRUE,
   pvalue_fun = format_p,
-  rho = 0
+  rho = 0,
+  ...
 )
 }
 \arguments{
@@ -43,7 +44,7 @@ survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
 
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
   ggsurvfit() +
-  add_pvalue("annotation", x = 1, y = 0.4)
+  add_pvalue("annotation", size = 5)
 }
 \seealso{
 \code{survfit_p()}
