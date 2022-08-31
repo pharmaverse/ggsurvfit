@@ -26,7 +26,7 @@ add_quantile <- function(y_value = 0.5, ...) {
         list(y_value = y_value),
         utils::modifyList(x = list(linetype = 2, na.rm = FALSE),
                           val = rlang::dots_list(...))
-      ),
+      )
   )
 }
 

@@ -22,6 +22,7 @@ Imports:
     broom (>= 1.0.0),
     cli (>= 3.0.0),
     dplyr (>= 1.0.0),
+    glue (>= 1.6.0),
     ggplot2 (>= 3.3.0),
     gtable,
     patchwork,
@@ -30,7 +31,6 @@ Imports:
     tidyr (>= 1.0.0)
 Suggests: 
     covr,
-    glue,
     knitr,
     rmarkdown,
     scales,
