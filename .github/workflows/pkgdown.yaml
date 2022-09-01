@@ -30,8 +30,12 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: gghighlight, any::pkgdown, local::.
+          extra-packages: any::pkgdown, local::.
           needs: website
+
+      - name: Install other pkgs
+        run: install.packages("gghighlight", repos = "http://cran.rstudio.com")
+        shell: Rscript {0}
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
