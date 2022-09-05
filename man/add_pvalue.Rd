@@ -18,7 +18,7 @@ add_pvalue(
 \code{c("caption", "annotation")}}
 
 \item{caption}{string to be placed as the caption/annotation. String will
-be processed with \code{glue::glue()}, and the default is "{p.value}"}
+be processed with \code{glue::glue()}, and the default is \code{"{p.value}"}}
 
 \item{prepend_p}{prepend \code{"p="} to formatted p-value}
 
@@ -26,7 +26,8 @@ be processed with \code{glue::glue()}, and the default is "{p.value}"}
 
 \item{rho}{argument passed to  \code{survival::survdiff(rho=)}}
 
-\item{...}{arguments passed to \code{ggplot2::annotate()}}
+\item{...}{arguments passed to \code{ggplot2::annotate()}. Commonly used arguments
+are \verb{x=} and \verb{y=} to place the p-value at the specified coordinates on the plot.}
 }
 \value{
 a ggplot2 figure
@@ -43,7 +44,7 @@ Examples of custom placement located in the help file for \code{survfit_p()}.
 \examples{
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
   ggsurvfit() +
-  add_pvalue()
+  add_pvalue(caption = "Log-rank {p.value}")
 
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
   ggsurvfit() +

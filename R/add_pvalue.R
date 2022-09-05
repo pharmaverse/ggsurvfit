@@ -10,10 +10,11 @@
 #' @param location string indicating where to place p-value. Must be one of
 #' `c("caption", "annotation")`
 #' @param caption string to be placed as the caption/annotation. String will
-#' be processed with `glue::glue()`, and the default is "{p.value}"
+#' be processed with `glue::glue()`, and the default is `"{p.value}"`
 #' @inheritParams survfit2_p
 #' @inheritParams survival::survdiff
-#' @param ... arguments passed to `ggplot2::annotate()`
+#' @param ... arguments passed to `ggplot2::annotate()`. Commonly used arguments
+#' are `x=` and `y=` to place the p-value at the specified coordinates on the plot.
 #'
 #' @return a ggplot2 figure
 #' @export
@@ -22,7 +23,7 @@
 #' @examples
 #' survfit2(Surv(time, status) ~ surg, df_colon) %>%
 #'   ggsurvfit() +
-#'   add_pvalue()
+#'   add_pvalue(caption = "Log-rank {p.value}")
 #'
 #' survfit2(Surv(time, status) ~ surg, df_colon) %>%
 #'   ggsurvfit() +
