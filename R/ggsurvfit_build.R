@@ -50,6 +50,7 @@
 #' )
 
 ggsurvfit_build <- function(x, combine_plots = FALSE) {
+  pvalue_args <- .extract_arguments_from_attr(x, attr_name = "add_pvalue")
   risktable_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable")
   risktable_symbol_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable_strata_symbol")
 
@@ -57,6 +58,10 @@ ggsurvfit_build <- function(x, combine_plots = FALSE) {
     cli_inform(c("i" = "{.code add_risktable()} must be run before {.code add_risktable_strata_symbol()}.",
                  "i" = "{.code add_risktable_strata_symbol()} has been ignored."))
     risktable_symbol_args <- NULL
+  }
+
+  if (!rlang::is_empty(pvalue_args)) {
+    x <- rlang::inject(.add_pvalue_caption(object = x, !!!pvalue_args))
   }
 
   if (!rlang::is_empty(risktable_args)) {

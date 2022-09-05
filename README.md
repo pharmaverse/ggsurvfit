@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggsurvfit
+# ggsurvfit <a href="http://www.danieldsjoberg.com/ggsurvfit/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
