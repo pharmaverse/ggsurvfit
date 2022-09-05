@@ -12,7 +12,7 @@ a formatted p-value."><meta property="og:image" content="http://www.danieldsjobe
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@ a formatted p-value.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">survfit2_p</span><span class="op">(</span><span class="va">x</span>, pvalue_fun <span class="op">=</span> <span class="va">format_p</span>, prepend_p <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">survfit2_p</span><span class="op">(</span><span class="va">x</span>, pvalue_fun <span class="op">=</span> <span class="va">format_p</span>, prepend_p <span class="op">=</span> <span class="cn">TRUE</span>, rho <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -78,28 +78,8 @@ a formatted p-value.</p>
 <dd><p>prepend <code>"p="</code> to formatted p-value</p></dd>
 
 
-<dt>...</dt>
-<dd><p>Arguments passed on to <code><a href="https://rdrr.io/pkg/survival/man/survdiff.html" class="external-link">survival::survdiff</a></code></p><dl><dt><code>subset</code></dt>
-<dd><p>expression indicating which subset of the rows of data should be used in
-the fit.  This can be a logical vector (which is replicated to have
-length equal to the number of observations), a numeric vector indicating
-which observation numbers are to be included (or excluded if negative),
-or a character vector of row names to be included.  All observations are
-included by default.</p></dd>
-
-    <dt><code>na.action</code></dt>
-<dd><p>a missing-data filter function.  This is applied to the <code>model.frame</code> after any
-subset argument has been used.  Default is <code>options()$na.action</code>.</p></dd>
-
-    <dt><code>rho</code></dt>
-<dd><p>a scalar parameter that controls the type of test.</p></dd>
-
-    <dt><code>timefix</code></dt>
-<dd><p>process times through the <code>aeqSurv</code> function to
-  eliminate potential roundoff issues.</p></dd>
-
-  
-</dl></dd>
+<dt>rho</dt>
+<dd><p>argument passed to  <code>survival::survdiff(rho=)</code></p></dd>
 
 </dl></div>
     <div class="section level2">
