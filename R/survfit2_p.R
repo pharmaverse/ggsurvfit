@@ -6,7 +6,7 @@
 #' @param x a 'survfit2' object
 #' @param pvalue_fun function to round and style p-value with
 #' @param prepend_p prepend `"p="` to formatted p-value
-#' @inheritDotParams survival::survdiff -data -formula
+#' @param rho argument passed to  `survival::survdiff(rho=)`
 #'
 #' @return a string
 #' @name survfit2_p
@@ -31,7 +31,7 @@ NULL
 
 #' @export
 #' @rdname survfit2_p
-survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, ...) {
+survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, rho = 0) {
   if (!inherits(x, "survfit2")) {
     cli_abort(
       c("!" = "Argument {.code x} must be class {.cls survfit2},",
@@ -42,7 +42,7 @@ survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, ...) {
   survival::survdiff(
     formula = .extract_formula_from_survfit(x),
     data = .extract_data_from_survfit(x),
-    ...
+    rho = rho
   ) %>%
     broom::glance() %>%
     dplyr::pull(.data$p.value) %>%

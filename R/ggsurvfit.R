@@ -61,7 +61,9 @@ ggsurvfit <- function(x, type = "survival",
   }
 
   # prep data to be passed to ggplot() -----------------------------------------
-  df <-  tidy_survfit(x = x, type = type)
+  df <-
+    tidy_survfit(x = x, type = type) %>%
+    dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
 
   # construct aes() call -------------------------------------------------------
   aes_args <- .construct_aes(df, linetype_aes = linetype_aes)
@@ -103,7 +105,8 @@ ggsurvfit <- function(x, type = "survival",
     list(
       x = rlang::expr(.data$time),
       y = rlang::expr(.data$estimate),
-      is_ggsurvfit = TRUE
+      is_ggsurvfit = TRUE,
+      survfit = rlang::expr(.data$survfit)
     )
 
   if ("monotonicity_type" %in% names(df)) {
