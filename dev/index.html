@@ -128,14 +128,14 @@
 <span></span>
 <span><span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># build Kaplan-Meier plot ----------------------------------------------------</span></span>
-<span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_risktable.html">add_risktable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.6</span>, color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  </span>
 <span>  <span class="co"># use ggplot2 functions to style the plot and update the labels --------------</span></span>
-<span>  <span class="co"># limit plot to show 8 years and less</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># limit plot to show 8 years and less</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># update figure labels/titles</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="st">"Percentage Survival"</span>,</span>
@@ -172,6 +172,11 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         n events median 0.95LCL 0.95UCL</span></span>
 <span><span class="co">#&gt; [1,] 2199    755    3.2     3.1    3.56</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="related-packages">Related Packages<a class="anchor" aria-label="anchor" href="#related-packages"></a>
+</h2>
+<p><img src="reference/figures/README-gt-related-pkgs.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
