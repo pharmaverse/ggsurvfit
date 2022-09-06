@@ -67,14 +67,14 @@ library(ggplot2)
 
 survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   # build Kaplan-Meier plot ----------------------------------------------------
-  ggsurvfit(size = 1) +
+ggsurvfit(size = 1) +
   add_confidence_interval() +
   add_risktable() +
   add_quantile(y_value = 0.6, color = "gray50", size = 0.75) +
   
   # use ggplot2 functions to style the plot and update the labels --------------
-  # limit plot to show 8 years and less
-  coord_cartesian(xlim = c(0, 8)) +
+# limit plot to show 8 years and less
+coord_cartesian(xlim = c(0, 8)) +
   # update figure labels/titles
   labs(
     y = "Percentage Survival",
@@ -129,3 +129,7 @@ survfit(Surv_CNSR() ~ 1, adtte)
 #>         n events median 0.95LCL 0.95UCL
 #> [1,] 2199    755    3.2     3.1    3.56
 ```
+
+## Related Packages
+
+<img src="man/figures/README-gt-related-pkgs.png" width="100%" />
