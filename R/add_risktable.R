@@ -38,8 +38,6 @@
 #' @export
 #' @return a ggplot2 figure
 #' @examples
-#' library(ggplot2)
-#'
 #' p <-
 #'   df_lung %>%
 #'   survfit2(Surv(time, status) ~ sex, data = .) %>%

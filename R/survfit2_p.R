@@ -12,8 +12,6 @@
 #' @name survfit2_p
 #'
 #' @examples
-#' library(ggplot2)
-#'
 #' sf <- survfit2(Surv(time, status) ~ sex, data = df_lung)
 #'
 #' sf %>%

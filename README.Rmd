@@ -59,7 +59,6 @@ Review the [**figure gallery**](http://www.danieldsjoberg.com/ggsurvfit/articles
 
 ```{r example, fig.height=5.5}
 library(ggsurvfit)
-library(ggplot2)
 
 survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   # build Kaplan-Meier plot ----------------------------------------------------
