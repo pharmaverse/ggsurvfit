@@ -1,6 +1,6 @@
 # ggsurvfit (development version)
 
-* Package now depends on {ggplot2}, meaning that it'll be loaded anytime {ggsurvfit} is loaded. (#62)
+* Package now depends on {ggplot2}, meaning that it'll be attached anytime {ggsurvfit} is attached. (#62)
 
 * Converted the gallery vignette to an article. (#75)
 
