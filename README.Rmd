@@ -142,7 +142,7 @@ gt_related_pkgs <-
   gt::tab_spanner(c(cmprsk, cmprsk_risktable), label = gt::md("**Competing Risks**")) |> 
   gt::fmt_markdown(c(pkg, covr_badge)) |> 
   gt::tab_footnote(
-    footnote = "Allows any {ggplot2} function to modify plot area (including scales) and the risktables align with plot.",
+    footnote = "Use any {ggplot2} function to modify plot area (including scales) and the risktable will align with  the plot.",
     locations = gt::cells_column_labels(ggplot2)
   ) |> 
   gt::text_transform(
