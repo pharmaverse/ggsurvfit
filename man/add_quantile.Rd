@@ -4,10 +4,12 @@
 \alias{add_quantile}
 \title{Add Quantile Annotation}
 \usage{
-add_quantile(y_value = 0.5, ...)
+add_quantile(y_value = 0.5, x_value = NULL, ...)
 }
 \arguments{
 \item{y_value}{Numeric value where the line segment will be drawn. Default is \code{0.5}}
+
+\item{x_value}{Numeric value where the line segment will be drawn. Default is NULL (i.e. no line)}
 
 \item{...}{Named arguments passed to \code{ggplot2::geom_segment()} with default \code{linetype = 2}}
 }
@@ -26,4 +28,8 @@ survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
   ggsurvfit() +
   add_quantile(linetype = 2) +
   add_quantile(y_value = 0.9, linetype = 3)
+
+survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
+  ggsurvfit() +
+  add_quantile(linetype = 2, y_value = NULL, x_value = 10)
 }

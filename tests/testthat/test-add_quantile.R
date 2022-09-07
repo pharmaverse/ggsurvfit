@@ -29,7 +29,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf1 %>%
       tidy_survfit() %>%
       dplyr::select(x = time, y = estimate) %>%
-      quantile_km_in_stat(y_value = 0.5) %>%
+      quantile_km_in_stat(y_value = 0.5, x_value = NULL) %>%
       dplyr::pull(x) %>%
       `[`(1),
     quantile(sf1, probs = 0.5, conf.int = FALSE) %>% as.numeric()
@@ -39,7 +39,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf2 %>%
       tidy_survfit() %>%
       dplyr::select(x = time, y = estimate, group = strata) %>%
-      quantile_km_in_stat(y_value = 0.5) %>%
+      quantile_km_in_stat(y_value = 0.5, x_value = NULL) %>%
       dplyr::pull(x) %>%
       setdiff(0),
     quantile(sf2, probs = 0.5, conf.int = FALSE) %>% as.numeric()
@@ -51,7 +51,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf2_colon %>%
       tidy_survfit() %>%
       dplyr::select(x = time, y = estimate, group = strata) %>%
-      quantile_km_in_stat(y_value = 0.5) %>%
+      quantile_km_in_stat(y_value = 0.5, x_value = NULL) %>%
       dplyr::pull(x) %>%
       setdiff(0),
     quantile(sf2_colon, probs = 0.5, conf.int = FALSE) %>%
@@ -161,3 +161,32 @@ test_that("add_quantile() works with ggcuminc() and multiple outcomes", {
   vdiffr::expect_doppelganger("cuminc3-quantile-all-outcomes", lst_cuminc_quantile_outcomes[[3]])
 })
 
+test_that("add_quantile() works x_value", {
+  expect_error(
+    ggquanitle_x_value1 <-
+      survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+      ggsurvfit() +
+      add_quantile(linetype = 2, y_value = NULL, x_value = 10),
+    NA
+  )
+  vdiffr::expect_doppelganger("sf2-quantile-x_value", ggquanitle_x_value1)
+
+  expect_error(
+    ggquanitle_x_value2 <-
+      survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+      ggsurvfit() +
+      add_quantile(linetype = 2, y_value = NULL, x_value = 10000),
+    NA
+  )
+  vdiffr::expect_doppelganger("sf2-quantile-x_value-out-of-bounds", ggquanitle_x_value2)
+
+  expect_error(
+    ggquanitle_x_value3 <-
+      survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+      ggsurvfit() +
+      add_quantile(linetype = 2, y_value = NULL, x_value = 33),
+    NA
+  )
+  vdiffr::expect_doppelganger("sf2-quantile-x_value-not-all-groups", ggquanitle_x_value3)
+
+})
