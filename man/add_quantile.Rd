@@ -4,10 +4,11 @@
 \alias{add_quantile}
 \title{Add Quantile Annotation}
 \usage{
-add_quantile(y_value = 0.5, x_value = NULL, ...)
+add_quantile(y_value = NULL, x_value = NULL, ...)
 }
 \arguments{
-\item{y_value}{Numeric value where the line segment will be drawn. Default is \code{0.5}}
+\item{y_value}{Numeric value where the line segment will be drawn.
+Default is \code{0.5} when both \code{y_value} and \code{x_value} are both unassigned.}
 
 \item{x_value}{Numeric value where the line segment will be drawn. Default is NULL (i.e. no line)}
 

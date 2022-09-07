@@ -2,7 +2,8 @@
 #'
 #' Add quantile information annotated on to the plot.
 #'
-#' @param y_value Numeric value where the line segment will be drawn. Default is `0.5`
+#' @param y_value Numeric value where the line segment will be drawn.
+#' Default is `0.5` when both `y_value` and `x_value` are both unassigned.
 #' @param x_value Numeric value where the line segment will be drawn. Default is NULL (i.e. no line)
 #' @param ... Named arguments passed to `ggplot2::geom_segment()` with default `linetype = 2`
 #'
@@ -22,7 +23,7 @@
 #' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit() +
 #'   add_quantile(linetype = 2, y_value = NULL, x_value = 10)
-add_quantile <- function(y_value = 0.5, x_value = NULL, ...) {
+add_quantile <- function(y_value = NULL, x_value = NULL, ...) {
   ggplot2::layer(
     stat = StatQuantileSurvfit, data = NULL, mapping = NULL, geom = "segment",
     position = "identity", show.legend = NA, inherit.aes = TRUE,
@@ -48,6 +49,8 @@ StatQuantileSurvfit <-
 
 
 quantile_km_in_stat <- function(data, y_value, x_value) {
+  if (is.null(y_value) && is.null(x_value)) y_value <- 0.5 # assign default value
+
   df_quantile_y <- .create_y_value_df(data, y_value)
   df_quantile_x <- .create_x_value_df(data, x_value)
 
