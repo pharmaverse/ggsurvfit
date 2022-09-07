@@ -63,7 +63,7 @@ for many more examples.
 
 ``` r
 library(ggsurvfit)
-library(ggplot2)
+#> Loading required package: ggplot2
 
 survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   # build Kaplan-Meier plot ----------------------------------------------------
