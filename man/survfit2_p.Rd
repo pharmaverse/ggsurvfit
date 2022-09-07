@@ -23,8 +23,6 @@ The function \code{survfit2_p()} wraps \code{survival::survdiff()} and returns
 a formatted p-value.
 }
 \examples{
-library(ggplot2)
-
 sf <- survfit2(Surv(time, status) ~ sex, data = df_lung)
 
 sf \%>\%

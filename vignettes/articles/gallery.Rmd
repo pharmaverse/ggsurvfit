@@ -13,7 +13,6 @@ The gallery exhibits both default plots as well as the many modifications one ca
 
 ```{r setup}
 library(ggsurvfit)
-library(ggplot2)
 library(patchwork)
 ```
 

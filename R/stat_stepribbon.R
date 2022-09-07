@@ -11,8 +11,6 @@
 #'
 #' @return a ggplot2 figure
 #' @examples
-#' library(ggplot2)
-#'
 #' survfit(Surv(time, status) ~ 1, data = df_lung) %>%
 #'   survival::survfit0() %>%
 #'   broom::tidy() %>%

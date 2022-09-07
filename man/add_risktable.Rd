@@ -69,8 +69,6 @@ outcomes \emph{shown on the plot}.
 }
 
 \examples{
-library(ggplot2)
-
 p <-
   df_lung \%>\%
   survfit2(Surv(time, status) ~ sex, data = .) \%>\%

@@ -26,7 +26,7 @@
 #'   survfit2(Surv(time, status) ~ surg, df_colon) %>%
 #'   ggsurvfit() +
 #'   add_risktable() +
-#'   ggplot2::scale_y_continuous(limits = c(0, 1))
+#'   scale_y_continuous(limits = c(0, 1))
 #'
 #' # build plots
 #' built_p <- ggsurvfit_build(p)

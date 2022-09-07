@@ -24,7 +24,6 @@ You can pass any ggplot2 theme to this argument, or simply add a theme using typ
 
 ```{r}
 library(ggsurvfit)
-library(ggplot2)
 library(patchwork)
 
 gg_theme_default1 <- 
