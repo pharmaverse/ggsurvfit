@@ -30,11 +30,11 @@ Use this function when stratum level names are long.
 }
 \examples{
 p <-
-survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
+  survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   ggsurvfit(size = 1) +
   add_confidence_interval() +
   add_risktable(risktable_group = "risktable_stats")
 
  p + add_risktable_strata_symbol()
- p + add_risktable_strata_symbol(symbol = "\U25CF")
+ p + add_risktable_strata_symbol(symbol = "\U25CF", size = 12)
 }
