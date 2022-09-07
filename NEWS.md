@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Added the `add_quantile(x_value=)` argument that places line segments at the time specified.
+
 * Package now depends on {ggplot2}, meaning that it'll be attached anytime {ggsurvfit} is attached. (#62)
 
 * Converted the gallery vignette to an article. (#75)
