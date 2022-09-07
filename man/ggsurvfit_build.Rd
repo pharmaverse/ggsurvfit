@@ -48,12 +48,10 @@ patchwork::wrap_plots(
   heights = c(0.70, 0.15, 0.15)
 )
 
-# place plots side-by-side
+# place plots side-by-side (plots must be built before placement with patchwork)
 patchwork::wrap_plots(
-  built_p[[1]],  built_p[[1]],
-  built_p[[2]],  built_p[[2]],
-  built_p[[3]],  built_p[[3]],
-  ncol = 2,
-  heights = c(0.70, 0.15, 0.15)
+  ggsurvfit_build(p, combine_plots = TRUE),
+  ggsurvfit_build(p, combine_plots = TRUE),
+  ncol = 2
 )
 }

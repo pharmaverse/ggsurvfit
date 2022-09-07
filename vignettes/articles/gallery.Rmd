@@ -177,6 +177,7 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
 ## Side-by-Side
 
 To place figures with risk tables side-by-side, utilize the `ggsurvfit_build()` function.
+Importantly, you _must_ build the plots before they can be cobbled together with {patchwork}.
 
 ```{r}
 p <-
@@ -187,15 +188,12 @@ p <-
   guides(color = guide_legend(ncol = 1, byrow=TRUE))
 
 # build plots
-built_p <- ggsurvfit_build(p)
+built_p <- ggsurvfit_build(p, combine_plots = TRUE)
 
 # place plots side-by-side
-patchwork::wrap_plots(
-  built_p[[1]],  built_p[[1]],
-  built_p[[2]],  built_p[[2]],
-  built_p[[3]],  built_p[[3]],
-  ncol = 2,
-  heights = c(0.70, 0.15, 0.15)
+wrap_plots(
+  built_p, built_p,
+  ncol = 2
 )
 ```
 
