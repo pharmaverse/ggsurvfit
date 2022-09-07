@@ -115,7 +115,7 @@ gt_related_pkgs <-
     "ggsurvfit",            "X",        "X",                  "X",       "X",                 "X",      "X",  "ddsjoberg",            "ggsurvfit",     "main",
     "survminer",            "X",        "X",                  "X",       "X",                  "",       "", "kassambara",            "survminer",   "master",
     "KMunicate",            "X",        "X",                  "X",        "",                  "",       "", "ellessenne",    "KMunicate-package",   "master",
-    "`GGally::ggsurv()`",   "X",        "X",                   "",        "",                  "",       "",      "ggobi",               "ggally",   "master",
+    "GGally",               "X",        "X",                   "",        "",                  "",       "",      "ggobi",               "ggally",   "master",
     "ggfortify",            "X",        "X",                   "",        "",                  "",       "",    "sinhrks",            "ggfortify",   "master",
     "iwillsurvive",          "",        "X",                  "X",        "",                  "",       "", "ndphillips",         "iwillsurvive",   "master"
   ) |> 
