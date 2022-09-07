@@ -7,10 +7,8 @@
 add_quantile(y_value = NULL, x_value = NULL, ...)
 }
 \arguments{
-\item{y_value}{Numeric value where the line segment will be drawn.
-Default is \code{0.5} when both \code{y_value} and \code{x_value} are both unassigned.}
-
-\item{x_value}{Numeric value where the line segment will be drawn. Default is NULL (i.e. no line)}
+\item{y_value, x_value}{Numeric value where the line segment will be drawn.
+Default is \code{y_value=0.5} when both \code{y_value} and \code{x_value} are unassigned.}
 
 \item{...}{Named arguments passed to \code{ggplot2::geom_segment()} with default \code{linetype = 2}}
 }
