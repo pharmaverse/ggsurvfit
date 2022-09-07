@@ -181,20 +181,18 @@ Importantly, you _must_ build the plots before they can be cobbled together with
 
 ```{r}
 p <-
-  survfit2(Surv(time, status) ~ surg, df_colon) %>%
+  survfit2(Surv(time, status) ~ 1, df_colon) %>%
   ggsurvfit() +
+  add_confidence_interval() +
   add_risktable() +
   scale_y_continuous(limits = c(0, 1)) +
-  guides(color = guide_legend(ncol = 1, byrow=TRUE))
+  scale_x_continuous(n.breaks = 7)
 
 # build plots
 built_p <- ggsurvfit_build(p, combine_plots = TRUE)
 
 # place plots side-by-side
-wrap_plots(
-  built_p, built_p,
-  ncol = 2
-)
+wrap_plots(built_p, built_p, ncol = 2)
 ```
 
 ## Faceting
