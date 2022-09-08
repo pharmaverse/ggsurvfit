@@ -122,6 +122,12 @@ test_that("add_quantile() errors with ggsurvfit()", {
        add_quantile()) %>%
       print()
   )
+
+  expect_warning(
+    (sf2 %>%
+      ggsurvfit() +
+      add_quantile(y_value = c(0.2, 0.5))) %>% print()
+  )
 })
 
 

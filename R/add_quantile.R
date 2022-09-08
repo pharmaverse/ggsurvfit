@@ -49,6 +49,12 @@ StatQuantileSurvfit <-
 
 quantile_km_in_stat <- function(data, y_value, x_value) {
   if (is.null(y_value) && is.null(x_value)) y_value <- 0.5 # assign default value
+  if (length(y_value) > 1 || length(x_value) > 1)
+    cli_abort(c(
+      "!" = "Neither {.code y_value} nor {.code x_value} may have length greater than one.",
+      "i" = "To plot multiple quantiles, call {.code add_quantile()} multiple times."
+    ))
+
 
   df_quantile_y <- .create_y_value_df(data, y_value)
   df_quantile_x <- .create_x_value_df(data, x_value)
