@@ -64,6 +64,7 @@ reference:
       - tidy_cuminc
       - ggsurvfit_build
       - stat_stepribbon
+      - scale_continuous_reduce_pad
 
   - title: Data
   - contents:
