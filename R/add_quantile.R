@@ -76,7 +76,7 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
   # creating df with the horizontal line definition
   df_quantile <-
     data %>%
-    dplyr::select(all_of(c("x", "y", "group"))) %>%
+    dplyr::select(dplyr::all_of(c("x", "y", "group"))) %>%
     dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
     dplyr::mutate(
       x_max = max(.data$x)
@@ -114,7 +114,7 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
       )
     ) %>%
     dplyr::filter(.data$x %in% .env$x_value) %>%
-    dplyr::select(all_of(c("x", "y"))) %>%
+    dplyr::select(dplyr::all_of(c("x", "y"))) %>%
     dplyr::mutate(
       xend = 0,
       yend = .data$y
