@@ -32,6 +32,16 @@ a ggplot2 figure
 \description{
 Plot a cumulative incidence object created with \code{tidycmprsk::cuminc()}.
 }
+\section{Details}{
+
+
+\emph{Why do we not use \code{cmprsk::cuminc()}?}
+
+The implementation of \code{cmprsk::cuminc()} does not provide the data required
+to construct the risk table. Moreover, the \code{tidycmprsk::cuminc()} has a
+user-friendlt interface making it easy to learn and use.
+}
+
 \examples{
 library(tidycmprsk)
 

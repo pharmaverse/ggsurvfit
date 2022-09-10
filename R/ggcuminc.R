@@ -10,6 +10,14 @@
 #' @return a ggplot2 figure
 #' @export
 #'
+#' @section Details:
+#'
+#' *Why do we not use `cmprsk::cuminc()`?*
+#'
+#' The implementation of `cmprsk::cuminc()` does not provide the data required
+#' to construct the risk table. Moreover, the `tidycmprsk::cuminc()` has a
+#' user-friendlt interface making it easy to learn and use.
+#'
 #' @examples
 #' library(tidycmprsk)
 #'
