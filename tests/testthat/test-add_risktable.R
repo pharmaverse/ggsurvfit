@@ -18,6 +18,10 @@ test_that("add_risktable() works with ggsurvfit()", {
   vdiffr::expect_doppelganger("sf2-risktable", lst_survfit2_risktable[[2]])
   vdiffr::expect_doppelganger("sf3-risktable", lst_survfit2_risktable[[3]])
 
+  vdiffr::expect_doppelganger(
+    "sf1-risktable-height",
+    sf1 %>% ggsurvfit() + add_risktable(risktable_height = 0.40)
+  )
 
   expect_error(
     list(sf1, sf2, sf3) %>%

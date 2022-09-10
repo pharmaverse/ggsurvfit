@@ -11,3 +11,5 @@
 ^data-raw$
 .covrignore
 codemeta.json
+^CRAN-SUBMISSION$
+^vignettes/articles$

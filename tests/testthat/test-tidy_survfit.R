@@ -70,6 +70,8 @@ test_that("tidy_survfit() works with survfit2()", {
     df_event_check %>% dplyr::filter(strata == "Male") %>% dplyr::pull(cum.event),
     lapply(times, function(x) sum(df_lung$time <= x & df_lung$status == 2 & df_lung$sex == "Male")) %>% unlist()
   )
+
+  expect_error(sf2 %>% tidy_survfit(type = mtcars))
 })
 
 test_that("tidy_survfit() throws appropriate errors", {

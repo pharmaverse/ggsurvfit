@@ -10,6 +10,14 @@
 #' @return a ggplot2 figure
 #' @export
 #'
+#' @section Details:
+#'
+#' *Why do we not use `cmprsk::cuminc()`?*
+#'
+#' The implementation of `cmprsk::cuminc()` does not provide the data required
+#' to construct the risk table. Moreover, the `tidycmprsk::cuminc()` has a
+#' user-friendlt interface making it easy to learn and use.
+#'
 #' @examples
 #' library(tidycmprsk)
 #'
@@ -34,16 +42,16 @@ ggcuminc <- function(x, outcome = NULL,
   }
 
   # prep data to be passed to ggplot() -----------------------------------------
-  df <- tidy_cuminc(x = x)
+  df <- tidy_cuminc(x = x) %>%
+    dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
 
   # subset on outcome of interest ----------------------------------------------
   if (is.null(outcome)) {
     outcome <- df$outcome[1]
-    if (!identical(Sys.getenv("TESTTHAT"), "true"))
-      cli_inform("Plotting outcome {.val {outcome}}.")
+    cli_inform("Plotting outcome {.val {outcome}}.")
   }
   if (any(!outcome %in% unique(df$outcome))) {
-    cli_abort("Argument {.code outcome} must be in {.val {unique(df$outcome)}}")
+    cli_abort("Argument {.code outcome} must be one or more of {.val {unique(df$outcome)}}")
   }
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 

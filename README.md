@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggsurvfit
+# ggsurvfit <a href="http://www.danieldsjoberg.com/ggsurvfit/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
@@ -10,7 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
-<!-- [![CRAN status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit) -->
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 <!-- badges: end -->
 
 ## Introduction
@@ -62,18 +63,18 @@ for many more examples.
 
 ``` r
 library(ggsurvfit)
-library(ggplot2)
+#> Loading required package: ggplot2
 
 survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   # build Kaplan-Meier plot ----------------------------------------------------
-  ggsurvfit(size = 1) +
+ggsurvfit(size = 1) +
   add_confidence_interval() +
   add_risktable() +
   add_quantile(y_value = 0.6, color = "gray50", size = 0.75) +
   
   # use ggplot2 functions to style the plot and update the labels --------------
-  # limit plot to show 8 years and less
-  coord_cartesian(xlim = c(0, 8)) +
+# limit plot to show 8 years and less
+coord_cartesian(xlim = c(0, 8)) +
   # update figure labels/titles
   labs(
     y = "Percentage Survival",
@@ -128,3 +129,7 @@ survfit(Surv_CNSR() ~ 1, adtte)
 #>         n events median 0.95LCL 0.95UCL
 #> [1,] 2199    755    3.2     3.1    3.56
 ```
+
+## Related Packages
+
+<img src="man/figures/README-gt-related-pkgs.png" width="100%" />

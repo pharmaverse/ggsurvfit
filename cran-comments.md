@@ -13,3 +13,9 @@
   New submission
 
 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+
+## Comments
+
+The package was reviewed and accepted on Aug 24, but a LaTeX issue in the manual halted the publication.
+The issue has now been resolved.
+Thank you for your time.

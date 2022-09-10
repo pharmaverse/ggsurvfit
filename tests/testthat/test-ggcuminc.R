@@ -13,6 +13,16 @@ test_that("ggcuminc() works", {
   vdiffr::expect_doppelganger("cuminc3-ggcuminc", lst_ggcuminc[[3]])
 
   expect_error(ggcuminc(mtcars))
+  expect_error(ggcuminc(cuminc1, outcome = "not an outcome"))
+  expect_error(
+    ggcuminc(cuminc1,
+             outcome = c("death from cancer", "death other causes"),
+             linetype_aes = TRUE)
+  )
+  expect_error(
+    ggcuminc(cuminc1, outcome = c("death from cancer", "death other causes")),
+    NA
+  )
 })
 
 test_that("ggcuminc() works with multiple outcomes", {
