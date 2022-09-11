@@ -72,6 +72,9 @@ test_that("tidy_survfit() works with survfit2()", {
   )
 
   expect_error(sf2 %>% tidy_survfit(type = mtcars))
+  expect_error(
+    survival::coxph(Surv(time, status) ~ sex, df_lung) %>% survfit() %>% tidy_survfit()
+  )
 })
 
 test_that("tidy_survfit() throws appropriate errors", {
