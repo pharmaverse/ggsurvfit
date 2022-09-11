@@ -135,10 +135,12 @@ test_that("tidy_survfit() works with multi-state models", {
     sfms1 %>%
       tidy_survfit() %>%
       dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
       dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata")))),
     cuminc1 %>%
       tidy_cuminc() %>%
       dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
       dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
   )
 
@@ -146,10 +148,12 @@ test_that("tidy_survfit() works with multi-state models", {
     sfms2 %>%
       tidy_survfit() %>%
       dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
       dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata")))),
     cuminc2 %>%
       tidy_cuminc() %>%
       dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
       dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
   )
 
@@ -157,12 +161,12 @@ test_that("tidy_survfit() works with multi-state models", {
     sfms3 %>%
       tidy_survfit() %>%
       dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
-      dplyr::mutate(dplyr::across(dplyr::any_of("strata"), ~as.character(.) %>% trimws())) %>%
+      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
       dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata")))),
     cuminc3 %>%
       tidy_cuminc() %>%
       dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
-      dplyr::mutate(dplyr::across(dplyr::any_of("strata"), ~as.character(.) %>% trimws())) %>%
+      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
       dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
   )
 
