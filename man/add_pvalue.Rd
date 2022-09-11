@@ -38,8 +38,11 @@ a ggplot2 figure
 \item \code{add_pvalue("annotation")}: Add a p-value text annotation via \code{ggplot2::annotation("text")}
 }
 
-P-values are calculated with \code{survival::survdiff()}.
+P-values are calculated with \code{survival::survdiff()} or \code{tidycmprsk::glance()}.
 Examples of custom placement located in the help file for \code{survfit_p()}.
+
+When a competing risks figure includes multiple outcomes, only the p-value
+comparing stratum for the \emph{first} outcome can be placed.
 }
 \examples{
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%

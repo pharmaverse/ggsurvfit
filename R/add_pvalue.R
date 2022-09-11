@@ -4,8 +4,11 @@
 #' - `add_pvalue("caption")`: Add a p-value to the figure via `ggplot2::labs(caption=)`
 #' - `add_pvalue("annotation")`: Add a p-value text annotation via `ggplot2::annotation("text")`
 #'
-#' P-values are calculated with `survival::survdiff()`.
+#' P-values are calculated with `survival::survdiff()` or `tidycmprsk::glance()`.
 #' Examples of custom placement located in the help file for `survfit_p()`.
+#'
+#' When a competing risks figure includes multiple outcomes, only the p-value
+#' comparing stratum for the _first_ outcome can be placed.
 #'
 #' @param location string indicating where to place p-value. Must be one of
 #' `c("caption", "annotation")`
@@ -71,19 +74,32 @@ add_pvalue <- function(location = c("caption", "annotation"),
   build <- ggplot2::ggplot_build(object)
   survfit <- build$data[[1]][["survfit"]][[1]]
 
-  if (!inherits(survfit, "survfit2")) {
+  if (!inherits(survfit, c("survfit2", "tidycuminc"))) {
     cli_inform(
-      c("!" = "{.code add_pvalue()} works with {.code ggsurvfit()} objects created with {.code survfit2()}.",
+      c("!" = "{.code add_pvalue()} works with objects created with {.code survfit2()} or {.code tidycmprsk::cuminc()}.",
         "i" = "{.code add_pvalue()} has been ignored.")
     )
     return(object)
   }
 
   # calculate p-value
-  p.value <- survfit2_p(survfit,
-                        pvalue_fun = pvalue_fun,
-                        prepend_p = prepend_p,
-                        rho = rho)
+  if (inherits(survfit, "survfit2")) {
+    p.value <- survfit2_p(survfit,
+                          pvalue_fun = pvalue_fun,
+                          prepend_p = prepend_p,
+                          rho = rho)
+  }
+  else if (inherits(survfit, "tidycuminc")) {
+    p.value <-
+      tidycmprsk::glance(survfit) %>%
+      dplyr::pull(.data$p.value_1) %>%
+      pvalue_fun() %>%
+      {dplyr::case_when(
+        !prepend_p ~ .,
+        prepend_p & grepl(pattern = "^<|^>", x = .) ~ paste0("p", .),
+        prepend_p ~ paste0("p=", .)
+      )}
+  }
 
   # add caption, and return ggplot
   if (location == "caption") {

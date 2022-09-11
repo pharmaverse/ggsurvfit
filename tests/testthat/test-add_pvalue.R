@@ -38,13 +38,15 @@ test_that("add_pvalue() works", {
 
   # no error with ggcuminc()
   expect_error(
-    tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
+    pvalue_cuminc <-
+      tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
       ggcuminc(outcome = "death from cancer") +
       add_confidence_interval() +
       add_risktable() +
       add_pvalue(),
     NA
   )
+  vdiffr::expect_doppelganger("cuminc2-pvalue", pvalue_cuminc)
 
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
