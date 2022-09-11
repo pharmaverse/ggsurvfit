@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Adding ability to report comparative p-values from cumulative incidence plots created with `tidycmprsk::cuminc()` (#84)
+
 * Adding support for multi-state models created with `survfit()`, i.e. competing risks from the survival package. (#83)
 
 * Changed the default of the `ggsurvfit_build(combine_plots=)` argument to `TRUE`.
