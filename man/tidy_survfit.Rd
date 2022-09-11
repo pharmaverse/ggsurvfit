@@ -12,7 +12,9 @@ tidy_survfit(x, times = NULL, type = c("survival", "risk", "cumhaz"))
 \item{times}{numeric vector of times. Default is \code{NULL},
 which returns all observed times.}
 
-\item{type}{type of statistic to report. Default is \code{"survival"}.
+\item{type}{type of statistic to report.
+Available for Kaplan-Meier estimates only.
+Default is \code{"survival"}.
 Must be one of the following:\tabular{ll}{
    type \tab transformation \cr
    \code{"survival"} \tab \code{x} \cr

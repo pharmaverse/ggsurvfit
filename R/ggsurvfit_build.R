@@ -15,7 +15,7 @@
 #' and the risk tables. When `TRUE`, plots are combined with `patchwork::wrap_plots()`.
 #' When `FALSE` and the plot has risk tables, they are returned in a list of
 #' gtable grobs.
-#' Default is `FALSE`.
+#' Default is `TRUE`.
 #'
 #' @return a list of ggplot2 objects or a single ggplot2 object
 #' @export
@@ -29,7 +29,7 @@
 #'   scale_y_continuous(limits = c(0, 1))
 #'
 #' # build plots
-#' built_p <- ggsurvfit_build(p)
+#' built_p <- ggsurvfit_build(p, combine_plots = FALSE)
 #'
 #' # reconstruct original figure print with risktables
 #' patchwork::wrap_plots(
@@ -42,12 +42,12 @@
 #'
 #' # place plots side-by-side (plots must be built before placement with patchwork)
 #' patchwork::wrap_plots(
-#'   ggsurvfit_build(p, combine_plots = TRUE),
-#'   ggsurvfit_build(p, combine_plots = TRUE),
+#'   ggsurvfit_build(p),
+#'   ggsurvfit_build(p),
 #'   ncol = 2
 #' )
 
-ggsurvfit_build <- function(x, combine_plots = FALSE) {
+ggsurvfit_build <- function(x, combine_plots = TRUE) {
   pvalue_args <- .extract_arguments_from_attr(x, attr_name = "add_pvalue")
   risktable_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable")
   risktable_symbol_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable_strata_symbol")

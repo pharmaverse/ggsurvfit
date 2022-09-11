@@ -56,6 +56,17 @@ add_pvalue <- function(location = c("caption", "annotation"),
 
 
 .add_pvalue_caption <- function(object, location, caption, pvalue_fun, prepend_p, pvalue_type, rho, ...) {
+  if (!rlang::is_string(caption)) {
+    cli_abort(c("!" = "The {.code add_pvalue(caption=)} argument must be a string of length one."))
+  }
+  if (!rlang::is_function(pvalue_fun)) {
+    cli_abort(c("!" = "The {.code add_pvalue(pvalue_fun=)} argument must be a function."))
+  }
+  if (!rlang::is_logical(prepend_p)) {
+    cli_abort(c("!" = "The {.code add_pvalue(prepend_p=)} argument must be a logical."))
+  }
+
+
   # extract survfit object
   build <- ggplot2::ggplot_build(object)
   survfit <- build$data[[1]][["survfit"]][[1]]

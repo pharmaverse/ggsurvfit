@@ -45,4 +45,23 @@ test_that("add_pvalue() works", {
       add_pvalue(),
     NA
   )
+
+  expect_error(
+    (survfit2(Surv(time, status) ~ surg, df_colon) %>%
+      ggsurvfit() +
+      add_pvalue(caption = letters)) %>%
+      ggsurvfit_build()
+  )
+  expect_error(
+    (survfit2(Surv(time, status) ~ surg, df_colon) %>%
+      ggsurvfit() +
+      add_pvalue(pvalue_fun = letters)) %>%
+    ggsurvfit_build()
+  )
+  expect_error(
+    (survfit2(Surv(time, status) ~ surg, df_colon) %>%
+      ggsurvfit() +
+      add_pvalue(prepend_p = letters)) %>%
+    ggsurvfit_build()
+  )
 })

@@ -59,6 +59,12 @@ ggsurvfit <- function(x, type = "survival",
         "i" = "Create the object with {.code survfit2()}.")
     )
   }
+  if (inherits(x, "survfitms")) {
+    cli_abort(c(
+      "!" = "{.code ggsurvfit()} cannot be used to plot objects of class {.cls {class(x)}}.",
+      "i" = "Use {.code ggsuminc()} for competing risks cumulative incidence plotting."
+    ))
+  }
 
   # prep data to be passed to ggplot() -----------------------------------------
   df <-

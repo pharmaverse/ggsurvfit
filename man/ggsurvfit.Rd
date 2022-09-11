@@ -15,7 +15,9 @@ ggsurvfit(
 \arguments{
 \item{x}{a 'survfit' object created with \code{survfit2()}}
 
-\item{type}{type of statistic to report. Default is \code{"survival"}.
+\item{type}{type of statistic to report.
+Available for Kaplan-Meier estimates only.
+Default is \code{"survival"}.
 Must be one of the following:\tabular{ll}{
    type \tab transformation \cr
    \code{"survival"} \tab \code{x} \cr

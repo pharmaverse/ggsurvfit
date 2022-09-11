@@ -64,4 +64,5 @@ test_that("ggsurvfit() works", {
   )
 
   expect_error(ggsurvfit(mtcars))
+  expect_error(survfit2(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>% ggsurvfit())
 })

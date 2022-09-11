@@ -3,6 +3,12 @@
                                  combine_groups, risktable_group,
                                  risktable_height, theme, combine_plots,
                                  risktable_symbol_args, ...) {
+  # check iputs ----------------------------------------------------------------
+  if (!is.null(risktable_height) &&
+    (length(risktable_height) > 1 || !is.numeric(risktable_height) || !dplyr::between(risktable_height, 0, 1))) {
+    cli_abort("The {.code add_risktable(risktable_height=)} argument must be a scalar between 0 and 1.")
+  }
+
   # build the ggplot to inspect the internals ----------------------------------
   plot_build <- ggplot2::ggplot_build(x)
 
@@ -209,6 +215,41 @@ lst_stat_labels_default <-
     )
 }
 
+.combine_over_outcomes <- function(x) {
+  # only need to combine over 'outcomes' if multiple outcomes shown in figure
+  if (!"outcome" %in% names(x) || length(unique(x$outcome)) < 2) return(x)
+  x %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of(c("time", "strata")))) %>%
+    dplyr::summarise(
+      n.risk = getElement(.data$n.risk, 1),
+      n.event = sum(.data$n.event),
+      n.censor = getElement(.data$n.censor, 1),
+      cum.event = sum(.data$cum.event),
+      cum.censor = getElement(.data$cum.censor, 1)
+    ) %>%
+    dplyr::ungroup()
+}
+
+.combine_over_strata <- function(x, combine_groups) {
+  # if isTRUE(combine_groups), combine all the stats across strata
+  if (!isTRUE(combine_groups)) return(x)
+
+  x %>%
+    dplyr::select(dplyr::any_of(c(
+      "time", "n.risk",
+      "n.event", "n.censor",
+      "cum.event", "cum.censor"
+    ))) %>%
+    dplyr::group_by(.data$time) %>%
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::any_of(c("n.risk", "n.event", "n.censor", "cum.event", "cum.censor")),
+        sum
+      )
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct()
+}
 
 # creating a data frame with the stats needed for the risk tables
 .prepare_data_for_risk_tables <- function(data, times, combine_groups) {
@@ -216,27 +257,9 @@ lst_stat_labels_default <-
     data %>%
     .add_tidy_times(times = times) %>%
     .add_cumulative_stats() %>%
-    .keep_selected_times(times = times)
-
-  # if isTRUE(combine_groups), combine all the stats across strata
-  if (isTRUE(combine_groups)) {
-    df_times <-
-      df_times %>%
-      dplyr::select(dplyr::any_of(c(
-        "time", "n.risk",
-        "n.event", "n.censor",
-        "cum.event", "cum.censor"
-      ))) %>%
-      dplyr::group_by(.data$time) %>%
-      dplyr::mutate(
-        dplyr::across(
-          dplyr::any_of(c("n.risk", "n.event", "n.censor", "cum.event", "cum.censor")),
-          sum
-        )
-      ) %>%
-      dplyr::ungroup() %>%
-      dplyr::distinct()
-  }
+    .keep_selected_times(times = times) %>%
+    .combine_over_outcomes() %>%
+    .combine_over_strata(combine_groups = combine_groups)
 
   df_times
 }
