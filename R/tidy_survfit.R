@@ -9,7 +9,9 @@
 #' @param x a 'survfit' object created with `survfit2()`
 #' @param times numeric vector of times. Default is `NULL`,
 #' which returns all observed times.
-#' @param type type of statistic to report. Default is `"survival"`.
+#' @param type type of statistic to report.
+#' Available for Kaplan-Meier estimates only.
+#' Default is `"survival"`.
 #' Must be one of the following:
 #' ```{r, echo = FALSE}
 #' dplyr::tribble(
@@ -35,7 +37,8 @@ tidy_survfit <- function(x,
     cli_abort(c("!" = "Argument {.code x} must be class {.cls survfit}.",
                 "i" = "Create the object with {.code survfit2()}"))
   }
-  if (is.character(type)) type <- match.arg(type)
+  if (inherits(x, "survfitms")) type <- "cuminc"
+  else if (is.character(type)) type <- match.arg(type)
   if (!is.null(times) && any(times < 0)) {
     cli_abort("The {.var times} cannot be negative.")
   }
@@ -43,8 +46,21 @@ tidy_survfit <- function(x,
   # create base tidy tibble ----------------------------------------------------
   df_tidy <-
     survival::survfit0(x, start.time = 0) %>%
-    structure(class = "survfit") %>%
     broom::tidy()
+
+  # if a competing risks model, filter on the outcome of interest
+  if (inherits(x, "survfitms")) {
+    df_tidy <-
+      df_tidy %>%
+      dplyr::filter(!.data$state %in% "(s0)") %>%
+      dplyr::select(-dplyr::all_of("n.risk")) %>%
+      dplyr::left_join(
+        df_tidy %>% dplyr::filter(.data$state %in% "(s0)") %>% dplyr::select(dplyr::any_of(c("strata", "time", "n.risk"))),
+        by = intersect(c("strata", "time"), names(df_tidy))
+      ) %>%
+      dplyr::relocate(.data$n.risk, .after = .data$time) %>%
+      dplyr::rename(outcome = .data$state)
+  }
 
   # if times are specified, add them (and associated stats) to the data frame
   df_tidy <- .add_tidy_times(df_tidy, times = times)
@@ -77,8 +93,6 @@ tidy_survfit <- function(x,
   if (!"strata" %in% names(x)) {
     return(x)
   }
-
-
 
   # if not a survift2 object, do not attempt to extract information from survfit object
   if (!inherits(survfit, c("survfit2", "tidycuminc"))) {
@@ -153,11 +167,12 @@ tidy_survfit <- function(x,
 }
 
 .transform_estimate <- function(x, type) {
-  # seleect transformation function --------------------------------------------
+  # select transformation function ---------------------------------------------
   if (rlang::is_string(type)) {
     .transfun <-
       switch(type,
              survival = function(y) y,
+             cuminc = function(y) y,
              risk = function(y) 1 - y,
              # survfit object contains an estimate for Cumhaz and SE based on Nelson-Aalen with or without correction for ties
              # However, no CI is calculated automatically. For plotting, the MLE estimator is used for convenience.
@@ -190,6 +205,7 @@ tidy_survfit <- function(x,
       estimate_type_label =
         dplyr::case_when(
           rlang::is_string(.env$type) && .env$type %in% "survival" ~ "Survival Probability",
+          rlang::is_string(.env$type) && .env$type %in% "cuminc" ~ "Cumulative Incidence",
           rlang::is_string(.env$type) && .env$type %in% "risk" ~ "Risk",
           rlang::is_string(.env$type) && .env$type %in% "cumhaz" ~ "Cumulative Hazard",
           TRUE ~ rlang::expr_deparse(.transfun)
@@ -201,6 +217,7 @@ tidy_survfit <- function(x,
     x$monotonicity_type <-
       switch(type,
              "survival" = "decreasing",
+             "cuminc" = "increasing",
              "risk" = "increasing",
              "cumhaz" = "increasing"
       )
@@ -220,7 +237,7 @@ tidy_survfit <- function(x,
     dplyr::mutate(
       time_group = cut(.data$time, breaks = union(.env$times, max(.env$x$time)))
     ) %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of(c("time_group", "strata")))) %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of(c("time_group", "strata", "outcome")))) %>%
     dplyr::mutate(
       dplyr::across(
         dplyr::all_of(c("n.censor", "n.event")),
@@ -234,7 +251,7 @@ tidy_survfit <- function(x,
 
 .add_cumulative_stats <- function(x) {
   x %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of("strata"))) %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of(c("strata", "outcome")))) %>%
     dplyr::mutate(
       cum.event = cumsum(.data$n.event),
       cum.censor = cumsum(.data$n.censor),
@@ -246,7 +263,7 @@ tidy_survfit <- function(x,
 .add_tidy_times <- function(x, times) {
   x <-
     x %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of("strata"))) %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of(c("strata", "outcome")))) %>%
     dplyr::mutate(
       time_max = max(.data$time)
     ) %>%
@@ -258,25 +275,34 @@ tidy_survfit <- function(x,
 
   # create tibble of times
   df_times <-
-    switch(as.character("strata" %in% names(x)),
-           "TRUE" = dplyr::tibble(time = list(times), strata = unique(x$strata)),
-           "FALSE" = dplyr::tibble(time = list(times))
-    ) %>%
-    tidyr::unnest(cols = .data$time)
+    do.call(
+      what = expand.grid,
+      args =
+        # remove NULL elements before passing to exapnd grid
+        Filter(
+          Negate(is.null),
+          list(
+            time = times,
+            strata = suppressWarnings(unique(x$strata)),
+            outcome = suppressWarnings(unique(x$outcome)),
+            stringsAsFactors = FALSE
+          )
+        )
+    )
 
   # merge tibble of times with tidy df
   df_result <-
     dplyr::full_join(
       x,
       df_times,
-      by = intersect(c("time", "strata"), names(x))
+      by = intersect(c("time", "strata", "outcome"), names(x))
     ) %>%
-    dplyr::arrange(dplyr::across(dplyr::any_of(c("strata", "time"))))
+    dplyr::arrange(dplyr::across(dplyr::any_of(c("outcome", "strata", "time"))))
 
   # fill in missing stats
   df_result <-
     df_result %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of("strata"))) %>%
+    dplyr::group_by(dplyr::across(dplyr::any_of(c("strata", "outcome")))) %>%
     dplyr::mutate(
       dplyr::across(c(.data$n.event, .data$n.censor), ~ ifelse(is.na(.), 0, .))
     ) %>%

@@ -1,6 +1,8 @@
 #' Plot Cumulative Incidence
 #'
-#' Plot a cumulative incidence object created with `tidycmprsk::cuminc()`.
+#' Plot a cumulative incidence object created with `tidycmprsk::cuminc()`
+#' or a multi-state object created with `survfit2()`.
+#' Read more on multi-state models [here](https://cran.r-project.org/web/packages/survival/vignettes/compete.pdf).
 #'
 #' @param outcome string indicating which outcome(s) to include in plot.
 #' Default is to include the first competing event.
@@ -16,7 +18,7 @@
 #'
 #' The implementation of `cmprsk::cuminc()` does not provide the data required
 #' to construct the risk table. Moreover, the `tidycmprsk::cuminc()` has a
-#' user-friendlt interface making it easy to learn and use.
+#' user-friendly interface making it easy to learn and use.
 #'
 #' @examples
 #' library(tidycmprsk)
@@ -29,12 +31,21 @@
 #' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
 #'   ggcuminc(outcome = c("death from cancer", "death other causes")) +
 #'   add_risktable()
-
+#'
+#' # using the survival multi-state model
+#' survfit2(Surv(ttdeath, death_cr) ~ trt, trial) %>%
+#'   ggcuminc(outcome = "death from cancer") +
+#'   add_confidence_interval() +
+#'   add_risktable()
+#'
+#' survfit2(Surv(ttdeath, death_cr) ~ trt, trial) %>%
+#'   ggcuminc(outcome = c("death from cancer", "death other causes")) +
+#'   add_risktable()
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
                      theme = theme_ggsurvfit_default(), ...) {
   # check inputs ---------------------------------------------------------------
-  if (!inherits(x, "tidycuminc")) {
+  if (!inherits(x, c("tidycuminc", "survfitms"))) {
     cli_abort(
       c("!" = "Argument {.code x} must be {.cls tidycuminc}.",
         "i" = "Create the object with {.code tidycmprsk::cuminc()}.")
@@ -42,8 +53,12 @@ ggcuminc <- function(x, outcome = NULL,
   }
 
   # prep data to be passed to ggplot() -----------------------------------------
-  df <- tidy_cuminc(x = x) %>%
-    dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
+  if (inherits(x, "tidycuminc"))
+    df <- tidy_cuminc(x = x)
+  else if (inherits(x, "survfitms"))
+    df <- tidy_survfit(x = x)
+  # adding the model object to df
+  df <- df %>% dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
 
   # subset on outcome of interest ----------------------------------------------
   if (is.null(outcome)) {

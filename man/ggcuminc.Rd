@@ -30,7 +30,9 @@ will be a mix a various line types for each stratum.}
 a ggplot2 figure
 }
 \description{
-Plot a cumulative incidence object created with \code{tidycmprsk::cuminc()}.
+Plot a cumulative incidence object created with \code{tidycmprsk::cuminc()}
+or a multi-state object created with \code{survfit2()}.
+Read more on multi-state models \href{https://cran.r-project.org/web/packages/survival/vignettes/compete.pdf}{here}.
 }
 \section{Details}{
 
@@ -39,7 +41,7 @@ Plot a cumulative incidence object created with \code{tidycmprsk::cuminc()}.
 
 The implementation of \code{cmprsk::cuminc()} does not provide the data required
 to construct the risk table. Moreover, the \code{tidycmprsk::cuminc()} has a
-user-friendlt interface making it easy to learn and use.
+user-friendly interface making it easy to learn and use.
 }
 
 \examples{
@@ -51,6 +53,16 @@ cuminc(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
   add_risktable()
 
 cuminc(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
+  ggcuminc(outcome = c("death from cancer", "death other causes")) +
+  add_risktable()
+
+# using the survival multi-state model
+survfit2(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
+  ggcuminc(outcome = "death from cancer") +
+  add_confidence_interval() +
+  add_risktable()
+
+survfit2(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
   ggcuminc(outcome = c("death from cancer", "death other causes")) +
   add_risktable()
 }
