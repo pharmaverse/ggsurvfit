@@ -90,6 +90,13 @@ test_that("add_risktable() throws error messages", {
        )) %>%
       print()
   )
+
+  expect_error(
+    ggsurvfit_build(
+      ggsurvfit(sf1) +
+        add_risktable(risktable_height = letters)
+    )
+  )
 })
 
 

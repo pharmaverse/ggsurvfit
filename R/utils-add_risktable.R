@@ -3,6 +3,12 @@
                                  combine_groups, risktable_group,
                                  risktable_height, theme, combine_plots,
                                  risktable_symbol_args, ...) {
+  # check iputs ----------------------------------------------------------------
+  if (!is.null(risktable_height) &&
+    (length(risktable_height) > 1 || !is.numeric(risktable_height) || !dplyr::between(risktable_height, 0, 1))) {
+    cli_abort("The {.code add_risktable(risktable_height=)} argument must be a scalar between 0 and 1.")
+  }
+
   # build the ggplot to inspect the internals ----------------------------------
   plot_build <- ggplot2::ggplot_build(x)
 
