@@ -188,8 +188,8 @@ p <-
   scale_y_continuous(limits = c(0, 1)) +
   scale_x_continuous(n.breaks = 7)
 
-# build plots
-built_p <- ggsurvfit_build(p, combine_plots = TRUE)
+# build plot (which constructs the risktable)
+built_p <- ggsurvfit_build(p)
 
 # place plots side-by-side
 wrap_plots(built_p, built_p, ncol = 2)
