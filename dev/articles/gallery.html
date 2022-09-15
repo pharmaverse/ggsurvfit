@@ -255,8 +255,8 @@
 <span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>n.breaks <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># build plots</span></span>
-<span><span class="va">built_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggsurvfit_build.html">ggsurvfit_build</a></span><span class="op">(</span><span class="va">p</span>, combine_plots <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># build plot (which constructs the risktable)</span></span>
+<span><span class="va">built_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggsurvfit_build.html">ggsurvfit_build</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># place plots side-by-side</span></span>
 <span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">built_p</span>, <span class="va">built_p</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
