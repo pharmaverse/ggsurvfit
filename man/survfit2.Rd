@@ -87,7 +87,7 @@ The definition of \code{survfit2()} is unremarkably simple:
   survfit <- survival::survfit(formula, ...)
 
   # add the environment
-  survfit$.Environment = rlang::current_env()
+  survfit$.Environment = parent.frame()
 
   # add class and return
   class(survfit) <- c("survfit2", "survfit")
