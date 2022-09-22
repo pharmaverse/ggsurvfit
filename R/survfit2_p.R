@@ -43,7 +43,7 @@ survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, rho = 0) {
     rho = rho
   ) %>%
     broom::glance() %>%
-    dplyr::pull(.data$p.value) %>%
+    dplyr::pull("p.value") %>%
     pvalue_fun() %>%
     {dplyr::case_when(
       !prepend_p ~ .,
