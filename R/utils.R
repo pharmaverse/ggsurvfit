@@ -17,3 +17,8 @@
     unlist(recursive = FALSE)
 }
 
+
+# this function assures that 5s are rounded up (and not to even, the default in `round()`)
+round2 <- function(x, digits = 0) {
+  round(x + .Machine$double.eps * sign(x), digits = digits)
+}
