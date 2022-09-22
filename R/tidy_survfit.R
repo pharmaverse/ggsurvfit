@@ -63,8 +63,8 @@ tidy_survfit <- function(x,
         df_tidy %>% dplyr::filter(.data$state %in% "(s0)") %>% dplyr::select(dplyr::any_of(c("strata", "time", "n.risk"))),
         by = intersect(c("strata", "time"), names(df_tidy))
       ) %>%
-      dplyr::relocate(.data$n.risk, .after = .data$time) %>%
-      dplyr::rename(outcome = .data$state)
+      dplyr::relocate("n.risk", .after = "time") %>%
+      dplyr::rename(outcome = "state")
   }
 
   # if times are specified, add them (and associated stats) to the data frame
@@ -86,7 +86,7 @@ tidy_survfit <- function(x,
 
   # return tidied tibble
   df_tidy %>%
-    dplyr::select(-.data$time_max) %>%
+    dplyr::select(-"time_max") %>%
     dplyr::mutate(
       conf.level = x$conf.int
     )
@@ -251,7 +251,7 @@ tidy_survfit <- function(x,
     ) %>%
     dplyr::filter(.data$time %in% .env$times) %>%
     dplyr::ungroup() %>%
-    dplyr::select(-.data$time_group)
+    dplyr::select(-"time_group")
 }
 
 .add_cumulative_stats <- function(x) {
@@ -260,7 +260,7 @@ tidy_survfit <- function(x,
     dplyr::mutate(
       cum.event = cumsum(.data$n.event),
       cum.censor = cumsum(.data$n.censor),
-      .after = .data$n.censor
+      .after = "n.censor"
     ) %>%
     dplyr::ungroup()
 }
@@ -309,14 +309,14 @@ tidy_survfit <- function(x,
     df_result %>%
     dplyr::group_by(dplyr::across(dplyr::any_of(c("strata", "outcome")))) %>%
     dplyr::mutate(
-      dplyr::across(c(.data$n.event, .data$n.censor), ~ ifelse(is.na(.), 0, .))
+      dplyr::across(c("n.event", "n.censor"), ~ ifelse(is.na(.), 0, .))
     ) %>%
     tidyr::fill(
-      -c(.data$n.risk, .data$n.event, .data$n.censor),
+      -c("n.risk", "n.event", "n.censor"),
       .direction = "down"
     ) %>%
     tidyr::fill(
-      .data$n.risk,
+      "n.risk",
       .direction = "up"
     ) %>%
     dplyr::mutate(
