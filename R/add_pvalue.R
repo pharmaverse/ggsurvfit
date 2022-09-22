@@ -92,7 +92,7 @@ add_pvalue <- function(location = c("caption", "annotation"),
   else if (inherits(survfit, "tidycuminc")) {
     p.value <-
       tidycmprsk::glance(survfit) %>%
-      dplyr::pull(.data$p.value_1) %>%
+      dplyr::pull("p.value_1") %>%
       pvalue_fun() %>%
       {dplyr::case_when(
         !prepend_p ~ .,

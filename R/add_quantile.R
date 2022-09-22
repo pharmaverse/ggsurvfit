@@ -86,7 +86,7 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
   # create tibble of times
   df_times <-
     dplyr::tibble(x = list(x_value), group = unique(data$group)) %>%
-    tidyr::unnest(cols = .data$x)
+    tidyr::unnest(cols = "x")
 
   # merge tibble of times with tidy df
   df_quantile <-
@@ -101,7 +101,7 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
   df_quantile <-
     df_quantile %>%
     dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
-    tidyr::fill(.data$y, .data$x_max, .direction = "down") %>%
+    tidyr::fill("y", "x_max", .direction = "down") %>%
     dplyr::ungroup()
 
   # any times above the max observed time are set to NA
@@ -152,7 +152,7 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
     dplyr::group_by(dplyr::across(dplyr::any_of(c("group", "outcome", "y")))) %>%
     dplyr::filter(.data$y %in% .env$y_value, dplyr::row_number() == 1L) %>%
     dplyr::ungroup() %>%
-    dplyr::select(.data$x, .data$y) %>%
+    dplyr::select("x", "y") %>%
     dplyr::mutate(xend = .data$x, yend = 0)
 
   # add row for horizontal line segment
@@ -194,7 +194,6 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
         dplyr::mutate(y = .env$y_value),
       by = intersect(c("group", "y"), names(.))
     )} %>%
-    # {dplyr::arrange(., !!!rlang::syms(intersect(c("group", "y"), names(.))), dplyr::desc(.data$x))} %>%
     {dplyr::arrange(
       .,
       !!!rlang::syms(intersect(c("group", "y"), names(.))),
@@ -202,7 +201,7 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
     )} %>%
     dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
     tidyr::fill(
-      .data$x,
+      "x",
       .direction =
         dplyr::case_when(
           monotonicity_type == "decreasing" ~ "down",
@@ -218,7 +217,7 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
             ifelse(.data$y > .data$y_extreme, NA, .data$x)
         )
     ) %>%
-    tidyr::drop_na(.data$x) %>%
+    tidyr::drop_na("x") %>%
     dplyr::arrange(dplyr::across(dplyr::any_of(c("group", "x", "y"))))
 }
 

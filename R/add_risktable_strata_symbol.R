@@ -60,7 +60,7 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
   # find the colors used in the figure
   colors <-
     plot_build$data[[1]] %>%
-    dplyr::select(.data$colour) %>%
+    dplyr::select("colour") %>%
     dplyr::distinct() %>%
     dplyr::pull()
 
@@ -70,7 +70,7 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
     switch(
       "strata" %in% names(plot_build$plot$data),
       plot_build$plot$data %>%
-        dplyr::pull(.data$strata) %>%
+        dplyr::pull("strata") %>%
         levels()
     ) %||%
     "Overall"
