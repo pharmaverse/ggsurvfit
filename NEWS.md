@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Fix in `survfit2()` that allows users to pass arguments with non-standard evaluation, i.e. bare column names. (#90)
+
 * Adding ability to report comparative p-values from cumulative incidence plots created with `tidycmprsk::cuminc()` (#84)
 
 * Adding support for multi-state models created with `survfit()`, i.e. competing risks from the survival package. (#83)
