@@ -72,9 +72,16 @@ survfit2 <- function(formula, ...) {
         "i" = "Argument is class {.cls {class(formula)}}")
     )
   }
-  survfit <- survival::survfit(formula = formula, ...)
 
-  # update object with env and add another class
+  # create call to `survfit()` -------------------------------------------------
+  # solution taken from https://adv-r.hadley.nz/evaluation.html#match.call
+  call <- match.call(survival::survfit, expand.dots = TRUE)
+  call[[1]] <- quote(survival::survfit)
+
+  # evaluate call --------------------------------------------------------------
+  survfit <- eval(call, parent.frame())
+
+  # update object with env and add another class -------------------------------
   survfit %>%
     utils::modifyList(val = list(.Environment = rlang::current_env())) %>%
     structure(class = c("survfit2", class(survfit)))
