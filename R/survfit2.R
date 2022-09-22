@@ -85,8 +85,8 @@ survfit2 <- function(formula, ...) {
   if (lapply(as.list(call), function(x) identical(x, quote(.))) %>% unlist() %>% any()) {
     cli::cli_inform(c(
       "x" = "Do not use the {.pkg magrittr} pipe, {.code %>%},  with {.code survfit2()}",
-      "!" = "Returned object is class {.cls survfit}, not {.cls survfit2}.",
-      "i" = "Use the base R pipe, {.code |>}, instead, e.g. {.code df_lung |> survfit2(Surv(time, status) ~ 1, data = _)}."
+      "i" = "Use the base R pipe, {.code |>}, instead, e.g. {.code df_lung |> survfit2(Surv(time, status) ~ 1, data = _)}.",
+      "!" = "Returned object is class {.cls survfit}, not {.cls survfit2}."
     ))
     return(survfit)
   }
