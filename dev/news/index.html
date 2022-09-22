@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9007</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9008</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
-<ul><li><p>Adding ability to report comparative p-values from cumulative incidence plots created with <code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/cuminc.html" class="external-link">tidycmprsk::cuminc()</a></code> (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/84" class="external-link">#84</a>)</p></li>
+<ul><li><p>Fix in <code><a href="../reference/survfit2.html">survfit2()</a></code> that allows users to pass arguments with non-standard evaluation, i.e. bare column names. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/90" class="external-link">#90</a>)</p></li>
+<li><p>When the <code>survfit(weights=)</code> argument is utilized the number at risk, number of observed events, etc. are a non-integer numbers. The counts in the risk table are now rounded to the nearest integer. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/90" class="external-link">#90</a>)</p></li>
+<li><p>Adding ability to report comparative p-values from cumulative incidence plots created with <code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/cuminc.html" class="external-link">tidycmprsk::cuminc()</a></code> (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/84" class="external-link">#84</a>)</p></li>
 <li><p>Adding support for multi-state models created with <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code>, i.e. competing risks from the survival package. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/83" class="external-link">#83</a>)</p></li>
 <li><p>Changed the default of the <code>ggsurvfit_build(combine_plots=)</code> argument to <code>TRUE</code>.</p></li>
 <li><p>Added the <code>add_quantile(x_value=)</code> argument that places line segments at the time specified.</p></li>
