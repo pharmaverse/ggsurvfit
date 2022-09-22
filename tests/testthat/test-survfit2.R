@@ -27,8 +27,10 @@ test_that("survfit2() works", {
   )
 
   expect_message(
-    df_lung %>% survfit2(Surv(time, status) ~ sex, data = .)
+    sf <- df_lung %>% survfit2(Surv(time, status) ~ sex, data = .)
   )
+  expect_true(inherits(sf, "survfit"))
+  expect_false(inherits(sf, "survfit2"))
 
   expect_error(survfit2(formula = mtcars))
   expect_error(survfit2())
