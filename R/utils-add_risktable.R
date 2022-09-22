@@ -198,7 +198,7 @@ lst_stat_labels_default <-
             ggplot2::aes(
               x = .data$time,
               y = .data[[y_value]],
-              label = .data$stat_value
+              label = round2(.data$stat_value)
             )
           ) +
           rlang::inject(ggplot2::geom_text(!!!geom_text_args))

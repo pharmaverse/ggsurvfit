@@ -39,8 +39,7 @@
 #' @return a ggplot2 figure
 #' @examples
 #' p <-
-#'   df_lung %>%
-#'   survfit2(Surv(time, status) ~ sex, data = .) %>%
+#'   survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit() +
 #'   add_censor_mark() +
 #'   add_confidence_interval()

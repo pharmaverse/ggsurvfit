@@ -1,5 +1,9 @@
 # ggsurvfit (development version)
 
+* Fix in `survfit2()` that allows users to pass arguments with non-standard evaluation, i.e. bare column names. (#90)
+
+* When the `survfit(weights=)` argument is utilized the number at risk, number of observed events, etc. are a non-integer numbers. The counts in the risk table are now rounded to the nearest integer. (#90)
+
 * Adding ability to report comparative p-values from cumulative incidence plots created with `tidycmprsk::cuminc()` (#84)
 
 * Adding support for multi-state models created with `survfit()`, i.e. competing risks from the survival package. (#83)

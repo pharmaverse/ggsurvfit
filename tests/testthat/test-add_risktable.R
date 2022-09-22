@@ -79,6 +79,20 @@ test_that("add_risktable() works with ggsurvfit()", {
   )
   vdiffr::expect_doppelganger("add_risktable-overall2", risktable_overall2)
 
+  # when weights are present, the risktable Ns should be rounded to nearest integer
+  expect_error(
+    risktable_with_weights <-
+      survfit2(
+        formula = Surv(time, status) ~ 1,
+        data = df_lung,
+        weights = abs(scale(age))
+      ) %>%
+      ggsurvfit() +
+      add_risktable(),
+    NA
+  )
+  vdiffr::expect_doppelganger("add_risktable-weights", risktable_with_weights)
+
 })
 
 test_that("add_risktable() throws error messages", {

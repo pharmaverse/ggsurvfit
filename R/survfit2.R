@@ -25,7 +25,7 @@
 #'   survfit <- survival::survfit(formula, ...)
 #'
 #'   # add the environment
-#'   survfit$.Environment = rlang::current_env()
+#'   survfit$.Environment = <calling environment>
 #'
 #'   # add class and return
 #'   class(survfit) <- c("survfit2", "survfit")
@@ -72,10 +72,27 @@ survfit2 <- function(formula, ...) {
         "i" = "Argument is class {.cls {class(formula)}}")
     )
   }
-  survfit <- survival::survfit(formula = formula, ...)
 
-  # update object with env and add another class
+  # create call to `survfit()` -------------------------------------------------
+  # solution taken from https://adv-r.hadley.nz/evaluation.html#match.call
+  call <- match.call(survival::survfit, expand.dots = TRUE)
+  call[[1]] <- quote(survival::survfit)
+
+  # evaluate call --------------------------------------------------------------
+  survfit <- eval(call, parent.frame())
+
+  # checking if data was piped in with magrittr --------------------------------
+  if (lapply(as.list(call), function(x) identical(x, quote(.))) %>% unlist() %>% any()) {
+    cli::cli_inform(c(
+      "x" = "Do not use the {.pkg magrittr} pipe, {.code %>%},  with {.code survfit2()}",
+      "i" = "Use the base R pipe, {.code |>}, instead, e.g. {.code df_lung |> survfit2(Surv(time, status) ~ 1, data = _)}.",
+      "!" = "Returned object is class {.cls survfit}, not {.cls survfit2}."
+    ))
+    return(survfit)
+  }
+
+  # update object with env and add another class -------------------------------
   survfit %>%
-    utils::modifyList(val = list(.Environment = rlang::current_env())) %>%
+    utils::modifyList(val = list(.Environment = parent.frame())) %>%
     structure(class = c("survfit2", class(survfit)))
 }
