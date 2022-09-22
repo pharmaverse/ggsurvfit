@@ -25,7 +25,7 @@
 #'   survfit <- survival::survfit(formula, ...)
 #'
 #'   # add the environment
-#'   survfit$.Environment = parent.frame()
+#'   survfit$.Environment = <calling environment>
 #'
 #'   # add class and return
 #'   class(survfit) <- c("survfit2", "survfit")
