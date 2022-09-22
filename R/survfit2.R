@@ -83,6 +83,6 @@ survfit2 <- function(formula, ...) {
 
   # update object with env and add another class -------------------------------
   survfit %>%
-    utils::modifyList(val = list(.Environment = rlang::current_env())) %>%
+    utils::modifyList(val = list(.Environment = parent.frame())) %>%
     structure(class = c("survfit2", class(survfit)))
 }
