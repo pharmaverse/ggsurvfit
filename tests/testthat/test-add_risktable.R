@@ -86,7 +86,7 @@ test_that("add_risktable() works with ggsurvfit()", {
         formula = Surv(time, status) ~ 1,
         data = df_lung,
         weights = abs(scale(age))
-      ) |>
+      ) %>%
       ggsurvfit() +
       add_risktable(),
     NA
