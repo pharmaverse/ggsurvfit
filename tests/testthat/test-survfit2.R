@@ -26,6 +26,10 @@ test_that("survfit2() works", {
       unclass()
   )
 
+  expect_message(
+    df_lung %>% survfit2(Surv(time, status) ~ sex, data = .)
+  )
+
   expect_error(survfit2(formula = mtcars))
   expect_error(survfit2())
 })

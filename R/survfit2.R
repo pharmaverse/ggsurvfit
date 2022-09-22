@@ -81,6 +81,16 @@ survfit2 <- function(formula, ...) {
   # evaluate call --------------------------------------------------------------
   survfit <- eval(call, parent.frame())
 
+  # checking if data was piped in with magrittr --------------------------------
+  if (lapply(as.list(call), function(x) identical(x, quote(.))) %>% unlist() %>% any()) {
+    cli::cli_inform(c(
+      "!" = "Do not use the {.pkg magrittr} pipe, {.code %>%},  with {.code survfit2()}",
+      "i" = "Use the base R pipe, {.code |>}, instead, e.g. {.code df_lung |> survfit2(Surv(time, status) ~ 1, data = _)}.",
+      "i" = "Returned object is class {.cls survfit}, not {.cls survfit2}."
+    ))
+    return(survfit)
+  }
+
   # update object with env and add another class -------------------------------
   survfit %>%
     utils::modifyList(val = list(.Environment = parent.frame())) %>%
