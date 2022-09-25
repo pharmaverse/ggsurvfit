@@ -116,11 +116,9 @@ opportunity for errors to be introduced in an analysis. The package
 exports a function called `Surv_CNSR()` to resolve this concern.
 
 The function creates a survival object (e.g. `survival::Surv()`) that
-uses CDISC ADaM ADTTE coding conventions and converts the arguments to
-the status/event variable convention used in the survival package for
-both the event indicator and the time component—`"CNSR"` and `"AVAL"`.
-The function can be used in **ggsurvfit** as well as any other package
-that uses `survival::Surv()`.
+uses CDISC ADaM ADTTE coding conventions as the default values. The
+function can be used in **ggsurvfit** as well as any other package that
+uses `survival::Surv()`.
 
 ``` r
 survfit(Surv_CNSR() ~ 1, adtte)

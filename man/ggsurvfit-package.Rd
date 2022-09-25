@@ -4,7 +4,7 @@
 \name{ggsurvfit-package}
 \alias{ggsurvfit-package}
 \alias{_PACKAGE}
-\title{ggsurvfit: Easy and Flexible Time-to-Event Figures}
+\title{ggsurvfit: Flexible Time-to-Event Figures}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
