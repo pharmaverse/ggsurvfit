@@ -62,7 +62,7 @@ ggsurvfit <- function(x, type = "survival",
   if (inherits(x, "survfitms")) {
     cli_abort(c(
       "!" = "{.code ggsurvfit()} cannot be used to plot objects of class {.cls {class(x)}}.",
-      "i" = "Use {.code ggsuminc()} for competing risks cumulative incidence plotting."
+      "i" = "Use {.code ggcuminc()} for competing risks cumulative incidence plotting."
     ))
   }
 
