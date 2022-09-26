@@ -116,7 +116,7 @@ In the example below, we've updated the symbol to a circle.
 
 ```{r}
 ggrisktable +
-  add_risktable_strata_symbol(symbol = "\U25CF")
+  add_risktable_strata_symbol(symbol = "\U25CF", size = 10.5)
 ```
 
 You can further customize the risk table using themes and the `add_risktable(...)` arguments.

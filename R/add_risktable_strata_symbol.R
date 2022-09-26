@@ -21,7 +21,7 @@
 #'   add_risktable(risktable_group = "risktable_stats")
 #'
 #'  p + add_risktable_strata_symbol()
-#'  p + add_risktable_strata_symbol(symbol = "\U25CF", size = 11)
+#'  p + add_risktable_strata_symbol(symbol = "\U25CF", size = 10.5)
 
 add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold", vjust = 0.3, ...) {
   rlang::inject(
