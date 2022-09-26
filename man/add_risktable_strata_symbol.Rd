@@ -36,5 +36,5 @@ p <-
   add_risktable(risktable_group = "risktable_stats")
 
  p + add_risktable_strata_symbol()
- p + add_risktable_strata_symbol(symbol = "\U25CF", size = 12)
+ p + add_risktable_strata_symbol(symbol = "\U25CF", size = 11)
 }
