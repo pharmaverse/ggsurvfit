@@ -17,6 +17,9 @@ a ggplot2 figure
 \description{
 I have a hard time remembering the syntax to reduce horizontal and vertical
 padding on a ggplot2 figure. Hence, a function with default reduced padding.
+The default padding arguments in this functions are
+\code{scale_x_continuous(expand = c(0.015, 0))} and
+\code{scale_y_continuous(expand = c(0.025, 0))}.
 
 If you use this function, you \strong{must} include all scale specifications
 that would appear in \code{scale_x_continuous()} or \code{scale_y_continuous()}.

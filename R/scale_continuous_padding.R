@@ -3,6 +3,9 @@
 #' @description
 #' I have a hard time remembering the syntax to reduce horizontal and vertical
 #' padding on a ggplot2 figure. Hence, a function with default reduced padding.
+#' The default padding arguments in this functions are
+#' `scale_x_continuous(expand = c(0.015, 0))` and
+#' `scale_y_continuous(expand = c(0.025, 0))`.
 #'
 #' If you use this function, you **must** include all scale specifications
 #' that would appear in `scale_x_continuous()` or `scale_y_continuous()`.
