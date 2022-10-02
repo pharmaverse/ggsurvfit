@@ -122,20 +122,21 @@
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <p>Review the <a href="http://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html"><strong>figure gallery</strong></a> for many more examples.</p>
+<p>The code below constructs a basic {ggsurvfit} figure without customization.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/ggsurvfit" class="external-link">ggsurvfit</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: ggplot2</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="co"># build Kaplan-Meier plot ----------------------------------------------------</span></span>
-<span><span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/add_risktable.html">add_risktable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.6</span>, color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  </span>
-<span>  <span class="co"># use ggplot2 functions to style the plot and update the labels --------------</span></span>
+<span>  <span class="fu"><a href="reference/add_quantile.html">add_quantile</a></span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.6</span>, color <span class="op">=</span> <span class="st">"gray50"</span>, size <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></span></code></pre></div>
+<p>Any figure created with {ggsurvfit} can be customized using {ggplot2} functions.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span></span>
 <span><span class="co"># limit plot to show 8 years and less</span></span>
-<span><span class="fu">coord_cartesian</span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">coord_cartesian</span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># update figure labels/titles</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="st">"Percentage Survival"</span>,</span>
@@ -147,7 +148,7 @@
 <span>                     expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.015</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, </span>
 <span>                     expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="survfit2-vs-survfit">
@@ -166,7 +167,7 @@
 </h2>
 <p>The package also includes a gem for those using the <a href="https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0" class="external-link">CDISC ADaM ADTTE</a> data model. The event indicator in ADTTE data sets is named <code>"CNSR"</code> and is coded in the opposite way the survival package expects outcomes—<code>1 = 'censored'</code> and <code>0 = 'event'</code>. This difference creates an opportunity for errors to be introduced in an analysis. The package exports a function called <code><a href="reference/Surv_CNSR.html">Surv_CNSR()</a></code> to resolve this concern.</p>
 <p>The function creates a survival object (e.g. <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>) that uses CDISC ADaM ADTTE coding conventions as the default values. The function can be used in <strong>ggsurvfit</strong> as well as any other package that uses <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="reference/Surv_CNSR.html">Surv_CNSR</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, <span class="va">adtte</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Call: survfit(formula = Surv_CNSR() ~ 1, data = adtte)</span></span>
 <span><span class="co">#&gt; </span></span>
