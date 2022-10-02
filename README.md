@@ -60,20 +60,27 @@ Review the [**figure
 gallery**](http://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html)
 for many more examples.
 
+The code below constructs a basic {ggsurvfit} figure without
+customization.
+
 ``` r
 library(ggsurvfit)
 #> Loading required package: ggplot2
 
-survfit2(Surv(time, status) ~ surg, data = df_colon) |>
-  # build Kaplan-Meier plot ----------------------------------------------------
-ggsurvfit(size = 1) +
+p <- survfit2(Surv(time, status) ~ surg, data = df_colon) |>
+  ggsurvfit(size = 1) +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(y_value = 0.6, color = "gray50", size = 0.75) +
-  
-  # use ggplot2 functions to style the plot and update the labels --------------
+  add_quantile(y_value = 0.6, color = "gray50", size = 0.75)
+```
+
+Any figure created with {ggsurvfit} can be customized using {ggplot2}
+functions.
+
+``` r
+p +
 # limit plot to show 8 years and less
-coord_cartesian(xlim = c(0, 8)) +
+  coord_cartesian(xlim = c(0, 8)) +
   # update figure labels/titles
   labs(
     y = "Percentage Survival",
@@ -87,7 +94,7 @@ coord_cartesian(xlim = c(0, 8)) +
                      expand = c(0.02, 0))
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ## `survfit2()` vs `survfit()`
 
