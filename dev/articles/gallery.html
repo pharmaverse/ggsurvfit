@@ -232,7 +232,8 @@
 <div class="section level2">
 <h2 id="side-by-side">Side-by-Side<a class="anchor" aria-label="anchor" href="#side-by-side"></a>
 </h2>
-<p>To place figures with risk tables side-by-side, utilize the <code><a href="../reference/ggsurvfit_build.html">ggsurvfit_build()</a></code> function. Importantly, you <em>must</em> build the plots before they can be cobbled together with {patchwork}.</p>
+<p>One of my favorite features of the {ggsurvfit} package is that any {ggplot2} to function may be used to modify the plot and the risk tables will still align with the primary plot. This is accomplished by delaying the construction of the risk tables until the plot is printed.</p>
+<p>For this reason, we must use the <code><a href="../reference/ggsurvfit_build.html">ggsurvfit_build()</a></code> function when placing figures with risk tables side-by-side; this function will construct the risk tables and combine them with the primary plot. Once the plots are built, the can be placed side-by-side with {patchwork}.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
