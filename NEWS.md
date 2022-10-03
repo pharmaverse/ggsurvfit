@@ -2,7 +2,7 @@
 
 * When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in `ggsurvfit()`. (#97)
 
-* Bug fix when `Surv_CNSR()` is used in conjunction with `ggsurvfit()`. The default x-axis label is incorrectly attributed to a stratifying variable, when present.
+* Bug fix when `Surv_CNSR()` is used in conjunction with `ggsurvfit()`. The default x-axis label is incorrectly attributed to a stratifying variable, when present. (#100)
 
 * Fix in `survfit2()` that allows users to pass arguments with non-standard evaluation, i.e. bare column names. (#90)
 
