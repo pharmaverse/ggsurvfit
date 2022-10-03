@@ -98,11 +98,13 @@ The `survfit2()` tracks the environment from which the function was called, resu
 
 ## CDISC ADaM ADTTE
 
-The package also includes a gem for those using the [CDISC ADaM ADTTE](https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0) data model.
+The package also includes gems for those using the [CDISC ADaM ADTTE](https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0) data model.
+
+If columns `"PARAM"` or `"PARAMCD"` are present in the data frame passed to `survfit2()`, their values will be used to construct default labels in the `ggsurvfit()` figure. 
+
 The event indicator in ADTTE data sets is named `"CNSR"` and is coded in the opposite way the survival package expects outcomes---`1 = 'censored'` and `0 = 'event'`.
 This difference creates an opportunity for errors to be introduced in an analysis.
-The package exports a function called `Surv_CNSR()` to resolve this concern.
-
+The **ggsurvfit** package exports a function called `Surv_CNSR()` to resolve this concern.
 The function creates a survival object (e.g. `survival::Surv()`) that uses CDISC ADaM ADTTE coding conventions as the default values.
 The function can be used in **ggsurvfit** as well as any other package that uses `survival::Surv()`.
 

@@ -101,7 +101,10 @@ adtte <-
   readr::read_csv('data-raw/2020-04-08-psi-vissig-adtte.csv',
                   show_col_types = FALSE) |>
   dplyr::as_tibble() |>
-  dplyr::mutate(AVAL = AVAL / 365.25)
+  dplyr::mutate(
+    AVAL = AVAL / 365.25,
+    PARAM = gsub(PARAM, pattern = "(days)", replacement = "(years)", fixed = TRUE)
+  )
 
 # attach var labels
 attr(adtte$STUDYID, "label") <- "Study identifier"
