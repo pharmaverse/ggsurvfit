@@ -7,8 +7,9 @@ CMD
 Codecov
 KMunicate
 Kaplan
-Lifecycle
 ORCID
+PARAM
+PARAMCD
 PFS
 Surv
 Survfit
@@ -18,6 +19,7 @@ cuminc
 geoms
 geom’
 ggcuminc
+ggeasy
 gghighlight
 ggplot
 grey
