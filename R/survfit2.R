@@ -83,12 +83,8 @@ survfit2 <- function(formula, ...) {
 
   # checking if data was piped in with magrittr --------------------------------
   if (lapply(as.list(call), function(x) identical(x, quote(.))) %>% unlist() %>% any()) {
-    for (call_element in as.list(call)) {
-      # save the "dot" to the new environment, so it can be evaluated later in functions like `survfti2_p()`
-      if (identical(call_element, quote(.))) {
-        env <- rlang::env(parent.frame(), `.` = eval(call_element, parent.frame()))
-      }
-    }
+    # save the "dot" to the new environment, so it can be evaluated later in functions like `survfti2_p()`
+    env <- rlang::env(parent.frame(), `.` = eval(quote(.), parent.frame()))
   }
   else env <- parent.frame()
 
