@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in `ggsurvfit()`. (#97)
+
 * Fix in `survfit2()` that allows users to pass arguments with non-standard evaluation, i.e. bare column names. (#90)
 
 * When the `survfit(weights=)` argument is utilized the number at risk, number of observed events, etc. are a non-integer numbers. The counts in the risk table are now rounded to the nearest integer. (#90)

@@ -63,6 +63,16 @@ test_that("ggsurvfit() works", {
       ggsurvfit()
   )
 
+  # test the default ADTTE x-axis label comes from PARAM column
+  expect_equal(
+    ggsurvfit(survfit2(Surv_CNSR() ~ 1, data = adtte)) %>%
+      ggplot2::ggplot_build() %>%
+      `[[`("plot") %>%
+      `[[`("labels") %>%
+      `[[`("x"),
+    adtte[["PARAM"]] %>% unique()
+  )
+
   expect_error(ggsurvfit(mtcars))
   expect_error(survfit2(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>% ggsurvfit())
 })

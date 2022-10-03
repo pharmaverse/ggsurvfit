@@ -16,7 +16,7 @@
 #' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
 #'   tidy_cuminc()
 tidy_cuminc <- function(x, times = NULL) {
-  rlang::check_installed("tidycmprsk")
+  rlang::check_installed("tidycmprsk", version = "0.2.0")
 
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "tidycuminc")) {
