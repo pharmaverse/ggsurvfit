@@ -45,7 +45,7 @@
     
     <a class="navbar-brand me-2" href="index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9008</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9009</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@
 <p>Any figure created with {ggsurvfit} can be customized using {ggplot2} functions.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span></span>
-<span><span class="co"># limit plot to show 8 years and less</span></span>
+<span>  <span class="co"># limit plot to show 8 years and less</span></span>
 <span>  <span class="fu">coord_cartesian</span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># update figure labels/titles</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span></span>
@@ -165,8 +165,9 @@
 <div class="section level2">
 <h2 id="cdisc-adam-adtte">CDISC ADaM ADTTE<a class="anchor" aria-label="anchor" href="#cdisc-adam-adtte"></a>
 </h2>
-<p>The package also includes a gem for those using the <a href="https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0" class="external-link">CDISC ADaM ADTTE</a> data model. The event indicator in ADTTE data sets is named <code>"CNSR"</code> and is coded in the opposite way the survival package expects outcomes—<code>1 = 'censored'</code> and <code>0 = 'event'</code>. This difference creates an opportunity for errors to be introduced in an analysis. The package exports a function called <code><a href="reference/Surv_CNSR.html">Surv_CNSR()</a></code> to resolve this concern.</p>
-<p>The function creates a survival object (e.g. <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>) that uses CDISC ADaM ADTTE coding conventions as the default values. The function can be used in <strong>ggsurvfit</strong> as well as any other package that uses <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>.</p>
+<p>The package also includes gems for those using the <a href="https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0" class="external-link">CDISC ADaM ADTTE</a> data model.</p>
+<p>If columns <code>"PARAM"</code> or <code>"PARAMCD"</code> are present in the data frame, their values will be used to construct default labels in the <code><a href="reference/ggsurvfit.html">ggsurvfit()</a></code> figure.</p>
+<p>The event indicator in ADTTE data sets is named <code>"CNSR"</code> and is coded in the opposite way the survival package expects outcomes—<code>1 = 'censored'</code> and <code>0 = 'event'</code>. This difference creates an opportunity for errors to be introduced in an analysis. The package exports a function called <code><a href="reference/Surv_CNSR.html">Surv_CNSR()</a></code> to resolve this concern. The function creates a survival object (e.g. <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>) that uses CDISC ADaM ADTTE coding conventions as the default values. The function can be used in <strong>ggsurvfit</strong> as well as any other package that uses <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="reference/Surv_CNSR.html">Surv_CNSR</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, <span class="va">adtte</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Call: survfit(formula = Surv_CNSR() ~ 1, data = adtte)</span></span>
