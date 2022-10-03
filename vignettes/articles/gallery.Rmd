@@ -68,23 +68,6 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   labs(title = "Grey Scale")
 ```
 
-## KMunicate
-
-To get figures that align with the guidelines outlined in ["Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate."](http://dx.doi.org/10.1136/bmjopen-2019-030215), use the `theme_ggsurvfit_KMunicate()` theme along with these function options.
-
-```{r}
-survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit(linetype_aes = TRUE) +
-  add_confidence_interval() +
-  add_risktable(
-    risktable_stats = c("n.risk", "cum.censor", "cum.event")
-  ) +
-  theme_ggsurvfit_KMunicate() +
-  scale_y_continuous(limits = c(0, 1)) +
-  scale_x_continuous(expand = c(0.02, 0)) +
-  theme(legend.position = c(0.85, 0.85))
-```
-
 ## Risk Tables
 
 The default risk table styling is ready for publication.
@@ -137,9 +120,27 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   )
 ```
 
+## KMunicate
+
+To get figures that align with the guidelines outlined in ["Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate."](http://dx.doi.org/10.1136/bmjopen-2019-030215), use the `theme_ggsurvfit_KMunicate()` theme along with these function options.
+
+```{r}
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+  ggsurvfit(linetype_aes = TRUE) +
+  add_confidence_interval() +
+  add_risktable(
+    risktable_stats = c("n.risk", "cum.censor", "cum.event")
+  ) +
+  theme_ggsurvfit_KMunicate() +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_x_continuous(expand = c(0.02, 0)) +
+  theme(legend.position = c(0.85, 0.85))
+```
+
 ## Quantiles and Censor Markings
 
 Add guidelines for survival quantiles and markings for censored patients using `add_quantile()` and `add_censor_mark()`.
+The `add_quantile()` function allows users to place guidelines by specifying either the y-intercept or x-intercept where the lines shall originate.
 
 ```{r}
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
@@ -162,10 +163,11 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
 
 ## Side-by-Side
 
-One of my favorite features of the {ggsurvfit} package is that any {ggplot2} to function may be used to modify the plot and the risk tables will still align with the primary plot.
+One of my favorite features of the {ggsurvfit} package is that any {ggplot2} function may be used to modify the plot and the risk tables will still align with the primary plot.
 This is accomplished by delaying the construction of the risk tables until the plot is printed.
 
-For this reason, we must use the `ggsurvfit_build()` function when placing figures with risk tables side-by-side; this function will construct the risk tables and combine them with the primary plot.
+Because the the delayed build of the risk tables, we must take one additional step when placing figures side-by-side that contain risk tables: we must use the `ggsurvfit_build()` function when placing figures with risk tables side-by-side.
+This function will construct the risk tables and combine them with the primary plot.
 Once the plots are built, the can be placed side-by-side with {patchwork}.
 
 ```{r}
@@ -186,7 +188,7 @@ wrap_plots(built_p, built_p, ncol = 2)
 
 ## Faceting
 
-Curves created with ggsurvfit can also later be faceted using ggplot2.
+Curves created with {ggsurvfit} can also later be faceted using {ggplot2}.
 Note, however, that faceted curves cannot include a risk table.
 
 The `ggsurvfit()` function calls `tidy_survfit()` to create the data frame that is used to create the figure.
@@ -220,14 +222,14 @@ survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
 
 ## Scales
 
-Unlike most ggplot2 functions, scales are not additive.
+Unlike most {ggplot2} functions, scales are not additive.
 This means that if a scale attribute is modified in one call to `scale_x_continuous()`, a second call to  `scale_x_continuous()` will write over _all_ changes made in the first.
-For this reason, the `ggsurvfit()` and `ggcuminc()` functions do not modify the default ggplot scales; rather, all changes to the scales are left to the user.
+For this reason, the `ggsurvfit()` and `ggcuminc()` functions do not modify the default {ggplot2} scales; rather, all changes to the scales are left to the user.
 
-But, I do not like the default ggplot2 padding when applied to survival curves: I find it to be excessive.
-Moreover, I have difficulty remembering the ggplot2 syntax to reduce the padding.
+But, I do not like the default {ggplot2} padding when applied to survival curves: I find it to be excessive.
+Moreover, I have difficulty remembering the {ggplot2} syntax to reduce the padding.
 For these reasons, we export a new scale function to reduce padding for the x and y axes: `scale_continuous_reduce_pad()`.
-To use this function, however, you must include all modifications you wish to make to either the x or y scale in this function call.
+To use this function, however, you must include all modifications you wish to make to either the x or y scale in the function call.
 
 In the example below, we reduce the padding and make other scale changes to the scales, such as, specifying the breaks on the x-axis, increasing the y-axis limits, and show the survival probabilities on a percentage scale.
 
@@ -241,3 +243,24 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   )
 ```
 
+## P-values
+
+Compare curves among the stratum using the `add_p()` function.
+P-values can be placed either in the figure caption (the default) or in the plot area as an annotation.
+Similarly to risk tables, p-values are placed on the figure at the time of printing, and therefore, you must build the figures with `ggsurvfit_build()` if you with to cobble figures together with {patchwork}.
+
+```{r}
+p <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+  ggsurvfit()
+
+# place p-value in caption
+p1 <- p + add_pvalue(caption = "Log-rank {p.value}")
+
+# place p-value as a plot annotation
+p2 <- p + add_pvalue(location  = "annotation")
+
+ggsurvfit_build(p1) + 
+  ggsurvfit_build(p2) + 
+  patchwork::plot_layout(guides = "collect") &
+  theme(legend.position = "bottom")
+```
