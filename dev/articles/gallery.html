@@ -309,7 +309,7 @@
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/add_pvalue.html">add_pvalue</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Log-rank {p.value}"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># place p-value as a plot annotation</span></span>
-<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/add_pvalue.html">add_pvalue</a></span><span class="op">(</span>location  <span class="op">=</span> <span class="st">"annotation"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/add_pvalue.html">add_pvalue</a></span><span class="op">(</span>location  <span class="op">=</span> <span class="st">"annotation"</span>, x <span class="op">=</span> <span class="fl">8.5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/ggsurvfit_build.html">ggsurvfit_build</a></span><span class="op">(</span><span class="va">p1</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="../reference/ggsurvfit_build.html">ggsurvfit_build</a></span><span class="op">(</span><span class="va">p2</span><span class="op">)</span> <span class="op">+</span> </span>
