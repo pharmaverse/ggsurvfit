@@ -73,6 +73,17 @@ test_that("ggsurvfit() works", {
     adtte[["PARAM"]] %>% unique()
   )
 
+  # testing the default label when using Surv_CNSR() without a PARAM COLUMN
+  expect_equal(
+    survfit2(
+      Surv_CNSR() ~ STR01L,
+      data = adtte %>% dplyr::select(-c(PARAM, PARAMCD))
+    ) %>%
+      .default_x_axis_label(),
+    "time"
+  )
+
+
   expect_error(ggsurvfit(mtcars))
   expect_error(survfit2(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>% ggsurvfit())
 })
