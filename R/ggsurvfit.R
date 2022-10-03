@@ -184,18 +184,18 @@ ggsurvfit <- function(x, type = "survival",
 .default_x_axis_label <- function(x) {
   # extract formula and data ---------------------------------------------------
   if (inherits(x, "survfit2")) {
-    formula <- .extract_formula_from_survfit(x)
+    formula <- .extract_formula_from_survfit(x) %>% rlang::f_lhs()
     data <- .extract_data_from_survfit(x)
   }
   else if (inherits(x, "tidycuminc")) {
-    formula <- x$formula
+    formula <- x$formula %>% rlang::f_lhs()
     data <- x$data
   } else {
     formula <- data <- NULL
   }
 
   # extract time variable ------------------------------------------------------
-  if (!is.null(formula)) {
+  if (!rlang::is_empty(formula) && !rlang::is_empty(all.vars(formula))) {
     time_variable <-
       formula %>%
       all.vars() %>%
@@ -217,7 +217,10 @@ ggsurvfit <- function(x, type = "survival",
       unique() %>%
       paste(collapse = ", ")
   ) %||%
-  attr(data[[time_variable]], "label") %||%
+    switch(
+      !is.null(time_variable) && !is.null(data),
+      attr(data[[time_variable]], "label")
+    ) %||%
     time_variable %||%
     "time"
 }
