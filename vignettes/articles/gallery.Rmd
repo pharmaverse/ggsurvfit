@@ -257,7 +257,7 @@ p <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
 p1 <- p + add_pvalue(caption = "Log-rank {p.value}")
 
 # place p-value as a plot annotation
-p2 <- p + add_pvalue(location  = "annotation")
+p2 <- p + add_pvalue(location  = "annotation", x = 8.5)
 
 ggsurvfit_build(p1) + 
   ggsurvfit_build(p2) + 
