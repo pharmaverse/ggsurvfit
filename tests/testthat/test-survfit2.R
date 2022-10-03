@@ -26,11 +26,34 @@ test_that("survfit2() works", {
       unclass()
   )
 
-  expect_message(
-    sf <- df_lung %>% survfit2(Surv(time, status) ~ sex, data = .)
+  # checking that the magrittr pipe env is handled correctly, and the data can be accessed
+  expect_error(
+    sf <- adtte %>% survfit2(Surv_CNSR() ~ STR01, data = .),
+    NA
   )
-  expect_true(inherits(sf, "survfit"))
-  expect_false(inherits(sf, "survfit2"))
+  expect_equal(
+    ggsurvfit(sf) %>%
+      ggplot2::ggplot_build() %>%
+      `[[`("plot") %>%
+      `[[`("labels") %>%
+      `[[`("x"),
+    adtte[["PARAM"]] %>% unique()
+  )
+  expect_equal(
+    survfit2_p(sf),
+    survival::survdiff(Surv_CNSR() ~ STR01, data = adtte) %>%
+      broom::glance() %>%
+      dplyr::pull(p.value) %>%
+      format_p() %>%
+      {paste0("p=", .)}
+  )
+  expect_equal(
+    sf %>%
+      tidy_survfit() %>%
+      dplyr::pull(strata_label) %>%
+      unique(),
+    attr(adtte[["STR01"]], "label")
+  )
 
   expect_error(survfit2(formula = mtcars))
   expect_error(survfit2())

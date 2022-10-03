@@ -83,16 +83,17 @@ survfit2 <- function(formula, ...) {
 
   # checking if data was piped in with magrittr --------------------------------
   if (lapply(as.list(call), function(x) identical(x, quote(.))) %>% unlist() %>% any()) {
-    cli::cli_inform(c(
-      "x" = "Do not use the {.pkg magrittr} pipe, {.code %>%},  with {.code survfit2()}",
-      "i" = "Use the base R pipe, {.code |>}, instead, e.g. {.code df_lung |> survfit2(Surv(time, status) ~ 1, data = _)}.",
-      "!" = "Returned object is class {.cls survfit}, not {.cls survfit2}."
-    ))
-    return(survfit)
+    for (call_element in as.list(call)) {
+      # save the "dot" to the new environment, so it can be evaluated later in functions like `survfti2_p()`
+      if (identical(call_element, quote(.))) {
+        env <- rlang::env(parent.frame(), `.` = eval(call_element, parent.frame()))
+      }
+    }
   }
+  else env <- parent.frame()
 
   # update object with env and add another class -------------------------------
   survfit %>%
-    utils::modifyList(val = list(.Environment = parent.frame())) %>%
+    utils::modifyList(val = list(.Environment = env)) %>%
     structure(class = c("survfit2", class(survfit)))
 }
