@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 
 ### Plot Themes
 
-Both `ggsurvfit()` and `ggcuminc()` use `theme_ggsurvfit_default()` as the default ggplot2 theme, which is similar to `ggplot2::theme_bw()`.
+Both `ggsurvfit()` and `ggcuminc()` use `theme_ggsurvfit_default()` as the default {ggplot2} theme, which is similar to `ggplot2::theme_bw()`.
 While this theme provides beautiful figures, you may want to modify it.
 
-You'll can use the `ggsurvfit(theme=)` argument to change the default theme.
-You can pass any ggplot2 theme to this argument, or simply add a theme using typical ggplot2 syntax.
+You can use the `ggsurvfit(theme=)` argument to change the default theme.
+You can pass any {ggplot2} theme to this argument, or simply add a theme using typical {ggplot2} syntax.
 
 ```{r}
 library(ggsurvfit)
