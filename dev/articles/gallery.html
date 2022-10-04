@@ -211,26 +211,10 @@
 <p><img src="gallery_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div class="section level2">
-<h2 id="scales">Scales<a class="anchor" aria-label="anchor" href="#scales"></a>
-</h2>
-<p>Unlike most {ggplot2} functions, scales are not additive. This means that if a scale attribute is modified in one call to <code>scale_x_continuous()</code>, a second call to <code>scale_x_continuous()</code> will write over <em>all</em> changes made in the first. For this reason, the <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code> and <code><a href="../reference/ggcuminc.html">ggcuminc()</a></code> functions do not modify the default {ggplot2} scales; rather, all changes to the scales are left to the user.</p>
-<p>But, I do not like the default {ggplot2} padding when applied to survival curves: I find it to be excessive. Moreover, I have difficulty remembering the {ggplot2} syntax to reduce the padding. For these reasons, we export a new scale function to reduce padding for the x and y axes: <code><a href="../reference/scale_continuous_reduce_pad.html">scale_continuous_reduce_pad()</a></code>. To use this function, however, you must include all modifications you wish to make to either the x or y scale in the function call.</p>
-<p>In the example below, we reduce the padding and make other scale changes to the scales, such as, specifying the breaks on the x-axis, increasing the y-axis limits, and show the survival probabilities on a percentage scale.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_continuous_reduce_pad.html">scale_continuous_reduce_pad</a></span><span class="op">(</span></span>
-<span>    x_scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>,</span>
-<span>    y_scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="gallery_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
-</div>
-<div class="section level2">
 <h2 id="p-values">P-values<a class="anchor" aria-label="anchor" href="#p-values"></a>
 </h2>
 <p>Compare curves among the stratum using the <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html" class="external-link">add_p()</a></code> function. P-values can be placed either in the figure caption (the default) or in the plot area as an annotation. Similarly to risk tables, p-values are placed on the figure at the time of printing, and therefore, you must build the figures with <code><a href="../reference/ggsurvfit_build.html">ggsurvfit_build()</a></code> if you with to cobble figures together with {patchwork}.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -244,6 +228,22 @@
 <span>  <span class="fu"><a href="../reference/ggsurvfit_build.html">ggsurvfit_build</a></span><span class="op">(</span><span class="va">p2</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="gallery_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="scales">Scales<a class="anchor" aria-label="anchor" href="#scales"></a>
+</h2>
+<p>Unlike most {ggplot2} functions, scales are not additive. This means that if a scale attribute is modified in one call to <code>scale_x_continuous()</code>, a second call to <code>scale_x_continuous()</code> will write over <em>all</em> changes made in the first. For this reason, the <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code> and <code><a href="../reference/ggcuminc.html">ggcuminc()</a></code> functions do not modify the default {ggplot2} scales; rather, all changes to the scales are left to the user.</p>
+<p>But, I do not like the default {ggplot2} padding on a survival curve: it is excessive. Moreover, I have difficulty remembering the {ggplot2} syntax to reduce the padding. For these reasons, we export a new scale function to reduce padding for the x and y axes: <code><a href="../reference/scale_continuous_reduce_pad.html">scale_continuous_reduce_pad()</a></code>. To use this function, however, you must include all modifications you wish to make to either the x or y scale in the function call.</p>
+<p>In the example below, we reduce the padding and make other scale changes to the scales, such as, specifying the breaks on the x-axis, increasing the y-axis limits, and show the survival probabilities on a percentage scale.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_continuous_reduce_pad.html">scale_continuous_reduce_pad</a></span><span class="op">(</span></span>
+<span>    x_scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>,</span>
+<span>    y_scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="gallery_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
 <div class="section level2">
