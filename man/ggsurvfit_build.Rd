@@ -10,7 +10,8 @@ ggsurvfit_build(x, combine_plots = TRUE)
 \item{x}{an object of class 'ggsurvfit' or 'ggcuminc'}
 
 \item{combine_plots}{logical indicating whether to combine the primary plot
-and the risk tables. When \code{TRUE}, plots are combined with \code{patchwork::wrap_plots()}.
+and the risk tables. When \code{TRUE}, plot and risk table(s) are combined with
+\code{patchwork::wrap_plots()}.
 When \code{FALSE} and the plot has risk tables, they are returned in a list of
 gtable grobs.
 Default is \code{TRUE}.}
