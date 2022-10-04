@@ -55,19 +55,6 @@ gg_styled <-
 gg_default + gg_styled
 ```
 
-## Grey-scale Figures
-
-You may need a black and white figure and that is achieved using grey-scale ggplot2 functions.
-
-```{r}
-survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit() +
-  add_confidence_interval() +
-  scale_color_grey() +
-  scale_fill_grey() +
-  labs(title = "Grey Scale")
-```
-
 ## Risk Tables
 
 The default risk table styling is ready for publication.
@@ -120,23 +107,6 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   )
 ```
 
-## KMunicate
-
-To get figures that align with the guidelines outlined in ["Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate."](http://dx.doi.org/10.1136/bmjopen-2019-030215), use the `theme_ggsurvfit_KMunicate()` theme along with these function options.
-
-```{r}
-survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit(linetype_aes = TRUE) +
-  add_confidence_interval() +
-  add_risktable(
-    risktable_stats = c("n.risk", "cum.censor", "cum.event")
-  ) +
-  theme_ggsurvfit_KMunicate() +
-  scale_y_continuous(limits = c(0, 1)) +
-  scale_x_continuous(expand = c(0.02, 0)) +
-  theme(legend.position = c(0.85, 0.85))
-```
-
 ## Quantiles and Censor Markings
 
 Add guidelines for survival quantiles and markings for censored patients using `add_quantile()` and `add_censor_mark()`.
@@ -148,17 +118,6 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   add_censor_mark(size = 2, alpha = 0.2) +
   add_quantile(y_value = 0.5, linetype = "dotted", color = "grey30", size = 0.8) +
   add_quantile(x_value = 5,  color = "grey30", size = 0.8) 
-```
-
-## Transformations
-
-Show the probability of an event rather than the probability of being free from the event with transformations.
-Custom transformations are also available.
-
-```{r}
-survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit(type = "risk", size = 0.8) +
-  add_confidence_interval()
 ```
 
 ## Side-by-Side
@@ -186,39 +145,6 @@ built_p <- ggsurvfit_build(p)
 wrap_plots(built_p, built_p, ncol = 2)
 ```
 
-## Faceting
-
-Curves created with {ggsurvfit} can also later be faceted using {ggplot2}.
-Note, however, that faceted curves cannot include a risk table.
-
-The `ggsurvfit()` function calls `tidy_survfit()` to create the data frame that is used to create the figure.
-In the data frame, there is a column named `"strata"`, which we will facet over.
-
-```{r}
-survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit() +
-  add_confidence_interval() +
-  facet_wrap(~strata, nrow = 1) +
-  theme(legend.position = "none") +
-  scale_x_continuous(n.breaks = 6) +
-  labs(title = "PFS by Duration between Surgery and Treatment")
-```
-
-## Extensions
-
-Because {ggsurvfit} functions are written as proper {ggplot2} geoms, you can both weave any {ggplot2} functions **and** ggplot2 extensions, such as {gghighlight} and {ggeasy}.
-
-```{r warning=FALSE}
-survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
-  ggsurvfit() +
-  gghighlight::gghighlight(
-    strata == "Levamisole+5-FU",
-    calculate_per_facet = TRUE
-  ) +
-  ggeasy::easy_remove_legend() +
-  ggeasy::easy_y_axis_labels_size(size = 15) +
-  ggeasy::easy_x_axis_labels_size(size = 15)
-```
 
 ## Scales
 
@@ -263,4 +189,79 @@ ggsurvfit_build(p1) +
   ggsurvfit_build(p2) + 
   patchwork::plot_layout(guides = "collect") &
   theme(legend.position = "bottom")
+```
+
+## Transformations
+
+Show the probability of an event rather than the probability of being free from the event with transformations.
+Custom transformations are also available.
+
+```{r}
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+  ggsurvfit(type = "risk", size = 0.8) +
+  add_confidence_interval()
+```
+
+## Extensions
+
+Because {ggsurvfit} functions are written as proper {ggplot2} geoms, you can both weave any {ggplot2} functions **and** ggplot2 extensions, such as {gghighlight} and {ggeasy}.
+
+```{r warning=FALSE}
+survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
+  ggsurvfit() +
+  gghighlight::gghighlight(
+    strata == "Levamisole+5-FU",
+    calculate_per_facet = TRUE
+  ) +
+  ggeasy::easy_remove_legend() +
+  ggeasy::easy_y_axis_labels_size(size = 15) +
+  ggeasy::easy_x_axis_labels_size(size = 15)
+```
+
+## Faceting
+
+Curves created with {ggsurvfit} can also later be faceted using {ggplot2}.
+Note, however, that faceted curves cannot include a risk table.
+
+The `ggsurvfit()` function calls `tidy_survfit()` to create the data frame that is used to create the figure.
+In the data frame, there is a column named `"strata"`, which we will facet over.
+
+```{r}
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+  ggsurvfit() +
+  add_confidence_interval() +
+  facet_wrap(~strata, nrow = 1) +
+  theme(legend.position = "none") +
+  scale_x_continuous(n.breaks = 6) +
+  labs(title = "PFS by Duration between Surgery and Treatment")
+```
+
+## Grey-scale Figures
+
+You may need a black and white figure and that is achieved using grey-scale ggplot2 functions.
+
+```{r}
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+  ggsurvfit() +
+  add_confidence_interval() +
+  scale_color_grey() +
+  scale_fill_grey() +
+  labs(title = "Grey Scale")
+```
+
+## KMunicate
+
+To get figures that align with the guidelines outlined in ["Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate."](http://dx.doi.org/10.1136/bmjopen-2019-030215), use the `theme_ggsurvfit_KMunicate()` theme along with these function options.
+
+```{r}
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+  ggsurvfit(linetype_aes = TRUE) +
+  add_confidence_interval() +
+  add_risktable(
+    risktable_stats = c("n.risk", "cum.censor", "cum.event")
+  ) +
+  theme_ggsurvfit_KMunicate() +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_x_continuous(expand = c(0.02, 0)) +
+  theme(legend.position = c(0.85, 0.85))
 ```
