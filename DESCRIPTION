@@ -4,7 +4,8 @@ Version: 0.1.0.9010
 Authors@R: c(
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-0862-2018")),
-    person("Mark", "Baillie", , "bailliem@gmail.com", role = "aut")
+    person("Mark", "Baillie", , "bailliem@gmail.com", role = "aut"),
+    person("Steven", "Haesendonckx", , "shaesen2@its.jnj.com", role = "aut")
   )
 Description: Ease the creation of time-to-event (i.e. survival) endpoint
     figures. The modular functions create figures ready for

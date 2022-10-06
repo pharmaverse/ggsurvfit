@@ -91,5 +91,29 @@ survfit2 <- function(formula, ...) {
   # update object with env and add another class -------------------------------
   survfit %>%
     utils::modifyList(val = list(.Environment = env)) %>%
-    structure(class = c("survfit2", class(survfit)))
+    structure(class = c("survfit2", class(survfit))) %>%
+    .check_PARAM_consistency()
+}
+
+.check_PARAM_consistency <- function(x) {
+  # get the formula and data
+  formula <- .extract_formula_from_survfit(x)
+  data <- .extract_data_from_survfit(x)
+
+  if (is.null(data) || is.null(formula)) return(x)
+  if (all(c("PARAM", "PARAMCD") %in% names(data)) && !.is_PARAM_consistent(formula, data))
+    cli::cli_inform(c("!" = "Columns {.cls {c('PARAM', 'PARAMCD')}} are not unique and usage is likely incorrect."))
+
+  x
+}
+
+.is_PARAM_consistent <- function(formula, data) {
+  isTRUE(
+    # lengths must be one and PARAM does not appear in formula
+      ((length(unique(data[["PARAM"]])) == 1L) &&
+      (length(unique(data[["PARAMCD"]])) == 1L) &&
+      !any(c("PARAM", "PARAMCD") %in% all.vars(formula))) ||
+        # or PARAM can be any length and it must appear in formula
+        (any(c("PARAM", "PARAMCD") %in% all.vars(formula)))
+  )
 }

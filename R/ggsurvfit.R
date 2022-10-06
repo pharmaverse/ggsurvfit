@@ -184,20 +184,22 @@ ggsurvfit <- function(x, type = "survival",
 .default_x_axis_label <- function(x) {
   # extract formula and data ---------------------------------------------------
   if (inherits(x, "survfit2")) {
-    formula <- .extract_formula_from_survfit(x) %>% rlang::f_lhs()
+    formula <- .extract_formula_from_survfit(x)
+    formula_lhs <- formula %>% rlang::f_lhs()
     data <- .extract_data_from_survfit(x)
   }
   else if (inherits(x, "tidycuminc")) {
-    formula <- x$formula %>% rlang::f_lhs()
+    formula <- x$formula
+    formula_lhs <- formula %>% rlang::f_lhs()
     data <- x$data
   } else {
-    formula <- data <- NULL
+    formula <- formula_lhs <- data <- NULL
   }
 
   # extract time variable ------------------------------------------------------
-  if (!rlang::is_empty(formula) && !rlang::is_empty(all.vars(formula))) {
+  if (!rlang::is_empty(formula_lhs) && !rlang::is_empty(all.vars(formula_lhs))) {
     time_variable <-
-      formula %>%
+      formula_lhs %>%
       all.vars() %>%
       `[`(1) %>%
       {
@@ -211,9 +213,10 @@ ggsurvfit <- function(x, type = "survival",
 
   # return time label ----------------------------------------------------------
   switch( # using the CDISC variable as default label, if present
-    isTRUE(!is.null(data) && any(c("PARAM", "PARAMCD") %in% names(data))),
-    data[["PARAM"]] %||%
-      data[["PARAMCD"]] %>%
+    !is.null(data) && !is.null(formula) &&
+      all(c("PARAM", "PARAMCD") %in% names(data)) &&
+      .is_PARAM_consistent(formula, data),
+    data[["PARAM"]] %>%
       unique() %>%
       paste(collapse = ", ")
   ) %||%
