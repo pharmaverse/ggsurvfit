@@ -211,16 +211,15 @@ ggsurvfit <- function(x, type = "survival",
 
   # return time label ----------------------------------------------------------
   switch( # using the CDISC variable as default label, if present
-    isTRUE(any(c("PARAM", "PARAMCD") %in% names(data))),
+    isTRUE(!is.null(data) && any(c("PARAM", "PARAMCD") %in% names(data))),
     data[["PARAM"]] %||%
       data[["PARAMCD"]] %>%
       unique() %>%
       paste(collapse = ", ")
   ) %||%
     switch(
-      !is.null(time_variable) && !is.null(data),
+      !is.null(time_variable) && !is.null(data) && time_variable %in% names(data),
       attr(data[[time_variable]], "label")
     ) %||%
-    time_variable %||%
-    "time"
+    "Time"
 }

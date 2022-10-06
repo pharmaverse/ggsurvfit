@@ -80,7 +80,7 @@ test_that("ggsurvfit() works", {
       data = adtte %>% dplyr::select(-c(PARAM, PARAMCD))
     ) %>%
       .default_x_axis_label(),
-    "time"
+    "Time"
   )
 
 
