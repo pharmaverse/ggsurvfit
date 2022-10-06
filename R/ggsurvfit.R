@@ -215,6 +215,7 @@ ggsurvfit <- function(x, type = "survival",
   switch( # using the CDISC variable as default label, if present
     !is.null(data) && !is.null(formula) &&
       all(c("PARAM", "PARAMCD") %in% names(data)) &&
+      !any(c("PARAM", "PARAMCD") %in% all.vars(formula)) &&
       .is_PARAM_consistent(formula, data),
     data[["PARAM"]] %>%
       unique() %>%

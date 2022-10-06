@@ -112,7 +112,7 @@ test_that("ggsurvfit() works", {
       `[[`("plot") %>%
       `[[`("labels") %>%
       `[[`("x"),
-    "PFS, OS"
+    "Time"
   )
 
   expect_error(ggsurvfit(mtcars))
