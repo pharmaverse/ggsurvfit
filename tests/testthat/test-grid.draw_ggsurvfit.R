@@ -5,22 +5,22 @@ test_that("grid.draw() works", {
     path
   }
 
-  expect_snapshot_file(
+  expect_error(
     save_image_png(
       survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
         ggsurvfit() +
         add_risktable()
     ),
-    "ggsurvfit.png"
+    NA
   )
 
-  expect_snapshot_file(
+  expect_error(
     save_image_png(
       tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
         ggcuminc(outcome = "death from cancer") +
         add_confidence_interval() +
         add_risktable()
     ),
-    "ggcuminc.png"
+    NA
   )
 })
