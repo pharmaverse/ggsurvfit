@@ -6,9 +6,14 @@
 \alias{theme_risktable_boxed}
 \title{Risk Table Themes}
 \usage{
-theme_risktable_default()
+theme_risktable_default(axis.text.y.size = 10, plot.title.size = 10.75)
 
 theme_risktable_boxed()
+}
+\arguments{
+\item{axis.text.y.size}{text size of the labels on the right of the risk table}
+
+\item{plot.title.size}{text size of the risk table title}
 }
 \value{
 a ggplot2 figure
