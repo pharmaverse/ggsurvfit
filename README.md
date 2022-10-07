@@ -38,6 +38,9 @@ risks cumulative incidence is also supported via `ggcuminc()`.
     other plot feature and the risk table will still align with the
     plot.
 
+-   **Simple Saving** Save individual images easily with
+    `ggplot2::ggsave()`.
+
 ## Installation
 
 Install **ggsurvfit** from CRAN with:
@@ -117,18 +120,19 @@ The package also includes gems for those using the [CDISC ADaM
 ADTTE](https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0)
 data model.
 
-If columns `"PARAM"` or `"PARAMCD"` are present in the data frame, their
-values will be used to construct default labels in the `ggsurvfit()`
-figure.
+If columns `"PARAM"` or `"PARAMCD"` are present in the data frame passed
+to `survfit2()`, their values will be used to construct default labels
+in the `ggsurvfit()` figure.
 
 The event indicator in ADTTE data sets is named `"CNSR"` and is coded in
 the opposite way the survival package expects outcomes—`1 = 'censored'`
 and `0 = 'event'`. This difference creates an opportunity for errors to
-be introduced in an analysis. The package exports a function called
-`Surv_CNSR()` to resolve this concern. The function creates a survival
-object (e.g. `survival::Surv()`) that uses CDISC ADaM ADTTE coding
-conventions as the default values. The function can be used in
-**ggsurvfit** as well as any other package that uses `survival::Surv()`.
+be introduced in an analysis. The **ggsurvfit** package exports a
+function called `Surv_CNSR()` to resolve this concern. The function
+creates a survival object (e.g. `survival::Surv()`) that uses CDISC ADaM
+ADTTE coding conventions as the default values. The function can be used
+in **ggsurvfit** as well as any other package that uses
+`survival::Surv()`.
 
 ``` r
 survfit(Surv_CNSR() ~ 1, adtte)
