@@ -10,7 +10,6 @@ survival::Surv
 #' @export
 dplyr::`%>%`
 
-#' @importFrom ggplot2 %+%
+#' @importFrom grid grid.draw
 #' @export
-ggplot2::`%+%`
-
+grid::grid.draw
