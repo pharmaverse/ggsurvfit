@@ -100,9 +100,9 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
     size = 4, # increase font size of risk table statistics
     theme =   # increase font size of risk table title and y-axis label
       list(
-        theme_risktable_default(),
-        theme(axis.text.y = element_text(size = 11),
-              plot.title = element_text(size = 11, face = "bold"))
+        theme_risktable_default(axis.text.y.size = 11, 
+                                plot.title.size = 11),
+        theme(plot.title = element_text(face = "bold"))
       )
   )
 ```
@@ -175,7 +175,7 @@ For this reason, the `ggsurvfit()` and `ggcuminc()` functions do not modify the 
 
 But, I do not like the default {ggplot2} padding on a survival curve: it is excessive.
 Moreover, I have difficulty remembering the {ggplot2} syntax to reduce the padding.
-For these reasons, we export a new scale function to reduce padding for the x and y axes: `scale_continuous_reduce_pad()`.
+For these reasons, we export a new scale function to reduce padding for the x and y axes: `scale_ggsurvfit()`.
 To use this function, however, you must include all modifications you wish to make to either the x or y scale in the function call.
 
 In the example below, we reduce the padding and make other scale changes to the scales, such as, specifying the breaks on the x-axis, increasing the y-axis limits, and show the survival probabilities on a percentage scale.
@@ -184,7 +184,7 @@ In the example below, we reduce the padding and make other scale changes to the 
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(size = 1) +
   add_confidence_interval() +
-  scale_continuous_reduce_pad(
+  scale_ggsurvfit(
     x_scales = list(breaks = 0:9),
     y_scales = list(label = scales::percent, limits = c(0, 1))
   )

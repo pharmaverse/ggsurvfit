@@ -1,8 +1,8 @@
-test_that("scale_continuous_reduce_pad() works", {
+test_that("scale_ggsurvfit() works", {
   expect_equal(
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
        ggsurvfit() +
-       scale_continuous_reduce_pad()) %>%
+       scale_ggsurvfit()) %>%
       {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$x.range},
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
        ggsurvfit() +
@@ -14,7 +14,7 @@ test_that("scale_continuous_reduce_pad() works", {
   expect_equal(
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
       ggsurvfit() +
-      scale_continuous_reduce_pad()) %>%
+      scale_ggsurvfit()) %>%
      {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$y.range},
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
       ggsurvfit() +

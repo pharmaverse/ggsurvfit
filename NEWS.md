@@ -18,7 +18,7 @@
 
 * Added the `add_quantile(x_value=)` argument that places line segments at the time specified.
 
-* Added the `scale_continuous_reduce_pad()` function that wraps both `ggplot2::scale_x_continuous()` and `ggplot2::scale_y_continuous()` and uses reduced padding (via the `expand=` argument) to both scales. (#82)
+* Added the `scale_ggsurvfit()` function that wraps both `ggplot2::scale_x_continuous()` and `ggplot2::scale_y_continuous()` and uses reduced padding (via the `expand=` argument), labels y-axis with percentages (`labels=`), and sets the y-axis limits to `c(0, 1)` (`limits=`). (#82)
 
 * Package now depends on {ggplot2}, meaning that it'll be attached anytime {ggsurvfit} is attached. (#62)
 
