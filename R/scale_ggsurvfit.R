@@ -1,17 +1,17 @@
 #' Apply Scales
 #'
 #' @description
-#' I have a hard time remembering the syntax to reduce horizontal and vertical
-#' padding on a ggplot2 figure. Hence, a function with default reduced padding.
-#' The default padding arguments in this functions are:
-#' - `scale_x_continuous(expand = c(0.015, 0))`
+#' The most common figure created with this package is a survival curve.
+#' This scale applies modifications often seen in these figures.
+#'
 #' - `scale_y_continuous(expand = c(0.025, 0), limits = c(0, 1), label = scales::label_percent())`.
+#' - `scale_x_continuous(expand = c(0.015, 0))`
 #'
 #' If you use this function, you **must** include all scale specifications
 #' that would appear in `scale_x_continuous()` or `scale_y_continuous()`.
 #'
 #' To reset any of the above settings to their ggplot2 default, set the value
-#' to `NULL`, e.g. `y_scales = list(limits = NULL)`
+#' to `NULL`, e.g. `y_scales = list(limits = NULL)`.
 #'
 #' @param x_scales a named list of arguments that will be passed to `ggplot2::scale_x_continuous()`.
 #' @param y_scales a named list of arguments that will be passed to `ggplot2::scale_y_continuous()`.

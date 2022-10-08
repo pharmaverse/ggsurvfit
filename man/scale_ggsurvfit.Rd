@@ -15,19 +15,18 @@ scale_ggsurvfit(x_scales = list(), y_scales = list())
 a ggplot2 figure
 }
 \description{
-I have a hard time remembering the syntax to reduce horizontal and vertical
-padding on a ggplot2 figure. Hence, a function with default reduced padding.
-The default padding arguments in this functions are:
+The most common figure created with this package is a survival curve.
+This scale applies modifications often seen in these figures.
 \itemize{
-\item \code{scale_x_continuous(expand = c(0.015, 0))}
 \item \code{scale_y_continuous(expand = c(0.025, 0), limits = c(0, 1), label = scales::label_percent())}.
+\item \code{scale_x_continuous(expand = c(0.015, 0))}
 }
 
 If you use this function, you \strong{must} include all scale specifications
 that would appear in \code{scale_x_continuous()} or \code{scale_y_continuous()}.
 
 To reset any of the above settings to their ggplot2 default, set the value
-to \code{NULL}, e.g. \code{y_scales = list(limits = NULL)}
+to \code{NULL}, e.g. \code{y_scales = list(limits = NULL)}.
 }
 \examples{
 ggsurvfit <-
