@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9010</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9011</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,11 +58,21 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">theme_risktable_default</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">theme_risktable_default</span><span class="op">(</span>axis.text.y.size <span class="op">=</span> <span class="fl">10</span>, plot.title.size <span class="op">=</span> <span class="fl">10.75</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">theme_risktable_boxed</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">theme_risktable_boxed</span><span class="op">(</span>axis.text.y.size <span class="op">=</span> <span class="fl">10</span>, plot.title.size <span class="op">=</span> <span class="fl">10.75</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>axis.text.y.size</dt>
+<dd><p>text size of the labels on the left of the risk table</p></dd>
+
+
+<dt>plot.title.size</dt>
+<dd><p>text size of the risk table title</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
@@ -78,13 +88,22 @@
 <span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="add_risktable.html">add_risktable</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="fu">theme_risktable_default</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="theme_risktable-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># larger text --------------------------------</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="add_risktable.html">add_risktable</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    size <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>    theme <span class="op">=</span> <span class="fu">theme_risktable_default</span><span class="op">(</span>axis.text.y.size <span class="op">=</span> <span class="fl">12</span>,</span></span>
+<span class="r-in"><span>                                    plot.title.size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-plt img"><img src="theme_risktable-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># boxed --------------------------------------</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="add_risktable.html">add_risktable</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="fu">theme_risktable_boxed</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="theme_risktable-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="theme_risktable-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># none ---------------------------------------</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="add_risktable.html">add_risktable</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="cn">NULL</span>, risktable_height <span class="op">=</span> <span class="fl">0.20</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="theme_risktable-3.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="theme_risktable-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

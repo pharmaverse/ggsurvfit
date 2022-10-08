@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9010</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9011</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
-<ul><li><p>When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/97" class="external-link">#97</a>)</p></li>
+<ul><li><p>Increased the default font size on the plot and in the risk tables, and added arguments to control font size in the risk table theme. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/103" class="external-link">#103</a>)</p></li>
+<li><p>When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/97" class="external-link">#97</a>)</p></li>
 <li><p>Bug fix when <code><a href="../reference/Surv_CNSR.html">Surv_CNSR()</a></code> is used in conjunction with <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>. The default x-axis label is incorrectly attributed to a stratifying variable, when present. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/100" class="external-link">#100</a>)</p></li>
 <li><p>Fix in <code><a href="../reference/survfit2.html">survfit2()</a></code> that allows users to pass arguments with non-standard evaluation, i.e. bare column names. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/90" class="external-link">#90</a>)</p></li>
 <li><p>When the <code>survfit(weights=)</code> argument is utilized the number at risk, number of observed events, etc. are a non-integer numbers. The counts in the risk table are now rounded to the nearest integer. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/90" class="external-link">#90</a>)</p></li>
