@@ -15,6 +15,10 @@ a ggplot2 theme
 }
 \description{
 Returns ggplot list of calls defining a theme.
+\itemize{
+\item \code{theme_ggsurvfit_default()}: Builds on \code{theme_bw()} with increased text sizes.
+\item \code{theme_ggsurvfit_KMunicate()}: Theme to create \href{http://dx.doi.org/10.1136/bmjopen-2019-030215}{KMunicate-styled} figures.
+}
 }
 \examples{
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%

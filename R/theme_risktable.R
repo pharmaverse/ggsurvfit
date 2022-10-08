@@ -3,7 +3,7 @@
 #' @description
 #' Returns ggplot list of calls defining a theme meant to be applied to a risk table.
 #'
-#' @param axis.text.y.size text size of the labels on the right of the risk table
+#' @param axis.text.y.size text size of the labels on the left of the risk table
 #' @param plot.title.size text size of the risk table title
 #'
 #' @name theme_risktable
@@ -13,6 +13,14 @@
 #'
 #' # default ------------------------------------
 #' p + add_risktable(theme = theme_risktable_default())
+#'
+#' # larger text --------------------------------
+#' p +
+#'   add_risktable(
+#'     size = 4,
+#'     theme = theme_risktable_default(axis.text.y.size = 12,
+#'                                     plot.title.size = 14)
+#'   )
 #'
 #' # boxed --------------------------------------
 #' p + add_risktable(theme = theme_risktable_boxed())
@@ -48,7 +56,7 @@ theme_risktable_default <- function(axis.text.y.size = 10, plot.title.size = 10.
 #' @name theme_risktable
 theme_risktable_boxed <- function() {
   list(
-    theme_risktable_default(),
+    theme_risktable_default(axis.text.y.size = 10, plot.title.size = 10.75),
     ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA))
   )
 }
