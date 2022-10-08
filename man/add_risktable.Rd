@@ -12,6 +12,7 @@ add_risktable(
   stats_label = NULL,
   combine_groups = FALSE,
   theme = theme_risktable_default(),
+  size = 3.5,
   ...
 )
 }
@@ -50,7 +51,7 @@ in the risk table across groups. Default is \code{FALSE}}
 
 \item{theme}{A risk table theme. Default is \code{theme_risktable_default()}}
 
-\item{...}{arguments passed to \code{ggplot2::geom_text(...)}. Pass arguments like, \code{size = 3}
+\item{size, ...}{arguments passed to \code{ggplot2::geom_text(...)}. Pass arguments like, \code{size = 4}
 to increase the size of the statistics presented in the table.}
 }
 \value{
