@@ -8,7 +8,7 @@
 \usage{
 theme_risktable_default(axis.text.y.size = 10, plot.title.size = 10.75)
 
-theme_risktable_boxed()
+theme_risktable_boxed(axis.text.y.size = 10, plot.title.size = 10.75)
 }
 \arguments{
 \item{axis.text.y.size}{text size of the labels on the left of the risk table}

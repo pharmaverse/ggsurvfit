@@ -54,9 +54,10 @@ theme_risktable_default <- function(axis.text.y.size = 10, plot.title.size = 10.
 
 #' @export
 #' @name theme_risktable
-theme_risktable_boxed <- function() {
+theme_risktable_boxed <- function(axis.text.y.size = 10, plot.title.size = 10.75) {
   list(
-    theme_risktable_default(axis.text.y.size = 10, plot.title.size = 10.75),
+    theme_risktable_default(axis.text.y.size = axis.text.y.size,
+                            plot.title.size = plot.title.size),
     ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA))
   )
 }
