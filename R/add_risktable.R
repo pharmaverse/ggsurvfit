@@ -26,7 +26,7 @@
 #' @param risktable_height A numeric value between 0 and 1 indicates the proportion of the
 #' final plot the risk table will occupy.
 #' @param theme A risk table theme. Default is `theme_risktable_default()`
-#' @param ... arguments passed to `ggplot2::geom_text(...)`. Pass arguments like, `size = 3`
+#' @param size,... arguments passed to `ggplot2::geom_text(...)`. Pass arguments like, `size = 4`
 #' to increase the size of the statistics presented in the table.
 #'
 #' @section Competing Risks:
@@ -68,6 +68,7 @@ add_risktable <- function(times = NULL,
                           stats_label = NULL,
                           combine_groups = FALSE,
                           theme = theme_risktable_default(),
+                          size = 3.5,
                           ...) {
   rlang::inject(
     ggplot2::layer(
@@ -91,6 +92,7 @@ add_risktable <- function(times = NULL,
           risktable_group = !!match.arg(risktable_group),
           risktable_height = risktable_height,
           theme = theme,
+          size = size,
           ...
         )
       )

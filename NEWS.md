@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Increased the default font size on the plot and in the risk tables, and added arguments to control font size in the risk table theme. (#103) 
+
 * When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in `ggsurvfit()`. (#97)
 
 * Bug fix when `Surv_CNSR()` is used in conjunction with `ggsurvfit()`. The default x-axis label is incorrectly attributed to a stratifying variable, when present. (#100)
