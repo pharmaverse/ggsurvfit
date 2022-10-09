@@ -33,10 +33,7 @@
 #'
 #' # specify additional scales
 #' ggsurvfit +
-#'   scale_ggsurvfit(
-#'     x_scales = list(breaks = 0:9),
-#'     y_scales = list(label = scales::percent, limits = c(0, 1))
-#'   )
+#'   scale_ggsurvfit(x_scales = list(breaks = 0:9))
 scale_ggsurvfit <- function(x_scales = list(), y_scales = list()){
   scale_ggsurvfit_empty_list <- list()
   structure(scale_ggsurvfit_empty_list, x_scales = x_scales, y_scales = y_scales, class = "scale_ggsurvfit")

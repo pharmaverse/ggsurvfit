@@ -41,8 +41,5 @@ ggsurvfit + scale_ggsurvfit()
 
 # specify additional scales
 ggsurvfit +
-  scale_ggsurvfit(
-    x_scales = list(breaks = 0:9),
-    y_scales = list(label = scales::percent, limits = c(0, 1))
-  )
+  scale_ggsurvfit(x_scales = list(breaks = 0:9))
 }
