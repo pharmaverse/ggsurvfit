@@ -149,7 +149,6 @@ wrap_plots(built_p, built_p, ncol = 2)
 
 Compare curves among the stratum using the `add_p()` function.
 P-values can be placed either in the figure caption (the default) or in the plot area as an annotation.
-Similarly to risk tables, p-values are placed on the figure at the time of printing, and therefore, you must build the figures with `ggsurvfit_build()` if you with to cobble figures together with {patchwork}.
 
 ```{r}
 p <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
@@ -161,8 +160,7 @@ p1 <- p + add_pvalue(caption = "Log-rank {p.value}")
 # place p-value as a plot annotation
 p2 <- p + add_pvalue(location  = "annotation", x = 8.5)
 
-ggsurvfit_build(p1) + 
-  ggsurvfit_build(p2) + 
+p1 + p2 + 
   patchwork::plot_layout(guides = "collect") &
   theme(legend.position = "bottom")
 ```

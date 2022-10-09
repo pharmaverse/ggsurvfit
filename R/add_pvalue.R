@@ -37,28 +37,32 @@ add_pvalue <- function(location = c("caption", "annotation"),
                        pvalue_fun = format_p,
                        rho = 0,
                        ...) {
-  rlang::inject(
-    ggplot2::layer(
-      data = NULL, mapping = NULL,
-      stat = StatBlankSurvfit, geom = "blank",
-      position = "identity",
-      show.legend = NA, inherit.aes = TRUE,
-      params = list()
-    ) %>%
-      structure(
-        "add_pvalue" = c(list(location = !!match.arg(location),
-                            caption = caption,
-                            pvalue_fun = pvalue_fun,
-                            prepend_p = prepend_p,
-                            rho = rho),
-                         rlang::dots_list(...))
-      )
-  )
+  add_pvalue_empty_list <- list()
+  structure(add_pvalue_empty_list,
+            location = match.arg(location),
+            caption = caption,
+            prepend_p = prepend_p,
+            pvalue_fun = pvalue_fun,
+            rho = rho,
+            dots = rlang::dots_list(...),
+            class = "add_pvalue")
 }
 
+#' @export
+ggplot_add.add_pvalue <- function (object, plot, object_name) {
+  update_add_pvalue(plot, object)
+}
 
+update_add_pvalue <- function(p, add_pvalue_empty_list) {
+  # getting user-passed arguments
+  location <- attr(add_pvalue_empty_list, "location")
+  caption <- attr(add_pvalue_empty_list, "caption")
+  prepend_p <- attr(add_pvalue_empty_list, "prepend_p")
+  pvalue_fun <- attr(add_pvalue_empty_list, "pvalue_fun")
+  rho <- attr(add_pvalue_empty_list, "rho")
+  dots <- attr(add_pvalue_empty_list, "dots")
 
-.add_pvalue_caption <- function(object, location, caption, pvalue_fun, prepend_p, pvalue_type, rho, ...) {
+  # checking inputs
   if (!rlang::is_string(caption)) {
     cli_abort(c("!" = "The {.code add_pvalue(caption=)} argument must be a string of length one."))
   }
@@ -71,7 +75,7 @@ add_pvalue <- function(location = c("caption", "annotation"),
 
 
   # extract survfit object
-  build <- ggplot2::ggplot_build(object)
+  build <- ggplot2::ggplot_build(p)
   survfit <- build$data[[1]][["survfit"]][[1]]
 
   if (!inherits(survfit, c("survfit2", "tidycuminc"))) {
@@ -79,7 +83,7 @@ add_pvalue <- function(location = c("caption", "annotation"),
       c("!" = "{.code add_pvalue()} works with objects created with {.code survfit2()} or {.code tidycmprsk::cuminc()}.",
         "i" = "{.code add_pvalue()} has been ignored.")
     )
-    return(object)
+    return(p)
   }
 
   # calculate p-value
@@ -104,22 +108,24 @@ add_pvalue <- function(location = c("caption", "annotation"),
   # add caption, and return ggplot
   if (location == "caption") {
     ret_object <-
-      object +
+      p +
       ggplot2::labs(caption = glue::glue(caption))
   }
   else if (location == "annotation") {
     location_args <-
       utils::modifyList(
         x = .default_pvalue_annotation_placement(build),
-        val = rlang::dots_list(...)
+        val = dots %||% list()
       )
 
     ret_object <-
-      object +
+      p +
       rlang::inject(ggplot2::annotate("text", label = glue::glue(caption), !!!location_args))
   }
   ret_object
+
 }
+
 
 .default_pvalue_annotation_placement <- function(build) {
   x_range <- build$layout$panel_params[[1]]$x.range
