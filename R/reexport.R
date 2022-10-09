@@ -13,3 +13,11 @@ dplyr::`%>%`
 #' @importFrom grid grid.draw
 #' @export
 grid::grid.draw
+
+#' @importFrom ggplot2 %+%
+#' @export
+ggplot2::`%+%`
+
+#' @importFrom ggplot2 ggplot_add
+#' @export
+ggplot2::ggplot_add
