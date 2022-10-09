@@ -27,13 +27,13 @@ Imports:
     gtable,
     patchwork,
     rlang (>= 1.0.0),
+    scales,
     survival (>= 3.4-0),
     tidyr (>= 1.0.0)
 Suggests: 
     covr,
     knitr,
     rmarkdown,
-    scales,
     spelling,
     testthat (>= 3.0.0),
     tidycmprsk (>= 0.2.0),
