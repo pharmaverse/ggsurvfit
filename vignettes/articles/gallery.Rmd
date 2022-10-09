@@ -149,7 +149,6 @@ wrap_plots(built_p, built_p, ncol = 2)
 
 Compare curves among the stratum using the `add_p()` function.
 P-values can be placed either in the figure caption (the default) or in the plot area as an annotation.
-Similarly to risk tables, p-values are placed on the figure at the time of printing, and therefore, you must build the figures with `ggsurvfit_build()` if you with to cobble figures together with {patchwork}.
 
 ```{r}
 p <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
@@ -161,8 +160,7 @@ p1 <- p + add_pvalue(caption = "Log-rank {p.value}")
 # place p-value as a plot annotation
 p2 <- p + add_pvalue(location  = "annotation", x = 8.5)
 
-ggsurvfit_build(p1) + 
-  ggsurvfit_build(p2) + 
+p1 + p2 + 
   patchwork::plot_layout(guides = "collect") &
   theme(legend.position = "bottom")
 ```
@@ -172,12 +170,10 @@ ggsurvfit_build(p1) +
 Unlike most {ggplot2} functions, scales are not additive.
 This means that if a scale attribute is modified in one call to `scale_x_continuous()`, a second call to  `scale_x_continuous()` will write over _all_ changes made in the first.
 For this reason, the `ggsurvfit()` and `ggcuminc()` functions do not modify the default {ggplot2} scales; rather, all changes to the scales are left to the user.
+But, we do export a helpful ggsurvfit-specific scales function to help.
 
-But, I do not like the default {ggplot2} padding on a survival curve: it is excessive.
-Moreover, I have difficulty remembering the {ggplot2} syntax to reduce the padding.
-For these reasons, we export a new scale function to reduce padding for the x- and y-axes, set the y-axis limits, and for label the y-axis label as percentages: `scale_ggsurvfit()`.
-To use this function, however, you must include all modifications you wish to make to either the x or y scale in the function call.
-
+The `scale_ggsurvfit()` function will apply default scales often seen in survival figures:
+reduced plot padding, y-axis labels appear as percentages, survival curves are shown from 0% to 100% on the y-axis.
 In the example below, we utilize `scale_ggsurvfit()` and make other scale changes to the scales, such as, specifying the breaks on the x-axis.
 
 ```{r}
