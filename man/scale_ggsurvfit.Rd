@@ -24,6 +24,8 @@ This scale applies modifications often seen in these figures.
 
 If you use this function, you \strong{must} include all scale specifications
 that would appear in \code{scale_x_continuous()} or \code{scale_y_continuous()}.
+For example, it's common that you'll need to specify the x-axis break points.
+\code{scale_ggsurvfit(x_scales=list(breaks=0:9))}.
 
 To reset any of the above settings to their ggplot2 default, set the value
 to \code{NULL}, e.g. \code{y_scales = list(limits = NULL)}.
@@ -39,8 +41,5 @@ ggsurvfit + scale_ggsurvfit()
 
 # specify additional scales
 ggsurvfit +
-  scale_ggsurvfit(
-    x_scales = list(breaks = 0:9),
-    y_scales = list(label = scales::percent, limits = c(0, 1))
-  )
+  scale_ggsurvfit(x_scales = list(breaks = 0:9))
 }
