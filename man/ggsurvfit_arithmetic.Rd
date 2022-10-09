@@ -2,15 +2,15 @@
 % Please edit documentation in R/ggsurvfit_arithmetic.R
 \name{ggsurvfit_arithmetic}
 \alias{ggsurvfit_arithmetic}
+\alias{|.ggsurvfit_built}
+\alias{|.ggsurvfit}
+\alias{|.ggcuminc}
 \alias{-.ggsurvfit_built}
 \alias{-.ggsurvfit}
 \alias{-.ggcuminc}
 \alias{/.ggsurvfit_built}
 \alias{/.ggsurvfit}
 \alias{/.ggcuminc}
-\alias{|.ggsurvfit_built}
-\alias{|.ggsurvfit}
-\alias{|.ggcuminc}
 \alias{*.ggsurvfit_built}
 \alias{*.ggsurvfit}
 \alias{*.ggcuminc}
@@ -19,6 +19,12 @@
 \alias{&.ggcuminc}
 \title{Plot Arithmetic}
 \usage{
+\method{|}{ggsurvfit_built}(e1, e2)
+
+\method{|}{ggsurvfit}(e1, e2)
+
+\method{|}{ggcuminc}(e1, e2)
+
 \method{-}{ggsurvfit_built}(e1, e2)
 
 \method{-}{ggsurvfit}(e1, e2)
@@ -30,12 +36,6 @@
 \method{/}{ggsurvfit}(e1, e2)
 
 \method{/}{ggcuminc}(e1, e2)
-
-\method{|}{ggsurvfit_built}(e1, e2)
-
-\method{|}{ggsurvfit}(e1, e2)
-
-\method{|}{ggcuminc}(e1, e2)
 
 \method{*}{ggsurvfit_built}(e1, e2)
 
@@ -99,9 +99,7 @@ p <-
 p1 <- p + ggtitle("Plot 1")
 p2 <- p + ggtitle("Plot 2")
 
-p1 - p2
-
 p1 | p2
 
-p1 / p2
+p1 - p2
 }

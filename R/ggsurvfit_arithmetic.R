@@ -51,33 +51,24 @@
 #' p1 - p2
 NULL
 
-# # `+` methods ------------------------------------------------------------------
-# #' @rdname plot_arithmetic
-# #' @export
-# "+.ggsurvfit_built" <- function(e1, e2) {
-#   if (!inherits(e2, c("ggsurvfit", "ggcuminc", "ggsurvfit_build"))) {
-#     return(e1 + e2)
-#   }
-#   build_and_wrap(e1) + build_and_wrap(e2)
-# }
-#
-# #' @rdname plot_arithmetic
-# #' @export
-# "+.ggsurvfit" <- function(e1, e2) {
-#   if (!inherits(e2, c("ggsurvfit", "ggcuminc", "ggsurvfit_build"))) {
-#     return(e1 + e2)
-#   }
-#   build_and_wrap(e1) + build_and_wrap(e2)
-# }
-#
-# #' @rdname plot_arithmetic
-# #' @export
-# "+.ggcuminc" <- function(e1, e2) {
-#   if (!inherits(e2, c("ggsurvfit", "ggcuminc", "ggsurvfit_build"))) {
-#     return(e1 + e2)
-#   }
-#   build_and_wrap(e1) + build_and_wrap(e2)
-# }
+# `|` methods ------------------------------------------------------------------
+#' @rdname ggsurvfit_arithmetic
+#' @export
+"|.ggsurvfit_built" <- function(e1, e2) {
+  build_and_wrap(e1) | build_and_wrap(e2)
+}
+
+#' @rdname ggsurvfit_arithmetic
+#' @export
+"|.ggsurvfit" <- function(e1, e2) {
+  build_and_wrap(e1) | build_and_wrap(e2)
+}
+
+#' @rdname ggsurvfit_arithmetic
+#' @export
+"|.ggcuminc" <- function(e1, e2) {
+  build_and_wrap(e1) | build_and_wrap(e2)
+}
 
 # `-` methods ------------------------------------------------------------------
 #' @rdname ggsurvfit_arithmetic
@@ -115,25 +106,6 @@ NULL
 #' @export
 "/.ggcuminc" <- function(e1, e2) {
   build_and_wrap(e1) / build_and_wrap(e2)
-}
-
-# `|` methods ------------------------------------------------------------------
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"|.ggsurvfit_built" <- function(e1, e2) {
-  build_and_wrap(e1) | build_and_wrap(e2)
-}
-
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"|.ggsurvfit" <- function(e1, e2) {
-  build_and_wrap(e1) | build_and_wrap(e2)
-}
-
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"|.ggcuminc" <- function(e1, e2) {
-  build_and_wrap(e1) | build_and_wrap(e2)
 }
 
 # `*` methods ------------------------------------------------------------------
