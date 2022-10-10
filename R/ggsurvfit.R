@@ -214,6 +214,7 @@ ggsurvfit <- function(x, type = "survival",
   # return time label ----------------------------------------------------------
   switch( # using the CDISC variable as default label, if present
     !is.null(data) && !is.null(formula) &&
+      .is_CDISC_ADTTE(data) &&
       all(c("PARAM", "PARAMCD") %in% names(data)) &&
       !any(c("PARAM", "PARAMCD") %in% all.vars(formula)) &&
       .is_PARAM_consistent(formula, data),

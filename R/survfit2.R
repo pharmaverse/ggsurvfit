@@ -101,19 +101,34 @@ survfit2 <- function(formula, ...) {
   data <- .extract_data_from_survfit(x)
 
   if (is.null(data) || is.null(formula)) return(x)
-  if (all(c("PARAM", "PARAMCD") %in% names(data)) && !.is_PARAM_consistent(formula, data))
-    cli::cli_inform(c("!" = "Columns {.cls {c('PARAM', 'PARAMCD')}} are not unique and usage is likely incorrect."))
+  if (.is_CDISC_ADTTE(data) && !.is_PARAM_consistent(formula, data))
+    cli::cli_warn(c("!" = "Columns {.cls {c('PARAM', 'PARAMCD')}} are not unique and usage is likely incorrect."))
 
   x
 }
 
+.is_CDISC_ADTTE <- function(data) {
+  all(c("AVAL", "CNSR") %in% names(data)) &&
+    any(c("PARAM", "PARAMCD") %in% names(data))
+}
+
 .is_PARAM_consistent <- function(formula, data) {
   isTRUE(
-    # lengths must be one and PARAM does not appear in formula
-      ((length(unique(data[["PARAM"]])) == 1L) &&
-      (length(unique(data[["PARAMCD"]])) == 1L) &&
-      !any(c("PARAM", "PARAMCD") %in% all.vars(formula))) ||
-        # or PARAM can be any length and it must appear in formula
-        (any(c("PARAM", "PARAMCD") %in% all.vars(formula)))
+    (
+      # PARAM and PARAMCD both present with appropriate lengths
+      (
+        all(c("PARAM", "PARAMCD") %in% names(data)) &&
+          (length(unique(data[["PARAM"]])) == 1L) &&
+          (length(unique(data[["PARAMCD"]])) == 1L)
+      ) ||
+        # PARAMCD only present, and is appropriate length
+        (
+          !"PARAM" %in% names(data) &&
+            "PARAMCD" %in% names(data) &&
+            (length(unique(data[["PARAMCD"]])) == 1L)
+        )
+    ) ||
+      # or PARAM can be any length and it must appear in formula
+      (any(c("PARAM", "PARAMCD") %in% all.vars(formula)))
   )
 }
