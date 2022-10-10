@@ -83,6 +83,57 @@ test_that("ggsurvfit() works", {
     "Time"
   )
 
+  # check ADTTE PARAM usage
+  expect_warning(
+    adtte %>%
+      dplyr::mutate(
+        PARAMCD = rep_len(c("PFS", "OS"), length.out = dplyr::n())
+      ) %>%
+      dplyr::select(-PARAM) %>%
+      survfit2(Surv_CNSR() ~ 1, data = .),
+    "usage is likely incorrect"
+  )
+
+  expect_warning(
+    adtte %>%
+      dplyr::mutate(
+        PARAMCD = rep_len(c("PFS", "OS"), length.out = dplyr::n())
+      ) %>%
+      dplyr::select(-PARAM) %>%
+      survfit2(Surv_CNSR() ~ PARAMCD, data = .),
+    NA
+  )
+
+  df_param2 <-
+    adtte %>%
+    dplyr::mutate(PARAM = rep_len(c("PFS", "OS"), length.out = dplyr::n()))
+
+  expect_warning(
+    survfit2(Surv_CNSR() ~ 1, data = df_param2),
+    "usage is likely incorrect"
+  )
+
+  # PARAM will not be used as label because of incorrect usage
+  expect_equal(
+    suppressWarnings(survfit2(Surv_CNSR() ~ 1, data = df_param2)) %>%
+      ggsurvfit() %>%
+      ggplot2::ggplot_build() %>%
+      `[[`("plot") %>%
+      `[[`("labels") %>%
+      `[[`("x"),
+    "Time"
+  )
+
+  # x-axis label comes from PARAM
+  expect_equal(
+    survfit2(Surv_CNSR() ~ PARAM, data = df_param2) %>%
+      ggsurvfit() %>%
+      ggplot2::ggplot_build() %>%
+      `[[`("plot") %>%
+      `[[`("labels") %>%
+      `[[`("x"),
+    "Time"
+  )
 
   expect_error(ggsurvfit(mtcars))
   expect_error(survfit2(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>% ggsurvfit())
