@@ -25,6 +25,7 @@ Useful links:
 Authors:
 \itemize{
   \item Mark Baillie \email{bailliem@gmail.com}
+  \item Steven Haesendonckx \email{shaesen2@its.jnj.com}
 }
 
 }
