@@ -3,6 +3,7 @@
 #' @description
 #' Plot arithmetic for 'ggsurvfit' figures, built to mimic the
 #' [patchwork plot arithmetic](https://patchwork.data-imaginist.com/reference/plot_arithmetic.html).
+#' Methods for `|`, `-`, and `/` have been implemented.
 #'
 #' Use these functions to patch together figures created with the ggsurvfit package.
 #' If you need patch together 'ggsurvfit' plots with other plots, see details below.
@@ -54,7 +55,7 @@ NULL
 # `|` methods ------------------------------------------------------------------
 #' @rdname ggsurvfit_arithmetic
 #' @export
-"|.ggsurvfit_built" <- function(e1, e2) {
+"|.ggsurvfit_build" <- function(e1, e2) {
   build_and_wrap(e1) | build_and_wrap(e2)
 }
 
@@ -73,7 +74,7 @@ NULL
 # `-` methods ------------------------------------------------------------------
 #' @rdname ggsurvfit_arithmetic
 #' @export
-"-.ggsurvfit_built" <- function(e1, e2) {
+"-.ggsurvfit_build" <- function(e1, e2) {
   build_and_wrap(e1) - build_and_wrap(e2)
 }
 
@@ -92,7 +93,7 @@ NULL
 # `/` methods ------------------------------------------------------------------
 #' @rdname ggsurvfit_arithmetic
 #' @export
-"/.ggsurvfit_built" <- function(e1, e2) {
+"/.ggsurvfit_build" <- function(e1, e2) {
   build_and_wrap(e1) / build_and_wrap(e2)
 }
 
@@ -106,44 +107,6 @@ NULL
 #' @export
 "/.ggcuminc" <- function(e1, e2) {
   build_and_wrap(e1) / build_and_wrap(e2)
-}
-
-# `*` methods ------------------------------------------------------------------
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"*.ggsurvfit_built" <- function(e1, e2) {
-  build_and_wrap(e1) * build_and_wrap(e2)
-}
-
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"*.ggsurvfit" <- function(e1, e2) {
-  build_and_wrap(e1) * build_and_wrap(e2)
-}
-
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"*.ggcuminc" <- function(e1, e2) {
-  build_and_wrap(e1) * build_and_wrap(e2)
-}
-
-# `&` methods ------------------------------------------------------------------
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"&.ggsurvfit_built" <- function(e1, e2) {
-  build_and_wrap(e1) & build_and_wrap(e2)
-}
-
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"&.ggsurvfit" <- function(e1, e2) {
-  build_and_wrap(e1) & build_and_wrap(e2)
-}
-
-#' @rdname ggsurvfit_arithmetic
-#' @export
-"&.ggcuminc" <- function(e1, e2) {
-  build_and_wrap(e1) & build_and_wrap(e2)
 }
 
 build_and_wrap <- function(x) {

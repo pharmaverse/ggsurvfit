@@ -2,52 +2,34 @@
 % Please edit documentation in R/ggsurvfit_arithmetic.R
 \name{ggsurvfit_arithmetic}
 \alias{ggsurvfit_arithmetic}
-\alias{|.ggsurvfit_built}
+\alias{|.ggsurvfit_build}
 \alias{|.ggsurvfit}
 \alias{|.ggcuminc}
-\alias{-.ggsurvfit_built}
+\alias{-.ggsurvfit_build}
 \alias{-.ggsurvfit}
 \alias{-.ggcuminc}
-\alias{/.ggsurvfit_built}
+\alias{/.ggsurvfit_build}
 \alias{/.ggsurvfit}
 \alias{/.ggcuminc}
-\alias{*.ggsurvfit_built}
-\alias{*.ggsurvfit}
-\alias{*.ggcuminc}
-\alias{&.ggsurvfit_built}
-\alias{&.ggsurvfit}
-\alias{&.ggcuminc}
 \title{Plot Arithmetic}
 \usage{
-\method{|}{ggsurvfit_built}(e1, e2)
+\method{|}{ggsurvfit_build}(e1, e2)
 
 \method{|}{ggsurvfit}(e1, e2)
 
 \method{|}{ggcuminc}(e1, e2)
 
-\method{-}{ggsurvfit_built}(e1, e2)
+\method{-}{ggsurvfit_build}(e1, e2)
 
 \method{-}{ggsurvfit}(e1, e2)
 
 \method{-}{ggcuminc}(e1, e2)
 
-\method{/}{ggsurvfit_built}(e1, e2)
+\method{/}{ggsurvfit_build}(e1, e2)
 
 \method{/}{ggsurvfit}(e1, e2)
 
 \method{/}{ggcuminc}(e1, e2)
-
-\method{*}{ggsurvfit_built}(e1, e2)
-
-\method{*}{ggsurvfit}(e1, e2)
-
-\method{*}{ggcuminc}(e1, e2)
-
-\method{&}{ggsurvfit_built}(e1, e2)
-
-\method{&}{ggsurvfit}(e1, e2)
-
-\method{&}{ggcuminc}(e1, e2)
 }
 \arguments{
 \item{e1}{A \code{ggsurvfit}, \code{ggcuminc}, or \code{ggsurvfit_built} object}
@@ -62,6 +44,7 @@ A \code{patchwork} object
 \description{
 Plot arithmetic for 'ggsurvfit' figures, built to mimic the
 \href{https://patchwork.data-imaginist.com/reference/plot_arithmetic.html}{patchwork plot arithmetic}.
+Methods for \code{|}, \code{-}, and \code{/} have been implemented.
 
 Use these functions to patch together figures created with the ggsurvfit package.
 If you need patch together 'ggsurvfit' plots with other plots, see details below.
