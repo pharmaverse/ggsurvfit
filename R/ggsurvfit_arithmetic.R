@@ -4,7 +4,7 @@
 #' Plot arithmetic for 'ggsurvfit' figures, built to mimic the
 #' [patchwork plot arithmetic](https://patchwork.data-imaginist.com/reference/plot_arithmetic.html).
 #'
-#' Use these functions to patch figures created with the ggsurvfit package.
+#' Use these functions to patch together figures created with the ggsurvfit package.
 #' If you need patch together 'ggsurvfit' plots with other plots, see details below.
 #'
 #' Notably, you **cannot** use the `+` operator to patch 'ggsurvfit' plots together:

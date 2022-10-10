@@ -63,7 +63,7 @@ A \code{patchwork} object
 Plot arithmetic for 'ggsurvfit' figures, built to mimic the
 \href{https://patchwork.data-imaginist.com/reference/plot_arithmetic.html}{patchwork plot arithmetic}.
 
-Use these functions to patch figures created with the ggsurvfit package.
+Use these functions to patch together figures created with the ggsurvfit package.
 If you need patch together 'ggsurvfit' plots with other plots, see details below.
 
 Notably, you \strong{cannot} use the \code{+} operator to patch 'ggsurvfit' plots together:
