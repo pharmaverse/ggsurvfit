@@ -5,14 +5,15 @@ Authors@R: c(
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-0862-2018")),
     person("Mark", "Baillie", , "bailliem@gmail.com", role = "aut"),
-    person("Steven", "Haesendonckx", , "shaesen2@its.jnj.com", role = "aut")
+    person("Steven", "Haesendonckx", , "shaesen2@its.jnj.com", role = "aut",
+           comment = c(ORCID = "0000-0001-8222-3686"))
   )
 Description: Ease the creation of time-to-event (i.e. survival) endpoint
-    figures. The modular functions create figures ready for
-    publication. Each of the functions that add to or modify the figure
-    are written as proper 'ggplot2' geoms or stat methods, allowing
-    the functions from this package to be combined with any function or
-    customization from 'ggplot2' and other 'ggplot2' extension packages.
+    figures. The modular functions create figures ready for publication.
+    Each of the functions that add to or modify the figure are written as
+    proper 'ggplot2' geoms or stat methods, allowing the functions from
+    this package to be combined with any function or customization from
+    'ggplot2' and other 'ggplot2' extension packages.
 License: MIT + file LICENSE
 URL: https://github.com/ddsjoberg/ggsurvfit,
     http://www.danieldsjoberg.com/ggsurvfit/
@@ -23,8 +24,8 @@ Imports:
     broom (>= 1.0.0),
     cli (>= 3.0.0),
     dplyr (>= 1.0.0),
-    glue (>= 1.6.0),
     ggplot2 (>= 3.3.0),
+    glue (>= 1.6.0),
     gtable,
     patchwork,
     rlang (>= 1.0.0),
@@ -39,9 +40,10 @@ Suggests:
     testthat (>= 3.0.0),
     tidycmprsk (>= 0.2.0),
     vdiffr (>= 1.0.0)
-Remotes: MSKCC-Epi-Bio/tidycmprsk
 VignetteBuilder: 
     knitr
+Remotes: 
+    MSKCC-Epi-Bio/tidycmprsk
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
