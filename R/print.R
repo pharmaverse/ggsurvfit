@@ -1,6 +1,6 @@
 #' Print ggsurvfit object
 #'
-#' @param x an object of class 'ggsurvfit'
+#' @param x an object of class 'ggsurvfit' or 'ggcuminc'
 #' @inheritParams rlang::args_dots_empty
 #'
 #' @return a printed ggplot2 figure
@@ -24,9 +24,4 @@ print.ggsurvfit <- function(x, ...) {
 
 #' @export
 #' @rdname print_ggsurvfit
-print.ggcuminc <- function(x, ...) {
-  # print nd return object
-  print.ggsurvfit(x)
-}
-
-
+print.ggcuminc <- print.ggsurvfit
