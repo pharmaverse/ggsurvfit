@@ -182,9 +182,22 @@ Show the probability of an event rather than the probability of being free from 
 Custom transformations are also available.
 
 ```{r}
-survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+p <-
+  survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(type = "risk", size = 0.8) +
   add_confidence_interval()
+p
+```
+
+## Saving Plots
+
+The {ggsurvfit} package plays well with `ggplot2::ggsave()`, which allows you to specify the output file format, the DPI, the height and width of a the image, and more.
+
+```{r}
+path_to_image <- file.path(tempdir(), "image.png")
+path_to_image
+
+ggsave(file = path_to_image, plot = p)
 ```
 
 ## Extensions
