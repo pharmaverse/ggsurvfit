@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Added S3 methods `grid.draw.ggsurvfit()` and `grid.draw.ggcuminc()` which in turn allows us to save images from the package directly with `ggplot2::ggsave()` (#107)
+
 * Increased the default font size on the plot and in the risk tables, and added arguments to control font size in the risk table theme. (#103) 
 
 * When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in `ggsurvfit()`. (#97)

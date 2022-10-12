@@ -11,7 +11,7 @@
 \method{print}{ggcuminc}(x, ...)
 }
 \arguments{
-\item{x}{an object of class 'ggsurvfit'}
+\item{x}{an object of class 'ggsurvfit' or 'ggcuminc'}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
