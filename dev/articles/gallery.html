@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9014</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9015</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -246,16 +246,30 @@
 </h2>
 <p>Show the probability of an event rather than the probability of being free from the event with transformations. Custom transformations are also available.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"risk"</span>, size <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p</span></span></code></pre></div>
 <p><img src="gallery_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="saving-plots">Saving Plots<a class="anchor" aria-label="anchor" href="#saving-plots"></a>
+</h2>
+<p>The {ggsurvfit} package plays well with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code>, which allows you to specify the output file format, the DPI, the height and width of a the image, and more.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">path_to_image</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"image.png"</span><span class="op">)</span></span>
+<span><span class="va">path_to_image</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpZvucbD/image.png"</span></span>
+<span></span>
+<span><span class="fu">ggsave</span><span class="op">(</span>file <span class="op">=</span> <span class="va">path_to_image</span>, plot <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Saving 7.29 x 4.51 in image</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="extensions">Extensions<a class="anchor" aria-label="anchor" href="#extensions"></a>
 </h2>
 <p>Because {ggsurvfit} functions are written as proper {ggplot2} geoms, you can both weave any {ggplot2} functions <strong>and</strong> ggplot2 extensions, such as {gghighlight} and {ggeasy}.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/gghighlight.html" class="external-link">gghighlight</a></span><span class="op">(</span></span>
@@ -265,14 +279,14 @@
 <span>  <span class="fu">ggeasy</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggeasy/man/easy_remove_legend.html" class="external-link">easy_remove_legend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggeasy</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggeasy/man/easy_change_text.html" class="external-link">easy_y_axis_labels_size</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggeasy</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggeasy/man/easy_change_text.html" class="external-link">easy_x_axis_labels_size</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
-<p><img src="gallery_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="gallery_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="faceting">Faceting<a class="anchor" aria-label="anchor" href="#faceting"></a>
 </h2>
 <p>Curves created with {ggsurvfit} can also later be faceted using {ggplot2}. Note, however, that faceted curves cannot include a risk table.</p>
 <p>The <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code> function calls <code><a href="../reference/tidy_survfit.html">tidy_survfit()</a></code> to create the data frame that is used to create the figure. In the data frame, there is a column named <code>"strata"</code>, which we will facet over.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -280,26 +294,26 @@
 <span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>n.breaks <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"PFS by Duration between Surgery and Treatment"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="gallery_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<p><img src="gallery_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="grey-scale-figures">Grey-scale Figures<a class="anchor" aria-label="anchor" href="#grey-scale-figures"></a>
 </h2>
 <p>You may need a black and white figure and that is achieved using grey-scale ggplot2 functions.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_color_grey</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_fill_grey</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Grey Scale"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="gallery_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p><img src="gallery_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="kmunicate">KMunicate<a class="anchor" aria-label="anchor" href="#kmunicate"></a>
 </h2>
 <p>To get figures that align with the guidelines outlined in <a href="http://dx.doi.org/10.1136/bmjopen-2019-030215" class="external-link">“Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate.”</a>, use the <code><a href="../reference/theme_ggsurvfit.html">theme_ggsurvfit_KMunicate()</a></code> theme along with these function options.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">surg</span>, data <span class="op">=</span> <span class="va">df_colon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span>linetype_aes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/add_confidence_interval.html">add_confidence_interval</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -310,7 +324,7 @@
 <span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.85</span>, <span class="fl">0.85</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="gallery_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p><img src="gallery_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
