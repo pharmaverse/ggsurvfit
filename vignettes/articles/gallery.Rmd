@@ -125,7 +125,7 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
 One of my favorite features of the {ggsurvfit} package is that any {ggplot2} function may be used to modify the plot and the risk tables will still align with the primary plot.
 This is accomplished by delaying the construction of the risk tables until the plot is printed.
 
-Because the the delayed build of the risk tables, we must take one additional step when placing figures side-by-side that contain risk tables: we must use the `ggsurvfit_build()` function when placing figures with risk tables side-by-side.
+Because the the delayed build of the risk tables, we must take one additional step when placing figures side-by-side that contain risk tables: we must use the `ggsurvfit_build()` function.
 This function will construct the risk tables and combine them with the primary plot.
 Once the plots are built, the can be placed side-by-side with {patchwork}.
 
@@ -144,6 +144,8 @@ built_p <- ggsurvfit_build(p)
 # place plots side-by-side
 wrap_plots(built_p, built_p, ncol = 2)
 ```
+
+NOTE: You can also use the patchwork arithmetic operators, but you must first wrap the plot in `patchwork::wrap_elements()`, e.g. `wrap_elements(built_p) | wrap_elements(built_p)`.
 
 ## P-values
 
