@@ -62,11 +62,11 @@ A few details on ggsurvfit plot arithmetic:
 implementation of the plot operators. To utilize the full suite supported
 by patchwork, see the note below.
 \item If you need to patch together 'ggsurvfit' figures with non-ggsurvfit
-figures OR need a feature supported in partchwork that is not supported
-by the ggsurvfit implmenetionation, you must utilize the arithmetic
+figures OR you need a feature supported in patchwork that is not supported
+by the ggsurvfit implementation, you must utilize the arithmetic
 operators directly from the \code{patchwork} package.
-To use directly use the \code{patchwork} operators, a figure created
-with \code{ggsurvfit} must be wrapped in \code{patchwork::wrap_elements(ggsurvfit_build(p))}.
+To use directly use the \code{patchwork} operators with a figure created
+with \code{ggsurvfit}, it must be wrapped in \code{patchwork::wrap_elements(ggsurvfit_build(p))}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{patchwork::wrap_elements(ggsurvfit_build(p)) + patchwork::wrap_elements(ggsurvfit_build(p))
 }\if{html}{\out{</div>}}

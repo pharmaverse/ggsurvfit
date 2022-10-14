@@ -19,11 +19,11 @@
 #'    implementation of the plot operators. To utilize the full suite supported
 #'    by patchwork, see the note below.
 #' 3. If you need to patch together 'ggsurvfit' figures with non-ggsurvfit
-#'    figures OR need a feature supported in partchwork that is not supported
-#'    by the ggsurvfit implmenetionation, you must utilize the arithmetic
+#'    figures OR you need a feature supported in patchwork that is not supported
+#'    by the ggsurvfit implementation, you must utilize the arithmetic
 #'    operators directly from the `patchwork` package.
-#'    To use directly use the `patchwork` operators, a figure created
-#'    with `ggsurvfit` must be wrapped in `patchwork::wrap_elements(ggsurvfit_build(p))`.
+#'    To use directly use the `patchwork` operators with a figure created
+#'    with `ggsurvfit`, it must be wrapped in `patchwork::wrap_elements(ggsurvfit_build(p))`.
 #'
 #'    ```r
 #'    patchwork::wrap_elements(ggsurvfit_build(p)) + patchwork::wrap_elements(ggsurvfit_build(p))
