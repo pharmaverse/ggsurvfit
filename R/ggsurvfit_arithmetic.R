@@ -8,14 +8,19 @@
 #' Use these functions to patch together figures created with the ggsurvfit package.
 #' If you need patch together 'ggsurvfit' plots with other plots, see details below.
 #'
-#' Notably, you **cannot** use the `+` operator to patch 'ggsurvfit' plots together:
-#' use `|` instead.
+#' If you experience an error using these operators, **read the details section below**.
 #'
 #' @section Details:
 #'
 #' A few details on ggsurvfit plot arithmetic:
-#' 1. These functions are meant to only work with figures created with the ggsurvfit package.
-#' 2. Not every combination of operators is supported by the ggsurvift
+#' 1. These functions are meant to only work with figures created with the ggsurvfit package,
+#'    and only two plots at a time. This means you can do this: `p1 | p2`. But
+#'    not this: `p1 | p2 | p3`. The reason for this is that these methods are
+#'    meant to be operated on figures created with ggsurvfit. After the first
+#'    `p1 | p2` is executed, the returned plot is no longer of class 'ggsurvfit',
+#'    and therefore the remaining operation of `. | p3` cannot execute properly.
+#'    See below for details on operating on 3 or more figures.
+#' 2. Not every combination of operators is supported by the ggsurvfit
 #'    implementation of the plot operators. To utilize the full suite supported
 #'    by patchwork, see the note below.
 #' 3. If you need to patch together 'ggsurvfit' figures with non-ggsurvfit

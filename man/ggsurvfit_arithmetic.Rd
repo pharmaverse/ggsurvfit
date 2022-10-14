@@ -49,16 +49,21 @@ Methods for \code{|}, \code{-}, and \code{/} have been implemented.
 Use these functions to patch together figures created with the ggsurvfit package.
 If you need patch together 'ggsurvfit' plots with other plots, see details below.
 
-Notably, you \strong{cannot} use the \code{+} operator to patch 'ggsurvfit' plots together:
-use \code{|} instead.
+If you experience an error using these operators, \strong{read the details section below}.
 }
 \section{Details}{
 
 
 A few details on ggsurvfit plot arithmetic:
 \enumerate{
-\item These functions are meant to only work with figures created with the ggsurvfit package.
-\item Not every combination of operators is supported by the ggsurvift
+\item These functions are meant to only work with figures created with the ggsurvfit package,
+and only two plots at a time. This means you can do this: \code{p1 | p2}. But
+not this: \code{p1 | p2 | p3}. The reason for this is that these methods are
+meant to be operated on figures created with ggsurvfit. After the first
+\code{p1 | p2} is executed, the returned plot is no longer of class 'ggsurvfit',
+and therefore the remaining operation of \code{. | p3} cannot execute properly.
+See below for details on operating on 3 or more figures.
+\item Not every combination of operators is supported by the ggsurvfit
 implementation of the plot operators. To utilize the full suite supported
 by patchwork, see the note below.
 \item If you need to patch together 'ggsurvfit' figures with non-ggsurvfit
