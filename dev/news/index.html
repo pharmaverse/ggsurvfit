@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9016</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9017</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
-<ul><li><p>Updated the default behavior of <code>add_risktable(risktable_group='auto')</code> to minimize the number of risk tables that appear below the figure. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/117" class="external-link">#117</a>)</p></li>
+<ul><li><p>Added function <code><a href="../reference/add_legend_title.html">add_legend_title()</a></code> that adds a title for the strata in the figure legend.</p></li>
+<li><p>Updated the default behavior of <code>add_risktable(risktable_group='auto')</code> to minimize the number of risk tables that appear below the figure. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/117" class="external-link">#117</a>)</p></li>
 <li><p>Added S3 methods <code><a href="../reference/grid.draw_ggsurvfit.html">grid.draw.ggsurvfit()</a></code> and <code><a href="../reference/grid.draw_ggsurvfit.html">grid.draw.ggcuminc()</a></code> which in turn allows us to save images from the package directly with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/107" class="external-link">#107</a>)</p></li>
 <li><p>Increased the default font size on the plot and in the risk tables, and added arguments to control font size in the risk table theme. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/103" class="external-link">#103</a>)</p></li>
 <li><p>When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/97" class="external-link">#97</a>)</p></li>
