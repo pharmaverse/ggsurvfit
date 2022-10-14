@@ -126,6 +126,7 @@ Plots created with the {ggsurvfit} can be cobbled or patched together using the
 grammar introduced in the {patchwork} package.
 
 Importantly, you cannot use the `+` operator as you can with {patchwork}: use `|` instead.
+There are other important caveats as well.
 See `?ggsurvfit_arithmetic` for details.
 
 ```{r}
