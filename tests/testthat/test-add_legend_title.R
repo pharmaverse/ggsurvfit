@@ -93,11 +93,4 @@ test_that("add_legend_title() works", {
     )$plot$labels$colour,
     "cyl"
   )
-
-  expect_error(
-    survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-      ggsurvfit() +
-      add_legend_title(title = letters),
-    "argument must be a string"
-  )
 })

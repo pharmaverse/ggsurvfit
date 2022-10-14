@@ -22,10 +22,6 @@ ggplot_add.add_legend_title <- function (object, plot, object_name) {
 }
 
 update_add_legend_title <- function(p, add_legend_title_empty_list) {
-  if (!is.null(attr(add_legend_title_empty_list, "title")) &&
-      !rlang::is_string(attr(add_legend_title_empty_list, "title"))) {
-    cli::cli_abort(c("!" = "The {.code add_legend_title(title=)} argument must be a string."))
-  }
   legend_title <-
     attr(add_legend_title_empty_list, "title") %||%
     p$data$strata_label[1]
