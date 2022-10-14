@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9015</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9016</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
-<ul><li><p>Added S3 methods <code><a href="../reference/grid.draw_ggsurvfit.html">grid.draw.ggsurvfit()</a></code> and <code><a href="../reference/grid.draw_ggsurvfit.html">grid.draw.ggcuminc()</a></code> which in turn allows us to save images from the package directly with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/107" class="external-link">#107</a>)</p></li>
+<ul><li><p>Updated the default behavior of <code>add_risktable(risktable_group='auto')</code> to minimize the number of risk tables that appear below the figure. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/117" class="external-link">#117</a>)</p></li>
+<li><p>Added S3 methods <code><a href="../reference/grid.draw_ggsurvfit.html">grid.draw.ggsurvfit()</a></code> and <code><a href="../reference/grid.draw_ggsurvfit.html">grid.draw.ggcuminc()</a></code> which in turn allows us to save images from the package directly with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/107" class="external-link">#107</a>)</p></li>
 <li><p>Increased the default font size on the plot and in the risk tables, and added arguments to control font size in the risk table theme. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/103" class="external-link">#103</a>)</p></li>
 <li><p>When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/97" class="external-link">#97</a>)</p></li>
 <li><p>Bug fix when <code><a href="../reference/Surv_CNSR.html">Surv_CNSR()</a></code> is used in conjunction with <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>. The default x-axis label is incorrectly attributed to a stratifying variable, when present. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/100" class="external-link">#100</a>)</p></li>
@@ -63,7 +64,7 @@
 <li><p>Adding support for multi-state models created with <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code>, i.e. competing risks from the survival package. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/83" class="external-link">#83</a>)</p></li>
 <li><p>Changed the default of the <code>ggsurvfit_build(combine_plots=)</code> argument to <code>TRUE</code>.</p></li>
 <li><p>Added the <code>add_quantile(x_value=)</code> argument that places line segments at the time specified.</p></li>
-<li><p>Added the <code><a href="../reference/scale_ggsurvfit.html">scale_ggsurvfit()</a></code> function that wraps both <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">ggplot2::scale_x_continuous()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">ggplot2::scale_y_continuous()</a></code> and uses reduced padding (via the <code>expand=</code> argument), labels y-axis with percentages (<code>labels=</code>), and sets the y-axis limits to <code>c(0, 1)</code> (<code>limits=</code>). (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/82" class="external-link">#82</a>)</p></li>
+<li><p>Added the <code><a href="../reference/scale_ggsurvfit.html">scale_ggsurvfit()</a></code> function that wraps both <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">ggplot2::scale_x_continuous()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">ggplot2::scale_y_continuous()</a></code> and uses reduced padding (via the <code>expand=</code> argument), labels y-axis with percentages (<code>labels=</code>), adds additional break points on the x-axis (<code>n.breaks=8</code>), and sets the y-axis limits to <code>c(0, 1)</code> (<code>limits=</code>). (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/82" class="external-link">#82</a>)</p></li>
 <li><p>Package now depends on {ggplot2}, meaning that it’ll be attached anytime {ggsurvfit} is attached. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/62" class="external-link">#62</a>)</p></li>
 <li><p>Converted the gallery vignette to an article. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/75" class="external-link">#75</a>)</p></li>
 <li><p>Adding function <code><a href="../reference/add_pvalue.html">add_pvalue()</a></code> to place p-values in the figure caption or as a text annotation.</p></li>
