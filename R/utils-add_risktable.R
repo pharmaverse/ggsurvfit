@@ -27,7 +27,8 @@
   if (risktable_group == "auto") {
     risktable_group <-
       dplyr::case_when(
-        "strata" %in% names(df_times) & length(risktable_stats) == 1L ~ "risktable_stats",
+        "strata" %in% names(df_times) && length(risktable_stats) == 1L ~ "risktable_stats",
+        "strata" %in% names(df_times) && length(unique(df_times[["strata"]])) > length(risktable_stats) ~ "risktable_stats",
         TRUE ~ "strata"
       )
   }
