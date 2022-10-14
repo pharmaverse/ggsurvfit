@@ -19,12 +19,12 @@ The most common figure created with this package is a survival curve.
 This scale applies modifications often seen in these figures.
 \itemize{
 \item \code{scale_y_continuous(expand = c(0.025, 0), limits = c(0, 1), label = scales::label_percent())}.
-\item \code{scale_x_continuous(expand = c(0.015, 0))}
+\item \code{scale_x_continuous(expand = c(0.015, 0), n.breaks = 8)}
 }
 
-If you use this function, you \strong{must} include all scale specifications
+If you use this function, you \strong{must} include \strong{all} scale specifications
 that would appear in \code{scale_x_continuous()} or \code{scale_y_continuous()}.
-For example, it's common that you'll need to specify the x-axis break points.
+For example, it's common you'll need to specify the x-axis break points.
 \code{scale_ggsurvfit(x_scales=list(breaks=0:9))}.
 
 To reset any of the above settings to their ggplot2 default, set the value
@@ -41,5 +41,5 @@ ggsurvfit + scale_ggsurvfit()
 
 # specify additional scales
 ggsurvfit +
-  scale_ggsurvfit(x_scales = list(breaks = 0:9))
+  scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
 }
