@@ -5,11 +5,11 @@
 #' This scale applies modifications often seen in these figures.
 #'
 #' - `scale_y_continuous(expand = c(0.025, 0), limits = c(0, 1), label = scales::label_percent())`.
-#' - `scale_x_continuous(expand = c(0.015, 0))`
+#' - `scale_x_continuous(expand = c(0.015, 0), n.breaks = 8)`
 #'
-#' If you use this function, you **must** include all scale specifications
+#' If you use this function, you **must** include **all** scale specifications
 #' that would appear in `scale_x_continuous()` or `scale_y_continuous()`.
-#' For example, it's common that you'll need to specify the x-axis break points.
+#' For example, it's common you'll need to specify the x-axis break points.
 #' `scale_ggsurvfit(x_scales=list(breaks=0:9))`.
 #'
 #' To reset any of the above settings to their ggplot2 default, set the value
@@ -33,7 +33,7 @@
 #'
 #' # specify additional scales
 #' ggsurvfit +
-#'   scale_ggsurvfit(x_scales = list(breaks = 0:9))
+#'   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
 scale_ggsurvfit <- function(x_scales = list(), y_scales = list()){
   scale_ggsurvfit_empty_list <- list()
   structure(scale_ggsurvfit_empty_list, x_scales = x_scales, y_scales = y_scales, class = "scale_ggsurvfit")
@@ -47,7 +47,7 @@ ggplot_add.scale_ggsurvfit <- function (object, plot, object_name) {
 
 update_scale_ggsurvfit <- function(p, scale_ggsurvfit_empty_list) {
   # setting default arguments
-  x_scale_defaults <- list(expand = c(0.015, 0))
+  x_scale_defaults <- list(expand = c(0.015, 0), n.breaks = 8)
   y_scale_defaults <- list(expand = c(0.025, 0), label = scales::label_percent())
   # set limits of a survival curve
   if (isTRUE(p$data$estimate_type[1] == "survival"))
