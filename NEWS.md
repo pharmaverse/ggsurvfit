@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Added function `add_legend_title()` that adds a title for the strata in the figure legend. 
+
 * Updated the default behavior of `add_risktable(risktable_group='auto')` to minimize the number of risk tables that appear below the figure. (#117) 
 
 * Added S3 methods `grid.draw.ggsurvfit()` and `grid.draw.ggcuminc()` which in turn allows us to save images from the package directly with `ggplot2::ggsave()` (#107)
