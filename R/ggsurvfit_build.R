@@ -69,6 +69,5 @@ ggsurvfit_build <- function(x, combine_plots = TRUE) {
   }
 
   # print and return object
-  x_eval %>%
-    structure(class = c("ggsurvfit_build", class(x_eval)))
+  x_eval
 }

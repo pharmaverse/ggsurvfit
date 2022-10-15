@@ -9,6 +9,8 @@
 \alias{grid.draw}
 \alias{\%+\%}
 \alias{ggplot_add}
+\alias{ggplot_build}
+\alias{arithmetic_prep}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -18,9 +20,11 @@ below to see their documentation.
 \describe{
   \item{dplyr}{\code{\link[dplyr:reexports]{\%>\%}}}
 
-  \item{ggplot2}{\code{\link[ggplot2:gg-add]{\%+\%}}, \code{\link[ggplot2]{ggplot_add}}}
+  \item{ggplot2}{\code{\link[ggplot2:gg-add]{\%+\%}}, \code{\link[ggplot2]{ggplot_add}}, \code{\link[ggplot2]{ggplot_build}}}
 
   \item{grid}{\code{\link[grid]{grid.draw}}}
+
+  \item{patchwork}{\code{\link[patchwork]{arithmetic_prep}}}
 
   \item{survival}{\code{\link[survival]{Surv}}, \code{\link[survival]{survfit}}}
 }}
