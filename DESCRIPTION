@@ -25,13 +25,13 @@ Depends:
 Imports: 
     broom (>= 1.0.0),
     cli (>= 3.0.0),
-    dplyr (>= 1.0.0),
+    dplyr (>= 1.0.3),
     ggplot2 (>= 3.3.0),
     glue (>= 1.6.0),
     gtable,
-    patchwork,
+    patchwork (>= 1.1.0),
     rlang (>= 1.0.0),
-    scales,
+    scales (>= 1.2.0),
     survival (>= 3.4-0),
     tidyr (>= 1.0.0)
 Suggests: 
@@ -44,8 +44,6 @@ Suggests:
     vdiffr (>= 1.0.0)
 VignetteBuilder: 
     knitr
-Remotes: 
-    MSKCC-Epi-Bio/tidycmprsk
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US

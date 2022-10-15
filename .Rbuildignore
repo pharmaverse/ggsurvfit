@@ -13,3 +13,4 @@
 codemeta.json
 ^CRAN-SUBMISSION$
 ^vignettes/articles$
+^revdep$

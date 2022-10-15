@@ -10,12 +10,15 @@
 ❯ checking CRAN incoming feasibility ... NOTE
   Maintainer: 'Daniel D. Sjoberg <danield.sjoberg@gmail.com>'
   
-  New submission
+0 errors ✔ | 0 warnings ✔ | 0 note ✖
 
-0 errors ✔ | 0 warnings ✔ | 1 note ✖
+## revdepcheck results
 
+We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
+ 
 ## Comments
 
-The package was reviewed and accepted on Aug 24, but a LaTeX issue in the manual halted the publication.
-The issue has now been resolved.
 Thank you for your time.
