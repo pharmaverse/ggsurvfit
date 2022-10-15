@@ -37,7 +37,7 @@ Competing risks cumulative incidence is also supported via `ggcuminc()`.
 
 - **Limitless Customization:** You can modify the x-axis scales or any other plot feature and the risk table will still align with the plot.
 
-- **Simple Saving** Save individual images easily with `ggplot2::ggsave()`.
+- **Simple Saving:** Save individual images easily with `ggplot2::ggsave()`.
 
 ## Installation
 
