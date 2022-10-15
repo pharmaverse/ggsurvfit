@@ -1,4 +1,4 @@
-# ggsurvfit (development version)
+# ggsurvfit 0.2.0
 
 ## Breaking changes
 
