@@ -3,7 +3,7 @@
 #' @description
 #' Returns ggplot list of calls defining a theme.
 #' - `theme_ggsurvfit_default()`: Builds on `theme_bw()` with increased text sizes.
-#' - `theme_ggsurvfit_KMunicate()`: Theme to create [KMunicate-styled](http://dx.doi.org/10.1136/bmjopen-2019-030215) figures.
+#' - `theme_ggsurvfit_KMunicate()`: Theme to create KMunicate-styled figures. \doi{10.1136/bmjopen-2019-030215}
 #'
 #' @return a ggplot2 theme
 #' @name theme_ggsurvfit

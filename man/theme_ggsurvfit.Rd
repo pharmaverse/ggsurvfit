@@ -17,7 +17,7 @@ a ggplot2 theme
 Returns ggplot list of calls defining a theme.
 \itemize{
 \item \code{theme_ggsurvfit_default()}: Builds on \code{theme_bw()} with increased text sizes.
-\item \code{theme_ggsurvfit_KMunicate()}: Theme to create \href{http://dx.doi.org/10.1136/bmjopen-2019-030215}{KMunicate-styled} figures.
+\item \code{theme_ggsurvfit_KMunicate()}: Theme to create KMunicate-styled figures. \doi{10.1136/bmjopen-2019-030215}
 }
 }
 \examples{

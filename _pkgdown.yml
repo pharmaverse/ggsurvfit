@@ -40,9 +40,10 @@ reference:
       - add_confidence_interval
       - add_risktable
       - add_risktable_strata_symbol
-      - add_censor_mark
       - add_quantile
       - add_pvalue
+      - add_censor_mark
+      - add_legend_title
 
   - title: Themes
   - contents:

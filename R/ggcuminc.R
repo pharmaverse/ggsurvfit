@@ -2,7 +2,7 @@
 #'
 #' Plot a cumulative incidence object created with `tidycmprsk::cuminc()`
 #' or a multi-state object created with `survfit2()`.
-#' Read more on multi-state models [here](https://cran.r-project.org/web/packages/survival/vignettes/compete.pdf).
+#' Read more on multi-state models [here](https://cran.r-project.org/package=survival/vignettes/compete.pdf).
 #'
 #' @param outcome string indicating which outcome(s) to include in plot.
 #' Default is to include the first competing event.

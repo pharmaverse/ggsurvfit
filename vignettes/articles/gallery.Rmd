@@ -141,6 +141,8 @@ p <-
 p | p
 ```
 
+NOTE: You can also use the patchwork arithmetic operators, but you must first wrap the plot in `patchwork::wrap_elements()`, e.g. `wrap_elements(built_p) | wrap_elements(built_p)`.
+
 ## P-values
 
 Compare curves among the stratum using the `add_p()` function.

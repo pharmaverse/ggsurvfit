@@ -32,7 +32,7 @@ a ggplot2 figure
 \description{
 Plot a cumulative incidence object created with \code{tidycmprsk::cuminc()}
 or a multi-state object created with \code{survfit2()}.
-Read more on multi-state models \href{https://cran.r-project.org/web/packages/survival/vignettes/compete.pdf}{here}.
+Read more on multi-state models \href{https://cran.r-project.org/package=survival/vignettes/compete.pdf}{here}.
 }
 \section{Details}{
 

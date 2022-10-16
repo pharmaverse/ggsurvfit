@@ -38,7 +38,7 @@ risks cumulative incidence is also supported via `ggcuminc()`.
     other plot feature and the risk table will still align with the
     plot.
 
--   **Simple Saving** Save individual images easily with
+-   **Simple Saving:** Save individual images easily with
     `ggplot2::ggsave()`.
 
 ## Installation
