@@ -222,7 +222,9 @@ survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
   ) +
   ggeasy::easy_remove_legend() +
   ggeasy::easy_y_axis_labels_size(size = 15) +
-  ggeasy::easy_x_axis_labels_size(size = 15)
+  ggeasy::easy_x_axis_labels_size(size = 15) +
+  ggeasy::easy_y_axis_title_size(size = 15) +
+  ggeasy::easy_x_axis_title_size(size = 15)
 ```
 
 ## Faceting

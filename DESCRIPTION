@@ -1,6 +1,6 @@
 Package: ggsurvfit
 Title: Flexible Time-to-Event Figures
-Version: 0.2.0.9000
+Version: 0.2.0.9001
 Authors@R: c(
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-0862-2018")),
@@ -31,13 +31,13 @@ Imports:
     gtable,
     patchwork (>= 1.1.0),
     rlang (>= 1.0.0),
-    scales (>= 1.2.0),
     survival (>= 3.4-0),
     tidyr (>= 1.0.0)
 Suggests: 
     covr,
     knitr,
     rmarkdown,
+    scales (>= 1.1.0),
     spelling,
     testthat (>= 3.0.0),
     tidycmprsk (>= 0.2.0),

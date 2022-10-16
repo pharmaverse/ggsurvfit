@@ -23,3 +23,11 @@ test_that("scale_ggsurvfit() works", {
       {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$y.range}
   )
 })
+
+test_that("label_percent_imposter() works", {
+  probs <- 0:4 * 0.25
+  expect_equal(
+    label_percent_imposter(probs),
+    scales::label_percent()(probs)
+  )
+})
