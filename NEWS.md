@@ -1,12 +1,14 @@
 # ggsurvfit (development version)
 
+* Migrated the 'scales' package from 'Imports:' to 'Suggests:', i.e. from a strong to a weak dependency. (#120)
+
 # ggsurvfit 0.2.0
 
-## Breaking changes
+### Breaking changes
 
 * Changed the default of the `ggsurvfit_build(combine_plots=)` argument to `TRUE`.
 
-## New features
+### New features
 
 * Added function `add_pvalue()` to place p-values in the figure caption or as a text annotation.
 
@@ -22,7 +24,7 @@
 
 * Added support for multi-state models created with `survfit()`, i.e. competing risks from the survival package. (#83)
 
-## Minor improvements and fixes
+### Minor improvements and fixes
 
 * Updated the default behavior of `add_risktable(risktable_group='auto')` to minimize the number of risk tables that appear below the figure. (#117) 
 
