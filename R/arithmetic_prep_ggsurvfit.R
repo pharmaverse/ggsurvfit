@@ -21,7 +21,6 @@ NULL
 #' @export
 #' @rdname arithmetic_prep_ggsurvfit
 arithmetic_prep.ggsurvfit <- function(x, ...) {
-  browser()
   build_and_wrap(x) %>%
     arithmetic_prep()
 }
