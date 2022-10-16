@@ -50,10 +50,6 @@ reference:
       - theme_risktable
       - theme_ggsurvfit
 
-  - title: Plot Arithmetic
-  - contents:
-      - ggsurvfit_arithmetic
-
   - title: P-values
   - contents:
       - survfit2_p
