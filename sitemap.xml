@@ -4,18 +4,6 @@
     <loc>http://www.danieldsjoberg.com/ggsurvfit/404.html</loc>
   </url>
   <url>
-    <loc>http://www.danieldsjoberg.com/ggsurvfit/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>http://www.danieldsjoberg.com/ggsurvfit/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>http://www.danieldsjoberg.com/ggsurvfit/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>http://www.danieldsjoberg.com/ggsurvfit/PULL_REQUEST_TEMPLATE.html</loc>
-  </url>
-  <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html</loc>
   </url>
   <url>
@@ -28,13 +16,22 @@
     <loc>http://www.danieldsjoberg.com/ggsurvfit/authors.html</loc>
   </url>
   <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/CONTRIBUTING.html</loc>
+  </url>
+  <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/index.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/LICENSE.html</loc>
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/news/index.html</loc>
   </url>
   <url>
-    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/Surv_CNSR.html</loc>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/PULL_REQUEST_TEMPLATE.html</loc>
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/add_censor_mark.html</loc>
@@ -104,6 +101,9 @@
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/survfit2_p.html</loc>
+  </url>
+  <url>
+    <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/Surv_CNSR.html</loc>
   </url>
   <url>
     <loc>http://www.danieldsjoberg.com/ggsurvfit/reference/theme_ggsurvfit.html</loc>
