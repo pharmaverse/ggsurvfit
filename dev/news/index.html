@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.0.9017</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,13 +51,14 @@
       <small>Source: <a href="https://github.com/ddsjoberg/ggsurvfit/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2"><h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="ggsurvfit-020">ggsurvfit 0.2.0<a class="anchor" aria-label="anchor" href="#ggsurvfit-020"></a></h2>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="breaking-changes-0-2-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-2-0"></a></h3>
 <ul><li>Changed the default of the <code>ggsurvfit_build(combine_plots=)</code> argument to <code>TRUE</code>.</li></ul></div>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-2-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-2-0"></a></h3>
 <ul><li><p>Added function <code><a href="../reference/add_pvalue.html">add_pvalue()</a></code> to place p-values in the figure caption or as a text annotation.</p></li>
 <li><p>Added the <code>add_quantile(x_value=)</code> argument that places line segments at the time specified.</p></li>
 <li><p>Added the <code><a href="../reference/scale_ggsurvfit.html">scale_ggsurvfit()</a></code> function that wraps both <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">ggplot2::scale_x_continuous()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">ggplot2::scale_y_continuous()</a></code> and uses reduced padding (via the <code>expand=</code> argument), labels y-axis with percentages (<code>labels=</code>), adds additional break points on the x-axis (<code>n.breaks=8</code>), and sets the y-axis limits to <code>c(0, 1)</code> (<code>limits=</code>). (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/82" class="external-link">#82</a>)</p></li>
@@ -67,7 +68,7 @@
 <li><p>Added support for multi-state models created with <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit()</a></code>, i.e. competing risks from the survival package. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/83" class="external-link">#83</a>)</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="minor-improvements-and-fixes-development-version">Minor improvements and fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-fixes-development-version"></a></h3>
+<h3 id="minor-improvements-and-fixes-0-2-0">Minor improvements and fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-fixes-0-2-0"></a></h3>
 <ul><li><p>Updated the default behavior of <code>add_risktable(risktable_group='auto')</code> to minimize the number of risk tables that appear below the figure. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/117" class="external-link">#117</a>)</p></li>
 <li><p>Increased the default font size on the plot and in the risk tables, and added arguments to control font size in the risk table theme. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/103" class="external-link">#103</a>)</p></li>
 <li><p>When using a CDISC ADTTE data frame, the label saved in PARAM/PARAMCD will be used as the default x-axis label in <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/97" class="external-link">#97</a>)</p></li>
