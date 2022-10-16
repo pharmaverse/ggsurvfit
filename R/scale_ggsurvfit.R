@@ -48,7 +48,13 @@ ggplot_add.scale_ggsurvfit <- function (object, plot, object_name) {
 update_scale_ggsurvfit <- function(p, scale_ggsurvfit_empty_list) {
   # setting default arguments
   x_scale_defaults <- list(expand = c(0.015, 0), n.breaks = 8)
-  y_scale_defaults <- list(expand = c(0.025, 0), label = scales::label_percent())
+  y_scale_defaults <-
+    list(
+      expand = c(0.025, 0),
+      label =
+        switch(rlang::is_installed("scales", version = "1.1.0"), scales::label_percent()) %||%
+        label_percent_imposter
+    )
   # set limits of a survival curve
   if (isTRUE(p$data$estimate_type[1] == "survival"))
     y_scale_defaults <- c(y_scale_defaults, list(limits = c(0, 1)))
@@ -67,5 +73,11 @@ update_scale_ggsurvfit <- function(p, scale_ggsurvfit_empty_list) {
         !!!utils::modifyList(x = y_scale_defaults, val = y_scales %||% list())
       ))
     )
+}
+
+# a poor substitute for `scales::label_percent()`,
+# in case users don't have an appropriate version of scales installed
+label_percent_imposter <- function(x) {
+  paste0(format(round(x * 100, digits = 0), trim = TRUE), "%")
 }
 
