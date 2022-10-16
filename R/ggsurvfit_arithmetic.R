@@ -5,8 +5,8 @@
 #'
 #' @inheritParams patchwork::arithmetic_prep
 #'
-#' @rdname arithmetic_prep
-#' @name arithmetic_prep
+#' @rdname arithmetic_prep_ggsurvfit
+#' @name arithmetic_prep_ggsurvfit
 #' @keywords internal
 #'
 #' @examples
@@ -19,22 +19,20 @@
 NULL
 
 #' @export
-#' @rdname arithmetic_prep
+#' @rdname arithmetic_prep_ggsurvfit
 arithmetic_prep.ggsurvfit <- function(x, ...) {
+  browser()
   build_and_wrap(x) %>%
     arithmetic_prep()
 }
 
 #' @export
-#' @rdname arithmetic_prep
+#' @rdname arithmetic_prep_ggsurvfit
 arithmetic_prep.ggcuminc <- arithmetic_prep.ggsurvfit
 
 #' @export
-#' @rdname arithmetic_prep
-arithmetic_prep.ggsurvfit_build <- function(x, ...) {
-  build_and_wrap(x) %>%
-    arithmetic_prep()
-}
+#' @rdname arithmetic_prep_ggsurvfit
+arithmetic_prep.ggsurvfit_build <- arithmetic_prep.ggsurvfit
 
 
 build_and_wrap <- function(x) {
