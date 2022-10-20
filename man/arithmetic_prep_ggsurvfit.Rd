@@ -5,6 +5,9 @@
 \alias{arithmetic_prep.ggsurvfit}
 \alias{arithmetic_prep.ggcuminc}
 \alias{arithmetic_prep.ggsurvfit_build}
+\alias{ggplot_add.ggsurvfit}
+\alias{ggplot_add.ggcuminc}
+\alias{ggplot_add.ggsurvfit_build}
 \title{Patchwork Arithmetic Prep}
 \usage{
 \method{arithmetic_prep}{ggsurvfit}(x, ...)
@@ -12,6 +15,12 @@
 \method{arithmetic_prep}{ggcuminc}(x, ...)
 
 \method{arithmetic_prep}{ggsurvfit_build}(x, ...)
+
+\method{ggplot_add}{ggsurvfit}(object, plot, object_name)
+
+\method{ggplot_add}{ggcuminc}(object, plot, object_name)
+
+\method{ggplot_add}{ggsurvfit_build}(object, plot, object_name)
 }
 \arguments{
 \item{x}{a plot object}

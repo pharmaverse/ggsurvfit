@@ -33,12 +33,29 @@ arithmetic_prep.ggcuminc <- arithmetic_prep.ggsurvfit
 #' @rdname arithmetic_prep_ggsurvfit
 arithmetic_prep.ggsurvfit_build <- arithmetic_prep.ggsurvfit
 
+#' @export
+#' @rdname arithmetic_prep_ggsurvfit
+ggplot_add.ggsurvfit <- function(object, plot, object_name) {
+  build_and_wrap(object, wrap_elements = FALSE) %>%
+    ggplot_add(plot = plot, object_name = object_name)
+}
 
-build_and_wrap <- function(x) {
+#' @export
+#' @rdname arithmetic_prep_ggsurvfit
+ggplot_add.ggcuminc <- ggplot_add.ggsurvfit
+
+#' @export
+#' @rdname arithmetic_prep_ggsurvfit
+ggplot_add.ggsurvfit_build <- function(object, plot, object_name) {
+  plot + patchwork::wrap_elements(full = object)
+}
+
+
+build_and_wrap <- function(x, wrap_elements = TRUE) {
   if (inherits(x, c("ggsurvfit", "ggcuminc"))) {
     x <- ggsurvfit_build(x)
   }
-  if (inherits(x, "ggsurvfit_build")) {
+  if (isTRUE(wrap_elements) && inherits(x, "ggsurvfit_build")) {
     x <- patchwork::wrap_elements(x)
   }
   x
