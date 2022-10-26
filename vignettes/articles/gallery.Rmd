@@ -236,7 +236,7 @@ Because {ggsurvfit} functions are written as proper {ggplot2} geoms, you can bot
 
 ```{r warning=FALSE}
 survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
-  ggsurvfit() +
+  ggsurvfit(size = 1) +
   gghighlight::gghighlight(
     strata == "Levamisole+5-FU",
     calculate_per_facet = TRUE
