@@ -36,7 +36,7 @@ ci_geom_selector <- function(type, ...) {
     "ribbon" =
       rlang::inject(
           ggplot2::layer(
-            data = NULL, mapping = NULL,
+            data = NULL, mapping = ggplot2::aes(ymin = .data$conf.low, ymax = .data$conf.high),
             stat = StatConfidenceInterval, geom = "ribbon",
             position = "identity",
             show.legend = NA, inherit.aes = TRUE,
@@ -47,12 +47,14 @@ ci_geom_selector <- function(type, ...) {
       rlang::inject(
         list(
           ggplot2::layer(
-            stat = StatStepLow, data = NULL, mapping = NULL, geom = "step",
+            stat = StatStepLow, data = NULL,
+            mapping = ggplot2::aes(y = .data$conf.low), geom = "step",
             position = "identity", show.legend = NA, inherit.aes = TRUE,
             params = !!geom_args,
           ),
           ggplot2::layer(
-            stat = StatStepHigh, data = NULL, mapping = NULL, geom = "step",
+            stat = StatStepHigh, data = NULL,
+            mapping = ggplot2::aes(y = .data$conf.high), geom = "step",
             position = "identity", show.legend = NA, inherit.aes = TRUE,
             params = !!geom_args,
           )
