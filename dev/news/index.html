@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9001</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
-<ul><li>Migrated the ‘scales’ package from ‘Imports:’ to ‘Suggests:’, i.e. from a strong to a weak dependency. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/120" class="external-link">#120</a>)</li>
+<ul><li><ul><li>Delay adding the <code>conf.low</code> and <code>conf.high</code> to the ggplot <code>aes()</code> until <code><a href="../reference/add_confidence_interval.html">add_confidence_interval()</a></code> has been called. Previously, these were being added in the first call to <code>ggplot(tidy_data, aes(x = time, y = estimate, ymin = conf.low, ymax = conf.high))</code>. The result was that figures that did <em>not</em> show the confidence interval still created space for the CI in the plot area. This update eliminates that blank space. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/123" class="external-link">#123</a>)</li>
+</ul></li>
+<li>Migrated the ‘scales’ package from ‘Imports:’ to ‘Suggests:’, i.e. from a strong to a weak dependency. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/120" class="external-link">#120</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="ggsurvfit-020">ggsurvfit 0.2.0<a class="anchor" aria-label="anchor" href="#ggsurvfit-020"></a></h2><p class="text-muted">CRAN release: 2022-10-15</p>

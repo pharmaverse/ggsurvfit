@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9001</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,6 +91,10 @@ Must be one of <code>c("ribbon", "lines")</code></p></dd>
 <span class="r-in"><span><span class="fu"><a href="survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">add_confidence_interval</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"lines"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Computation failed in `stat_step_low()`:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Cannot use `add_confidence_interval()` in this context.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Computation failed in `stat_step_high()`:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Cannot use `add_confidence_interval()` in this context.</span>
 <span class="r-plt img"><img src="add_confidence_interval-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
