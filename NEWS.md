@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* * Delay adding the `conf.low` and `conf.high` to the ggplot `aes()` until `add_confidence_interval()` has been called. Previously, these were being added in the first call to `ggplot(tidy_data, aes(x = time, y = estimate, ymin = conf.low, ymax = conf.high))`. The result was that figures that did _not_ show the confidence interval still created space for the CI in the plot area. This update eliminates that blank space. (#123)
+
 * Migrated the 'scales' package from 'Imports:' to 'Suggests:', i.e. from a strong to a weak dependency. (#120)
 
 # ggsurvfit 0.2.0

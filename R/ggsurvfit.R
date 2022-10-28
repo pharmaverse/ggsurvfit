@@ -141,18 +141,6 @@ ggsurvfit <- function(x, type = "survival",
     ))
   }
 
-  # setting confidence interval ------------------------------------------------
-  if ("conf.low" %in% names(df)) {
-    aes_args <- c(aes_args, list(
-      ymin = rlang::expr(.data$conf.low)
-    ))
-  }
-  if ("conf.high" %in% names(df)) {
-    aes_args <- c(aes_args, list(
-      ymax = rlang::expr(.data$conf.high)
-    ))
-  }
-
   # setting censoring ----------------------------------------------------------
   if ("n.censor" %in% names(df)) {
     aes_args <- c(aes_args, list(
