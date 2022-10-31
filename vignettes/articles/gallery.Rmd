@@ -49,11 +49,27 @@ gg_styled <-
   theme_minimal() +
   theme(legend.position = "bottom") +
   guides(color = guide_legend(ncol = 1)) +
-  labs(title = "Modified",
-       y = "Percentage Survival")
+  labs(
+    title = "Modified",
+    y = "Percentage Survival"
+  )
 
 gg_default + gg_styled
 ```
+
+In addition to using additional {ggplot2} functions, it is helpful to understand which underlying functions are used to create the figures.
+The survival lines are drawn with `geom_step()` and the confidence interval with `geom_ribbon()`.
+Users can pass additional arguments to these construction functions in `ggsurvfti(...)` and `add_confidence_interval(...)`, respectively.
+In the example below, we use the color and fill aesthetic to change the colors of an unstratified estimate.
+
+```{r}
+survfit2(Surv(time, status) ~ 1, data = df_colon) %>%
+  ggsurvfit(color = "#3B513C") +
+  add_confidence_interval(fill = "#3B513C") +
+  add_risktable() +
+  scale_ggsurvfit()
+```
+
 
 ## Risk Tables
 
