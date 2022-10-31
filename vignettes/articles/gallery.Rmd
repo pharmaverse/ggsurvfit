@@ -64,8 +64,8 @@ In the example below, we use the color and fill aesthetic to change the colors o
 
 ```{r}
 survfit2(Surv(time, status) ~ 1, data = df_colon) %>%
-  ggsurvfit(color = "#3B513C") +
-  add_confidence_interval(fill = "#3B513C") +
+  ggsurvfit(color = "#508050") +
+  add_confidence_interval(fill = "#508050") +
   add_risktable() +
   scale_ggsurvfit()
 ```
