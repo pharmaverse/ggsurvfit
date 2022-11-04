@@ -138,3 +138,44 @@ test_that("ggsurvfit() works", {
   expect_error(ggsurvfit(mtcars))
   expect_error(survfit2(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>% ggsurvfit())
 })
+
+test_that("ggsurvfit() works with geoms with new data", {
+  expect_error(
+    p1 <-
+      survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+      ggsurvfit() +
+      geom_point(
+        data = mtcars,
+        aes(y = mpg / max(mpg), x = hp / max(hp) * 30)
+      ) +
+      add_censor_mark() +
+      add_quantile() +
+      add_pvalue() +
+      add_confidence_interval() +
+      add_risktable(risktable_group = "risktable_stats") +
+      add_risktable_strata_symbol() +
+      add_legend_title(),
+    NA
+  )
+
+  expect_error(
+    p2 <-
+      survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+      ggsurvfit() +
+      add_censor_mark() +
+      add_quantile() +
+      add_pvalue() +
+      add_confidence_interval() +
+      add_risktable(risktable_group = "risktable_stats") +
+      add_risktable_strata_symbol() +
+      add_legend_title() +
+      geom_point(
+        data = mtcars,
+        aes(y = mpg / max(mpg), x = hp / max(hp) * 30)
+      ),
+    NA
+  )
+
+  vdiffr::expect_doppelganger("sf2-ggsurvfit_new_data_geom1", p1)
+  vdiffr::expect_doppelganger("sf2-ggsurvfit_new_data_geom2", p2)
+})
