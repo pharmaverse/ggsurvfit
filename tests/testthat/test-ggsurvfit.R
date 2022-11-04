@@ -142,7 +142,7 @@ test_that("ggsurvfit() works", {
 test_that("ggsurvfit() works with geoms with new data", {
   expect_error(
     p1 <-
-      survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+      survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
       ggsurvfit() +
       geom_point(
         data = mtcars,
@@ -160,7 +160,7 @@ test_that("ggsurvfit() works with geoms with new data", {
 
   expect_error(
     p2 <-
-      survfit2(Surv(time, status) ~ sex, data = df_lung) |>
+      survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
       ggsurvfit() +
       add_censor_mark() +
       add_quantile() +
