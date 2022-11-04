@@ -41,8 +41,8 @@ update_add_confidence_interval <- function(p, add_confidence_interval_empty_list
 
   geom_args <-
     switch(type,
-           "ribbon" = list(na.rm = FALSE, alpha = 0.2, color = NA),
-           "lines" = list(na.rm = FALSE, linetype = "dashed")
+           "ribbon" = list(na.rm = TRUE, alpha = 0.2, color = NA),
+           "lines" = list(na.rm = TRUE, linetype = "dashed")
     ) %>%
     utils::modifyList(val = dots)
 
