@@ -147,7 +147,7 @@ ggsurvfit <- function(x, type = "survival",
     ))
   }
 
-  return(invisible())
+  return(invisible(TRUE))
 }
 
 

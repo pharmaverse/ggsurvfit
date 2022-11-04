@@ -64,6 +64,8 @@ update_add_quantile <- function(p, add_quantile_empty_list) {
       df_quantile_x
     )
 
+  if (nrow(df_geom_segment) == 0L) return(p)
+
   p +
     rlang::inject(
       ggplot2::geom_segment(
