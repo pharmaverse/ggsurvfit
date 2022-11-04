@@ -59,11 +59,11 @@ stairstepn <- function(data, direction = "hv", yvars = "y") {
   data <- as.data.frame(data)[order(data$x), ]
 
   n <- nrow(data)
-  if (n <= 1L) {
-    return(data[FALSE, ])
-  }
 
-  if (direction == "vh") {
+  if (n == 1L) {
+    ys <- xs <- 1
+  }
+  else if (direction == "vh") {
     xs <- rep(1:n, each = 2)[-2 * n]
     ys <- c(1, rep(2:n, each = 2))
   } else {

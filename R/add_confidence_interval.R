@@ -41,8 +41,8 @@ update_add_confidence_interval <- function(p, add_confidence_interval_empty_list
 
   geom_args <-
     switch(type,
-           "ribbon" = list(na.rm = TRUE, alpha = 0.2, color = NA),
-           "lines" = list(na.rm = TRUE, linetype = "dashed")
+           "ribbon" = list(na.rm = FALSE, alpha = 0.2, color = NA),
+           "lines" = list(na.rm = FALSE, linetype = "dashed")
     ) %>%
     utils::modifyList(val = dots)
 
@@ -53,7 +53,7 @@ update_add_confidence_interval <- function(p, add_confidence_interval_empty_list
         "ribbon" =
           rlang::inject(
             stat_stepribbon(
-              ggplot2::aes(!!!.construct_ribbon_ci_aes(p, list(ymin = rlang::expr(.data$conf.low), ymax = rlang::expr(.data$conf.high)), ribbon = TRUE)),
+              ggplot2::aes(!!!.construct_ci_aes(p, list(ymin = rlang::expr(.data$conf.low), ymax = rlang::expr(.data$conf.high)), ribbon = TRUE)),
               !!!geom_args
             )
           )
@@ -61,15 +61,15 @@ update_add_confidence_interval <- function(p, add_confidence_interval_empty_list
         "lines" =
           rlang::inject(
             list(
-              ggplot2::geom_step(ggplot2::aes(!!!.construct_ribbon_ci_aes(p, list(y = .data$conf.low))), !!!geom_args),
-              ggplot2::geom_step(ggplot2::aes(!!!.construct_ribbon_ci_aes(p, list(y = .data$conf.high))), !!!geom_args)
+              ggplot2::geom_step(ggplot2::aes(!!!.construct_ci_aes(p, list(y = rlang::expr(.data$conf.low)))), !!!geom_args),
+              ggplot2::geom_step(ggplot2::aes(!!!.construct_ci_aes(p, list(y = rlang::expr(.data$conf.high)))), !!!geom_args)
             )
           )
       )
     )
 }
 
-.construct_ribbon_ci_aes <- function(p, lst_aes = NULL, ribbon = FALSE) {
+.construct_ci_aes <- function(p, lst_aes = NULL, ribbon = FALSE) {
   lst_aes <-
     ggplot2::ggplot_build(p)$plot$layers[[1]]$computed_mapping[c("x", "color", "colour", "linetype")] %>%
     Filter(Negate(is.null), .) %>% # remove NULLs from list

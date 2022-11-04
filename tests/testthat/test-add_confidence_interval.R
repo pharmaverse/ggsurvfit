@@ -28,7 +28,7 @@ test_that("add_confidence_interval() errors with ggsurvfit()", {
       print()
   )
 
-  expect_warning(
+  expect_error(
     (mtcars %>%
        dplyr::mutate(conf.low = mpg, conf.high = mpg) %>%
        ggplot2::ggplot(ggplot2::aes(y = mpg, x = hp)) +
