@@ -70,41 +70,92 @@ add_risktable <- function(times = NULL,
                           theme = theme_risktable_default(),
                           size = 3.5,
                           ...) {
+
+  add_risktable_empty_list <- list()
   rlang::inject(
-    ggplot2::layer(
-      data = NULL, mapping = NULL,
-      stat = StatBlankSurvfit, geom = "blank",
-      position = "identity",
-      show.legend = NA, inherit.aes = TRUE,
-      params = list()
-    ) %>%
-      structure(
-        "add_risktable" = list(
-          times = times,
-          risktable_stats =
-            !!match.arg(
-              rev(risktable_stats),
-              choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
-              several.ok = TRUE
-            ),
-          stats_label = stats_label,
-          combine_groups = combine_groups,
-          risktable_group = !!match.arg(risktable_group),
-          risktable_height = risktable_height,
-          theme = theme,
-          size = size,
-          ...
-        )
-      )
+    structure(add_risktable_empty_list,
+              "add_risktable" =
+                list(times = times,
+                     risktable_stats =
+                       !!match.arg(
+                         rev(risktable_stats),
+                         choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
+                         several.ok = TRUE
+                       ),
+                     stats_label = stats_label,
+                     combine_groups = combine_groups,
+                     risktable_group = match.arg(risktable_group),
+                     risktable_height = risktable_height,
+                     theme = theme,
+                     !!!utils::modifyList(
+                       x = list(size = size),
+                       val = rlang::dots_list(...)
+                     )
+                ),
+              class = "add_risktable")
   )
 }
 
-StatBlankSurvfit <-
-  ggplot2::ggproto(
-    "StatBlankSurvfit", ggplot2::Stat,
-    compute_group = function(data, scales, ...) {
-      .is_ggsurvfit(data, fun_name = "add_risktable()", required_aes_cols = c("x", "y"))
-      data
-    }
-  )
+#' @export
+ggplot_add.add_risktable <- function (object, plot, object_name) {
+  update_add_risktable(plot, object)
+}
+
+update_add_risktable <- function(p, add_risktable_empty_list) {
+  .is_ggsurvfit(p, fun_name = "add_rikstable()")
+  p +
+    rlang::inject(
+      structure(
+        ggplot2::geom_blank(),
+        add_risktable = !!attr(add_risktable_empty_list, "add_risktable")
+      )
+    )
+}
+
+# add_risktable <- function(times = NULL,
+#                           risktable_stats = c("n.risk", "cum.event"),
+#                           risktable_group = c("auto", "strata", "risktable_stats"),
+#                           risktable_height = NULL,
+#                           stats_label = NULL,
+#                           combine_groups = FALSE,
+#                           theme = theme_risktable_default(),
+#                           size = 3.5,
+#                           ...) {
+#   rlang::inject(
+#     ggplot2::layer(
+#       data = NULL, mapping = NULL,
+#       stat = StatBlankSurvfit, geom = "blank",
+#       position = "identity",
+#       show.legend = NA, inherit.aes = TRUE,
+#       params = list()
+#     ) %>%
+#       structure(
+#         "add_risktable" = list(
+#           times = times,
+#           risktable_stats =
+#             !!match.arg(
+#               rev(risktable_stats),
+#               choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
+#               several.ok = TRUE
+#             ),
+#           stats_label = stats_label,
+#           combine_groups = combine_groups,
+#           risktable_group = !!match.arg(risktable_group),
+#           risktable_height = risktable_height,
+#           theme = theme,
+#           size = size,
+#           ...
+#         )
+#       )
+#   )
+# }
+#
+# StatBlankSurvfit <-
+#   ggplot2::ggproto(
+#     "StatBlankSurvfit", ggplot2::Stat,
+#     compute_group = function(data, scales, ...) {
+#       .is_ggsurvfit(data, fun_name = "add_risktable()", required_aes_cols = c("x", "y"))
+#       data
+#     }
+#   )
 

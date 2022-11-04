@@ -29,7 +29,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf1 %>%
       tidy_survfit() %>%
       dplyr::select(x = time, y = estimate) %>%
-      quantile_km_in_stat(y_value = 0.5, x_value = NULL) %>%
+      .create_y_value_df(y_value = 0.5) %>%
       dplyr::pull(x) %>%
       `[`(1),
     quantile(sf1, probs = 0.5, conf.int = FALSE) %>% as.numeric()
@@ -116,7 +116,7 @@ test_that("add_quantile() works with ggsurvfit()", {
 })
 
 test_that("add_quantile() errors with ggsurvfit()", {
-  expect_warning(
+  expect_error(
     (mtcars %>%
        ggplot2::ggplot(ggplot2::aes(y = mpg, x = hp)) +
        add_quantile()) %>%

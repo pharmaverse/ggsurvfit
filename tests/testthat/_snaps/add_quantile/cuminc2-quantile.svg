@@ -78,10 +78,8 @@
 <rect x='311.32' y='542.28' width='129.69' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <rect x='322.27' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='324.00' y1='556.40' x2='337.83' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<line x1='324.00' y1='556.40' x2='337.83' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='381.64' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='383.37' y1='556.40' x2='397.19' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<line x1='383.37' y1='556.40' x2='397.19' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <text x='345.03' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
 <text x='404.40' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
 <text x='37.80' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='99.80px' lengthAdjust='spacingAndGlyphs'>cuminc2-quantile</text>

@@ -84,9 +84,9 @@ ggsurvfit <- function(x, type = "survival",
 }
 
 .construct_ggplot <- function(x, df, aes_args, theme, ...) {
-  rlang::inject(ggplot2::ggplot(data = df, ggplot2::aes(!!!aes_args))) +
+  ggplot2::ggplot(data = df, aes(is_ggsurvfit = TRUE)) +
     list(
-      ggplot2::geom_step(...),
+      rlang::inject(ggplot2::geom_step(ggplot2::aes(!!!aes_args), !!!rlang::dots_list(...))),
       ggplot2::labs(
         y = .default_y_axis_label(df),
         x = .default_x_axis_label(x),
@@ -110,29 +110,21 @@ ggsurvfit <- function(x, type = "survival",
   aes_args <-
     list(
       x = rlang::expr(.data$time),
-      y = rlang::expr(.data$estimate),
-      is_ggsurvfit = TRUE,
-      survfit = rlang::expr(.data$survfit)
+      y = rlang::expr(.data$estimate)
+      # is_ggsurvfit = TRUE,
+      # survfit = rlang::expr(.data$survfit)
     )
-
-  if ("monotonicity_type" %in% names(df)) {
-    aes_args <- c(aes_args, list(
-      monotonicity_type = rlang::expr(.data$monotonicity_type)
-    ))
-  }
 
   if ("strata" %in% names(df)) {
     aes_args <- c(aes_args, list(
-      color = rlang::expr(.data$strata),
-      fill = rlang::expr(.data$strata)
+      color = rlang::expr(.data$strata)
     ))
   }
 
   # setting linetype -----------------------------------------------------------
   if (!is.null(outcome) && length(outcome) > 1) {
     aes_args <- c(aes_args, list(
-      linetype = rlang::expr(.data$outcome),
-      outcome = rlang::expr(.data$outcome)
+      linetype = rlang::expr(.data$outcome)
     ))
   }
   if (isTRUE(linetype_aes) && "strata" %in% names(df)) {
@@ -141,27 +133,37 @@ ggsurvfit <- function(x, type = "survival",
     ))
   }
 
-  # setting censoring ----------------------------------------------------------
-  if ("n.censor" %in% names(df)) {
-    aes_args <- c(aes_args, list(
-      censor_count = rlang::expr(.data$n.censor)
-    ))
-  }
+  aes_args
 }
 
-.is_ggsurvfit <- function(x, fun_name, required_aes_cols = NULL) {
+.is_ggsurvfit <- function(p, fun_name, required_cols = NULL) {
   if (
-    (any(!c(required_aes_cols, "is_ggsurvfit") %in% names(x))) ||
-    (!isTRUE(x$is_ggsurvfit[1]))
+    !inherits(p, c("ggsurvfit", "ggcuminc")) ||
+    (!is.null(required_cols) && any(!required_cols %in% names(ggplot2::ggplot_build(p)$plot$data)))
   ) {
     cli::cli_abort(c(
       "x" = "Cannot use {.code {fun_name}} in this context.",
-      "i" = "Use {.code {fun_name}} after a call to {.code autofit.survfit()}"
+      "i" = "Use {.code {fun_name}} after a call to {.code ggsurvfit()} or {.code ggcuminc()}"
     ))
   }
 
   return(invisible())
 }
+
+
+# .is_ggsurvfit <- function(x, fun_name, required_aes_cols = NULL) {
+#   if (
+#     (any(!c(required_aes_cols, "is_ggsurvfit") %in% names(x))) ||
+#     (!isTRUE(x$is_ggsurvfit[1]))
+#   ) {
+#     cli::cli_abort(c(
+#       "x" = "Cannot use {.code {fun_name}} in this context.",
+#       "i" = "Use {.code {fun_name}} after a call to {.code autofit.survfit()}"
+#     ))
+#   }
+#
+#   return(invisible())
+# }
 
 # function to assign default y-axis label from the statistic type
 .default_y_axis_label <- function(df) {

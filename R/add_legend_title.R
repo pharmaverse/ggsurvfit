@@ -22,6 +22,7 @@ ggplot_add.add_legend_title <- function (object, plot, object_name) {
 }
 
 update_add_legend_title <- function(p, add_legend_title_empty_list) {
+  .is_ggsurvfit(p, fun_name = "add_legend_title()")
   legend_title <-
     attr(add_legend_title_empty_list, "title") %||%
     p$data$strata_label[1]
@@ -30,14 +31,14 @@ update_add_legend_title <- function(p, add_legend_title_empty_list) {
   p_build <- ggplot2::ggplot_build(p)
 
   # if colour or fill present add the title for those aes()
-  if ("colour" %in% names(p_build$data[[1]])) {
+  if ("colour" %in% names(p_build$plot$labels)) {
     lst_labs[["colour"]] <- legend_title
   }
-  if ("fill" %in% names(p_build$data[[1]])) {
+  if ("fill" %in% names(p_build$plot$labels)) {
     lst_labs[["fill"]] <- legend_title
   }
   # if there is a linetype aes() AND it's not from ggcuminc() with multiple outcomes, add title
-  if ("linetype" %in% names(p_build$data[[1]]) && (!inherits(p, "ggcuminc") || !length(unique(p$data$outcome)) > 1L)) {
+  if ("linetype" %in% names(p_build$plot$labels) && (!inherits(p, "ggcuminc") || !length(unique(p$data$outcome)) > 1L)) {
     lst_labs[["linetype"]] <- legend_title
   }
 

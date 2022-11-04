@@ -85,25 +85,18 @@
 <rect x='7.06' y='525.00' width='743.76' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <rect x='18.02' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='19.75' y1='539.12' x2='33.57' y2='539.12' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<line x1='19.75' y1='539.12' x2='33.57' y2='539.12' style='stroke-width: 1.07; stroke: #F8766D; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='18.02' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='19.75' y1='556.40' x2='33.57' y2='556.40' style='stroke-width: 1.07; stroke: #C49A00; stroke-linecap: butt;' />
-<line x1='19.75' y1='556.40' x2='33.57' y2='556.40' style='stroke-width: 1.07; stroke: #C49A00; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='203.02' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='204.75' y1='539.12' x2='218.57' y2='539.12' style='stroke-width: 1.07; stroke: #53B400; stroke-linecap: butt;' />
-<line x1='204.75' y1='539.12' x2='218.57' y2='539.12' style='stroke-width: 1.07; stroke: #53B400; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='203.02' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='204.75' y1='556.40' x2='218.57' y2='556.40' style='stroke-width: 1.07; stroke: #00C094; stroke-linecap: butt;' />
-<line x1='204.75' y1='556.40' x2='218.57' y2='556.40' style='stroke-width: 1.07; stroke: #00C094; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='372.75' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='374.48' y1='539.12' x2='388.30' y2='539.12' style='stroke-width: 1.07; stroke: #00B6EB; stroke-linecap: butt;' />
-<line x1='374.48' y1='539.12' x2='388.30' y2='539.12' style='stroke-width: 1.07; stroke: #00B6EB; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='372.75' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='374.48' y1='556.40' x2='388.30' y2='556.40' style='stroke-width: 1.07; stroke: #A58AFF; stroke-linecap: butt;' />
-<line x1='374.48' y1='556.40' x2='388.30' y2='556.40' style='stroke-width: 1.07; stroke: #A58AFF; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='569.42' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='571.15' y1='539.12' x2='584.97' y2='539.12' style='stroke-width: 1.07; stroke: #FB61D7; stroke-linecap: butt;' />
-<line x1='571.15' y1='539.12' x2='584.97' y2='539.12' style='stroke-width: 1.07; stroke: #FB61D7; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <text x='40.78' y='542.56' style='font-size: 10.00px; font-family: sans;' textLength='128.94px' lengthAdjust='spacingAndGlyphs'>Male, Asymptomatic              </text>
 <text x='40.78' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='156.76px' lengthAdjust='spacingAndGlyphs'>Male, Symptomatic and ambulatory</text>
 <text x='225.78' y='542.56' style='font-size: 10.00px; font-family: sans;' textLength='141.49px' lengthAdjust='spacingAndGlyphs'>Male, In bed &lt;50% of the day    </text>
