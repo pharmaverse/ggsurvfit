@@ -86,22 +86,16 @@
 <rect x='264.96' y='525.00' width='222.40' height='45.52' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <rect x='275.92' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='277.65' y1='539.12' x2='291.47' y2='539.12' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<line x1='277.65' y1='539.12' x2='291.47' y2='539.12' style='stroke-width: 1.07; stroke: #F8766D; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='275.92' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='277.65' y1='556.40' x2='291.47' y2='556.40' style='stroke-width: 1.07; stroke: #B79F00; stroke-linecap: butt;' />
-<line x1='277.65' y1='556.40' x2='291.47' y2='556.40' style='stroke-width: 1.07; stroke: #B79F00; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='343.62' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='345.35' y1='539.12' x2='359.18' y2='539.12' style='stroke-width: 1.07; stroke: #00BA38; stroke-linecap: butt;' />
-<line x1='345.35' y1='539.12' x2='359.18' y2='539.12' style='stroke-width: 1.07; stroke: #00BA38; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='343.62' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='345.35' y1='556.40' x2='359.18' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<line x1='345.35' y1='556.40' x2='359.18' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='414.10' y='530.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='415.83' y1='539.12' x2='429.65' y2='539.12' style='stroke-width: 1.07; stroke: #619CFF; stroke-linecap: butt;' />
-<line x1='415.83' y1='539.12' x2='429.65' y2='539.12' style='stroke-width: 1.07; stroke: #619CFF; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <rect x='414.10' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <line x1='415.83' y1='556.40' x2='429.65' y2='556.40' style='stroke-width: 1.07; stroke: #F564E3; stroke-linecap: butt;' />
-<line x1='415.83' y1='556.40' x2='429.65' y2='556.40' style='stroke-width: 1.07; stroke: #F564E3; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <text x='298.68' y='542.56' style='font-size: 10.00px; font-family: sans;' textLength='39.46px' lengthAdjust='spacingAndGlyphs'>Drug A, I</text>
 <text x='298.68' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='39.46px' lengthAdjust='spacingAndGlyphs'>Drug B, I</text>
 <text x='366.38' y='542.56' style='font-size: 10.00px; font-family: sans;' textLength='42.24px' lengthAdjust='spacingAndGlyphs'>Drug A, II</text>

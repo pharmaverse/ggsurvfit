@@ -60,7 +60,10 @@ stairstepn <- function(data, direction = "hv", yvars = "y") {
 
   n <- nrow(data)
 
-  if (direction == "vh") {
+  if (n == 1L) {
+    ys <- xs <- 1
+  }
+  else if (direction == "vh") {
     xs <- rep(1:n, each = 2)[-2 * n]
     ys <- c(1, rep(2:n, each = 2))
   } else {
@@ -72,5 +75,6 @@ stairstepn <- function(data, direction = "hv", yvars = "y") {
     x = data$x[xs],
     data[ys, yvars, drop = FALSE],
     data[xs, setdiff(names(data), c("x", yvars)), drop = FALSE]
-  )
+  ) %>%
+    tidyr::drop_na()
 }

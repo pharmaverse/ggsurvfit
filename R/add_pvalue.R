@@ -54,6 +54,7 @@ ggplot_add.add_pvalue <- function (object, plot, object_name) {
 }
 
 update_add_pvalue <- function(p, add_pvalue_empty_list) {
+  .is_ggsurvfit(p, fun_name = "add_pvalue()")
   # getting user-passed arguments
   location <- attr(add_pvalue_empty_list, "location")
   caption <- attr(add_pvalue_empty_list, "caption")
@@ -76,7 +77,7 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
 
   # extract survfit object
   build <- ggplot2::ggplot_build(p)
-  survfit <- build$data[[1]][["survfit"]][[1]]
+  survfit <- build$plot[["data"]][["survfit"]][[1]]
 
   if (!inherits(survfit, c("survfit2", "tidycuminc"))) {
     cli_inform(
@@ -133,8 +134,8 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
 
   x <- x_range[2] - diff(x_range) * 0.10
 
-  if (!"monotonicity_type" %in% names(build$data[[1]]) ||
-      build$data[[1]]$monotonicity_type[1] == "decreasing") {
+  if (!"monotonicity_type" %in% names(build$plot$data) ||
+      build$plot$data$monotonicity_type[1] == "decreasing") {
     y <- y_range[2] - diff(y_range) * 0.10
   }
   else {
