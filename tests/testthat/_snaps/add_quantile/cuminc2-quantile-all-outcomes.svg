@@ -79,20 +79,20 @@
 <text x='709.39' y='515.76' text-anchor='middle' style='font-size: 10.00px; fill: #4D4D4D; font-family: sans;' textLength='11.12px' lengthAdjust='spacingAndGlyphs'>25</text>
 <text x='376.16' y='528.83' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='130.09px' lengthAdjust='spacingAndGlyphs'>Months to Death/Censor</text>
 <text transform='translate(13.74,263.36) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.75px' lengthAdjust='spacingAndGlyphs'>Cumulative Incidence</text>
-<rect x='189.28' y='542.28' width='233.12' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='189.28' y='542.28' width='129.69' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <rect x='200.23' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='201.96' y1='556.40' x2='215.79' y2='556.40' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<rect x='309.08' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='310.81' y1='556.40' x2='324.64' y2='556.40' style='stroke-width: 1.07; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
-<text x='222.99' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
-<text x='331.84' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
-<rect x='433.35' y='542.28' width='129.69' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='444.31' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='446.04' y1='556.40' x2='459.87' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='503.68' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='505.41' y1='556.40' x2='519.23' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<text x='467.07' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
-<text x='526.44' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
+<line x1='201.96' y1='556.40' x2='215.79' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='259.60' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='261.33' y1='556.40' x2='275.15' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
+<text x='222.99' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
+<text x='282.36' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
+<rect x='329.93' y='542.28' width='233.12' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='340.89' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='342.61' y1='556.40' x2='356.44' y2='556.40' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<rect x='449.73' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='451.46' y1='556.40' x2='465.29' y2='556.40' style='stroke-width: 1.07; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
+<text x='363.65' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
+<text x='472.49' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
 <text x='37.80' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='179.04px' lengthAdjust='spacingAndGlyphs'>cuminc2-quantile-all-outcomes</text>
 </g>
 </svg>

@@ -9,7 +9,6 @@ test_that("stat_stepribbon() works", {
     NA
   )
 
-  vdiffr::expect_doppelganger("gg_stepribbon1", gg_stepribbon1)
 
   expect_error(
     gg_stepribbon2 <-
@@ -21,5 +20,7 @@ test_that("stat_stepribbon() works", {
     NA
   )
 
+  skip_on_os("linux")
+  vdiffr::expect_doppelganger("gg_stepribbon1", gg_stepribbon1)
   vdiffr::expect_doppelganger("gg_stepribbon2", gg_stepribbon2)
 })
