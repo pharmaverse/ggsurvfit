@@ -29,7 +29,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf1 %>%
       tidy_survfit() %>%
       dplyr::select(x = time, y = estimate) %>%
-      quantile_km_in_stat(y_value = 0.5, x_value = NULL) %>%
+      .create_y_value_df(y_value = 0.5) %>%
       dplyr::pull(x) %>%
       `[`(1),
     quantile(sf1, probs = 0.5, conf.int = FALSE) %>% as.numeric()
@@ -39,7 +39,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf2 %>%
       tidy_survfit() %>%
       dplyr::select(x = time, y = estimate, group = strata) %>%
-      quantile_km_in_stat(y_value = 0.5, x_value = NULL) %>%
+      .create_y_value_df(y_value = 0.5) %>%
       dplyr::pull(x) %>%
       setdiff(0),
     quantile(sf2, probs = 0.5, conf.int = FALSE) %>% as.numeric()
@@ -51,7 +51,7 @@ test_that("add_quantile() works with ggsurvfit()", {
     sf2_colon %>%
       tidy_survfit() %>%
       dplyr::select(x = time, y = estimate, group = strata) %>%
-      quantile_km_in_stat(y_value = 0.5, x_value = NULL) %>%
+      .create_y_value_df(y_value = 0.5) %>%
       dplyr::pull(x) %>%
       setdiff(0),
     quantile(sf2_colon, probs = 0.5, conf.int = FALSE) %>%
@@ -116,14 +116,14 @@ test_that("add_quantile() works with ggsurvfit()", {
 })
 
 test_that("add_quantile() errors with ggsurvfit()", {
-  expect_warning(
+  expect_error(
     (mtcars %>%
        ggplot2::ggplot(ggplot2::aes(y = mpg, x = hp)) +
        add_quantile()) %>%
       print()
   )
 
-  expect_warning(
+  expect_error(
     (sf2 %>%
       ggsurvfit() +
       add_quantile(y_value = c(0.2, 0.5))) %>% print()

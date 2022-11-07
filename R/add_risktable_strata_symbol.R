@@ -22,24 +22,57 @@
 #'
 #'  p + add_risktable_strata_symbol()
 #'  p + add_risktable_strata_symbol(symbol = "\U25CF", size = 10)
-
 add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold", vjust = 0.3, ...) {
+  add_risktable_strata_symbol_empty_list <- list()
   rlang::inject(
-    ggplot2::layer(
-      data = NULL, mapping = NULL,
-      stat = StatBlankSurvfit, geom = "blank",
-      position = "identity",
-      show.legend = NA, inherit.aes = TRUE,
-      params = list()
-    ) %>%
-      structure(
-        "add_risktable_strata_symbol" =
-          list(symbol = symbol %||% "\U25AC",
-               size = size, face = face, vjust = vjust,
-               !!!rlang::dots_list(...))
-      )
+    structure(add_risktable_strata_symbol_empty_list,
+              "add_risktable_strata_symbol" =
+                list(symbol = symbol %||% "\U25AC",
+                     face = face,
+                     vjust = vjust,
+                     size = size,
+                     !!!rlang::dots_list(...)
+                ),
+              class = "add_risktable_strata_symbol")
   )
 }
+
+#' @export
+ggplot_add.add_risktable_strata_symbol <- function (object, plot, object_name) {
+  update_add_risktable_strata_symbol(plot, object)
+}
+
+update_add_risktable_strata_symbol <- function(p, add_risktable_strata_symbol_empty_list) {
+  .is_ggsurvfit(p, fun_name = "add_risktable_strata_symbol()")
+  p +
+    rlang::inject(
+      structure(
+        ggplot2::geom_blank(),
+        add_risktable_strata_symbol =
+          !!attr(add_risktable_strata_symbol_empty_list, "add_risktable_strata_symbol")
+      )
+    )
+}
+
+
+
+# add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold", vjust = 0.3, ...) {
+#   rlang::inject(
+#     ggplot2::layer(
+#       data = NULL, mapping = NULL,
+#       stat = StatBlankSurvfit, geom = "blank",
+#       position = "identity",
+#       show.legend = NA, inherit.aes = TRUE,
+#       params = list()
+#     ) %>%
+#       structure(
+#         "add_risktable_strata_symbol" =
+#           list(symbol = symbol %||% "\U25AC",
+#                size = size, face = face, vjust = vjust,
+#                !!!rlang::dots_list(...))
+#       )
+#   )
+# }
 
 
 

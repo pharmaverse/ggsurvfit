@@ -23,31 +23,27 @@
 #'   ggsurvfit() +
 #'   add_quantile(linetype = 2, y_value = NULL, x_value = 10)
 add_quantile <- function(y_value = NULL, x_value = NULL, ...) {
-  ggplot2::layer(
-    stat = StatQuantileSurvfit, data = NULL, mapping = NULL, geom = "segment",
-    position = "identity", show.legend = NA, inherit.aes = TRUE,
-    params =
-      c(
-        list(y_value = y_value, x_value = x_value),
-        utils::modifyList(x = list(linetype = 2, na.rm = FALSE),
-                          val = rlang::dots_list(...))
-      )
-  )
+  add_quantile_empty_list <- list()
+  structure(add_quantile_empty_list,
+            y_value = y_value,
+            x_value = x_value,
+            dots = utils::modifyList(x = list(linetype = 2, na.rm = FALSE),
+                                     val = rlang::dots_list(...)),
+            class = "add_quantile")
 }
 
-StatQuantileSurvfit <-
-  ggplot2::ggproto(
-    "StatQuantileSurvfit",
-    ggplot2::Stat,
-    compute_panel =
-      function(data, scales, params, y_value, x_value) {
-        .is_ggsurvfit(data, fun_name = "add_quantile()", required_aes_cols = c("x", "y"))
-        quantile_km_in_stat(data, y_value, x_value)
-      }
-  )
+#' @export
+ggplot_add.add_quantile <- function (object, plot, object_name) {
+  update_add_quantile(plot, object)
+}
 
+update_add_quantile <- function(p, add_quantile_empty_list) {
+  .is_ggsurvfit(p, fun_name = "add_quantile()", required_cols = c("time", "estimate"))
+  # getting user-passed arguments
+  y_value <- attr(add_quantile_empty_list, "y_value")
+  x_value <- attr(add_quantile_empty_list, "x_value")
+  dots <- attr(add_quantile_empty_list, "dots")
 
-quantile_km_in_stat <- function(data, y_value, x_value) {
   if (is.null(y_value) && is.null(x_value)) y_value <- 0.5 # assign default value
   if (length(y_value) > 1 || length(x_value) > 1)
     cli_abort(c(
@@ -55,15 +51,32 @@ quantile_km_in_stat <- function(data, y_value, x_value) {
       "i" = "To plot multiple quantiles, call {.code add_quantile()} multiple times."
     ))
 
-
+  built_p <- ggplot2::ggplot_build(p)
+  data <- built_p[["data"]][[1]]
+  data$monotonicity_type <- suppressWarnings(built_p$plot$data$monotonicity_type[1])
   df_quantile_y <- .create_y_value_df(data, y_value)
   df_quantile_x <- .create_x_value_df(data, x_value)
 
 
-  dplyr::bind_rows(
-    df_quantile_y,
-    df_quantile_x
-  )
+  df_geom_segment <-
+    dplyr::bind_rows(
+      df_quantile_y,
+      df_quantile_x
+    )
+
+  if (nrow(df_geom_segment) == 0L) return(p)
+
+  p +
+    rlang::inject(
+      ggplot2::geom_segment(
+        data = df_geom_segment,
+        ggplot2::aes(
+          x = .data$x, y = .data$y,
+          xend = .data$xend, yend = .data$yend
+        ),
+        !!!dots
+      )
+    )
 }
 
 .create_x_value_df <- function(data, x_value) {

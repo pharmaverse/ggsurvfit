@@ -16,7 +16,7 @@ test_that("add_censor_mark() works with ggsurvfit()", {
 })
 
 test_that("add_censor_mark() errors with ggsurvfit()", {
-  expect_warning(
+  expect_error(
     (mtcars %>%
        ggplot2::ggplot(ggplot2::aes(y = mpg, x = hp)) +
        add_censor_mark()) %>%

@@ -15,29 +15,48 @@
 #'   add_confidence_interval() +
 #'   add_censor_mark()
 add_censor_mark <- function(...) {
-  rlang::inject(
-    ggplot2::layer(
-      stat = StatCensorMark, data = NULL, mapping = NULL, geom = "point",
-      position = "identity", show.legend = NA, inherit.aes = TRUE,
-      params =
-          utils::modifyList(x = list(na.rm = TRUE, size = 2, shape = 3),
-                            val = rlang::dots_list(...))
-    )
-  )
+  add_censor_mark_empty_list <- list()
+  structure(add_censor_mark_empty_list,
+            dots = utils::modifyList(x = list(na.rm = TRUE, size = 2, shape = 3),
+                                     val = rlang::dots_list(...)),
+            class = "add_censor_mark")
 }
 
-StatCensorMark <-
-  ggplot2::ggproto(
-    "StatCensorMark",
-    ggplot2::Stat,
-    compute_panel =
-      function(data, scales, params) {
-        .is_ggsurvfit(data, fun_name = "add_censor_mark()", required_aes_cols = c("x", "y", "censor_count"))
-        .compute_censor_data(data)
-      }
-  )
+#' @export
+ggplot_add.add_censor_mark <- function (object, plot, object_name) {
+  update_add_censor_mark(plot, object)
+}
 
-.compute_censor_data <- function(x) {
-  # expanding censored rows (removing rows with 0 censored obs)
-  tidyr::uncount(x, weights = .data$censor_count)
+
+update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
+  .is_ggsurvfit(p, fun_name = "add_censor_mark()", required_cols = c("time", "estimate", "n.censor"))
+  # getting user-passed arguments
+  dots <- attr(add_censor_mark_empty_list, "dots")
+
+  p +
+    rlang::inject(
+      ggplot2::geom_point(
+        data = ~ tidyr::uncount(.x, weights = .data$n.censor),
+        ggplot2::aes(!!!.construct_censor_mark_aes(p)),
+        !!!dots
+      )
+    )
+}
+
+
+.construct_censor_mark_aes <- function(p) {
+  lst_aes <-
+    list(
+      x = rlang::expr(.data$time),
+      y = rlang::expr(.data$estimate)
+    )
+
+  if ("strata" %in% names(ggplot2::ggplot_build(p)$plot$data)) {
+    lst_aes <- c(
+      lst_aes,
+      colour = rlang::expr(.data$strata)
+    )
+  }
+
+  lst_aes
 }

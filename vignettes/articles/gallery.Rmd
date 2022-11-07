@@ -49,11 +49,27 @@ gg_styled <-
   theme_minimal() +
   theme(legend.position = "bottom") +
   guides(color = guide_legend(ncol = 1)) +
-  labs(title = "Modified",
-       y = "Percentage Survival")
+  labs(
+    title = "Modified",
+    y = "Percentage Survival"
+  )
 
 gg_default + gg_styled
 ```
+
+In addition to using additional {ggplot2} functions, it is helpful to understand which underlying functions are used to create the figures.
+The survival lines are drawn with `geom_step()` and the confidence interval with `geom_ribbon()`.
+Users can pass additional arguments to these construction functions in `ggsurvfti(...)` and `add_confidence_interval(...)`, respectively.
+In the example below, we use the color and fill aesthetic to change the colors of an unstratified estimate.
+
+```{r}
+survfit2(Surv(time, status) ~ 1, data = df_colon) %>%
+  ggsurvfit(color = "#508050") +
+  add_confidence_interval(fill = "#508050") +
+  add_risktable() +
+  scale_ggsurvfit()
+```
+
 
 ## Risk Tables
 
@@ -129,6 +145,7 @@ Importantly, you cannot use the `+` operator as you can with {patchwork}: use `|
 There are other important caveats as well.
 See `?ggsurvfit_arithmetic` for details.
 
+
 ```{r}
 p <-
   survfit2(Surv(time, status) ~ 1, df_colon) %>%
@@ -139,9 +156,36 @@ p <-
   scale_x_continuous(n.breaks = 7)
 
 p | p
+
+# build plot (which constructs the risktable)
+built_p <- ggsurvfit_build(p)
 ```
 
-NOTE: You can also use the patchwork arithmetic operators, but you must first wrap the plot in `patchwork::wrap_elements()`, e.g. `wrap_elements(built_p) | wrap_elements(built_p)`.
+#### patchwork
+
+Combine with `patchwork::wrap_plots()`
+
+```{r, fig.show='hide'}
+wrap_plots(built_p, built_p, ncol = 2)
+```
+
+To use patchwork plot arithmetic, each plot must be wrapped in `patchwork::wrap_elements()`
+
+```{r, fig.show='hide'}
+wrap_elements(built_p) | wrap_elements(built_p)
+```
+
+#### cowplot
+
+Combine with `cowplot::plot_grid()`
+
+```{r, fig.show='hide'}
+cowplot::plot_grid(built_p, built_p, ncol = 2)
+```
+
+```{r, echo=FALSE}
+wrap_plots(built_p, built_p, ncol = 2)
+```
 
 ## P-values
 
@@ -209,7 +253,7 @@ Because {ggsurvfit} functions are written as proper {ggplot2} geoms, you can bot
 
 ```{r warning=FALSE}
 survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
-  ggsurvfit() +
+  ggsurvfit(size = 1) +
   gghighlight::gghighlight(
     strata == "Levamisole+5-FU",
     calculate_per_facet = TRUE
