@@ -14,14 +14,7 @@ test_that("add_risktable() works with ggsurvfit()", {
       lapply(function(x) print(x)),
     NA,
   )
-  vdiffr::expect_doppelganger("sf1-risktable", lst_survfit2_risktable[[1]])
-  vdiffr::expect_doppelganger("sf2-risktable", lst_survfit2_risktable[[2]])
-  vdiffr::expect_doppelganger("sf3-risktable", lst_survfit2_risktable[[3]])
 
-  vdiffr::expect_doppelganger(
-    "sf1-risktable-height",
-    sf1 %>% ggsurvfit() + add_risktable(risktable_height = 0.40)
-  )
 
   expect_error(
     list(sf1, sf2, sf3) %>%
@@ -67,7 +60,6 @@ test_that("add_risktable() works with ggsurvfit()", {
                     risktable_group = "risktable_stats"),
     NA
   )
-  vdiffr::expect_doppelganger("add_risktable-overall1", risktable_overall1)
 
   expect_error(
     risktable_overall2 <-
@@ -77,7 +69,6 @@ test_that("add_risktable() works with ggsurvfit()", {
                     risktable_group = "risktable_stats"),
     NA
   )
-  vdiffr::expect_doppelganger("add_risktable-overall2", risktable_overall2)
 
   # when weights are present, the risktable Ns should be rounded to nearest integer
   expect_error(
@@ -91,8 +82,20 @@ test_that("add_risktable() works with ggsurvfit()", {
       add_risktable(),
     NA
   )
-  vdiffr::expect_doppelganger("add_risktable-weights", risktable_with_weights)
 
+
+  skip_on_os("linux")
+  vdiffr::expect_doppelganger("sf1-risktable", lst_survfit2_risktable[[1]])
+  vdiffr::expect_doppelganger("sf2-risktable", lst_survfit2_risktable[[2]])
+  vdiffr::expect_doppelganger("sf3-risktable", lst_survfit2_risktable[[3]])
+
+  vdiffr::expect_doppelganger(
+    "sf1-risktable-height",
+    sf1 %>% ggsurvfit() + add_risktable(risktable_height = 0.40)
+  )
+  vdiffr::expect_doppelganger("add_risktable-overall1", risktable_overall1)
+  vdiffr::expect_doppelganger("add_risktable-overall2", risktable_overall2)
+  vdiffr::expect_doppelganger("add_risktable-weights", risktable_with_weights)
 })
 
 test_that("add_risktable() throws error messages", {
@@ -130,9 +133,6 @@ test_that("add_risktable() works with ggcuminc()", {
       lapply(function(x) print(x)),
     NA,
   )
-  vdiffr::expect_doppelganger("cuminc1-risktable", lst_cuminc_risktable[[1]])
-  vdiffr::expect_doppelganger("cuminc2-risktable", lst_cuminc_risktable[[2]])
-  vdiffr::expect_doppelganger("cuminc3-risktable", lst_cuminc_risktable[[3]])
 
   expect_error(
     list(cuminc1, cuminc2, cuminc3) %>%
@@ -157,18 +157,23 @@ test_that("add_risktable() works with ggcuminc()", {
       lapply(function(x) (ggcuminc(x) + add_risktable(combine_groups = TRUE)) %>% print()),
     NA,
   )
+
+
+  skip_on_os("linux")
+  vdiffr::expect_doppelganger("cuminc1-risktable", lst_cuminc_risktable[[1]])
+  vdiffr::expect_doppelganger("cuminc2-risktable", lst_cuminc_risktable[[2]])
+  vdiffr::expect_doppelganger("cuminc3-risktable", lst_cuminc_risktable[[3]])
 })
 
 test_that("add_risktable() works with ggcuminc() and multiple outcomes", {
-  skip_on_os("linux")
-  skip_on_cran()
-
   expect_error(
     lst_cuminc_risktable_outcomes <-
       list(cuminc1, cuminc2, cuminc3) %>%
       lapply(function(x) ggcuminc(x, outcome = c("death from cancer", "death other causes")) + add_risktable()),
     NA,
   )
+
+  skip_on_os("linux")
   vdiffr::expect_doppelganger("cuminc1-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[1]])
   vdiffr::expect_doppelganger("cuminc2-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[2]])
   vdiffr::expect_doppelganger("cuminc3-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[3]])
