@@ -84,7 +84,7 @@ ggsurvfit <- function(x, type = "survival",
 }
 
 .construct_ggplot <- function(x, df, aes_args, theme, ...) {
-  ggplot2::ggplot(data = df, aes(is_ggsurvfit = TRUE)) +
+  ggplot2::ggplot(data = df, ggplot2::aes(is_ggsurvfit = TRUE)) +
     list(
       rlang::inject(ggplot2::geom_step(ggplot2::aes(!!!aes_args), !!!rlang::dots_list(...))),
       ggplot2::labs(
