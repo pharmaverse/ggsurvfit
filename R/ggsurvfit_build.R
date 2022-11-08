@@ -47,7 +47,7 @@
 #'   ggsurvfit_build(p),
 #'   ncol = 2
 #' )
-
+#' @inherit ggsurvfit seealso
 ggsurvfit_build <- function(x, combine_plots = TRUE) {
   risktable_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable")
   risktable_symbol_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable_strata_symbol")

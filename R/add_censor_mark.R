@@ -14,6 +14,7 @@
 #'   ggsurvfit() +
 #'   add_confidence_interval() +
 #'   add_censor_mark()
+#' @inherit ggsurvfit seealso
 add_censor_mark <- function(...) {
   add_censor_mark_empty_list <- list()
   structure(add_censor_mark_empty_list,

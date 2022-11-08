@@ -38,3 +38,6 @@ p <-
  p + add_risktable_strata_symbol()
  p + add_risktable_strata_symbol(symbol = "\U25CF", size = 10)
 }
+\seealso{
+Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
+}
