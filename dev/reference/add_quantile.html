@@ -78,23 +78,30 @@ Default is <code>y_value=0.5</code> when both <code>y_value</code> and <code>x_v
 
 <p>a ggplot2 figure</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Visit the <a href="https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html" class="external-link">gallery</a> for examples modifying the default figures</p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">add_quantile</span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">add_quantile</span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="scale_ggsurvfit.html">scale_ggsurvfit</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="add_quantile-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">add_quantile</span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">add_quantile</span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.9</span>, linetype <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">add_quantile</span><span class="op">(</span>y_value <span class="op">=</span> <span class="fl">0.9</span>, linetype <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="scale_ggsurvfit.html">scale_ggsurvfit</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="add_quantile-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="survfit2.html">survfit2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">df_lung</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggsurvfit.html">ggsurvfit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">add_quantile</span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">2</span>, y_value <span class="op">=</span> <span class="cn">NULL</span>, x_value <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">add_quantile</span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">2</span>, y_value <span class="op">=</span> <span class="cn">NULL</span>, x_value <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="scale_ggsurvfit.html">scale_ggsurvfit</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="add_quantile-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
