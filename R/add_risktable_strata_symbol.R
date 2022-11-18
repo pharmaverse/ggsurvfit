@@ -56,27 +56,6 @@ update_add_risktable_strata_symbol <- function(p, add_risktable_strata_symbol_em
 }
 
 
-
-# add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold", vjust = 0.3, ...) {
-#   rlang::inject(
-#     ggplot2::layer(
-#       data = NULL, mapping = NULL,
-#       stat = StatBlankSurvfit, geom = "blank",
-#       position = "identity",
-#       show.legend = NA, inherit.aes = TRUE,
-#       params = list()
-#     ) %>%
-#       structure(
-#         "add_risktable_strata_symbol" =
-#           list(symbol = symbol %||% "\U25AC",
-#                size = size, face = face, vjust = vjust,
-#                !!!rlang::dots_list(...))
-#       )
-#   )
-# }
-
-
-
 # function returns a named vector the the strata level as the name and the hex color as the value
 .match_strata_level_to_color <- function(plot_build, risktable_group, risktable_symbol_args) {
   if (rlang::is_empty(risktable_symbol_args) ||
