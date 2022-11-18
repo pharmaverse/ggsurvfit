@@ -60,7 +60,6 @@ update_add_risktable_strata_symbol <- function(p, add_risktable_strata_symbol_em
 .match_strata_level_to_color <- function(plot_build, risktable_group, risktable_symbol_args) {
   if (rlang::is_empty(risktable_symbol_args) ||
       risktable_group == "strata"  ||
-      # !"strata" %in% names(plot_build$plot$data) ||
       !"colour" %in% names(plot_build$data[[1]])) {
     if (!rlang::is_empty(risktable_symbol_args)) {
       cli_inform(

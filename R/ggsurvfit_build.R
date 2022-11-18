@@ -53,8 +53,9 @@ ggsurvfit_build <- function(x, combine_plots = TRUE) {
   risktable_symbol_args <- .extract_arguments_from_attr(x, attr_name = "add_risktable_strata_symbol")
 
   if (rlang::is_empty(risktable_args) && !rlang::is_empty(risktable_symbol_args)) {
-    cli_inform(c("i" = "{.code add_risktable()} must be run before {.code add_risktable_strata_symbol()}.",
-                 "i" = "{.code add_risktable_strata_symbol()} has been ignored."))
+    cli_inform(c("!" = "{.code add_risktable_strata_symbol()} has been ignored.",
+                 "i" = "{.code add_risktable()} must be run before {.code add_risktable_strata_symbol()}.",
+                 "i" = "Include {.code risktable_group='risktable_stats'} if stratum are present."))
     risktable_symbol_args <- NULL
   }
 
