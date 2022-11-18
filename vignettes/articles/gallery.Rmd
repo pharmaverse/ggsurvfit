@@ -110,7 +110,7 @@ For example, use the following code to increase the font size of both the risk t
 
 ```{r}
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit(size = 0.8) +
+  ggsurvfit(linewidth = 0.8) +
   add_risktable(
     risktable_height = 0.33,
     size = 4, # increase font size of risk table statistics
@@ -130,10 +130,10 @@ The `add_quantile()` function allows users to place guidelines by specifying eit
 
 ```{r}
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit(size = 0.8) +
+  ggsurvfit(linewidth = 0.8) +
   add_censor_mark(size = 2, alpha = 0.2) +
-  add_quantile(y_value = 0.5, linetype = "dotted", color = "grey30", size = 0.8) +
-  add_quantile(x_value = 5,  color = "grey30", size = 0.8) 
+  add_quantile(y_value = 0.5, linetype = "dotted", color = "grey30", linewidth = 0.8) +
+  add_quantile(x_value = 5,  color = "grey30", linewidth = 0.8) 
 ```
 
 ## Side-by-Side
@@ -217,7 +217,7 @@ In the example below, we utilize `scale_ggsurvfit()` and make other scale change
 
 ```{r}
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit(size = 1) +
+  ggsurvfit(linewidth = 1) +
   add_confidence_interval() +
   scale_ggsurvfit(x_scales = list(breaks = 0:9))
 ```
@@ -230,7 +230,7 @@ Custom transformations are also available.
 ```{r}
 p <-
   survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit(type = "risk", size = 0.8) +
+  ggsurvfit(type = "risk", linewidth = 0.8) +
   add_confidence_interval()
 p
 ```
@@ -252,7 +252,7 @@ Because {ggsurvfit} functions are written as proper {ggplot2} geoms, you can bot
 
 ```{r warning=FALSE}
 survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
-  ggsurvfit(size = 1) +
+  ggsurvfit(linewidth = 1) +
   gghighlight::gghighlight(
     strata == "Levamisole+5-FU",
     calculate_per_facet = TRUE
