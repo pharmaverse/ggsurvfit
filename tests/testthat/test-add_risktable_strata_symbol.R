@@ -2,7 +2,7 @@ test_that("add_risktable_strata_symbol() works", {
   expect_error(
     p <-
       survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
-      ggsurvfit(size = 1) +
+      ggsurvfit(linewidth = 1) +
       add_confidence_interval() +
       add_risktable(risktable_group = "risktable_stats"),
     NA
@@ -32,7 +32,7 @@ test_that("add_risktable_strata_symbol() works", {
 
   expect_message(
     print(survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
-            ggsurvfit(size = 1) +
+            ggsurvfit(linewidth = 1) +
             add_confidence_interval() +
             add_risktable_strata_symbol(risktable_group = "risktable_stats")),
     "must be run before"

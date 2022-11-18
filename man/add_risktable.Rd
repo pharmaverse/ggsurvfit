@@ -94,3 +94,6 @@ p +
     combine_groups = TRUE
   )
 }
+\seealso{
+Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
+}

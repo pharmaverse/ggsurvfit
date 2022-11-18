@@ -25,7 +25,7 @@
 #' @examples
 #' ggsurvfit <-
 #'   survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-#'   ggsurvfit(size = 1) +
+#'   ggsurvfit(linewidth = 1) +
 #'   add_confidence_interval()
 #'
 #' # use the function defaults
@@ -34,6 +34,7 @@
 #' # specify additional scales
 #' ggsurvfit +
 #'   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
+#' @inherit ggsurvfit seealso
 scale_ggsurvfit <- function(x_scales = list(), y_scales = list()){
   scale_ggsurvfit_empty_list <- list()
   structure(scale_ggsurvfit_empty_list, x_scales = x_scales, y_scales = y_scales, class = "scale_ggsurvfit")

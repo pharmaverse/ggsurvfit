@@ -31,3 +31,6 @@ survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
   ggsurvfit() +
   add_confidence_interval(type = "lines")
 }
+\seealso{
+Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
+}

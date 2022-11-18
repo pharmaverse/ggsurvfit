@@ -20,3 +20,6 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) \%>\%
   ggsurvfit() +
   add_legend_title()
 }
+\seealso{
+Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
+}

@@ -33,7 +33,7 @@ to \code{NULL}, e.g. \code{y_scales = list(limits = NULL)}.
 \examples{
 ggsurvfit <-
   survfit2(Surv(time, status) ~ surg, data = df_colon) \%>\%
-  ggsurvfit(size = 1) +
+  ggsurvfit(linewidth = 1) +
   add_confidence_interval()
 
 # use the function defaults
@@ -42,4 +42,7 @@ ggsurvfit + scale_ggsurvfit()
 # specify additional scales
 ggsurvfit +
   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
+}
+\seealso{
+Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
 }

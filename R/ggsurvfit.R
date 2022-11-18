@@ -49,6 +49,7 @@
 #'   add_confidence_interval() +
 #'   add_quantile() +
 #'   add_risktable()
+#' @seealso Visit the [gallery](https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html) for examples modifying the default figures
 ggsurvfit <- function(x, type = "survival",
                       linetype_aes = FALSE,
                       theme = theme_ggsurvfit_default(), ...) {
@@ -150,20 +151,6 @@ ggsurvfit <- function(x, type = "survival",
   return(invisible(TRUE))
 }
 
-
-# .is_ggsurvfit <- function(x, fun_name, required_aes_cols = NULL) {
-#   if (
-#     (any(!c(required_aes_cols, "is_ggsurvfit") %in% names(x))) ||
-#     (!isTRUE(x$is_ggsurvfit[1]))
-#   ) {
-#     cli::cli_abort(c(
-#       "x" = "Cannot use {.code {fun_name}} in this context.",
-#       "i" = "Use {.code {fun_name}} after a call to {.code autofit.survfit()}"
-#     ))
-#   }
-#
-#   return(invisible())
-# }
 
 # function to assign default y-axis label from the statistic type
 .default_y_axis_label <- function(df) {

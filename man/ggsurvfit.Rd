@@ -78,3 +78,6 @@ survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
   add_quantile() +
   add_risktable()
 }
+\seealso{
+Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
+}

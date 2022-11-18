@@ -21,14 +21,20 @@ Add quantile information annotated on to the plot.
 \examples{
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   ggsurvfit() +
-  add_quantile(linetype = 2)
+  add_quantile(linetype = 2) +
+  scale_ggsurvfit()
 
 survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
   ggsurvfit() +
   add_quantile(linetype = 2) +
-  add_quantile(y_value = 0.9, linetype = 3)
+  add_quantile(y_value = 0.9, linetype = 3) +
+  scale_ggsurvfit()
 
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   ggsurvfit() +
-  add_quantile(linetype = 2, y_value = NULL, x_value = 10)
+  add_quantile(linetype = 2, y_value = NULL, x_value = 10) +
+  scale_ggsurvfit()
+}
+\seealso{
+Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
 }

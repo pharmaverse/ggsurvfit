@@ -31,6 +31,7 @@
 #' survfit2(Surv(time, status) ~ surg, df_colon) %>%
 #'   ggsurvfit() +
 #'   add_pvalue("annotation", size = 5)
+#' @inherit ggsurvfit seealso
 add_pvalue <- function(location = c("caption", "annotation"),
                        caption = "{p.value}",
                        prepend_p = TRUE,

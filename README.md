@@ -22,24 +22,23 @@ risks cumulative incidence is also supported via `ggcuminc()`.
 
 ## Why ggsurvfit?
 
--   **Use ggplot2 functions:** Each **ggsurvfit** add-on function
-    (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is
-    written as a proper ggplot2
-    [‘geom’](https://ggplot2.tidyverse.org/reference/index.html),
-    meaning the package functions can be woven with ggplot2 functions
-    seamlessly. You don’t need to learn how to style the plot within the
-    ggsurvfit functions: rather, rely on the suite of ggplot2 functions
-    you already know.
+- **Use ggplot2 functions:** Each **ggsurvfit** add-on function
+  (e.g. `add_confidence_interval()`, `add_risktable()`, etc.) is written
+  as a proper ggplot2
+  [‘geom’](https://ggplot2.tidyverse.org/reference/index.html), meaning
+  the package functions can be woven with ggplot2 functions seamlessly.
+  You don’t need to learn how to style the plot within the ggsurvfit
+  functions: rather, rely on the suite of ggplot2 functions you already
+  know.
 
--   **Publishable Legends:** Raw variable names do not appear in the
-    figure legend, e.g. `"sex=Female"`.
+- **Publishable Legends:** Raw variable names do not appear in the
+  figure legend, e.g. `"sex=Female"`.
 
--   **Limitless Customization:** You can modify the x-axis scales or any
-    other plot feature and the risk table will still align with the
-    plot.
+- **Limitless Customization:** You can modify the x-axis scales or any
+  other plot feature and the risk table will still align with the plot.
 
--   **Simple Saving:** Save individual images easily with
-    `ggplot2::ggsave()`.
+- **Simple Saving:** Save individual images easily with
+  `ggplot2::ggsave()`.
 
 ## Installation
 
@@ -71,10 +70,10 @@ library(ggsurvfit)
 #> Loading required package: ggplot2
 
 p <- survfit2(Surv(time, status) ~ surg, data = df_colon) |>
-  ggsurvfit(size = 1) +
+  ggsurvfit(linewidth = 1) +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(y_value = 0.6, color = "gray50", size = 0.75)
+  add_quantile(y_value = 0.6, color = "gray50", linewidth = 0.75)
 ```
 
 Any figure created with {ggsurvfit} can be customized using {ggplot2}
@@ -105,14 +104,14 @@ Both functions have identical inputs, so why do we need `survfit2()`?
 The `survfit2()` tracks the environment from which the function was
 called, resulting in the following benefits.
 
--   We can reliably remove the raw variable names from the figure
-    legend, e.g. `SEX=Female`.
--   P-values can be calculated with `survfit_p()` and added to figures.
--   The items above are often *possible* using `survfit()`. However, by
-    utilizing the calling
-    [environment](https://adv-r.hadley.nz/environments.html) we are
-    assured the correct elements are found, rather than crossing our
-    fingers that the search path contains the needed elements.
+- We can reliably remove the raw variable names from the figure legend,
+  e.g. `SEX=Female`.
+- P-values can be calculated with `survfit_p()` and added to figures.
+- The items above are often *possible* using `survfit()`. However, by
+  utilizing the calling
+  [environment](https://adv-r.hadley.nz/environments.html) we are
+  assured the correct elements are found, rather than crossing our
+  fingers that the search path contains the needed elements.
 
 ## CDISC ADaM ADTTE
 
