@@ -25,7 +25,7 @@
 #' @examples
 #' ggsurvfit <-
 #'   survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-#'   ggsurvfit(size = 1) +
+#'   ggsurvfit(linewidth = 1) +
 #'   add_confidence_interval()
 #'
 #' # use the function defaults

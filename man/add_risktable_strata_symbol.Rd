@@ -31,7 +31,7 @@ Use this function when stratum level names are long.
 \examples{
 p <-
   survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
-  ggsurvfit(size = 1) +
+  ggsurvfit(linewidth = 1) +
   add_confidence_interval() +
   add_risktable(risktable_group = "risktable_stats")
 

@@ -6,6 +6,8 @@
 
 * Migrated the 'scales' package from 'Imports:' to 'Suggests:', i.e. from a strong to a weak dependency. (#120)
 
+* Updated ggplot `size=` argument to `linewidth=` where needed as of ggplot2 v3.4.0 (#131)
+
 # ggsurvfit 0.2.0
 
 ### Breaking changes
