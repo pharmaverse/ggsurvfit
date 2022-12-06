@@ -1,4 +1,4 @@
-# ggsurvfit (development version)
+# ggsurvfit 0.2.1
 
 * All calls to `aes()` have been migrated from `ggplot()` to the individual geoms, e.g. `geom_step()`. This was done because adding the `aes()` call in `ggplot()` led to an error when a later geom is added with user-created data. (#127)
 
