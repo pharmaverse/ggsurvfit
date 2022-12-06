@@ -1,10 +1,10 @@
-pandoc: '2.18'
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   gallery: gallery.html
   themes: themes.html
-last_built: 2022-10-16T00:13Z
+last_built: 2022-12-06T18:30Z
 urls:
   reference: http://www.danieldsjoberg.com/ggsurvfit/reference
   article: http://www.danieldsjoberg.com/ggsurvfit/articles
