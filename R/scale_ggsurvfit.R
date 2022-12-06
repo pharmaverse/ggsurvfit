@@ -58,7 +58,9 @@ update_scale_ggsurvfit <- function(p, scale_ggsurvfit_empty_list) {
     )
   # set limits of a survival curve
   if (isTRUE(p$data$estimate_type[1] == "survival"))
-    y_scale_defaults <- c(y_scale_defaults, list(limits = c(0, 1)))
+    y_scale_defaults <-
+    c(y_scale_defaults,
+      list(limits = c(0 - sqrt(.Machine$double.eps), 1 + sqrt(.Machine$double.eps))))
 
   # getting user-passed arguments
   x_scales <- attr(scale_ggsurvfit_empty_list, "x_scales")
