@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9005</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.1" id="ggsurvfit-021">ggsurvfit 0.2.1<a class="anchor" aria-label="anchor" href="#ggsurvfit-021"></a></h2>
 <ul><li><p>All calls to <code>aes()</code> have been migrated from <code>ggplot()</code> to the individual geoms, e.g. <code>geom_step()</code>. This was done because adding the <code>aes()</code> call in <code>ggplot()</code> led to an error when a later geom is added with user-created data. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/127" class="external-link">#127</a>)</p></li>
 <li><p>Delay adding the <code>conf.low</code> and <code>conf.high</code> to the ggplot <code>aes()</code> until <code><a href="../reference/add_confidence_interval.html">add_confidence_interval()</a></code> has been called. Previously, these were being added in the first call to <code>ggplot(tidy_data, aes(x = time, y = estimate, ymin = conf.low, ymax = conf.high))</code>. The result was that figures that did <em>not</em> show the confidence interval still created space for the CI in the plot area. This update eliminates that blank space. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/123" class="external-link">#123</a>)</p></li>
 <li><p>Migrated the ‘scales’ package from ‘Imports:’ to ‘Suggests:’, i.e. from a strong to a weak dependency. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/120" class="external-link">#120</a>)</p></li>
