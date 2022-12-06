@@ -37,10 +37,6 @@
 #'   ggcuminc(outcome = "death from cancer") +
 #'   add_confidence_interval() +
 #'   add_risktable()
-#'
-#' survfit2(Surv(ttdeath, death_cr) ~ trt, trial) %>%
-#'   ggcuminc(outcome = c("death from cancer", "death other causes")) +
-#'   add_risktable()
 #' @inherit ggsurvfit seealso
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
