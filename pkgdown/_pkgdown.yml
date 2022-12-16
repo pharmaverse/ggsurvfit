@@ -22,8 +22,22 @@ development:
 navbar:
   bg: primary
   structure:
-    left:  [intro, reference, articles, tutorials, news]
+    left:  [intro, reference, tutorials, news]
     right: [search, github]
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: Reference
+      href: reference/index.html
+    - text: Gallery
+      href: articles/gallery.html
+    - text: Articles
+      menu:
+      - text: "Themes"
+        href: articles/themes.html
+    - text: News
+      href: news/index.html
+
 
 reference:
   - title: Build survfit

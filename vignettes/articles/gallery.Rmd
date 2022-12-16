@@ -133,7 +133,8 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(linewidth = 0.8) +
   add_censor_mark(size = 2, alpha = 0.2) +
   add_quantile(y_value = 0.5, linetype = "dotted", color = "grey30", linewidth = 0.8) +
-  add_quantile(x_value = 5,  color = "grey30", linewidth = 0.8) 
+  add_quantile(x_value = 5,  color = "grey30", linewidth = 0.8) +
+  scale_ggsurvfit()
 ```
 
 ## Side-by-Side
