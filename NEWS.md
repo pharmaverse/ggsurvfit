@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Added feature in `add_risktable(risktable_stats=)` to accept glue-like syntax. Anything inside curly brackets will be evaluated. Users can style the statistics in any way they like by including rounding/formatting functions within the curly brackets. Users may now also display estimates along with the confidence limits in the risk table. (#135)
+
 # ggsurvfit 0.2.1
 
 * All calls to `aes()` have been migrated from `ggplot()` to the individual geoms, e.g. `geom_step()`. This was done because adding the `aes()` call in `ggplot()` led to an error when a later geom is added with user-created data. (#127)
