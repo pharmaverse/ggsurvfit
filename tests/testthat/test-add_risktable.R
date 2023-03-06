@@ -242,9 +242,9 @@ test_that("add_risktable() custom stats", {
   vdiffr::expect_doppelganger("sf2-risktable-custom-stats-and-label", lst_custom_stats[[2]])
   vdiffr::expect_doppelganger("sf3-risktable-custom-stats-and-label", lst_custom_stats[[3]])
 
-  vdiffr::expect_doppelganger("sf1-risktable-custom-stats-and-label", lst_custom_stats2[[1]])
-  vdiffr::expect_doppelganger("sf2-risktable-custom-stats-and-label", lst_custom_stats2[[2]])
-  vdiffr::expect_doppelganger("sf3-risktable-custom-stats-and-label", lst_custom_stats2[[3]])
+  vdiffr::expect_doppelganger("sf1-risktable-custom-stats-and-label2", lst_custom_stats2[[1]])
+  vdiffr::expect_doppelganger("sf2-risktable-custom-stats-and-label2", lst_custom_stats2[[2]])
+  vdiffr::expect_doppelganger("sf3-risktable-custom-stats-and-label2", lst_custom_stats2[[3]])
 })
 
 
