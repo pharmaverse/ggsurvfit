@@ -66,9 +66,9 @@ survfit2 <- function(formula, ...) {
   if (missing(formula)) {
     cli::cli_abort("The {.code formula} argument cannot be missing.")
   }
-  if (!rlang::is_formula(formula)) {
+  if (!rlang::is_formula(formula) & !inherits(formula, "coxph")) {
     cli::cli_abort(
-      c("x" = "The {.code formula} argument must be class {.cls formula}.",
+      c("x" = "The {.code formula} argument must be class {.cls formula} or {.cls coxph}.",
         "i" = "Argument is class {.cls {class(formula)}}")
     )
   }
