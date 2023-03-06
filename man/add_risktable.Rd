@@ -31,7 +31,9 @@ Default is \code{c("n.risk", "cum.event")}.
 \item \code{"cum.censor"} Cumulative number of censored observations
 \item \code{"n.event"} Number of events in time interval
 \item \code{"n.censor"} Number of censored observations in time interval
-}}
+}
+
+See additional details below.}
 
 \item{risktable_group}{String indicating the grouping variable for the risk tables.
 Default is \code{"auto"} and will select \code{"strata"} or \code{"risktable_stats"} based on context.
@@ -61,6 +63,29 @@ a ggplot2 figure
 Add risk tables below the plot showing the number at risk, events observed, and
 number of censored observations.
 }
+\section{Customize Statistics}{
+
+You can customize how the statistics in the risk table are displayed by
+utilizing \href{https://glue.tidyverse.org/}{glue}-like syntax in the \code{risktable_stats}
+argument.
+
+For example, if you prefer to have the number at risk and the number of events
+on the same row, you can use \code{risktable_stats = "{n.risk} ({cum.event})"}.
+
+You can further customize the table to include the risk estimates using
+elements \code{c("estimate", "conf.low", "conf.high", "std.error")}. When using
+these elements, you'll likely need to include a function to round the estimates
+and multiply them by 100.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_risktable(
+  risktable_stats =
+    c("\{n.risk\} (\{cum.event\})",
+      "\{round(estimate*100)\}\% (\{round(conf.low*100)\}, \{round(conf.high*100)\})"),
+  stats_label = c("At Risk (Cum. Events)", "Survival (95\% CI)")
+)
+}\if{html}{\out{</div>}}
+}
+
 \section{Competing Risks}{
 
 
@@ -76,16 +101,19 @@ p <-
   add_censor_mark() +
   add_confidence_interval()
 
+# using the function defaults
 p + add_risktable()
+
+# change the statistics shown and the label
+p +
+  add_risktable(
+    risktable_stats = "n.risk",
+    stats_label = list(n.risk = "Number at Risk"),
+  )
 
 p +
   add_risktable(
-    risktable_stats = c("n.risk", "cum.event"),
-    stats_label = list(
-      cum.event = "Cumulative Observed Events",
-      n.risk = "Number at Risk"
-    ),
-    risktable_group = "strata",
+    risktable_stats = "{n.risk} ({cum.event})"
   )
 
 p +

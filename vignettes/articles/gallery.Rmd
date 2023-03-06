@@ -123,6 +123,14 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   )
 ```
 
+You can also use [glue](https://glue.tidyverse.org/)-like syntax to place multiple statistics on the same row of the risk table.
+
+```{r}
+survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+  ggsurvfit() +
+  add_risktable(risktable_stats = "{n.risk} ({cum.event})")
+```
+
 ## Quantiles and Censor Markings
 
 Add guidelines for survival quantiles and markings for censored patients using `add_quantile()` and `add_censor_mark()`.
