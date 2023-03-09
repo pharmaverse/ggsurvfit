@@ -1,7 +1,7 @@
 #' Create survival curves
 #'
 #' @description
-#' Simple wrapper for `survival::survfit.formula()` except the environment is also
+#' Simple wrapper for `survival::survfit()` except the environment is also
 #' included in the returned object.
 #'
 #' Use this function with all other functions in this package to ensure

@@ -199,3 +199,39 @@ test_that("add_risktable() throws messages", {
     )
   )
 })
+
+
+
+test_that("add_risktable() works with Cox models", {
+  # runs without error
+  strata <- survival::strata
+  sf_cox <-
+    survival::coxph(Surv(time, status) ~ age + strata(sex), data = df_lung) %>%
+    survfit2()
+  expect_error(
+    (ggsurvfit(sf_cox) + add_risktable()) %>%
+      ggsurvfit_build(),
+    NA
+  )
+
+  # risk table matches with Cox models
+  expect_equal(
+    sf_cox %>%
+      tidy_survfit(times = 0:4 * 10) %>%
+      dplyr::select(time, strata,
+                    n.risk, n.event, n.censor,
+                    cum.event, cum.censor),
+    survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+      tidy_survfit(times = 0:4 * 10) %>%
+      dplyr::select(time, strata,
+                    n.risk, n.event, n.censor,
+                    cum.event, cum.censor)
+  )
+
+  # not compatible with `add_pvalue()`
+  expect_message(
+    sf_cox %>%
+      ggsurvfit() +
+      add_pvalue()
+  )
+})
