@@ -1,4 +1,12 @@
 .extract_formula_from_survfit <- function(x) {
+  if (inherits(x, "survfitcox")) {
+    x <-
+      x$call %>%
+      as.list() %>%
+      `[[`("formula") %>%
+      rlang::eval_tidy(env = x$.Environment) %>%
+      utils::modifyList(val = list(.Environment = x$.Environment))
+  }
   x$call %>%
     as.list() %>%
     `[[`("formula") %>%
@@ -6,6 +14,14 @@
 }
 
 .extract_data_from_survfit <- function(x) {
+  if (inherits(x, "survfitcox")) {
+    x <-
+      x$call %>%
+      as.list() %>%
+      `[[`("formula") %>%
+      rlang::eval_tidy(env = x$.Environment) %>%
+      utils::modifyList(val = list(.Environment = x$.Environment))
+  }
   x$call %>%
     as.list() %>%
     `[[`("data") %>%

@@ -1,7 +1,7 @@
 #' Create survival curves
 #'
 #' @description
-#' Simple wrapper for `survival::survfit.formula()` except the environment is also
+#' Simple wrapper for `survival::survfit()` except the environment is also
 #' included in the returned object.
 #'
 #' Use this function with all other functions in this package to ensure
@@ -61,14 +61,13 @@
 #' summary(fit, times = c(10, 20))
 #'
 #' summary(fit2, times = c(10, 20))
-#'
 survfit2 <- function(formula, ...) {
   if (missing(formula)) {
     cli::cli_abort("The {.code formula} argument cannot be missing.")
   }
-  if (!rlang::is_formula(formula)) {
+  if (!rlang::is_formula(formula) & !inherits(formula, "coxph")) {
     cli::cli_abort(
-      c("x" = "The {.code formula} argument must be class {.cls formula}.",
+      c("x" = "The {.code formula} argument must be class {.cls formula} or {.cls coxph}.",
         "i" = "Argument is class {.cls {class(formula)}}")
     )
   }

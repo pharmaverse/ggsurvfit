@@ -42,11 +42,6 @@ tidy_survfit <- function(x,
   if (!is.null(times) && any(times < 0)) {
     cli_abort("The {.var times} cannot be negative.")
   }
-  if (inherits(x, "survfitcox")) {
-    cli_abort(c(
-      "!" = "The {.code tidy_survfit()} cannot tidy summaries of {.code survival::coxph()} models."
-    ))
-  }
 
   # create base tidy tibble ----------------------------------------------------
   df_tidy <-

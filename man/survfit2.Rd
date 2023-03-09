@@ -66,7 +66,7 @@ survfit2(formula, ...)
 survfit2 object
 }
 \description{
-Simple wrapper for \code{survival::survfit.formula()} except the environment is also
+Simple wrapper for \code{survival::survfit()} except the environment is also
 included in the returned object.
 
 Use this function with all other functions in this package to ensure
@@ -120,7 +120,6 @@ fit2
 summary(fit, times = c(10, 20))
 
 summary(fit2, times = c(10, 20))
-
 }
 \seealso{
 \code{\link[survival:survfit.formula]{survival::survfit.formula()}}
