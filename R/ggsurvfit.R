@@ -1,7 +1,7 @@
 #' Plot Survival Probability
 #'
 #' Plot survival probabilities (and other transformations) using the results
-#' from `survfit2()` or `survival::survfit()`; although, we recommend the former
+#' from `survfit2()` or `survival::survfit()`; although, the former is recommend
 #' to have the best experience with the **ggsurvfit** package.
 #'
 #' @param theme a survfit theme. Default is `theme_ggsurvfit_default()`

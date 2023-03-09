@@ -38,7 +38,7 @@ a ggplot2 figure
 }
 \description{
 Plot survival probabilities (and other transformations) using the results
-from \code{survfit2()} or \code{survival::survfit()}; although, we recommend the former
+from \code{survfit2()} or \code{survival::survfit()}; although, the former is recommend
 to have the best experience with the \strong{ggsurvfit} package.
 }
 \section{Details}{

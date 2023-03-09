@@ -87,6 +87,13 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
     )
     return(p)
   }
+  if (inherits(survfit, "survfitcox")) {
+    cli_inform(
+      c("!" = "{.code add_pvalue()} does not support adjusted {.code coxph()} models.",
+        "i" = "{.code add_pvalue()} has been ignored.")
+    )
+    return(p)
+  }
 
   # calculate p-value
   if (inherits(survfit, "survfit2")) {
