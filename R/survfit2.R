@@ -61,7 +61,6 @@
 #' summary(fit, times = c(10, 20))
 #'
 #' summary(fit2, times = c(10, 20))
-#'
 survfit2 <- function(formula, ...) {
   if (missing(formula)) {
     cli::cli_abort("The {.code formula} argument cannot be missing.")
