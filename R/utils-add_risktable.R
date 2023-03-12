@@ -190,7 +190,7 @@ lst_stat_labels_default <-
       stat_value =
         lapply(
           risktable_stats,
-          function(x) glue::glue(x)
+          function(x) tryCatch(glue::glue(x), error = function(e) cli::cli_abort("Error constructing risktable statistic {.val {x}}"))
         ) %>%
         unlist() %>%
         list()
