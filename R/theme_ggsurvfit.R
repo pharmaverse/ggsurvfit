@@ -21,7 +21,8 @@ theme_ggsurvfit_default <- function() {
     ggplot2::theme(strip.background = ggplot2::element_blank()),
     ggplot2::theme(axis.text = ggplot2::element_text(size = 10)),
     ggplot2::theme(axis.title = ggplot2::element_text(size = 12)),
-    ggplot2::theme(legend.text = ggplot2::element_text(size = 10))
+    ggplot2::theme(legend.text = ggplot2::element_text(size = 10)),
+    ggplot2::theme(plot.margin = ggplot2::unit(c(5.5, 5.5, 0, 5.5), "points"))
   )
 }
 
