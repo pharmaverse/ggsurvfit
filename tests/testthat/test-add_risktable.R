@@ -79,7 +79,10 @@ test_that("add_risktable() works with ggsurvfit()", {
         weights = abs(scale(age))
       ) %>%
       ggsurvfit() +
-      add_risktable(),
+      add_risktable(
+        risktable_stats = c("{round(n.risk)}", "{round(cum.event)}"),
+        stats_label = c("At Risk", "Events")
+      ),
     NA
   )
 
@@ -201,6 +204,50 @@ test_that("add_risktable() throws messages", {
 })
 
 
+test_that("add_risktable() custom stats", {
+  expect_error(
+    lst_custom_stats <-
+      list(sf1, sf2, sf3) %>%
+      lapply(
+        function(x) {
+          ggsurvfit(x) +
+            add_risktable(
+              risktable_stats =
+                c("{n.risk} ({cum.event})",
+                  "{round(estimate*100)}% ({round(conf.low*100)}, {round(conf.high*100)})"),
+              stats_label = c("At Risk (Cum. Events)", "Survival (95% CI)")
+            )
+        }
+      ),
+    NA
+  )
+
+
+  expect_error(
+    lst_custom_stats2 <-
+      list(sf1, sf2, sf3) %>%
+      lapply(
+        function(x) {
+          ggsurvfit(x) +
+            add_risktable(
+              risktable_stats = "{n.risk} ({cum.event})",
+              stats_label = list("n.risk" = "No. at Risk")
+            )
+        }
+      ),
+    NA
+  )
+
+  skip_on_os("linux")
+  vdiffr::expect_doppelganger("sf1-risktable-custom-stats-and-label", lst_custom_stats[[1]])
+  vdiffr::expect_doppelganger("sf2-risktable-custom-stats-and-label", lst_custom_stats[[2]])
+  vdiffr::expect_doppelganger("sf3-risktable-custom-stats-and-label", lst_custom_stats[[3]])
+
+  vdiffr::expect_doppelganger("sf1-risktable-custom-stats-and-label2", lst_custom_stats2[[1]])
+  vdiffr::expect_doppelganger("sf2-risktable-custom-stats-and-label2", lst_custom_stats2[[2]])
+  vdiffr::expect_doppelganger("sf3-risktable-custom-stats-and-label2", lst_custom_stats2[[3]])
+})
+
 
 test_that("add_risktable() works with Cox models", {
   # runs without error
@@ -235,3 +282,4 @@ test_that("add_risktable() works with Cox models", {
       add_pvalue()
   )
 })
+

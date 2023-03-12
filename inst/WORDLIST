@@ -15,6 +15,7 @@ Surv
 Survfit
 adjuvant
 behaviour
+cowplot
 cuminc
 geoms
 geom’
@@ -35,4 +36,5 @@ tablemab
 tibble
 tidycmprsk
 unremarkably
+unstratified
 vismab

@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Added feature in `add_risktable(risktable_stats=)` to accept glue-like syntax. Anything inside curly brackets will be evaluated. Users can style the statistics in any way they like by including rounding/formatting functions within the curly brackets. Users may now also display estimates along with the confidence limits in the risk table. (#135)
+
 * Updated `ggsurvfit()`, `tidy_survfit()`, and `survfit2()` to handle `survival::coxph()` models. (#9)
 
 # ggsurvfit 0.2.1

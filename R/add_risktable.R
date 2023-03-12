@@ -15,6 +15,8 @@
 #' - `"cum.censor"` Cumulative number of censored observations
 #' - `"n.event"` Number of events in time interval
 #' - `"n.censor"` Number of censored observations in time interval
+#'
+#' See additional details below.
 #' @param stats_label named vector or list of custom labels. Names are the statistics
 #' from `risktable_stats=` and the value is the custom label.
 #' @param risktable_group String indicating the grouping variable for the risk tables.
@@ -28,6 +30,28 @@
 #' @param theme A risk table theme. Default is `theme_risktable_default()`
 #' @param size,... arguments passed to `ggplot2::geom_text(...)`. Pass arguments like, `size = 4`
 #' to increase the size of the statistics presented in the table.
+#'
+#' @section Customize Statistics:
+#' You can customize how the statistics in the risk table are displayed by
+#' utilizing [glue](https://glue.tidyverse.org/)-like syntax in the `risktable_stats`
+#' argument.
+#'
+#' For example, if you prefer to have the number at risk and the number of events
+#' on the same row, you can use `risktable_stats = "{n.risk} ({cum.event})"`.
+#'
+#' You can further customize the table to include the risk estimates using
+#' elements `c("estimate", "conf.low", "conf.high", "std.error")`. When using
+#' these elements, you'll likely need to include a function to round the estimates
+#' and multiply them by 100.
+#'
+#' ```r
+#' add_risktable(
+#'   risktable_stats =
+#'     c("{n.risk} ({cum.event})",
+#'       "{round(estimate*100)}% ({round(conf.low*100)}, {round(conf.high*100)})"),
+#'   stats_label = c("At Risk (Cum. Events)", "Survival (95% CI)")
+#' )
+#' ```
 #'
 #' @section Competing Risks:
 #'
@@ -44,16 +68,19 @@
 #'   add_censor_mark() +
 #'   add_confidence_interval()
 #'
+#' # using the function defaults
 #' p + add_risktable()
+#'
+#' # change the statistics shown and the label
+#' p +
+#'   add_risktable(
+#'     risktable_stats = "n.risk",
+#'     stats_label = list(n.risk = "Number at Risk"),
+#'   )
 #'
 #' p +
 #'   add_risktable(
-#'     risktable_stats = c("n.risk", "cum.event"),
-#'     stats_label = list(
-#'       cum.event = "Cumulative Observed Events",
-#'       n.risk = "Number at Risk"
-#'     ),
-#'     risktable_group = "strata",
+#'     risktable_stats = "{n.risk} ({cum.event})"
 #'   )
 #'
 #' p +
@@ -77,12 +104,7 @@ add_risktable <- function(times = NULL,
     structure(add_risktable_empty_list,
               "add_risktable" =
                 list(times = times,
-                     risktable_stats =
-                       !!match.arg(
-                         rev(risktable_stats),
-                         choices = c("n.risk", "cum.censor", "cum.event", "n.censor", "n.event"),
-                         several.ok = TRUE
-                       ),
+                     risktable_stats = !!.convert_to_glue(risktable_stats),
                      stats_label = stats_label,
                      combine_groups = combine_groups,
                      risktable_group = match.arg(risktable_group),
@@ -111,4 +133,14 @@ update_add_risktable <- function(p, add_risktable_empty_list) {
         add_risktable = !!attr(add_risktable_empty_list, "add_risktable")
       )
     )
+}
+
+.convert_to_glue <- function(x) {
+  possible_stats <-
+    c("n.risk", "n.event", "n.censor", "cum.event", "cum.censor",
+      "estimate", "conf.low", "conf.high", "std.error")
+
+  x[x %in% possible_stats] <- paste0("{", x[x %in% possible_stats], "}")
+
+  x
 }

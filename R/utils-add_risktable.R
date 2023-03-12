@@ -5,7 +5,7 @@
                                  risktable_symbol_args, ...) {
   # check iputs ----------------------------------------------------------------
   if (!is.null(risktable_height) &&
-    (length(risktable_height) > 1 || !is.numeric(risktable_height) || !dplyr::between(risktable_height, 0, 1))) {
+      (length(risktable_height) > 1 || !is.numeric(risktable_height) || !dplyr::between(risktable_height, 0, 1))) {
     cli_abort("The {.code add_risktable(risktable_height=)} argument must be a scalar between 0 and 1.")
   }
 
@@ -126,9 +126,20 @@
     dplyr::mutate(
       stat_label =
         risktable_stats %>%
-        lapply(function(x) stats_label[[x]] %||% lst_stat_labels_default[[x]] %||% x) %>%
-        unlist() %>%
-        factor(x = ., levels = rev(.))
+        lapply(
+          function(x) {
+            stats_label[[x]] %||%
+              tryCatch(
+                glue::glue(
+                  x,
+                  .envir =
+                    rlang::new_environment(data = lst_stat_labels_default %>% utils::modifyList(val = stats_label %||% list()))
+                ),
+                error = function(e) NULL) %||%
+              x
+          }
+        ) %>%
+        unlist()
     )
 }
 
@@ -139,9 +150,12 @@ lst_stat_labels_default <-
     n.event = "Interval Events",
     n.censor = "Interval Censored",
     cum.event = "Events",
-    cum.censor = "Censored"
+    cum.censor = "Censored",
+    estimate = "Estimate",
+    conf.low = "LB",
+    conf.high = "UB",
+    std.error = "SE"
   )
-
 
 # returns a list of the risktable ggplot objects
 .create_list_of_gg_risk_tables <- function(df_times, risktable_stats, times,
@@ -167,16 +181,22 @@ lst_stat_labels_default <-
 
   df_risktable <-
     df_times %>%
-    dplyr::select(dplyr::any_of(c("time", "strata", risktable_stats))) %>%
-    tidyr::pivot_longer(
-      cols = -dplyr::any_of(c("time", "strata")),
-      names_to = "stat_name",
-      values_to = "stat_value"
-    ) %>%
+    dplyr::rowwise() %>%
     dplyr::mutate(
-      stat_name = factor(.data$stat_name, levels = .env$risktable_stats)
+      stat_label =
+        df_stat_labels %>%
+        dplyr::mutate(stat_label = factor(.data$stat_label, levels = unique(.data$stat_label))) %>%
+        list(),
+      stat_value =
+        lapply(
+          risktable_stats,
+          function(x) tryCatch(glue::glue(x), error = function(e) cli::cli_abort("Error constructing risktable statistic {.val {x}}"))
+        ) %>%
+        unlist() %>%
+        list()
     ) %>%
-    dplyr::left_join(df_stat_labels, by = "stat_name")
+    dplyr::select(dplyr::any_of(c("time", "strata", "stat_label", "stat_value"))) %>%
+    tidyr::unnest(cols = c("stat_label", "stat_value"))
 
   df_risktable %>%
     dplyr::mutate(
@@ -199,7 +219,7 @@ lst_stat_labels_default <-
             ggplot2::aes(
               x = .data$time,
               y = .data[[y_value]],
-              label = round2(.data$stat_value)
+              label = .data$stat_value
             )
           ) +
           rlang::inject(ggplot2::geom_text(!!!geom_text_args))
