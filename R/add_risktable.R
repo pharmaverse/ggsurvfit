@@ -100,6 +100,7 @@ add_risktable <- function(times = NULL,
                           ...) {
 
   add_risktable_empty_list <- list()
+
   rlang::inject(
     structure(add_risktable_empty_list,
               "add_risktable" =
@@ -127,6 +128,10 @@ ggplot_add.add_risktable <- function (object, plot, object_name) {
 update_add_risktable <- function(p, add_risktable_empty_list) {
   .is_ggsurvfit(p, fun_name = "add_rikstable()")
   p +
+    ggplot2::theme(
+      plot.margin = ggplot2::unit(c(5.5, 5.5, 0, 5.5), "points"),
+      legend.margin = ggplot2::margin(t = 0, b = 0)
+    ) +
     rlang::inject(
       structure(
         ggplot2::geom_blank(),
