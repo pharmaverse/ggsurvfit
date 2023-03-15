@@ -43,9 +43,9 @@ theme_risktable_default <- function(axis.text.y.size = 10, plot.title.size = 10.
       axis.text.x = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank(),
       axis.text.y = ggplot2::element_text(size = axis.text.y.size, colour = "black", face = "plain"),
-      plot.margin = ggplot2::unit(c(1, 0, 0, 0), "lines"),
+      plot.margin = ggplot2::unit(c(0, 5.5, 0, 5.5), "points"),
       plot.title = ggplot2::element_text(hjust = 0, vjust = 0, size = plot.title.size),
-      legend.position = "none"
+      legend.position = "none",
     ),
     ggplot2::xlab(NULL),
     ggplot2::ylab(NULL)
