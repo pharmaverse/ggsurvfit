@@ -19,7 +19,7 @@
 #' Background
 #' The example simulated data set is based on large phase III clinical trials in
 #' breast cancer such as the ALTTO trial
-#' \url{https://ascopubs.org/doi/pdf/10.1200/JCO.2015.62.1797}.
+#' `https://ascopubs.org/doi/abs/10.1200/JCO.2015.62.1797`.
 #' The example “trial” aims to determine if a combination of two therapies
 #' tablemab (T) plus vismab (V) improves outcomes for metastatic human epidermal
 #' growth factor 2–positive breast cancer and increases the pathologic complete

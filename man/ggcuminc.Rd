@@ -45,6 +45,7 @@ user-friendly interface making it easy to learn and use.
 }
 
 \examples{
+\donttest{
 library(tidycmprsk)
 
 cuminc(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
@@ -61,6 +62,7 @@ survfit2(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
   ggcuminc(outcome = "death from cancer") +
   add_confidence_interval() +
   add_risktable()
+}
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures

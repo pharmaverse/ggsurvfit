@@ -21,6 +21,7 @@
 #' user-friendly interface making it easy to learn and use.
 #'
 #' @examples
+#' \donttest{
 #' library(tidycmprsk)
 #'
 #' cuminc(Surv(ttdeath, death_cr) ~ trt, trial) %>%
@@ -37,6 +38,7 @@
 #'   ggcuminc(outcome = "death from cancer") +
 #'   add_confidence_interval() +
 #'   add_risktable()
+#' }
 #' @inherit ggsurvfit seealso
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
