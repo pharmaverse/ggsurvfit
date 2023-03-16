@@ -1,6 +1,6 @@
 # ggsurvfit 0.3.0
 
-* Added feature in `add_risktable(risktable_stats=)` to accept glue-like syntax---anything inside curly brackets will be evaluated. Users can now place multiple types of statistics on the same row, including allowing users to style the statistics in any way they like by including rounding/formatting functions within the curly brackets. Users may now also display estimates and confidence limits in the risk table. (#135)
+* Added feature in `add_risktable(risktable_stats=)` to accept glue-like syntax---anything inside curly brackets will be evaluated. Users can now place multiple types of statistics on the same row, including allowing users to style the statistics in any way they like by adding rounding/formatting functions within the curly brackets. Users may now also display estimates and confidence limits in the risk table. (#135)
 
 * Updated `ggsurvfit()`, `tidy_survfit()`, and `survfit2()` to handle `survival::coxph()` models. (#9)
 
