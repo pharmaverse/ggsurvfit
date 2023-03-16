@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggsurvfit</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.1.9004</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.3.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggsurvfit-development-version">ggsurvfit (development version)<a class="anchor" aria-label="anchor" href="#ggsurvfit-development-version"></a></h2>
-<ul><li><p>Added feature in <code>add_risktable(risktable_stats=)</code> to accept glue-like syntax—anything inside curly brackets will be evaluated. Users can now place multiple types of statistics on the same row, including allowing users to style the statistics in any way they like by including rounding/formatting functions within the curly brackets. Users may now also display estimates and confidence limits in the risk table. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/135" class="external-link">#135</a>)</p></li>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.0" id="ggsurvfit-030">ggsurvfit 0.3.0<a class="anchor" aria-label="anchor" href="#ggsurvfit-030"></a></h2>
+<ul><li><p>Added feature in <code>add_risktable(risktable_stats=)</code> to accept glue-like syntax—anything inside curly brackets will be evaluated. Users can now place multiple types of statistics on the same row, including allowing users to style the statistics in any way they like by adding rounding/formatting functions within the curly brackets. Users may now also display estimates and confidence limits in the risk table. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/135" class="external-link">#135</a>)</p></li>
 <li><p>Updated <code><a href="../reference/ggsurvfit.html">ggsurvfit()</a></code>, <code><a href="../reference/tidy_survfit.html">tidy_survfit()</a></code>, and <code><a href="../reference/survfit2.html">survfit2()</a></code> to handle <code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code> models. (<a href="https://github.com/ddsjoberg/ggsurvfit/issues/9" class="external-link">#9</a>)</p></li>
 <li><p>Updated the default margin size when a risktable is added to a figure. Namely, the primary plot’s bottom margin is set to zero, along with each risktable’s top and bottom margin. Moreover, the top and bottom margin of the legend is also set to zero.</p></li>
 </ul></div>
