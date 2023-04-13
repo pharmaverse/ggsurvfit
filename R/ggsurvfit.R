@@ -79,8 +79,8 @@ ggsurvfit <- function(x, type = "survival",
   gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)
 
   # assign class and return object ---------------------------------------------
-  class(gg) <- c("ggsurvfit", class(gg))
-
+  # class(gg) <- c("ggsurvfit", class(gg))
+  gg <- new("ggsurvfit", p = structure(gg, class = "ggplot"))
   gg
 }
 
