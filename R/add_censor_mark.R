@@ -30,10 +30,13 @@ ggplot_add.add_censor_mark <- function (object, plot, object_name) {
 
 
 update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
+  # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_censor_mark()", required_cols = c("time", "estimate", "n.censor"))
+
   # getting user-passed arguments
   dots <- attr(add_censor_mark_empty_list, "dots")
 
+  # add censor marks with `geom_point()`
   p +
     rlang::inject(
       ggplot2::geom_point(
@@ -44,7 +47,7 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
     )
 }
 
-
+# prepare `aes()` call
 .construct_censor_mark_aes <- function(p) {
   lst_aes <-
     list(
@@ -52,6 +55,7 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
       y = rlang::expr(.data$estimate)
     )
 
+  # if a stratified model, add a `colour=` argument
   if ("strata" %in% names(ggplot2::ggplot_build(p)$plot$data)) {
     lst_aes <- c(
       lst_aes,

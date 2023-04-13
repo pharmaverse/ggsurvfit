@@ -42,6 +42,7 @@ ggplot_add.add_quantile <- function (object, plot, object_name) {
 }
 
 update_add_quantile <- function(p, add_quantile_empty_list) {
+  # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_quantile()", required_cols = c("time", "estimate"))
   # getting user-passed arguments
   y_value <- attr(add_quantile_empty_list, "y_value")

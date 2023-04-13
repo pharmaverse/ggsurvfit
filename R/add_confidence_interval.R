@@ -35,11 +35,14 @@ ggplot_add.add_confidence_interval <- function (object, plot, object_name) {
 
 
 update_add_confidence_interval <- function(p, add_confidence_interval_empty_list) {
+  # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_confidence_interval()", required_cols = c("conf.low", "conf.high"))
+
   # getting user-passed arguments
   type <- attr(add_confidence_interval_empty_list, "type")
   dots <- attr(add_confidence_interval_empty_list, "dots")
 
+  # preparing named list of geom arguments
   geom_args <-
     switch(type,
            "ribbon" = list(na.rm = TRUE, alpha = 0.2, color = NA),
@@ -47,6 +50,7 @@ update_add_confidence_interval <- function(p, add_confidence_interval_empty_list
     ) %>%
     utils::modifyList(val = dots)
 
+  # add either the step ribbon or the geom lines for confidence intervals
   p +
     rlang::expr(
       !!switch(
@@ -70,6 +74,7 @@ update_add_confidence_interval <- function(p, add_confidence_interval_empty_list
     )
 }
 
+# prepare `aes()` call
 .construct_ci_aes <- function(p, lst_aes = NULL, ribbon = FALSE) {
   lst_aes <-
     ggplot2::ggplot_build(p)$plot$layers[[1]]$computed_mapping[c("x", "color", "colour", "linetype")] %>%

@@ -126,6 +126,7 @@ ggplot_add.add_risktable <- function (object, plot, object_name) {
 }
 
 update_add_risktable <- function(p, add_risktable_empty_list) {
+  # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_rikstable()")
   p +
     ggplot2::theme(

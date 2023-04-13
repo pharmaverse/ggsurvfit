@@ -44,7 +44,9 @@ ggplot_add.add_risktable_strata_symbol <- function (object, plot, object_name) {
 }
 
 update_add_risktable_strata_symbol <- function(p, add_risktable_strata_symbol_empty_list) {
+  # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_risktable_strata_symbol()")
+
   p +
     rlang::inject(
       structure(

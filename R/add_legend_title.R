@@ -23,7 +23,10 @@ ggplot_add.add_legend_title <- function (object, plot, object_name) {
 }
 
 update_add_legend_title <- function(p, add_legend_title_empty_list) {
+  # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_legend_title()")
+
+  # extract legend title
   legend_title <-
     attr(add_legend_title_empty_list, "title") %||%
     p$data$strata_label[1]

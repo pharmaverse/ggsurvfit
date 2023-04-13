@@ -55,6 +55,7 @@ ggplot_add.add_pvalue <- function (object, plot, object_name) {
 }
 
 update_add_pvalue <- function(p, add_pvalue_empty_list) {
+  # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_pvalue()")
   # getting user-passed arguments
   location <- attr(add_pvalue_empty_list, "location")
