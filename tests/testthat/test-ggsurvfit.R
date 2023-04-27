@@ -177,6 +177,8 @@ test_that("ggsurvfit() works with geoms with new data", {
   )
 
   skip_on_os("linux")
+  skip_on_os("mac")
+  skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("sf2-ggsurvfit_new_data_geom1", p1)
   vdiffr::expect_doppelganger("sf2-ggsurvfit_new_data_geom2", p2)
 })

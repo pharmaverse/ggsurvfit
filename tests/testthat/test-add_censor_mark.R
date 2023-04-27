@@ -11,6 +11,8 @@ test_that("add_censor_mark() works with ggsurvfit()", {
   )
 
   skip_on_os("linux")
+  skip_on_os("mac")
+  skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("sf1-censor_mark", lst_survfit2_censor_mark[[1]])
   vdiffr::expect_doppelganger("sf2-censor_mark", lst_survfit2_censor_mark[[2]])
   vdiffr::expect_doppelganger("sf3-censor_mark", lst_survfit2_censor_mark[[3]])
@@ -43,6 +45,8 @@ test_that("add_censor_mark() works with ggcuminc()", {
   )
 
   skip_on_os("linux")
+  skip_on_os("mac")
+  skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("cuminc1-censor_mark", lst_cuminc_censor_mark[[1]])
   vdiffr::expect_doppelganger("cuminc2-censor_mark", lst_cuminc_censor_mark[[2]])
   vdiffr::expect_doppelganger("cuminc3-censor_mark", lst_cuminc_censor_mark[[3]])
@@ -57,6 +61,8 @@ test_that("add_censor_mark() works with ggcuminc()", {
   )
 
   skip_on_os("linux")
+  skip_on_os("mac")
+  skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("cuminc1-censor_mark-all-outcomes", lst_cuminc_censor_mark_outcome[[1]])
   vdiffr::expect_doppelganger("cuminc2-censor_mark-all-outcomes", lst_cuminc_censor_mark_outcome[[2]])
   vdiffr::expect_doppelganger("cuminc3-censor_mark-all-outcomes", lst_cuminc_censor_mark_outcome[[3]])

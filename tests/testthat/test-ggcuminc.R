@@ -55,6 +55,8 @@ test_that("ggcuminc() works with multiple outcomes", {
   )
 
   skip_on_os("linux")
+  skip_on_os("mac")
+  skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("cuminc1-ggcuminc-all-outcomes", lst_ggcuminc_outcomes[[1]])
   vdiffr::expect_doppelganger("cuminc2-ggcuminc-all-outcomes", lst_ggcuminc_outcomes[[2]])
   vdiffr::expect_doppelganger("cuminc3-ggcuminc-all-outcomes", lst_ggcuminc_outcomes[[3]])

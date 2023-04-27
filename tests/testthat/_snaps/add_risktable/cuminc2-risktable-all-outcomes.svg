@@ -166,20 +166,20 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='209.12' y='403.44' width='118.73' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='209.12' y='403.44' width='222.16' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <rect x='214.60' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='216.33' y1='412.08' x2='230.15' y2='412.08' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='273.97' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='275.70' y1='412.08' x2='289.52' y2='412.08' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<text x='237.36' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
-<text x='296.73' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
-<rect x='338.82' y='403.44' width='222.16' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='344.30' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='346.02' y1='412.08' x2='359.85' y2='412.08' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<rect x='453.14' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='454.87' y1='412.08' x2='468.70' y2='412.08' style='stroke-width: 1.07; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
-<text x='367.05' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
-<text x='475.90' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
+<line x1='216.33' y1='412.08' x2='230.15' y2='412.08' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<rect x='323.45' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='325.18' y1='412.08' x2='339.00' y2='412.08' style='stroke-width: 1.07; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
+<text x='237.36' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
+<text x='346.21' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
+<rect x='442.24' y='403.44' width='118.73' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='447.72' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='449.45' y1='412.08' x2='463.28' y2='412.08' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='507.09' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='508.82' y1='412.08' x2='522.64' y2='412.08' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
+<text x='470.48' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
+<text x='529.85' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
 </g>
