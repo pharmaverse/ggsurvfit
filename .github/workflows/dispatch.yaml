@@ -9,10 +9,12 @@ name: pkgdown
 jobs:
   pkgdown:
   runs-on: ubuntu-latest
-    - name: Install curl on Linux
-      if: runner.os == 'Linux'
-      run: sudo apt-get install curl
 
-    - name: Send dispatch
-      if: runner.os == 'Linux'
-      run: curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/ddsjoberg/website-test/actions/workflows/pkgdown.yaml/dispatches --data '{"ref": "main"}'
+  steps:
+  - name: Install curl on Linux
+    if: runner.os == 'Linux'
+    run: sudo apt-get install curl
+
+  - name: Send dispatch
+    if: runner.os == 'Linux'
+    run: curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/ddsjoberg/website-test/actions/workflows/pkgdown.yaml/dispatches --data '{"ref": "main"}'
