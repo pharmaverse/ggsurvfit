@@ -1,0 +1,24 @@
+on:
+  push:
+    branches: [main, master]
+  release:
+    types: [published]
+
+name: pkgdown
+
+jobs:
+  pkgdown:
+    runs-on: ubuntu-latest
+    # Only restrict concurrency for non-PR jobs
+    concurrency:
+      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install curl on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get install curl
+
+      - name: Send dispatch
+        if: runner.os == 'Linux'
+        run: curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/ddsjoberg/website-test/actions/workflows/pkgdown.yaml/dispatches --data '{"ref": "main"}'
