@@ -6,7 +6,7 @@
 
 --------------------------------------------------------------------------------
 
-Reviewer Checklist (if item does not apply, mark is as complete)
+Reviewer Checklist (if item does not apply, mark as complete)
 
 - [ ] Ensure all package dependencies are installed by running `renv::install()`
 - [ ] PR branch has pulled the most recent updates from master branch. Ensure the pull request branch and your local version match and both have the latest updates from the master branch.
