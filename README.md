@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/pharmaverse/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pharmaverse/ggsurvfit/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/pharmaverse/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/pharmaverse/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/pharmaverse/ggsurvfit?branch=main)
+coverage](https://codecov.io/gh/pharmaverse/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 [![](https://cranlogs.r-pkg.org/badges/ggsurvfit)](https://cran.r-project.org/package=ggsurvfit)
@@ -49,11 +49,11 @@ install.packages("ggsurvfit")
 ```
 
 You can install the development version from
-[GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
+[GitHub](https://github.com/pharmaverse/ggsurvfit) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ddsjoberg/ggsurvfit")
+devtools::install_github("pharmaverse/ggsurvfit")
 ```
 
 ## Examples
