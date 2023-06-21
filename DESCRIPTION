@@ -17,9 +17,9 @@ Description: Ease the creation of time-to-event (i.e. survival) endpoint
     this package to be combined with any function or customization from
     'ggplot2' and other 'ggplot2' extension packages.
 License: MIT + file LICENSE
-URL: https://github.com/ddsjoberg/ggsurvfit,
+URL: https://github.com/pharmaverse/ggsurvfit,
     http://www.danieldsjoberg.com/ggsurvfit/
-BugReports: https://github.com/ddsjoberg/ggsurvfit/issues
+BugReports: https://github.com/ddsjoberg/pharmaverse/issues
 Depends: 
     R (>= 3.5)
 Imports: 

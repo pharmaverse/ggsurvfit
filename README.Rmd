@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 # ggsurvfit <a href="http://www.danieldsjoberg.com/ggsurvfit/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/ddsjoberg/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
+[![R-CMD-check](https://github.com/pharmaverse/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/pharmaverse/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ddsjoberg/ggsurvfit?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 [![](https://cranlogs.r-pkg.org/badges/ggsurvfit)](https://cran.r-project.org/package=ggsurvfit)
 <!-- badges: end -->
@@ -47,11 +47,11 @@ Install **ggsurvfit** from CRAN with:
 install.packages("ggsurvfit")
 ```
 
-You can install the development version from [GitHub](https://github.com/ddsjoberg/ggsurvfit) with:
+You can install the development version from [GitHub](https://github.com/pharmaverse/ggsurvfit) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ddsjoberg/ggsurvfit")
+devtools::install_github("pharmaverse/ggsurvfit")
 ```
 
 ## Examples
@@ -120,7 +120,7 @@ survfit(Surv_CNSR() ~ 1, adtte)
 gt_related_pkgs <-
   dplyr::tribble(
     ~pkg,                 ~cran,   ~survfit,   ~survfit_risktable,   ~cmprsk,   ~cmprsk_risktable, ~ggplot2,    ~gh_owner,               ~gh_repo, ~gh_branch,
-    "ggsurvfit",            "X",        "X",                  "X",       "X",                 "X",      "X",  "ddsjoberg",            "ggsurvfit",     "main",
+    "ggsurvfit",            "X",        "X",                  "X",       "X",                 "X",      "X",  "pharmaverse",            "ggsurvfit",     "main",
     "survminer",            "X",        "X",                  "X",       "X",                  "",       "", "kassambara",            "survminer",   "master",
     "KMunicate",            "X",        "X",                  "X",        "",                  "",       "", "ellessenne",    "KMunicate-package",   "master",
     "GGally",               "X",        "X",                   "",        "",                  "",       "",      "ggobi",               "ggally",   "master",
