@@ -75,8 +75,8 @@ test_that("add_confidence_interval() works with ggcuminc() and multiple outcomes
     NA
   )
 
-  skip_on_os("linux")
-  skip_on_os("mac")
+  # only check on mac
+  skip_on_os(c("linux", "windows", "solaris"))
   skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("cuminc1-confidence_interval-all-outcomes",
                               lst_cuminc_confidence_interval_outcomes[[1]])

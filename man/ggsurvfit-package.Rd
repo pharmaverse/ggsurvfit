@@ -13,9 +13,9 @@ Ease the creation of time-to-event (i.e. survival) endpoint figures. The modular
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/ddsjoberg/ggsurvfit}
+  \item \url{https://github.com/pharmaverse/ggsurvfit}
   \item \url{http://www.danieldsjoberg.com/ggsurvfit/}
-  \item Report bugs at \url{https://github.com/ddsjoberg/ggsurvfit/issues}
+  \item Report bugs at \url{https://github.com/ddsjoberg/pharmaverse/issues}
 }
 
 }

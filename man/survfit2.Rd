@@ -59,6 +59,7 @@ survfit2(formula, ...)
     a variable giving the type of event.  This has been superseded by
     multi-state Surv objects and is deprecated; see example below.
   }
+    \item{\code{model}}{include a copy of the model frame in the output}
     \item{\code{error}}{this argument is no longer used}
   }}
 }

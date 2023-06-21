@@ -87,8 +87,8 @@ test_that("add_risktable() works with ggsurvfit()", {
   )
 
 
-  skip_on_os("linux")
-  skip_on_os("mac")
+  # only check on mac
+  skip_on_os(c("linux", "windows", "solaris"))
   skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("sf1-risktable", lst_survfit2_risktable[[1]])
   vdiffr::expect_doppelganger("sf2-risktable", lst_survfit2_risktable[[2]])
@@ -164,8 +164,8 @@ test_that("add_risktable() works with ggcuminc()", {
   )
 
 
-  skip_on_os("linux")
-  skip_on_os("mac")
+  # only check on mac
+  skip_on_os(c("linux", "windows", "solaris"))
   skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("cuminc1-risktable", lst_cuminc_risktable[[1]])
   vdiffr::expect_doppelganger("cuminc2-risktable", lst_cuminc_risktable[[2]])
@@ -180,8 +180,8 @@ test_that("add_risktable() works with ggcuminc() and multiple outcomes", {
     NA,
   )
 
-  skip_on_os("linux")
-  skip_on_os("mac")
+  # only check on mac
+  skip_on_os(c("linux", "windows", "solaris"))
   skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("cuminc1-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[1]])
   vdiffr::expect_doppelganger("cuminc2-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[2]])
@@ -244,8 +244,8 @@ test_that("add_risktable() custom stats", {
     NA
   )
 
-  skip_on_os("linux")
-  skip_on_os("mac")
+  # only check on mac
+  skip_on_os(c("linux", "windows", "solaris"))
   skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("sf1-risktable-custom-stats-and-label", lst_custom_stats[[1]])
   vdiffr::expect_doppelganger("sf2-risktable-custom-stats-and-label", lst_custom_stats[[2]])
