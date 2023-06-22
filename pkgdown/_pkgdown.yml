@@ -19,6 +19,13 @@ development:
   mode: auto
   version_label: default
 
+# footer:
+#   structure:
+#     left: developed_by
+#     right: pharmaverse
+#   components:
+#     pharmaverse: Part of the <a href="https://pharmaverse.org/"><img src="https://pharmaverse.org/images/banner.png" height="32" /></a>
+
 navbar:
   bg: primary
   structure:
