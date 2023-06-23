@@ -11,6 +11,7 @@ coverage](https://codecov.io/gh/pharmaverse/ggsurvfit/branch/main/graph/badge.sv
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 [![](https://cranlogs.r-pkg.org/badges/ggsurvfit)](https://cran.r-project.org/package=ggsurvfit)
+[<img src="http://pharmaverse.org/shields/ggsurvfit.svg">](https://pharmaverse.org)
 <!-- badges: end -->
 
 ## Introduction
