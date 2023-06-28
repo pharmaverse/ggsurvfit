@@ -212,17 +212,13 @@ tidy_survfit <- function(x,
         )
     )
 
-  # adding the monotonicity, if a known type
-  if (rlang::is_string(type)) {
-    x$monotonicity_type <-
-      switch(type,
-             "survival" = "decreasing",
-             "cuminc" = "increasing",
-             "risk" = "increasing",
-             "cumhaz" = "increasing"
-      )
-  }
+  # adding the monotonicity
+  x <- .add_monotonicity_type(x, type = type)
 
+  # switch conf.low and conf.high levels if needed
+  if (x$monotonicity_type[1] %in% "increasing" && all(c("conf.low", "conf.high") %in% colnames(x))) {
+    x <- dplyr::rename(x, conf.low = "conf.high", conf.high = "conf.low")
+  }
 
   # return data frame ----------------------------------------------------------
   x
@@ -327,4 +323,36 @@ tidy_survfit <- function(x,
         ~ ifelse(.data$time > .data$time_max, NA, .)
       )
     )
+}
+
+.add_monotonicity_type <- function(x, type = NULL, estimate_var = "estimate") {
+  if ("monotonicity_type" %in% names(x)) {
+    return(x)
+  }
+
+  # adding the monotonicity, if a known type
+  if (rlang::is_string(type)) {
+    x$monotonicity_type <-
+      switch(type,
+             "survival" = "decreasing",
+             "cuminc" = "increasing",
+             "risk" = "increasing",
+             "cumhaz" = "increasing"
+      )
+  }
+  else {
+    x <-
+      x %>%
+      dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
+      dplyr::mutate(
+        monotonicity_type =
+          dplyr::case_when(
+            .data[[estimate_var]][1] > .data[[estimate_var]][dplyr::n()] ~ "decreasing",
+            .data[[estimate_var]][1] < .data[[estimate_var]][dplyr::n()] ~ "increasing"
+          )
+      ) %>%
+      dplyr::ungroup()
+  }
+
+  x
 }

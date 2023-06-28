@@ -7,3 +7,4 @@ inst/doc
 tests/testthat/Rplots.pdf
 delete.png
 revdep
+.DS_Store

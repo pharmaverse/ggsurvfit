@@ -72,6 +72,14 @@ test_that("tidy_survfit() works with survfit2()", {
   )
 
   expect_error(sf2 %>% tidy_survfit(type = mtcars))
+
+  expect_true(
+    sf1 %>%
+      tidy_survfit(type = "risk") %>%
+      dplyr::mutate(..flag.. = conf.low <= conf.high) %>%
+      dplyr::pull("..flag..") %>%
+      all()
+  )
 })
 
 test_that("tidy_survfit() throws appropriate errors", {
