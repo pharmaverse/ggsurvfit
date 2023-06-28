@@ -164,7 +164,7 @@ update_add_quantile <- function(p, add_quantile_empty_list) {
   # create vertical line segments
   df_quantile <-
     data %>%
-    .add_monotonicity_type() %>%
+    .add_monotonicity_type(estimate_var = "y") %>%
     dplyr::select(dplyr::any_of(c("x", "y", "group", "outcome", "monotonicity_type"))) %>%
     .add_requested_y_value(y_value = y_value) %>%
     dplyr::group_by(dplyr::across(dplyr::any_of(c("group", "outcome", "y")))) %>%
@@ -240,19 +240,4 @@ update_add_quantile <- function(p, add_quantile_empty_list) {
 }
 
 
-.add_monotonicity_type <- function(x) {
-  if ("monotonicity_type" %in% names(x)) {
-    return(x)
-  }
 
-  x %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
-    dplyr::mutate(
-      monotonicity_type =
-        dplyr::case_when(
-          .data$y[1] > .data$y[dplyr::n()] ~ "decreasing",
-          .data$y[1] < .data$y[dplyr::n()] ~ "increasing"
-        )
-    ) %>%
-    dplyr::ungroup()
-}
