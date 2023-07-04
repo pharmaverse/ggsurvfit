@@ -116,8 +116,8 @@ called, resulting in the following benefits.
 
 ## CDISC ADaM ADTTE
 
-The package also includes gems for those using the [CDISC ADaM
-ADTTE](https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0)
+The package also includes gems for those using the [CDISC ADaM ADTTE
+v1.0](https://www.cdisc.org/standards/foundational/adam/adam-basic-data-structure-bds-time-event-tte-analyses-v1-0)
 data model.
 
 If columns `"PARAM"` or `"PARAMCD"` are present in the data frame passed
