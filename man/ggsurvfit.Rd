@@ -50,7 +50,7 @@ code used internally:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   tidy_survfit() \%>\%
-  ggplot(aes(x = time, y = estimate, y
+  ggplot(aes(x = time, y = estimate,
              min = conf.low, ymax = conf.low,
              color = strata, fill = strata)) +
   geom_step()
