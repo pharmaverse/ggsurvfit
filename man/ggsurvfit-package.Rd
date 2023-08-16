@@ -25,7 +25,7 @@ Useful links:
 Authors:
 \itemize{
   \item Mark Baillie \email{bailliem@gmail.com}
-  \item Charlotta Fruechtenicht \email{charlotta.fruechtenicht@roche.com}
+  \item Charlotta Fruechtenicht \email{charlotta.fruechtenicht@roche.com} (\href{https://orcid.org/0000-0002-6689-6423}{ORCID})
   \item Steven Haesendonckx \email{shaesen2@its.jnj.com} (\href{https://orcid.org/0000-0001-8222-3686}{ORCID})
   \item Tim Treis \email{tim.treis@outlook.de} (\href{https://orcid.org/0000-0002-9686-4799}{ORCID})
 }
