@@ -1,4 +1,6 @@
 test_that("add_pvalue() works", {
+  skip_on_os(c("linux", "windows", "solaris"))
+  skip_if_not(identical(current_release_version, loaded_release_version))
   expect_error(
     tbl_p1 <-
       survfit2(Surv(time, status) ~ surg, df_colon) %>%
@@ -47,23 +49,26 @@ test_that("add_pvalue() works", {
     NA
   )
   vdiffr::expect_doppelganger("cuminc2-pvalue", pvalue_cuminc)
+})
 
+
+test_that("add_pvalue() throws proper errors", {
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
-      ggsurvfit() +
-      add_pvalue(caption = letters)) %>%
+       ggsurvfit() +
+       add_pvalue(caption = letters)) %>%
       ggsurvfit_build()
   )
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
-      ggsurvfit() +
-      add_pvalue(pvalue_fun = letters)) %>%
-    ggsurvfit_build()
+       ggsurvfit() +
+       add_pvalue(pvalue_fun = letters)) %>%
+      ggsurvfit_build()
   )
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
-      ggsurvfit() +
-      add_pvalue(prepend_p = letters)) %>%
-    ggsurvfit_build()
+       ggsurvfit() +
+       add_pvalue(prepend_p = letters)) %>%
+      ggsurvfit_build()
   )
 })

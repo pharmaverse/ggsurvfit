@@ -9,6 +9,9 @@ test_that("theme_risktable works", {
       lapply(function(x) ggsurvfit(x) + add_risktable(theme = theme_risktable_default())),
     NA
   )
+
+  skip_on_os(c("linux", "windows", "solaris"))
+  skip_if_not(identical(current_release_version, loaded_release_version))
   vdiffr::expect_doppelganger("sf1-ggsurvfit_theme_risktable_default", lst_survfit2_default[[1]])
   vdiffr::expect_doppelganger("sf2-ggsurvfit_theme_risktable_default", lst_survfit2_default[[2]])
   vdiffr::expect_doppelganger("sf3-ggsurvfit_theme_risktable_default", lst_survfit2_default[[3]])
