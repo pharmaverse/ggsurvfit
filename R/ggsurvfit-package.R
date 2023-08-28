@@ -10,3 +10,8 @@ NULL
 
 
 utils::globalVariables(".")
+
+
+release_bullets <- function() {
+  c("Remember to build the pkgdown website at `ddsjoberg/ggsurvfit`.")
+}
