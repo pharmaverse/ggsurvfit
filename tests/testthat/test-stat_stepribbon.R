@@ -21,8 +21,7 @@ test_that("stat_stepribbon() works", {
   )
 
   # only check on mac
-  skip_on_os(c("linux", "windows", "solaris"))
-  skip_if_not(identical(current_release_version, loaded_release_version))
+  skip_on_ci()
   vdiffr::expect_doppelganger("gg_stepribbon1", gg_stepribbon1)
   vdiffr::expect_doppelganger("gg_stepribbon2", gg_stepribbon2)
 })
