@@ -1,4 +1,4 @@
-# ggsurvfit (development version)
+# ggsurvfit 0.3.1
 
 * For transformations in `tidy_survfit()` that change the monotonicity of the curve, the `conf.low` and `conf.high` column names are now switched. (#154)
 
