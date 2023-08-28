@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggsurvfit <a href="http://www.danieldsjoberg.com/ggsurvfit/"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# ggsurvfit <a href="https://www.danieldsjoberg.com/ggsurvfit/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
@@ -60,7 +60,7 @@ devtools::install_github("pharmaverse/ggsurvfit")
 ## Examples
 
 Review the [**figure
-gallery**](http://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html)
+gallery**](https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html)
 for many more examples.
 
 The code below constructs a basic {ggsurvfit} figure without

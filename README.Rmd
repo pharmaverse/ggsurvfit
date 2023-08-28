@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ggsurvfit <a href="http://www.danieldsjoberg.com/ggsurvfit/"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# ggsurvfit <a href="https://www.danieldsjoberg.com/ggsurvfit/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/pharmaverse/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ddsjoberg/ggsurvfit/actions/workflows/R-CMD-check.yaml)
@@ -57,7 +57,7 @@ devtools::install_github("pharmaverse/ggsurvfit")
 
 ## Examples
 
-Review the [**figure gallery**](http://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html) for many more examples. 
+Review the [**figure gallery**](https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html) for many more examples. 
 
 The code below constructs a basic {ggsurvfit} figure without customization.
 
