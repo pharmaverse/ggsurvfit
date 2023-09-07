@@ -34,6 +34,7 @@ Imports:
     patchwork (>= 1.1.0),
     rlang (>= 1.0.0),
     survival (>= 3.4-0),
+    tidycmprsk (>= 0.2.0),
     tidyr (>= 1.0.0)
 Suggests: 
     covr,
@@ -42,7 +43,6 @@ Suggests:
     scales (>= 1.1.0),
     spelling,
     testthat (>= 3.0.0),
-    tidycmprsk (>= 0.2.0),
     vdiffr (>= 1.0.0)
 VignetteBuilder: 
     knitr
