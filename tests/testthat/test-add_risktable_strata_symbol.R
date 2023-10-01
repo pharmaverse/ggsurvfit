@@ -7,6 +7,14 @@ test_that("add_risktable_strata_symbol() works", {
       add_risktable(risktable_group = "risktable_stats"),
     NA
   )
+  expect_error(
+    (p + add_risktable_strata_symbol()) %>% print(),
+    NA
+  )
+  expect_error(
+    (p + add_risktable_strata_symbol(symbol = "\U25CF")) %>% print(),
+    NA
+  )
 
   # works with univariate model
   expect_error(
@@ -17,6 +25,7 @@ test_that("add_risktable_strata_symbol() works", {
       add_risktable_strata_symbol(vjust = 0.3),
     NA
   )
+
 
 
   skip_on_ci()
