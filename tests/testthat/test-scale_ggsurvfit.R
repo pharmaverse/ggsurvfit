@@ -6,7 +6,7 @@ test_that("scale_ggsurvfit() works", {
       {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$x.range},
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
        ggsurvfit() +
-       scale_x_continuous(expand = c(0.015, 0)) +
+       scale_x_continuous(expand = c(0.02, 0)) +
        scale_y_continuous(
          limits = c(0 - sqrt(.Machine$double.eps), 1 + sqrt(.Machine$double.eps)),
          expand = c(0.025, 0)
