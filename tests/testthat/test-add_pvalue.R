@@ -14,7 +14,6 @@ test_that("add_pvalue() works", {
       add_pvalue("annotation", size = 7),
     NA
   )
-  vdiffr::expect_doppelganger("sf2-pvalue-annotation", tbl_p2)
 
   expect_error(
     tbl_p3 <-
@@ -46,6 +45,7 @@ test_that("add_pvalue() works", {
 
   skip_on_ci()
   vdiffr::expect_doppelganger("sf2-pvalue-caption", tbl_p1)
+  vdiffr::expect_doppelganger("sf2-pvalue-annotation", tbl_p2)
   vdiffr::expect_doppelganger("sf2-pvalue-annotation-risk", tbl_p3)
   vdiffr::expect_doppelganger("sf2-pvalue-with_survfit", tbl_p4)
   vdiffr::expect_doppelganger("cuminc2-pvalue", pvalue_cuminc)

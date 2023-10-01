@@ -9,11 +9,8 @@ test_that("theme_risktable works", {
       lapply(function(x) ggsurvfit(x) + add_risktable(theme = theme_risktable_default())),
     NA
   )
+  expect_error(lst_survfit2_default %>% lapply(function(x) print(x)), NA)
 
-  skip_on_ci()
-  vdiffr::expect_doppelganger("sf1-ggsurvfit_theme_risktable_default", lst_survfit2_default[[1]])
-  vdiffr::expect_doppelganger("sf2-ggsurvfit_theme_risktable_default", lst_survfit2_default[[2]])
-  vdiffr::expect_doppelganger("sf3-ggsurvfit_theme_risktable_default", lst_survfit2_default[[3]])
 
   expect_error(
     lst_survfit2_boxed <-
@@ -21,9 +18,7 @@ test_that("theme_risktable works", {
       lapply(function(x) ggsurvfit(x) + add_risktable(theme = theme_risktable_boxed())),
     NA
   )
-  vdiffr::expect_doppelganger("sf1-ggsurvfit_theme_risktable_boxed", lst_survfit2_boxed[[1]])
-  vdiffr::expect_doppelganger("sf2-ggsurvfit_theme_risktable_boxed", lst_survfit2_boxed[[2]])
-  vdiffr::expect_doppelganger("sf3-ggsurvfit_theme_risktable_boxed", lst_survfit2_boxed[[3]])
+  expect_error(lst_survfit2_boxed %>% lapply(function(x) print(x)), NA)
 
   expect_error(
     lst_survfit2_boxed_symbol <-
@@ -31,6 +26,18 @@ test_that("theme_risktable works", {
       lapply(function(x) ggsurvfit(x) + add_risktable(theme = theme_risktable_boxed(), risktable_group = "risktable_stats") + add_risktable_strata_symbol()),
     NA
   )
+  expect_error(lst_survfit2_boxed_symbol %>% lapply(function(x) print(x)), NA)
+
+
+  skip_on_ci()
+  vdiffr::expect_doppelganger("sf1-ggsurvfit_theme_risktable_default", lst_survfit2_default[[1]])
+  vdiffr::expect_doppelganger("sf2-ggsurvfit_theme_risktable_default", lst_survfit2_default[[2]])
+  vdiffr::expect_doppelganger("sf3-ggsurvfit_theme_risktable_default", lst_survfit2_default[[3]])
+
+  vdiffr::expect_doppelganger("sf1-ggsurvfit_theme_risktable_boxed", lst_survfit2_boxed[[1]])
+  vdiffr::expect_doppelganger("sf2-ggsurvfit_theme_risktable_boxed", lst_survfit2_boxed[[2]])
+  vdiffr::expect_doppelganger("sf3-ggsurvfit_theme_risktable_boxed", lst_survfit2_boxed[[3]])
+
   vdiffr::expect_doppelganger("sf1-ggsurvfit_theme_risktable_boxed_symbol", lst_survfit2_boxed_symbol[[1]])
   vdiffr::expect_doppelganger("sf2-ggsurvfit_theme_risktable_boxed_symbol", lst_survfit2_boxed_symbol[[2]])
   vdiffr::expect_doppelganger("sf3-ggsurvfit_theme_risktable_boxed_symbol", lst_survfit2_boxed_symbol[[3]])

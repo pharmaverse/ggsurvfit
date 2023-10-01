@@ -60,6 +60,7 @@ test_that("add_risktable() works with ggsurvfit()", {
                     risktable_group = "risktable_stats"),
     NA
   )
+  expect_error(print(risktable_overall1), NA)
 
   expect_error(
     risktable_overall2 <-
@@ -69,6 +70,7 @@ test_that("add_risktable() works with ggsurvfit()", {
                     risktable_group = "risktable_stats"),
     NA
   )
+  expect_error(print(risktable_overall2), NA)
 
   # when weights are present, the risktable Ns should be rounded to nearest integer
   expect_error(
@@ -85,6 +87,15 @@ test_that("add_risktable() works with ggsurvfit()", {
       ),
     NA
   )
+  expect_error(print(risktable_with_weights), NA)
+
+  expect_error(
+    `sf1-risktable-height` <-
+      sf1 %>% ggsurvfit() +
+      add_risktable(risktable_height = 0.40),
+    NA
+  )
+  expect_error(print(`sf1-risktable-height`), NA)
 
 
   # only check on mac
@@ -93,10 +104,7 @@ test_that("add_risktable() works with ggsurvfit()", {
   vdiffr::expect_doppelganger("sf2-risktable", lst_survfit2_risktable[[2]])
   vdiffr::expect_doppelganger("sf3-risktable", lst_survfit2_risktable[[3]])
 
-  vdiffr::expect_doppelganger(
-    "sf1-risktable-height",
-    sf1 %>% ggsurvfit() + add_risktable(risktable_height = 0.40)
-  )
+  vdiffr::expect_doppelganger("sf1-risktable-height", `sf1-risktable-height`)
   vdiffr::expect_doppelganger("add_risktable-overall1", risktable_overall1)
   vdiffr::expect_doppelganger("add_risktable-overall2", risktable_overall2)
   vdiffr::expect_doppelganger("add_risktable-weights", risktable_with_weights)
@@ -162,8 +170,6 @@ test_that("add_risktable() works with ggcuminc()", {
     NA,
   )
 
-
-  # only check on mac
   skip_on_ci()
   vdiffr::expect_doppelganger("cuminc1-risktable", lst_cuminc_risktable[[1]])
   vdiffr::expect_doppelganger("cuminc2-risktable", lst_cuminc_risktable[[2]])
@@ -176,6 +182,10 @@ test_that("add_risktable() works with ggcuminc() and multiple outcomes", {
       list(cuminc1, cuminc2, cuminc3) %>%
       lapply(function(x) ggcuminc(x, outcome = c("death from cancer", "death other causes")) + add_risktable()),
     NA,
+  )
+  expect_error(
+    lst_cuminc_risktable_outcomes %>% lapply(function(x) print(x)),
+    NA
   )
 
   # only check on mac
@@ -224,7 +234,7 @@ test_that("add_risktable() custom stats", {
       ),
     NA
   )
-
+  expect_error(lst_custom_stats %>% lapply(function(x) print(x)), NA)
 
   expect_error(
     lst_custom_stats2 <-
@@ -240,6 +250,7 @@ test_that("add_risktable() custom stats", {
       ),
     NA
   )
+  expect_error(lst_custom_stats2 %>% lapply(function(x) print(x)), NA)
 
   # only check on mac
   skip_on_ci()

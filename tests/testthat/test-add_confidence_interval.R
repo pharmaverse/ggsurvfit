@@ -9,15 +9,18 @@ test_that("add_confidence_interval() works with ggsurvfit()", {
       lapply(function(x) ggsurvfit(x) + add_confidence_interval()),
     NA
   )
-  vdiffr::expect_doppelganger("sf1-confidence_interval", lst_survfit2_confidence_interval[[1]])
-  vdiffr::expect_doppelganger("sf2-confidence_interval", lst_survfit2_confidence_interval[[2]])
-  vdiffr::expect_doppelganger("sf3-confidence_interval", lst_survfit2_confidence_interval[[3]])
 
   expect_error(
     list(sf1, sf2, sf3) %>%
       lapply(function(x) ggsurvfit(x) + add_confidence_interval(type = "lines")),
     NA
   )
+
+  skip_on_ci()
+  vdiffr::expect_doppelganger("sf1-confidence_interval", lst_survfit2_confidence_interval[[1]])
+  vdiffr::expect_doppelganger("sf2-confidence_interval", lst_survfit2_confidence_interval[[2]])
+  vdiffr::expect_doppelganger("sf3-confidence_interval", lst_survfit2_confidence_interval[[3]])
+
 })
 
 test_that("add_confidence_interval() errors with ggsurvfit()", {
@@ -56,6 +59,8 @@ test_that("add_confidence_interval() works with ggcuminc()", {
       lapply(function(x) ggcuminc(x) + add_confidence_interval()),
     NA
   )
+
+  skip_on_ci()
   vdiffr::expect_doppelganger("cuminc1-confidence_interval", lst_cuminc_confidence_interval[[1]])
   vdiffr::expect_doppelganger("cuminc2-confidence_interval", lst_cuminc_confidence_interval[[2]])
   vdiffr::expect_doppelganger("cuminc3-confidence_interval", lst_cuminc_confidence_interval[[3]])
