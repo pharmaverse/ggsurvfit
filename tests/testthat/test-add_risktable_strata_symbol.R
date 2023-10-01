@@ -28,7 +28,7 @@ test_that("add_risktable_strata_symbol() works", {
 
 
 
-  skip_on_ci()
+  # skip_on_ci()
   vdiffr::expect_doppelganger(
     "add_risktable_strata_symbol-default",
     p + add_risktable_strata_symbol()

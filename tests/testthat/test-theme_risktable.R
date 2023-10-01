@@ -10,7 +10,7 @@ test_that("theme_risktable works", {
     NA
   )
 
-  skip_on_ci()
+  # skip_on_ci()
   vdiffr::expect_doppelganger("sf1-ggsurvfit_theme_risktable_default", lst_survfit2_default[[1]])
   vdiffr::expect_doppelganger("sf2-ggsurvfit_theme_risktable_default", lst_survfit2_default[[2]])
   vdiffr::expect_doppelganger("sf3-ggsurvfit_theme_risktable_default", lst_survfit2_default[[3]])
