@@ -8,6 +8,7 @@ test_that("stat_stepribbon() works", {
       stat_stepribbon(alpha = 0.2),
     NA
   )
+  expect_error(print(gg_stepribbon1), NA)
 
 
   expect_error(
@@ -19,9 +20,10 @@ test_that("stat_stepribbon() works", {
       stat_stepribbon(alpha = 0.2, direction = "vh"),
     NA
   )
+  expect_error(print(gg_stepribbon2), NA)
 
   # only check on mac
-  # skip_on_ci()
+  skip_on_ci()
   vdiffr::expect_doppelganger("gg_stepribbon1", gg_stepribbon1)
   vdiffr::expect_doppelganger("gg_stepribbon2", gg_stepribbon2)
 })

@@ -43,7 +43,7 @@ test_that("add_pvalue() works", {
     NA
   )
 
-  # skip_on_ci()
+  skip_on_ci()
   vdiffr::expect_doppelganger("sf2-pvalue-caption", tbl_p1)
   vdiffr::expect_doppelganger("sf2-pvalue-annotation", tbl_p2)
   vdiffr::expect_doppelganger("sf2-pvalue-annotation-risk", tbl_p3)

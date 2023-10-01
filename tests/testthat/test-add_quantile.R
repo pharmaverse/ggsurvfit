@@ -57,28 +57,33 @@ test_that("add_quantile() works with ggsurvfit()", {
     ignore_attr = TRUE
   )
 
+  expect_error(
+    `sf2_colon-quantile` <-
+      sf2_colon %>%
+      ggsurvfit() +
+      add_quantile(),
+    NA
+  )
 
-  # only check on mac
-  # skip_on_ci()
+  expect_error(
+    `sf2_colon-quantile-no-line` <-
+      sf2_colon %>%
+      ggsurvfit() +
+      add_quantile(y_value = 0.2),
+    NA
+  )
+
+
+  skip_on_ci()
   vdiffr::expect_doppelganger("sf1-quantile", lst_survfit2_quantile[[1]])
   vdiffr::expect_doppelganger("sf2-quantile", lst_survfit2_quantile[[2]])
   vdiffr::expect_doppelganger("sf3-quantile", lst_survfit2_quantile[[3]])
 
 
-  vdiffr::expect_doppelganger(
-    "sf2_colon-quantile",
-    sf2_colon %>%
-      ggsurvfit() +
-      add_quantile()
-  )
+  vdiffr::expect_doppelganger("sf2_colon-quantile", `sf2_colon-quantile`)
 
   # no lines added, because 20% not reached
-  vdiffr::expect_doppelganger(
-    "sf2_colon-quantile-no-line",
-    sf2_colon %>%
-      ggsurvfit() +
-      add_quantile(y_value = 0.2)
-  )
+  vdiffr::expect_doppelganger("sf2_colon-quantile-no-line", `sf2_colon-quantile-no-line`)
 
   # testing that both increasing and decreasing function work
   vdiffr::expect_doppelganger(
@@ -151,7 +156,7 @@ test_that("add_quantile() works with ggcuminc()", {
   )
 
   # only check on mac
-  # skip_on_ci()
+  skip_on_ci()
   vdiffr::expect_doppelganger("cuminc1-quantile", lst_cuminc_quantile[[1]])
   vdiffr::expect_doppelganger("cuminc2-quantile", lst_cuminc_quantile[[2]])
   vdiffr::expect_doppelganger("cuminc3-quantile", lst_cuminc_quantile[[3]])
@@ -165,8 +170,7 @@ test_that("add_quantile() works with ggcuminc() and multiple outcomes", {
     NA
   )
 
-  # only check on mac
-  # skip_on_ci()
+  skip_on_ci()
   vdiffr::expect_doppelganger("cuminc1-quantile-all-outcomes", lst_cuminc_quantile_outcomes[[1]])
   vdiffr::expect_doppelganger("cuminc2-quantile-all-outcomes", lst_cuminc_quantile_outcomes[[2]])
   vdiffr::expect_doppelganger("cuminc3-quantile-all-outcomes", lst_cuminc_quantile_outcomes[[3]])
@@ -180,7 +184,6 @@ test_that("add_quantile() works x_value", {
       add_quantile(linetype = 2, y_value = NULL, x_value = 10),
     NA
   )
-  vdiffr::expect_doppelganger("sf2-quantile-x_value", ggquanitle_x_value1)
 
   expect_error(
     ggquanitle_x_value2 <-
@@ -189,7 +192,6 @@ test_that("add_quantile() works x_value", {
       add_quantile(linetype = 2, y_value = NULL, x_value = 10000),
     NA
   )
-  vdiffr::expect_doppelganger("sf2-quantile-x_value-out-of-bounds", ggquanitle_x_value2)
 
   expect_error(
     ggquanitle_x_value3 <-
@@ -198,6 +200,9 @@ test_that("add_quantile() works x_value", {
       add_quantile(linetype = 2, y_value = NULL, x_value = 33),
     NA
   )
-  vdiffr::expect_doppelganger("sf2-quantile-x_value-not-all-groups", ggquanitle_x_value3)
 
+  skip_on_ci()
+  vdiffr::expect_doppelganger("sf2-quantile-x_value", ggquanitle_x_value1)
+  vdiffr::expect_doppelganger("sf2-quantile-x_value-out-of-bounds", ggquanitle_x_value2)
+  vdiffr::expect_doppelganger("sf2-quantile-x_value-not-all-groups", ggquanitle_x_value3)
 })

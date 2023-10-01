@@ -16,7 +16,7 @@ test_that("add_confidence_interval() works with ggsurvfit()", {
     NA
   )
 
-  # skip_on_ci()
+  skip_on_ci()
   vdiffr::expect_doppelganger("sf1-confidence_interval", lst_survfit2_confidence_interval[[1]])
   vdiffr::expect_doppelganger("sf2-confidence_interval", lst_survfit2_confidence_interval[[2]])
   vdiffr::expect_doppelganger("sf3-confidence_interval", lst_survfit2_confidence_interval[[3]])
@@ -60,7 +60,7 @@ test_that("add_confidence_interval() works with ggcuminc()", {
     NA
   )
 
-  # skip_on_ci()
+  skip_on_ci()
   vdiffr::expect_doppelganger("cuminc1-confidence_interval", lst_cuminc_confidence_interval[[1]])
   vdiffr::expect_doppelganger("cuminc2-confidence_interval", lst_cuminc_confidence_interval[[2]])
   vdiffr::expect_doppelganger("cuminc3-confidence_interval", lst_cuminc_confidence_interval[[3]])
@@ -81,7 +81,7 @@ test_that("add_confidence_interval() works with ggcuminc() and multiple outcomes
   )
 
   # only check on mac
-  # skip_on_ci()
+  skip_on_ci()
   vdiffr::expect_doppelganger("cuminc1-confidence_interval-all-outcomes",
                               lst_cuminc_confidence_interval_outcomes[[1]])
   vdiffr::expect_doppelganger("cuminc2-confidence_interval-all-outcomes",
