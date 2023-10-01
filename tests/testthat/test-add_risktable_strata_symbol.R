@@ -8,16 +8,6 @@ test_that("add_risktable_strata_symbol() works", {
     NA
   )
 
-  skip_on_ci()
-  vdiffr::expect_doppelganger(
-    "add_risktable_strata_symbol-default",
-    p + add_risktable_strata_symbol()
-  )
-  vdiffr::expect_doppelganger(
-    "add_risktable_strata_symbol-circle",
-    p + add_risktable_strata_symbol(symbol = "\U25CF")
-  )
-
   # works with univariate model
   expect_error(
     ggsymbol_univariate <-
@@ -26,6 +16,17 @@ test_that("add_risktable_strata_symbol() works", {
       add_risktable(risktable_stats = "n.risk", risktable_group = "risktable_stats") +
       add_risktable_strata_symbol(vjust = 0.3),
     NA
+  )
+
+
+  skip_on_ci()
+  vdiffr::expect_doppelganger(
+    "add_risktable_strata_symbol-default",
+    p + add_risktable_strata_symbol()
+  )
+  vdiffr::expect_doppelganger(
+    "add_risktable_strata_symbol-circle",
+    p + add_risktable_strata_symbol(symbol = "\U25CF")
   )
   vdiffr::expect_doppelganger(
     "add_risktable_strata_symbol-uni",
