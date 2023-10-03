@@ -19,7 +19,6 @@ print.ggsurvfit <- function(x, ...) {
 
   # print and return object ----------------------------------------------------
   print(built_x)
-  return(invisible(built_x))
 }
 
 #' @export

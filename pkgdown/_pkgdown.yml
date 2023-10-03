@@ -87,6 +87,7 @@ reference:
       - ggsurvfit_build
       - stat_stepribbon
       - scale_ggsurvfit
+      - ggsurvfit_options
 
   - title: Data
   - contents:

@@ -43,7 +43,8 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     tidycmprsk (>= 0.2.0),
-    vdiffr (>= 1.0.0)
+    vdiffr (>= 1.0.0),
+    withr
 VignetteBuilder: 
     knitr
 Config/Needs/website: cowplot, ggeasy, gghighlight
