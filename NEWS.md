@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* By default, a model plot created with `ggsurvfit()` or `ggcuminc()` uses the color aesthetic to plot curves by the stratifying variable(s), and further, `ggcuminc()` uses the linetype aesthetic for plots that contain multiple outcomes (i.e. competing events). We not introduce the global option `"ggsurvfit.switch-color-linetype"` to switch these defaults, giving users more flexibility over the output figures. (#166)
+
 * Slightly increased the padding to the right of the plot when `scale_ggsurvfit()` is called. (#165)
 
 # ggsurvfit 0.3.1
