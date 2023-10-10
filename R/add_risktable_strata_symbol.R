@@ -89,9 +89,7 @@ update_add_risktable_strata_symbol <- function(p, add_risktable_strata_symbol_em
     ) %||%
     "Overall"
 
-  # i hope this will work 100% of the time!
-  # what modifications could a use make the the figures that could break this connection?
-  colors %>% stats::setNames(color_label)
+  rep_len(colors, length.out = length(color_label)) %>% stats::setNames(color_label)
 }
 
 .construct_color_block <- function(color_block_mapping, symbol, ...) {
