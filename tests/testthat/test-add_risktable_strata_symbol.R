@@ -308,3 +308,4 @@ test_that(".match_strata_level_to_color() works", {
     c("Overall" = "#00BFC4") # blue
   )
 })
+
