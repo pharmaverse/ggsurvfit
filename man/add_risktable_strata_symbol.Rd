@@ -29,6 +29,7 @@ Replace the stratum level names with a color symbol in the risk tables.
 Use this function when stratum level names are long.
 }
 \examples{
+\dontshow{if (!names(grDevices::dev.cur()) \%in\% c("pdf", "postscript")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 p <-
   survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   ggsurvfit(linewidth = 1) +
@@ -37,6 +38,7 @@ p <-
 
  p + add_risktable_strata_symbol()
  p + add_risktable_strata_symbol(symbol = "\U25CF", size = 10)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
