@@ -26,7 +26,7 @@ test_that("theme_risktable works", {
       lapply(function(x) ggsurvfit(x) + add_risktable(theme = theme_risktable_boxed(), risktable_group = "risktable_stats") + add_risktable_strata_symbol()),
     NA
   )
-  expect_error(lst_survfit2_boxed_symbol %>% lapply(function(x) print(x)), NA)
+  expect_error(lst_survfit2_boxed_symbol %>% lapply(function(x) ggsurvfit_build(x)), NA)
 
 
   skip_on_ci()
