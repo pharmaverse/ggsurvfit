@@ -53,6 +53,22 @@
 #' )
 #' ```
 #'
+#' @section Formatting Numbers:
+#' You can also pass [glue](https://glue.tidyverse.org/)-like syntax to
+#' `risktable_stats` to format the numbers displayed in
+#' the risk table. This is particularly helpful when working with weighted
+#' `survfit2` objects for which the risk table may display too many decimals by
+#' default e.g., for weighted patients at risk.
+#'
+#' ```{r}
+#' add_risktable(
+#'   risktable_stats = c("{format(round(n.risk, 2), nsmall = 2)}",
+#'                       "{format(round(n.event, 2), nsmall = 2)}"),
+#'   stats_label = c("N effective patients at risk",
+#'                   "N effective events")
+#' )
+#' ```
+#'
 #' @section Competing Risks:
 #'
 #' The `ggcuminc()` can plot multiple competing events.
