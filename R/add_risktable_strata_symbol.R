@@ -13,7 +13,7 @@
 #' @return a ggplot2 figure
 #' @export
 #'
-#' @examplesIf !names(grDevices::dev.cur()) %in% c("pdf", "postscript")
+#' @examplesIf !names(grDevices::dev.cur()) %in% c("pdf")
 #' p <-
 #'   survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit(linewidth = 1) +
