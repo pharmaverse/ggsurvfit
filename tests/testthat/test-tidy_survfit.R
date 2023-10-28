@@ -152,32 +152,59 @@ test_that("tidy_survfit() works with multi-state models", {
       dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
   )
 
-  expect_equal(
+
+  df_cmprsk_survfit <-
     sfms2 %>%
-      tidy_survfit() %>%
-      dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
-      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
-      dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata")))),
+    tidy_survfit() %>%
+    dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
+    dplyr::arrange(dplyr::across(dplyr::any_of(c("outcome", "strata", "time"))))
+  df_cmprsk_cuminc <-
     cuminc2 %>%
-      tidy_cuminc() %>%
-      dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
-      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
-      dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
-  )
+    tidy_cuminc() %>%
+    dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
+    dplyr::arrange(dplyr::across(dplyr::any_of(c("outcome", "strata", "time"))))
 
   expect_equal(
-    sfms3 %>%
-      tidy_survfit() %>%
-      dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
-      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
-      dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata")))),
-    cuminc3 %>%
-      tidy_cuminc() %>%
-      dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
-      dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
-      dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
+    df_cmprsk_cuminc %>%
+      dplyr::select(c("outcome", "strata", "time", "estimate")),
+    # adding in potential rows that were unobserved
+    df_cmprsk_cuminc %>%
+      dplyr::select(c("outcome", "strata", "time")) %>%
+      dplyr::full_join(df_cmprsk_survfit, by = c("outcome", "strata", "time")) %>%
+      dplyr::arrange(dplyr::across(dplyr::any_of(c("outcome", "strata", "time")))) %>%
+      dplyr::group_by(dplyr::across(dplyr::any_of(c("outcome", "strata")))) %>%
+      tidyr::fill("estimate", .direction = "down") %>%
+      dplyr::ungroup()
   )
 
+  df_sfms3 <-
+    sfms3 %>%
+    tidy_survfit() %>%
+    dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
+    dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
+  df_cuminc3 <-
+    cuminc3 %>%
+    tidy_cuminc() %>%
+    dplyr::select(dplyr::any_of(c("time", "outcome", "strata", "estimate"))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("strata", "outcome")), ~as.character(.) %>% trimws())) %>%
+    dplyr::arrange(dplyr::across(dplyr::any_of(c("time", "outcome", "strata"))))
+
+  expect_equal(
+    df_cuminc3 %>%
+      dplyr::arrange(dplyr::across(dplyr::any_of(c("outcome", "strata", "time")))) %>%
+      dplyr::select(c("outcome", "strata", "time", "estimate")),
+    # adding in potential rows that were unobserved
+    df_cuminc3 %>%
+      dplyr::select(c("outcome", "strata", "time")) %>%
+      dplyr::full_join(df_sfms3, by = c("outcome", "strata", "time")) %>%
+      dplyr::group_by(dplyr::across(dplyr::any_of(c("outcome", "strata")))) %>%
+      tidyr::fill("estimate", .direction = "down") %>%
+      dplyr::ungroup() %>%
+      dplyr::arrange(dplyr::across(dplyr::any_of(c("outcome", "strata", "time"))))
+  )
 })
 
 

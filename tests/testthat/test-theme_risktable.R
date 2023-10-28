@@ -23,7 +23,7 @@ test_that("theme_risktable works", {
   expect_error(
     lst_survfit2_boxed_symbol <-
       list(sf1, sf2, sf3) %>%
-      lapply(function(x) ggsurvfit(x) + add_risktable(theme = theme_risktable_boxed(), risktable_group = "risktable_stats") + add_risktable_strata_symbol()),
+      lapply(function(x) ggsurvfit(x) + add_risktable(theme = theme_risktable_boxed(), risktable_group = "risktable_stats") + add_risktable_strata_symbol(symbol = "0")),
     NA
   )
   expect_error(lst_survfit2_boxed_symbol %>% lapply(function(x) ggsurvfit_build(x)), NA)
