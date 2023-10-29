@@ -8,11 +8,11 @@ test_that("add_risktable_strata_symbol() works", {
     NA
   )
   expect_error(
-    (p + add_risktable_strata_symbol()) %>% print(),
+    (p + add_risktable_strata_symbol(symbol = "O")) %>% ggsurvfit_build(),
     NA
   )
   expect_error(
-    (p + add_risktable_strata_symbol(symbol = "\U25CF")) %>% print(),
+    (p + add_risktable_strata_symbol(symbol = "O")) %>% ggsurvfit_build(),
     NA
   )
 
@@ -22,7 +22,7 @@ test_that("add_risktable_strata_symbol() works", {
       survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
       ggsurvfit() +
       add_risktable(risktable_stats = "n.risk", risktable_group = "risktable_stats") +
-      add_risktable_strata_symbol(vjust = 0.3),
+      add_risktable_strata_symbol(vjust = 0.3, symbol = "O"),
     NA
   )
 
