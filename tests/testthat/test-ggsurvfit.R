@@ -140,6 +140,9 @@ test_that("ggsurvfit() works", {
 })
 
 test_that("ggsurvfit() works with geoms with new data", {
+  # first just a silly test
+  expect_true(inherits(release_bullets(), "character"))
+
   expect_error(
     p1 <-
       survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
