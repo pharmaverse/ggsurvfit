@@ -25,11 +25,13 @@ Add a confidence interval represented by either a ribbon or lines.
 \examples{
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   ggsurvfit() +
-  add_confidence_interval()
+  add_confidence_interval() +
+  scale_ggsurvfit()
 
 survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
   ggsurvfit() +
-  add_confidence_interval(type = "lines")
+  add_confidence_interval(type = "lines") +
+  scale_ggsurvfit()
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures

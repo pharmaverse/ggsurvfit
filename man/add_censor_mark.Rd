@@ -21,7 +21,8 @@ censored.
 survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
   ggsurvfit() +
   add_confidence_interval() +
-  add_censor_mark()
+  add_censor_mark() +
+  scale_ggsurvfit()
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures

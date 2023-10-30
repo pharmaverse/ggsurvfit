@@ -9,7 +9,9 @@
 #' @name theme_risktable
 #' @return a ggplot2 figure
 #' @examples
-#' p <- survfit2(Surv(time, status) ~ 1, data = df_lung) %>% ggsurvfit()
+#' p <- survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
+#'   ggsurvfit() +
+#'   scale_ggsurvfit()
 #'
 #' # default ------------------------------------
 #' p + add_risktable(theme = theme_risktable_default())

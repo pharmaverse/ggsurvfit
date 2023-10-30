@@ -60,7 +60,7 @@
 #' `survfit2` objects for which the risk table may display too many decimals by
 #' default e.g., for weighted patients at risk.
 #'
-#' ```{r}
+#' ```r
 #' add_risktable(
 #'   risktable_stats = c("{format(round(n.risk, 2), nsmall = 2)}",
 #'                       "{format(round(n.event, 2), nsmall = 2)}"),
@@ -82,7 +82,8 @@
 #'   survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit() +
 #'   add_censor_mark() +
-#'   add_confidence_interval()
+#'   add_confidence_interval() +
+#'   scale_ggsurvfit()
 #'
 #' # using the function defaults
 #' p + add_risktable()

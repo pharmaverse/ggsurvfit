@@ -19,11 +19,13 @@ library(tidycmprsk)
 
 cuminc(Surv(ttdeath, death_cr) ~ trt, trial) \%>\%
   ggcuminc(outcome = "death from cancer") +
-  add_risktable()
+  add_risktable() +
+  scale_ggsurvfit()
 
 cuminc(Surv(ttdeath, death_cr) ~ 1, trial) \%>\%
   ggcuminc(outcome = c("death from cancer", "death other causes")) +
-  add_risktable()
+  add_risktable() +
+  scale_ggsurvfit()
 
 # reset option
 options("ggsurvfit.switch-color-linetype" = NULL)

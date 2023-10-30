@@ -18,7 +18,8 @@ Add a default or custom title to the figure legend.
 \examples{
 survfit2(Surv(time, status) ~ surg, data = df_colon) \%>\%
   ggsurvfit() +
-  add_legend_title()
+  add_legend_title() +
+  scale_ggsurvfit()
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures

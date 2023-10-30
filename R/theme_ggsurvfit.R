@@ -9,7 +9,8 @@
 #' @name theme_ggsurvfit
 #' @examples
 #' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
-#'   ggsurvfit(theme = theme_ggsurvfit_default())
+#'   ggsurvfit(theme = theme_ggsurvfit_default()) +
+#'   scale_ggsurvfit()
 NULL
 
 #' @export

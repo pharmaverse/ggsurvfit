@@ -10,7 +10,8 @@
 #' @examples
 #' survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
 #'   ggsurvfit() +
-#'   add_legend_title()
+#'   add_legend_title() +
+#'   scale_ggsurvfit()
 #' @inherit ggsurvfit seealso
 add_legend_title <- function(title = NULL) {
   add_legend_title_empty_list <- list()

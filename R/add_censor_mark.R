@@ -13,7 +13,8 @@
 #' survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
 #'   ggsurvfit() +
 #'   add_confidence_interval() +
-#'   add_censor_mark()
+#'   add_censor_mark() +
+#'   scale_ggsurvfit()
 #' @inherit ggsurvfit seealso
 add_censor_mark <- function(...) {
   add_censor_mark_empty_list <- list()

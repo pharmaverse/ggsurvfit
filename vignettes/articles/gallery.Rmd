@@ -33,17 +33,12 @@ gg_default <-
   survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
+  scale_ggsurvfit() +
   labs(title = "Default")
 
 gg_styled <-
   gg_default +
   coord_cartesian(xlim = c(0, 8)) +
-  scale_y_continuous(
-    limits = c(0, 1),
-    labels = scales::percent, 
-    expand = c(0.01, 0)
-  ) +
-  scale_x_continuous(breaks = 0:9, expand = c(0.02, 0)) +
   scale_color_manual(values = c('#54738E', '#82AC7C')) +
   scale_fill_manual(values = c('#54738E', '#82AC7C')) +
   theme_minimal() +
@@ -79,7 +74,8 @@ The default risk table styling is ready for publication.
 survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit() +
   add_confidence_interval() +
-  add_risktable()
+  add_risktable() +
+  scale_ggsurvfit()
 ```
 
 You can also group the risk table by the statistics rather than the stratum.
@@ -91,8 +87,7 @@ ggrisktable <-
   ggsurvfit() +
   add_confidence_interval() +
   add_risktable(risktable_group = "risktable_stats") +
-  scale_x_continuous(breaks = 0:9) +
-  scale_y_continuous(limits = c(0, 1))
+  scale_ggsurvfit()
 ggrisktable
 ```
 
@@ -120,7 +115,8 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
                                 plot.title.size = 11),
         theme(plot.title = element_text(face = "bold"))
       )
-  )
+  ) +
+  scale_ggsurvfit()
 ```
 
 You can also use [glue](https://glue.tidyverse.org/)-like syntax to place multiple statistics on the same row of the risk table.
@@ -128,7 +124,8 @@ You can also use [glue](https://glue.tidyverse.org/)-like syntax to place multip
 ```{r}
 survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
   ggsurvfit() +
-  add_risktable(risktable_stats = "{n.risk} ({cum.event})")
+  add_risktable(risktable_stats = "{n.risk} ({cum.event})") +
+  scale_ggsurvfit()
 ```
 
 ## Quantiles and Censor Markings
@@ -160,8 +157,7 @@ p <-
   ggsurvfit() +
   add_confidence_interval() +
   add_risktable() +
-  scale_y_continuous(limits = c(0, 1)) +
-  scale_x_continuous(n.breaks = 7)
+  scale_ggsurvfit()
 
 # build plot (which constructs the risktable)
 built_p <- ggsurvfit_build(p)
@@ -200,7 +196,8 @@ P-values can be placed either in the figure caption (the default) or in the plot
 
 ```{r}
 p <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-  ggsurvfit()
+  ggsurvfit() +
+  scale_ggsurvfit()
 
 # place p-value in caption
 p1 <- p + add_pvalue(caption = "Log-rank {p.value}")
@@ -240,7 +237,8 @@ Custom transformations are also available.
 p <-
   survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
   ggsurvfit(type = "risk", linewidth = 0.8) +
-  add_confidence_interval()
+  add_confidence_interval() +
+  scale_ggsurvfit()
 p
 ```
 
@@ -262,6 +260,7 @@ Because {ggsurvfit} functions are written as proper {ggplot2} geoms, you can bot
 ```{r warning=FALSE}
 survfit2(Surv(time, status) ~ rx, data = df_colon) %>%
   ggsurvfit(linewidth = 1) +
+  scale_ggsurvfit() +
   gghighlight::gghighlight(
     strata == "Levamisole+5-FU",
     calculate_per_facet = TRUE

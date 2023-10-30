@@ -34,7 +34,8 @@ p <-
   survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   ggsurvfit(linewidth = 1) +
   add_confidence_interval() +
-  add_risktable(risktable_group = "risktable_stats")
+  add_risktable(risktable_group = "risktable_stats") +
+  scale_ggsurvfit()
 
  p + add_risktable_strata_symbol()
  p + add_risktable_strata_symbol(symbol = "\U25CF", size = 10)
