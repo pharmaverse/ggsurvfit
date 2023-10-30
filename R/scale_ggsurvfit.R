@@ -48,7 +48,7 @@ ggplot_add.scale_ggsurvfit <- function (object, plot, object_name) {
 
 update_scale_ggsurvfit <- function(p, scale_ggsurvfit_empty_list) {
   # setting default arguments
-  x_scale_defaults <- list(expand = c(0.02, 0), n.breaks = 8)
+  x_scale_defaults <- list(expand = c(0.025, 0), n.breaks = 8)
   y_scale_defaults <-
     list(
       expand = c(0.025, 0),
