@@ -53,7 +53,7 @@
   # align all the plots --------------------------------------------------------
   gg_risktable_list_aligned <-
     c(list(x), gg_risktable_list) %>%
-    align_plots()
+    ggsurvfit_align_plots()
 
   # combine all plots into single figure ---------------------------------------
   if (isFALSE(combine_plots)) return(gg_risktable_list_aligned)
