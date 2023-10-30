@@ -149,8 +149,7 @@ ggsurvfit <- function(x, type = "survival",
           "FALSE" = list(linetype = rlang::expr(.data$outcome)),
           "TRUE" = list(color = rlang::expr(.data$outcome))
         )
-
-                  )
+      )
   }
   if (isTRUE(linetype_aes) &&
       "strata" %in% names(df) &&
