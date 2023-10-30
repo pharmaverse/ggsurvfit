@@ -60,7 +60,8 @@ code used internally:
 \examples{
 # Default publication ready plot
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
-  ggsurvfit()
+  ggsurvfit() +
+  scale_ggsurvfit(x_scales = list(breaks = seq(0, 30, by = 6)))
 
 # Changing statistic type
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
@@ -68,7 +69,8 @@ survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
 
 # Configuring KM line type to vary by strata
 survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
-  ggsurvfit(linetype_aes = TRUE)
+  ggsurvfit(linetype_aes = TRUE) +
+  scale_ggsurvfit()
 
 # Customizing the plot to your needs
 survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
@@ -76,7 +78,8 @@ survfit2(Surv(time, status) ~ 1, data = df_lung) \%>\%
   add_censor_mark() +
   add_confidence_interval() +
   add_quantile() +
-  add_risktable()
+  add_risktable() +
+  scale_ggsurvfit()
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures

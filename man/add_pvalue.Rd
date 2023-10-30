@@ -47,11 +47,13 @@ comparing stratum for the \emph{first} outcome can be placed.
 \examples{
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
   ggsurvfit() +
-  add_pvalue(caption = "Log-rank {p.value}")
+  add_pvalue(caption = "Log-rank {p.value}") +
+  scale_ggsurvfit()
 
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%
   ggsurvfit() +
-  add_pvalue("annotation", size = 5)
+  add_pvalue("annotation", size = 5) +
+  scale_ggsurvfit()
 }
 \seealso{
 \code{survfit_p()}

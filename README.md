@@ -74,7 +74,8 @@ p <- survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   ggsurvfit(linewidth = 1) +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(y_value = 0.6, color = "gray50", linewidth = 0.75)
+  add_quantile(y_value = 0.6, color = "gray50", linewidth = 0.75) +
+  scale_ggsurvfit()
 ```
 
 Any figure created with {ggsurvfit} can be customized using {ggplot2}
@@ -88,13 +89,7 @@ p +
   labs(
     y = "Percentage Survival",
     title = "Recurrence by Time From Surgery to Randomization",
-  ) +
-  # reduce padding on edges of figure and format axes
-  scale_y_continuous(label = scales::percent, 
-                     breaks = seq(0, 1, by = 0.2),
-                     expand = c(0.015, 0)) +
-  scale_x_continuous(breaks = 0:10, 
-                     expand = c(0.02, 0))
+  )
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />

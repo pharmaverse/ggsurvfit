@@ -14,11 +14,13 @@
 #' @examples
 #' survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 #'   ggsurvfit() +
-#'   add_confidence_interval()
+#'   add_confidence_interval() +
+#'   scale_ggsurvfit()
 #'
 #' survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
 #'   ggsurvfit() +
-#'   add_confidence_interval(type = "lines")
+#'   add_confidence_interval(type = "lines") +
+#'   scale_ggsurvfit()
 #' @inherit ggsurvfit seealso
 add_confidence_interval <- function(type = c("ribbon", "lines"), ...) {
   add_confidence_interval_empty_list <- list()
