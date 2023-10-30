@@ -66,10 +66,10 @@ library(ggsurvfit)
 
 p <- survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   ggsurvfit(linewidth = 1) +
-  scale_ggsurvfit() +
   add_confidence_interval() +
   add_risktable() +
-  add_quantile(y_value = 0.6, color = "gray50", linewidth = 0.75)
+  add_quantile(y_value = 0.6, color = "gray50", linewidth = 0.75) +
+  scale_ggsurvfit()
 ```
 
 Any figure created with {ggsurvfit} can be customized using {ggplot2} functions.
