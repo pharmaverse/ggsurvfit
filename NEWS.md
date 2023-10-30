@@ -4,7 +4,7 @@
 
 * Slightly increased the padding to the right of the plot when `scale_ggsurvfit()` is called. (#165)
 
-* Now exporting the utility function `align_plots()` that is used to ensure risktable and the primary plot align. By exporting this function, users will now be able to construct custom risktable graphics. See `?align_plots()` for an example. (#175)
+* Now exporting the utility function `ggsurvfit_align_plots()` that is used to ensure risktable and the primary plot align. By exporting this function, users will now be able to construct custom risktable graphics. See `?ggsurvfit_align_plots()` for an example. (#175)
 
 # ggsurvfit 0.3.1
 

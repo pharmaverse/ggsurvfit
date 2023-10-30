@@ -88,7 +88,7 @@ reference:
       - stat_stepribbon
       - scale_ggsurvfit
       - ggsurvfit_options
-      - align_plots
+      - ggsurvfit_align_plots
 
   - title: Data
   - contents:
