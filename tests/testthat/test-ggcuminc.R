@@ -19,10 +19,13 @@ test_that("ggcuminc() works", {
 
   expect_error(ggcuminc(mtcars))
   expect_error(ggcuminc(cuminc1, outcome = "not an outcome"))
+
+  # the linetype_aes argument is silently ignored here
   expect_error(
     ggcuminc(cuminc1,
              outcome = c("death from cancer", "death other causes"),
-             linetype_aes = TRUE)
+             linetype_aes = TRUE),
+    NA
   )
   expect_error(
     ggcuminc(cuminc1, outcome = c("death from cancer", "death other causes")),

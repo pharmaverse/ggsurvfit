@@ -107,18 +107,18 @@ ggsurvfit <- function(x, type = "survival",
 
 # prepare `aes()` call
 .construct_aes <- function(df, linetype_aes, outcome = NULL) {
-  if (!is.null(outcome) &&
-      length(outcome) > 1 &&
-      isTRUE(linetype_aes) &&
-      !isTRUE(getOption("ggsurvfit.switch-color-linetype"))) {
-    cli_abort("Cannot specify multiple outcomes with {.code linetype_aes=TRUE}.")
+  # if `linetype_aes` specified in an inappropriate situation, it is silently ignored
+  if (
+    isTRUE(linetype_aes) &&
+    !(
+      (is.null(outcome) && "strata" %in% names(df) && !isTRUE(getOption("ggsurvfit.switch-color-linetype"))) || # ggsurvfit with strata
+      (!is.null(outcome) && length(outcome) == 1L && "strata" %in% names(df) && !isTRUE(getOption("ggsurvfit.switch-color-linetype"))) || # ggcuminc with 1 outcome and strata
+      (!is.null(outcome) && length(outcome) > 1L && !"strata" %in% names(df) && isTRUE(getOption("ggsurvfit.switch-color-linetype"))) # ggcuminc with 2+ outcomes and no strata
+    )
+  ) {
+    linetype_aes <- FALSE
   }
-  if ("strata" %in% names(df) &&
-      length(unique(df$strata)) > 1 &&
-      isTRUE(linetype_aes) &&
-      isTRUE(getOption("ggsurvfit.switch-color-linetype"))) {
-    cli_abort("Cannot specify stratum with {.code linetype_aes=TRUE}.")
-  }
+
 
   # setting aes() --------------------------------------------------------------
   aes_args <-
@@ -154,6 +154,8 @@ ggsurvfit <- function(x, type = "survival",
         )
       )
   }
+
+  # adding linetype_aes argument -----------------------------------------------
   if (isTRUE(linetype_aes) &&
       "strata" %in% names(df) &&
       !isTRUE(getOption("ggsurvfit.switch-color-linetype"))) {
