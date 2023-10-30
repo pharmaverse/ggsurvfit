@@ -62,6 +62,7 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
     lst_aes <- c(lst_aes, list(color = rlang::expr(.data$strata)))
   }
   if ("outcome" %in% names(ggplot2::ggplot_build(p)$plot$data) &&
+      length(unique(ggplot2::ggplot_build(p)$plot$data$outcome)) > 1L &&
       isTRUE(getOption("ggsurvfit.switch-color-linetype", default = FALSE))) {
     lst_aes <- c(lst_aes, list(color = rlang::expr(.data$outcome)))
   }

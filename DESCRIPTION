@@ -41,8 +41,8 @@ Suggests:
     rmarkdown,
     scales (>= 1.1.0),
     spelling,
-    testthat (>= 3.0.0),
-    tidycmprsk (>= 0.2.0),
+    testthat (>= 3.2.0),
+    tidycmprsk (>= 1.0.0),
     vdiffr (>= 1.0.0),
     withr
 VignetteBuilder: 

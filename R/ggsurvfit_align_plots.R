@@ -18,17 +18,24 @@
 #'   scale_ggsurvfit()
 #'
 #' # create an area plot representing the number of subjects who experienced
+#' df_risktable <-
+#'   survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
+#'   tidy_survfit()
 #' # the event and those that have been censored.
 #' gg_risktable_figure <-
-#'   survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
-#'   tidy_survfit() %>%
+#'   df_risktable %>%
 #'   ggplot() +
 #'   geom_ribbon(aes(x = time, ymin = 0, ymax = cum.event), fill = "black") +
 #'   geom_ribbon(aes(x = time, ymin = n.risk[1], ymax = n.risk[1] - cum.censor), fill = "grey") +
-#'   theme_void()
+#'   theme_void() +
+#'   theme(axis.text.y = element_text(size=8)) +
+#'   scale_y_continuous(
+#'     breaks = c(0, max(df_risktable$n.risk)),
+#'     labels = c("Cum. Events",  "Cum.Censored")
+#'   )
 #'
 #' # align plots
-#' lst_aligned_plots <- align_plots(list(gg, gg_risktable_figure))
+#' lst_aligned_plots <- ggsurvfit_align_plots(list(gg, gg_risktable_figure))
 #'
 #' # combine plots with patchwork
 #' patchwork::wrap_plots(
@@ -36,7 +43,7 @@
 #'   ncol = 1,
 #'   heights = c(0.9, 0.1)
 #' )
-align_plots <- function(pltlist) {
+ggsurvfit_align_plots <- function(pltlist) {
   # set all x axis ranges to be the same
   x_range <-
     ggplot2::ggplot_build(pltlist[[1]])$layout$panel_params[[1]]$x.range
