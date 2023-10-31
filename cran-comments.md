@@ -10,7 +10,7 @@
 ❯ checking CRAN incoming feasibility ... NOTE
   Maintainer: 'Daniel D. Sjoberg <danield.sjoberg@gmail.com>'
   
-0 errors ✔ | 0 warnings ✔ | 0 note ✖
+0 errors ✔ | 0 warnings ✔ | 0 note ✔
 
 ## revdepcheck results
 
