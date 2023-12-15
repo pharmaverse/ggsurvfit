@@ -38,3 +38,11 @@
 round2 <- function(x, digits = 0) {
   round(x + .Machine$double.eps * sign(x), digits = digits)
 }
+
+allow_lambda <- function(x) {
+  if (rlang::is_formula(x)) {
+    rlang::as_function(x)
+  } else {
+    x
+  }
+}

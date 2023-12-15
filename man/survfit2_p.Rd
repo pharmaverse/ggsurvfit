@@ -4,19 +4,23 @@
 \alias{survfit2_p}
 \title{Calculate p-value}
 \usage{
-survfit2_p(x, pvalue_fun = format_p, prepend_p = TRUE, rho = 0)
+survfit2_p(x, format = TRUE, prepend_p = TRUE, rho = 0)
 }
 \arguments{
-\item{x}{a 'survfit2' object}
+\item{x}{A \link{survfit2} object}
 
-\item{pvalue_fun}{function to round and style p-value with}
+\item{format}{A bool or a function (formula would be okay) to round and style
+p-value with. If \code{FALSE}, will return pvalue directly, if \code{TRUE},
+\link{survfit2_p} will be used to format the pvalue.}
 
-\item{prepend_p}{prepend \code{"p="} to formatted p-value}
+\item{prepend_p}{A boolean value indicating whether a \code{"p="} should be
+prepended to the formatted p-value. Only used when \code{format} is \code{TRUE} or a
+function.}
 
 \item{rho}{argument passed to  \code{survival::survdiff(rho=)}}
 }
 \value{
-a string
+A number of pvalue if format is \code{FALSE}, otherwise, a string.
 }
 \description{
 The function \code{survfit2_p()} wraps \code{survival::survdiff()} and returns

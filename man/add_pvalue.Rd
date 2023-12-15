@@ -20,11 +20,15 @@ add_pvalue(
 \item{caption}{string to be placed as the caption/annotation. String will
 be processed with \code{glue::glue()}, and the default is \code{"{p.value}"}}
 
-\item{prepend_p}{prepend \code{"p="} to formatted p-value}
+\item{prepend_p}{A boolean value indicating whether a \code{"p="} should be
+prepended to the formatted p-value.}
 
-\item{pvalue_fun}{function to round and style p-value with}
+\item{pvalue_fun}{A function (formula would be okay) to round and style
+p-value with.}
 
-\item{rho}{argument passed to  \code{survival::survdiff(rho=)}}
+\item{rho}{
+a scalar parameter that controls the type of test.
+}
 
 \item{...}{arguments passed to \code{ggplot2::annotate()}. Commonly used arguments
 are \verb{x=} and \verb{y=} to place the p-value at the specified coordinates on the plot.}

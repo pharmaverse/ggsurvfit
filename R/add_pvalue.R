@@ -14,7 +14,10 @@
 #' `c("caption", "annotation")`
 #' @param caption string to be placed as the caption/annotation. String will
 #' be processed with `glue::glue()`, and the default is `"{p.value}"`
-#' @inheritParams survfit2_p
+#' @param pvalue_fun A function (formula would be okay) to round and style
+#' p-value with.
+#' @param prepend_p A boolean value indicating whether a `"p="` should be
+#' prepended to the formatted p-value. 
 #' @inheritParams survival::survdiff
 #' @param ... arguments passed to `ggplot2::annotate()`. Commonly used arguments
 #' are `x=` and `y=` to place the p-value at the specified coordinates on the plot.
@@ -45,7 +48,7 @@ add_pvalue <- function(location = c("caption", "annotation"),
             location = match.arg(location),
             caption = caption,
             prepend_p = prepend_p,
-            pvalue_fun = pvalue_fun,
+            pvalue_fun = allow_lambda(pvalue_fun),
             rho = rho,
             dots = rlang::dots_list(...),
             class = "add_pvalue")
@@ -101,7 +104,7 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
   # calculate p-value
   if (inherits(survfit, "survfit2")) {
     p.value <- survfit2_p(survfit,
-                          pvalue_fun = pvalue_fun,
+                          format = pvalue_fun,
                           prepend_p = prepend_p,
                           rho = rho)
   }
