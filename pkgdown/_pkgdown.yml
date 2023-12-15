@@ -71,9 +71,10 @@ reference:
       - theme_risktable
       - theme_ggsurvfit
 
-  - title: P-values
+  - title: P-values or Hazard ratio
   - contents:
       - survfit2_p
+      - survfit2_hr
       - format_p
 
   - title: CDISC

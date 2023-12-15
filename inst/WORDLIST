@@ -15,8 +15,10 @@ Surv
 Survfit
 adjuvant
 behaviour
+bool
 cowplot
 cuminc
+exponentiate
 geoms
 geom’
 ggcuminc
@@ -30,6 +32,7 @@ linetype
 monotonicity
 neoadjuvant
 pathologic
+pvalue
 randomisation
 risktable
 risktable's
