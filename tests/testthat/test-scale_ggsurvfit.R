@@ -25,7 +25,7 @@ test_that("scale_ggsurvfit() works", {
        scale_y_continuous(
          expand = c(0.025, 0),
          limits = c(0 - sqrt(.Machine$double.eps), 1 + sqrt(.Machine$double.eps)),
-         label = scales::label_percent()
+         labels = scales::label_percent()
        )) %>%
       {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$y.range}
   )

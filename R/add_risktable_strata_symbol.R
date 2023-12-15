@@ -98,7 +98,7 @@ update_add_risktable_strata_symbol <- function(p, add_risktable_strata_symbol_em
 
   list(
     ggplot2::scale_y_discrete(
-      label = function(x) symbol # https://cloford.com/resources/charcodes/utf-8_geometric.htm
+      labels = function(x) symbol # https://cloford.com/resources/charcodes/utf-8_geometric.htm
     ),
     ggplot2::theme(
       axis.text.y.left =

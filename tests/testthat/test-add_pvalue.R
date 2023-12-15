@@ -18,7 +18,7 @@ test_that("add_pvalue() works", {
   expect_error(
     tbl_p3 <-
       survfit2(Surv(time, status) ~ surg, df_colon) %>%
-      ggsurvfit(typ = "risk") +
+      ggsurvfit(type = "risk") +
       add_pvalue("annotation"),
     NA
   )
@@ -27,7 +27,7 @@ test_that("add_pvalue() works", {
   expect_error(
     tbl_p4 <-
       survfit(Surv(time, status) ~ surg, df_colon) %>%
-      ggsurvfit(typ = "risk") +
+      ggsurvfit(type = "risk") +
       add_pvalue(),
     NA
   )

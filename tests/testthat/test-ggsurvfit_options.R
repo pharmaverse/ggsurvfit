@@ -5,7 +5,7 @@ test_that("ggsurvfit.switch-color-linetype option works", {
       tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
       ggcuminc(outcome = c("death from cancer", "death other causes")) +
       add_censor_mark() +
-      add_quantile(y = 0.1),
+      add_quantile(y_value = 0.1),
     NA
   )
   expect_error(print(ggci_strata_outcomes), NA)
@@ -15,7 +15,7 @@ test_that("ggsurvfit.switch-color-linetype option works", {
       tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, tidycmprsk::trial) %>%
       ggcuminc(outcome = c("death from cancer", "death other causes")) +
       add_censor_mark() +
-      add_quantile(y = 0.1),
+      add_quantile(y_value = 0.1),
     NA
   )
   expect_error(print(ggci_outcomes), NA)
@@ -25,7 +25,7 @@ test_that("ggsurvfit.switch-color-linetype option works", {
       tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
       ggcuminc() +
       add_censor_mark() +
-      add_quantile(y = 0.1),
+      add_quantile(y_value = 0.1),
     NA
   )
   expect_error(print(ggci_strata), NA)
