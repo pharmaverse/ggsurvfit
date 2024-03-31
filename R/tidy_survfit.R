@@ -19,6 +19,7 @@
 #'   '`"survival"`', '`x`',
 #'   '`"risk"`',     '`1 - x`',
 #'   '`"cumhaz"`',   '`-log(x)`',
+#'   '`"cloglog"`',   '`log(-log(x))`',
 #' ) %>%
 #' knitr::kable()
 #' ```
@@ -31,7 +32,7 @@
 #'   tidy_survfit()
 tidy_survfit <- function(x,
                          times = NULL,
-                         type = c("survival", "risk", "cumhaz")) {
+                         type = c("survival", "risk", "cumhaz", "cloglog")) {
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, "survfit")) {
     cli_abort(c("!" = "Argument {.code x} must be class {.cls survfit}.",
@@ -176,13 +177,14 @@ tidy_survfit <- function(x,
              risk = function(y) 1 - y,
              # survfit object contains an estimate for Cumhaz and SE based on Nelson-Aalen with or without correction for ties
              # However, no CI is calculated automatically. For plotting, the MLE estimator is used for convenience.
-             cumhaz = function(y) -log(y)
+             cumhaz = function(y) -log(y),
+             cloglog = function(y) log(-log(y))
       )
   } else {
     .transfun <- type
   }
   if (!rlang::is_function(.transfun)) {
-    cli_abort("The {.var type} argument must be one of {.val {c('survival', 'risk', 'cumhaz')}}, or a function.")
+    cli_abort("The {.var type} argument must be one of {.val {c('survival', 'risk', 'cumhaz', 'cloglog')}}, or a function.")
   }
 
   # transform estimates --------------------------------------------------------
@@ -208,6 +210,7 @@ tidy_survfit <- function(x,
           rlang::is_string(.env$type) && .env$type %in% "cuminc" ~ "Cumulative Incidence",
           rlang::is_string(.env$type) && .env$type %in% "risk" ~ "Risk",
           rlang::is_string(.env$type) && .env$type %in% "cumhaz" ~ "Cumulative Hazard",
+          rlang::is_string(.env$type) && .env$type %in% "cloglog" ~ "Log Minus Log Survival",
           TRUE ~ rlang::expr_deparse(.transfun)
         )
     )
@@ -337,7 +340,8 @@ tidy_survfit <- function(x,
              "survival" = "decreasing",
              "cuminc" = "increasing",
              "risk" = "increasing",
-             "cumhaz" = "increasing"
+             "cumhaz" = "increasing",
+             "cloglog" = "increasing"
       )
   }
   else {
