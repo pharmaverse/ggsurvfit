@@ -23,6 +23,7 @@ Must be one of the following:\tabular{ll}{
    \code{"survival"} \tab \code{x} \cr
    \code{"risk"} \tab \code{1 - x} \cr
    \code{"cumhaz"} \tab \code{-log(x)} \cr
+   \code{"cloglog"} \tab \code{log(-log(x))} \cr
 }}
 
 \item{linetype_aes}{logical indicating whether to add \code{ggplot2::aes(linetype = strata)}
