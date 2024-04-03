@@ -28,7 +28,7 @@ Imports:
     broom (>= 1.0.0),
     cli (>= 3.0.0),
     dplyr (>= 1.0.3),
-    ggplot2 (>= 3.4.0),
+    ggplot2 (>= 3.5.0),
     glue (>= 1.6.0),
     gtable,
     patchwork (>= 1.1.0),
@@ -53,4 +53,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

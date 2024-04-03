@@ -65,13 +65,13 @@
 <text x='617.04' y='515.76' text-anchor='middle' style='font-size: 10.00px; fill: #4D4D4D; font-family: sans;' textLength='11.12px' lengthAdjust='spacingAndGlyphs'>30</text>
 <text x='371.99' y='528.83' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.72px' lengthAdjust='spacingAndGlyphs'>Survival time, months</text>
 <text transform='translate(13.74,263.36) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='102.06px' lengthAdjust='spacingAndGlyphs'>Cumulative Hazard</text>
-<rect x='310.76' y='542.28' width='122.46' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='321.72' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='323.45' y1='556.40' x2='337.27' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='371.64' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='373.36' y1='556.40' x2='387.19' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<text x='344.48' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>Male</text>
-<text x='394.40' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='33.35px' lengthAdjust='spacingAndGlyphs'>Female</text>
+<rect x='313.50' y='542.28' width='116.98' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='318.98' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='320.71' y1='556.40' x2='334.53' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='368.90' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='370.62' y1='556.40' x2='384.45' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
+<text x='341.74' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>Male</text>
+<text x='391.66' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='33.35px' lengthAdjust='spacingAndGlyphs'>Female</text>
 <text x='29.46' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='125.48px' lengthAdjust='spacingAndGlyphs'>sf2-ggsurvfit_cumhaz</text>
 </g>
 </svg>

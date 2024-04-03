@@ -431,19 +431,19 @@
 <text x='709.39' y='515.76' text-anchor='middle' style='font-size: 10.00px; fill: #4D4D4D; font-family: sans;' textLength='11.12px' lengthAdjust='spacingAndGlyphs'>25</text>
 <text x='376.16' y='528.83' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='130.09px' lengthAdjust='spacingAndGlyphs'>Months to Death/Censor</text>
 <text transform='translate(13.74,263.36) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.75px' lengthAdjust='spacingAndGlyphs'>Cumulative Incidence</text>
-<rect x='259.60' y='542.28' width='233.12' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='270.56' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='272.29' y1='556.40' x2='286.11' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='271.27' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D; fill-opacity: 0.20;' />
-<line x1='275.68' y1='556.40' x2='282.72' y2='556.40' style='stroke-width: 0.71; stroke: #F8766D;' />
-<line x1='279.20' y1='559.92' x2='279.20' y2='552.88' style='stroke-width: 0.71; stroke: #F8766D;' />
-<rect x='379.41' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='381.14' y1='556.40' x2='394.96' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
-<rect x='380.12' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-dasharray: 2.85,2.85; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4; fill-opacity: 0.20;' />
-<line x1='384.53' y1='556.40' x2='391.57' y2='556.40' style='stroke-width: 0.71; stroke: #00BFC4;' />
-<line x1='388.05' y1='559.92' x2='388.05' y2='552.88' style='stroke-width: 0.71; stroke: #00BFC4;' />
-<text x='293.32' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
-<text x='402.17' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
+<rect x='262.34' y='542.28' width='227.64' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='267.82' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='269.55' y1='556.40' x2='283.37' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='268.53' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D; fill-opacity: 0.20;' />
+<line x1='272.94' y1='556.40' x2='279.98' y2='556.40' style='stroke-width: 0.71; stroke: #F8766D;' />
+<line x1='276.46' y1='559.92' x2='276.46' y2='552.88' style='stroke-width: 0.71; stroke: #F8766D;' />
+<rect x='376.67' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='378.40' y1='556.40' x2='392.22' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
+<rect x='377.38' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-dasharray: 2.85,2.85; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4; fill-opacity: 0.20;' />
+<line x1='381.79' y1='556.40' x2='388.83' y2='556.40' style='stroke-width: 0.71; stroke: #00BFC4;' />
+<line x1='385.31' y1='559.92' x2='385.31' y2='552.88' style='stroke-width: 0.71; stroke: #00BFC4;' />
+<text x='290.58' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
+<text x='399.43' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
 <text x='37.80' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='141.65px' lengthAdjust='spacingAndGlyphs'>ggci_outcomes_linetype</text>
 </g>
 </svg>

@@ -151,7 +151,7 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text transform='translate(37.00,248.45) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.75px' lengthAdjust='spacingAndGlyphs'>Cumulative Incidence</text>
+<text transform='translate(19.22,248.45) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.75px' lengthAdjust='spacingAndGlyphs'>Cumulative Incidence</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
 </g>
@@ -160,13 +160,29 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='273.97' y='506.98' width='222.16' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='279.45' y='506.98' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='281.18' y1='515.62' x2='295.00' y2='515.62' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<rect x='388.30' y='506.98' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='390.03' y1='515.62' x2='403.85' y2='515.62' style='stroke-width: 1.07; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
-<text x='302.21' y='519.07' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
-<text x='411.06' y='519.07' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='276.71' y='506.98' width='216.68' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='276.71' y='506.98' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='278.44' y1='515.62' x2='292.26' y2='515.62' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<rect x='385.56' y='506.98' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='387.29' y1='515.62' x2='401.11' y2='515.62' style='stroke-width: 1.07; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
+<text x='299.47' y='519.07' style='font-size: 10.00px; font-family: sans;' textLength='80.61px' lengthAdjust='spacingAndGlyphs'>death from cancer</text>
+<text x='408.32' y='519.07' style='font-size: 10.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>death other causes</text>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
 </g>
@@ -176,10 +192,6 @@
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <text x='61.06' y='20.04' style='font-size: 13.20px; font-family: sans;' textLength='181.96px' lengthAdjust='spacingAndGlyphs'>cuminc1-risktable-all-outcomes</text>
-</g>
-<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw1MjQuMjY=)'>
 </g>
@@ -268,6 +280,22 @@
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <text x='56.13' y='559.35' text-anchor='end' style='font-size: 10.00px; font-family: sans;' textLength='30.58px' lengthAdjust='spacingAndGlyphs'>Events</text>
 <text x='56.13' y='539.57' text-anchor='end' style='font-size: 10.00px; font-family: sans;' textLength='31.68px' lengthAdjust='spacingAndGlyphs'>At Risk</text>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NTI0LjI2fDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NTI0LjI2fDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NTI0LjI2fDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NTI0LjI2fDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NTI0LjI2fDU3MC41Mg==)'>
 </g>
