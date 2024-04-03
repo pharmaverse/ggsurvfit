@@ -164,7 +164,7 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text transform='translate(37.00,196.68) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.75px' lengthAdjust='spacingAndGlyphs'>Cumulative Incidence</text>
+<text transform='translate(19.22,196.68) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.75px' lengthAdjust='spacingAndGlyphs'>Cumulative Incidence</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
 </g>
@@ -173,13 +173,29 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='325.68' y='403.44' width='118.73' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='331.16' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='332.89' y1='412.08' x2='346.71' y2='412.08' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='390.53' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='392.26' y1='412.08' x2='406.08' y2='412.08' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<text x='353.92' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
-<text x='413.29' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='328.42' y='403.44' width='113.25' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='328.42' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='330.15' y1='412.08' x2='343.98' y2='412.08' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='387.79' y='403.44' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='389.52' y1='412.08' x2='403.34' y2='412.08' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
+<text x='351.18' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
+<text x='410.55' y='415.52' style='font-size: 10.00px; font-family: sans;' textLength='31.13px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
 </g>
@@ -189,10 +205,6 @@
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <text x='61.06' y='20.04' style='font-size: 13.20px; font-family: sans;' textLength='102.72px' lengthAdjust='spacingAndGlyphs'>cuminc2-risktable</text>
-</g>
-<g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NS40OHw0MjAuNzI=)'>
 </g>
@@ -313,11 +325,27 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NDIwLjcyfDQ5NS42Mg==)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text x='61.06' y='430.35' style='font-size: 10.75px; font-family: sans;' textLength='33.46px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NDIwLjcyfDQ5NS42Mg==)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDIwLjcyfDQ5NS42Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDIwLjcyfDQ5NS42Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDIwLjcyfDQ5NS42Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDIwLjcyfDQ5NS42Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='61.06' y='430.35' style='font-size: 10.75px; font-family: sans;' textLength='33.46px' lengthAdjust='spacingAndGlyphs'>Drug A</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NDIwLjcyfDQ5NS42Mg==)'>
 </g>
@@ -438,11 +466,27 @@
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NDk1LjYyfDU3MC41Mg==)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text x='61.06' y='505.25' style='font-size: 10.75px; font-family: sans;' textLength='33.46px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NDk1LjYyfDU3MC41Mg==)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDk1LjYyfDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDk1LjYyfDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDk1LjYyfDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpNS40OHw3MTQuNTJ8NDk1LjYyfDU3MC41Mg==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='61.06' y='505.25' style='font-size: 10.75px; font-family: sans;' textLength='33.46px' lengthAdjust='spacingAndGlyphs'>Drug B</text>
 </g>
 <g clip-path='url(#cpNS40OHw3MTQuNTJ8NDk1LjYyfDU3MC41Mg==)'>
 </g>
