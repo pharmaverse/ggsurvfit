@@ -66,13 +66,13 @@
 <text x='574.80' y='515.76' text-anchor='middle' style='font-size: 10.00px; fill: #4D4D4D; font-family: sans;' textLength='13.90px' lengthAdjust='spacingAndGlyphs'>7.5</text>
 <text x='376.16' y='528.83' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='114.05px' lengthAdjust='spacingAndGlyphs'>Follow-up time, years</text>
 <text transform='translate(13.74,263.36) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>Risk</text>
-<rect x='214.59' y='542.28' width='323.14' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='225.55' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='227.28' y1='556.40' x2='241.10' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='376.63' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='378.36' y1='556.40' x2='392.18' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
-<text x='248.31' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='122.84px' lengthAdjust='spacingAndGlyphs'>Limited Time Since Surgery</text>
-<text x='399.39' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='132.86px' lengthAdjust='spacingAndGlyphs'>Extended Time Since Surgery</text>
+<rect x='217.33' y='542.28' width='317.66' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='222.81' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='224.54' y1='556.40' x2='238.36' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='373.89' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='375.62' y1='556.40' x2='389.44' y2='556.40' style='stroke-width: 1.07; stroke: #00BFC4; stroke-linecap: butt;' />
+<text x='245.57' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='122.84px' lengthAdjust='spacingAndGlyphs'>Limited Time Since Surgery</text>
+<text x='396.65' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='132.86px' lengthAdjust='spacingAndGlyphs'>Extended Time Since Surgery</text>
 <text x='37.80' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='151.90px' lengthAdjust='spacingAndGlyphs'>sf2-pvalue-annotation-risk</text>
 </g>
 </svg>

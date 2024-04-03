@@ -28,7 +28,7 @@ Imports:
     broom (>= 1.0.0),
     cli (>= 3.0.0),
     dplyr (>= 1.0.3),
-    ggplot2 (>= 3.4.0),
+    ggplot2 (>= 3.5.0),
     glue (>= 1.6.0),
     gtable,
     patchwork (>= 1.1.0),

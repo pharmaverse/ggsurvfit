@@ -77,16 +77,16 @@
 <text x='613.82' y='515.76' text-anchor='middle' style='font-size: 10.00px; fill: #4D4D4D; font-family: sans;' textLength='11.12px' lengthAdjust='spacingAndGlyphs'>30</text>
 <text x='378.94' y='528.83' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='26.67px' lengthAdjust='spacingAndGlyphs'>Time</text>
 <text transform='translate(13.74,263.36) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>Risk</text>
-<rect x='322.76' y='542.28' width='112.36' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='333.72' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='335.45' y1='556.40' x2='349.27' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='367.52' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='369.25' y1='556.40' x2='383.07' y2='556.40' style='stroke-width: 1.07; stroke: #00BA38; stroke-linecap: butt;' />
-<rect x='401.32' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='403.05' y1='556.40' x2='416.87' y2='556.40' style='stroke-width: 1.07; stroke: #619CFF; stroke-linecap: butt;' />
-<text x='356.48' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='390.28' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>6</text>
-<text x='424.08' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>8</text>
+<rect x='325.50' y='542.28' width='106.88' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='330.98' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='332.71' y1='556.40' x2='346.53' y2='556.40' style='stroke-width: 1.07; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='364.78' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='366.51' y1='556.40' x2='380.33' y2='556.40' style='stroke-width: 1.07; stroke: #00BA38; stroke-linecap: butt;' />
+<rect x='398.58' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='400.31' y1='556.40' x2='414.13' y2='556.40' style='stroke-width: 1.07; stroke: #619CFF; stroke-linecap: butt;' />
+<text x='353.74' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='387.54' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text x='421.34' y='559.84' style='font-size: 10.00px; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>8</text>
 <text x='43.36' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='212.78px' lengthAdjust='spacingAndGlyphs'>sf-mtcars-increasing-many-quantiles</text>
 </g>
 </svg>
