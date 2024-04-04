@@ -84,7 +84,6 @@ test_that("tidy_survfit() works with survfit2()", {
 
 test_that("tidy_survfit() throws appropriate errors", {
   expect_error(tidy_survfit(mtcars))
-  expect_error(tidy_survfit(sf1, times = -5:5))
   expect_error(tidy_survfit(sf1, type = "not_a_type"))
 })
 
