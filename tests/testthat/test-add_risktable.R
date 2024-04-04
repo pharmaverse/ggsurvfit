@@ -317,6 +317,6 @@ test_that("add_risktable() works with ggsurvfit() `start.time` and negative time
 
   skip_on_ci()
   vdiffr::expect_doppelganger("sf-negative_time", sf_negative_time)
-  vdiffr::expect_doppelganger("sf-sf_start_time", sf_start_time)
+  vdiffr::expect_doppelganger("sf-start_time", sf_start_time)
 })
 
