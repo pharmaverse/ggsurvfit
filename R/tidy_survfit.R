@@ -39,13 +39,17 @@ tidy_survfit <- function(x,
   }
   if (inherits(x, "survfitms")) type <- "cuminc"
   else if (is.character(type)) type <- match.arg(type)
-  if (!is.null(times) && any(times < 0)) {
-    cli_abort("The {.var times} cannot be negative.")
-  }
+
 
   # create base tidy tibble ----------------------------------------------------
+  if (is.null(x$start.time) && min(x$time) < 0) {
+    cli::cli_inform(c(
+      "!" ="Setting start time to {.val {min(x$time)}}.",
+      "i" = "Specify {.code ggsurvfit::survfit2(start.time)} to override this default."
+    ))
+  }
   df_tidy <-
-    survival::survfit0(x, start.time = 0) %>%
+    survival::survfit0(x) %>%
     broom::tidy()
 
   # if a competing risks model, filter on the outcome of interest

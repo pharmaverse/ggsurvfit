@@ -298,3 +298,25 @@ test_that("add_risktable() works with Cox models", {
   )
 })
 
+test_that("add_risktable() works with ggsurvfit() `start.time` and negative times", {
+  expect_error(
+    sf_negative_time <-
+      survfit(Surv(time - 10, status) ~ 1, df_lung, start.time = -10) |>
+      ggsurvfit() +
+      add_risktable(),
+    NA
+  )
+
+  expect_error(
+    sf_start_time <-
+      survfit(Surv(time, status) ~ sex, df_lung, start.time = 10) |>
+      ggsurvfit() +
+      add_risktable(),
+    NA
+  )
+
+  skip_on_ci()
+  vdiffr::expect_doppelganger("sf-negative_time", sf_negative_time)
+  vdiffr::expect_doppelganger("sf-sf_start_time", sf_start_time)
+})
+

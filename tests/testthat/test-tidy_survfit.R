@@ -207,4 +207,17 @@ test_that("tidy_survfit() works with multi-state models", {
   )
 })
 
-
+test_that("tidy_survfit() messaging", {
+  # expect a message about the start time when there are negative times and no start.time
+  expect_snapshot(
+    survfit(Surv(time - 500, status) ~ 1, df_lung) |>
+      tidy_survfit() |>
+      invisible()
+  )
+  # no longer see message when start.time specified
+  expect_invisible(
+    survfit(Surv(time - 500, status) ~ 1, df_lung, start.time = -500) |>
+      tidy_survfit() |>
+      invisible()
+  )
+})
