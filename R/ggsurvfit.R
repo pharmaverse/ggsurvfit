@@ -73,7 +73,7 @@ ggsurvfit <- function(x, type = "survival",
   # prep data to be passed to ggplot() -----------------------------------------
   df <-
     tidy_survfit(x = x, type = type) %>%
-    dplyr::filter(type != "cloglog" | time > 0) %>%
+    dplyr::filter(type != "cloglog" | .$time > 0) %>%
     dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
 
   # construct aes() call -------------------------------------------------------
@@ -82,7 +82,7 @@ ggsurvfit <- function(x, type = "survival",
   # construction ggplot object -------------------------------------------------
   gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)
   if (type == "cloglog") {
-    gg <- gg + scale_x_log10()
+    gg <- gg + ggplot2::scale_x_log10()
   }
 
   # assign class and return object ---------------------------------------------
