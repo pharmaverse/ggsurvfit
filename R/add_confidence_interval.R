@@ -79,7 +79,7 @@ update_add_confidence_interval <- function(p, add_confidence_interval_empty_list
 # prepare `aes()` call
 .construct_ci_aes <- function(p, lst_aes = NULL, ribbon = FALSE) {
   lst_aes <-
-    ggplot2::ggplot_build(p)$plot$layers[[1]]$computed_mapping[c("x", "color", "colour", "linetype")] %>%
+    suppressWarnings(ggplot2::ggplot_build(p))$plot$layers[[1]]$computed_mapping[c("x", "color", "colour", "linetype")] %>%
     Filter(Negate(is.null), .) %>% # remove NULLs from list
     utils::modifyList(val = lst_aes)
 

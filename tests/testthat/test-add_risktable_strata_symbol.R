@@ -45,10 +45,12 @@ test_that("add_risktable_strata_symbol() works", {
 
 test_that("add_risktable_strata_symbol() messaging works", {
   expect_message(
-    print(survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
-            ggsurvfit(linewidth = 1) +
-            add_confidence_interval() +
-            add_risktable_strata_symbol(risktable_group = "risktable_stats")),
+    suppressWarnings(
+      print(survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+              ggsurvfit(linewidth = 1) +
+              add_confidence_interval() +
+              add_risktable_strata_symbol(risktable_group = "risktable_stats"))
+    ),
     "must be run before"
   )
   expect_message(
@@ -65,7 +67,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -77,7 +79,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit(Surv(time, status) ~ sex, data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -89,7 +91,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit2(Surv(time, status) ~ as.numeric(sex), data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -101,7 +103,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit(Surv(time, status) ~ as.numeric(sex), data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -113,7 +115,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit2(Surv(time, status) ~ as.character(sex), data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -125,7 +127,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit(Surv(time, status) ~ as.character(sex), data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -138,7 +140,7 @@ test_that(".match_strata_level_to_color() works", {
     survfit2(Surv(time, status) ~ sex,
              data = df_lung %>% dplyr::mutate(sex = glue::glue("{as.character(sex)}"))) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -151,7 +153,7 @@ test_that(".match_strata_level_to_color() works", {
     survfit(Surv(time, status) ~ sex,
              data = df_lung %>% dplyr::mutate(sex = glue::glue("{as.character(sex)}"))) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -163,7 +165,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit2(Surv(time, status) ~ factor(sex, ordered = TRUE), data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -175,7 +177,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit(Surv(time, status) ~ factor(sex, ordered = TRUE), data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -188,7 +190,7 @@ test_that(".match_strata_level_to_color() works", {
     survfit2(Surv(time, status) ~ sex,
             data = df_lung %>% dplyr::mutate(sex = factor(sex, levels = c("Female", "Male")))) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -201,7 +203,7 @@ test_that(".match_strata_level_to_color() works", {
     survfit(Surv(time, status) ~ sex,
              data = df_lung %>% dplyr::mutate(sex = factor(sex, levels = c("Female", "Male")))) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -214,7 +216,7 @@ test_that(".match_strata_level_to_color() works", {
     survfit2(Surv(time, status) ~ sex,
             data = df_lung %>% dplyr::mutate(sex = factor(sex, levels = c("Male", "Female")))) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -227,7 +229,7 @@ test_that(".match_strata_level_to_color() works", {
     survfit(Surv(time, status) ~ sex,
              data = df_lung %>% dplyr::mutate(sex = factor(sex, levels = c("Male", "Female")))) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -239,7 +241,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit2(Surv(time, status) ~ ph.ecog, data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -253,7 +255,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit(Surv(time, status) ~ ph.ecog, data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -267,7 +269,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -278,7 +280,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit(Surv(time, status) ~ 1, data = df_lung) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")
@@ -289,8 +291,8 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit2(Surv(time, status) ~ 1, data = df_lung) %>%
       ggsurvfit(color = "#00BFC4") %>%
-    ggplot2::ggplot_build() %>%
-    .match_strata_level_to_color(
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
+      .match_strata_level_to_color(
       risktable_group = "risktable_stats",
       risktable_symbol_args = list(symbol = "\U25AC")
     ),
@@ -300,7 +302,7 @@ test_that(".match_strata_level_to_color() works", {
   expect_equal(
     survfit(Surv(time, status) ~ 1, data = df_lung) %>%
       ggsurvfit(color = "#00BFC4") %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       .match_strata_level_to_color(
         risktable_group = "risktable_stats",
         risktable_symbol_args = list(symbol = "\U25AC")

@@ -80,7 +80,7 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
 
 
   # extract survfit object
-  build <- ggplot2::ggplot_build(p)
+  build <- suppressWarnings(ggplot2::ggplot_build(p))
   survfit <- build$plot[["data"]][["survfit"]][[1]]
 
   if (!inherits(survfit, c("survfit2", "tidycuminc"))) {

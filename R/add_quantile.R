@@ -56,7 +56,7 @@ update_add_quantile <- function(p, add_quantile_empty_list) {
       "i" = "To plot multiple quantiles, call {.code add_quantile()} multiple times."
     ))
 
-  built_p <- ggplot2::ggplot_build(p)
+  built_p <- suppressWarnings(ggplot2::ggplot_build(p))
   data <- built_p[["data"]][[1]]
   data$monotonicity_type <- suppressWarnings(built_p$plot$data$monotonicity_type[1])
   df_quantile_y <- .create_y_value_df(data, y_value)
