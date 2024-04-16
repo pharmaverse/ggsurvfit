@@ -10,7 +10,7 @@
   }
 
   # build the ggplot to inspect the internals ----------------------------------
-  plot_build <- ggplot2::ggplot_build(x)
+  plot_build <- suppressWarnings(ggplot2::ggplot_build(x))
 
   # if plot is faceted, return plot without risktable --------------------------
   if (.is_faceted(plot_build)) {
