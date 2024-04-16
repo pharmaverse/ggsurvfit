@@ -33,7 +33,7 @@ test_that("survfit2() works", {
   )
   expect_equal(
     ggsurvfit(sf) %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       `[[`("plot") %>%
       `[[`("labels") %>%
       `[[`("x"),
