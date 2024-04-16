@@ -33,7 +33,7 @@ update_add_legend_title <- function(p, add_legend_title_empty_list) {
     p$data$strata_label[1]
 
   lst_labs <- list()
-  p_build <- ggplot2::ggplot_build(p)
+  p_build <- suppressWarnings(ggplot2::ggplot_build(p))
 
   # if colour or fill present add the title for those aes()
   if ("colour" %in% names(p_build$plot$labels)) {

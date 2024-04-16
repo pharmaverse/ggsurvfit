@@ -3,7 +3,7 @@ test_that("scale_ggsurvfit() works", {
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
        ggsurvfit() +
        scale_ggsurvfit()) %>%
-      {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$x.range},
+      {suppressWarnings(ggplot2::ggplot_build(.))$layout$panel_params[[1]]$x.range},
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
        ggsurvfit() +
        scale_x_continuous(expand = c(0.025, 0)) +
@@ -11,14 +11,14 @@ test_that("scale_ggsurvfit() works", {
          limits = c(0 - sqrt(.Machine$double.eps), 1 + sqrt(.Machine$double.eps)),
          expand = c(0.025, 0)
        )) %>%
-      {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$x.range}
+      {suppressWarnings(ggplot2::ggplot_build(.))$layout$panel_params[[1]]$x.range}
   )
 
   expect_equal(
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
        ggsurvfit() +
        scale_ggsurvfit()) %>%
-      {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$y.range},
+      {suppressWarnings(ggplot2::ggplot_build(.))$layout$panel_params[[1]]$y.range},
     (survfit2(Surv(time, status) ~ sex, df_lung) %>%
        ggsurvfit() +
        scale_x_continuous(expand = c(0.015, 0)) +
@@ -27,7 +27,7 @@ test_that("scale_ggsurvfit() works", {
          limits = c(0 - sqrt(.Machine$double.eps), 1 + sqrt(.Machine$double.eps)),
          label = scales::label_percent()
        )) %>%
-      {ggplot2::ggplot_build(.)$layout$panel_params[[1]]$y.range}
+      {suppressWarnings(ggplot2::ggplot_build(.))$layout$panel_params[[1]]$y.range}
   )
 })
 

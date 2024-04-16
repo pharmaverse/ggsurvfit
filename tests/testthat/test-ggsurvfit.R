@@ -66,7 +66,7 @@ test_that("ggsurvfit() works", {
   # test the default ADTTE x-axis label comes from PARAM column
   expect_equal(
     ggsurvfit(survfit2(Surv_CNSR() ~ 1, data = adtte)) %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       `[[`("plot") %>%
       `[[`("labels") %>%
       `[[`("x"),
@@ -117,7 +117,7 @@ test_that("ggsurvfit() works", {
   expect_equal(
     suppressWarnings(survfit2(Surv_CNSR() ~ 1, data = df_param2)) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       `[[`("plot") %>%
       `[[`("labels") %>%
       `[[`("x"),
@@ -128,7 +128,7 @@ test_that("ggsurvfit() works", {
   expect_equal(
     survfit2(Surv_CNSR() ~ PARAM, data = df_param2) %>%
       ggsurvfit() %>%
-      ggplot2::ggplot_build() %>%
+      {suppressWarnings(ggplot2::ggplot_build(.))} %>%
       `[[`("plot") %>%
       `[[`("labels") %>%
       `[[`("x"),
