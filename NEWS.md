@@ -2,6 +2,10 @@
 
 * Updated legend position syntax to account for changes in ggplot v3.5.0.
 
+* The `tidy_survfit()` (and subsequently `ggsurvfit()`) now honor the `survfit(start.time)` if specified. (#192)
+
+* We now allow for negative follow-up times in `tidy_survfit()` (and subsequently `ggsurvfit()`). When negative follow-up times are present users should specify `survfit(start.time)` and we print a note to this effect when not set. (#192) 
+
 # ggsurvfit 1.0.0
 
 * By default, a model plot created with `ggsurvfit()` or `ggcuminc()` uses the color aesthetic to plot curves by the stratifying variable(s), and further, `ggcuminc()` uses the linetype aesthetic for plots that contain multiple outcomes (i.e. competing events). We now introduce the global option `"ggsurvfit.switch-color-linetype"` to switch these defaults, giving users more flexibility over the output figures. Furthermore, when the `linetype_aes=` argument is called in a situation when it does not apply, it will be silently ignored (previously, an error message _may_ have been thrown). (#166)
