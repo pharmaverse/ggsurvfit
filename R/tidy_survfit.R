@@ -78,7 +78,7 @@ tidy_survfit <- function(x,
   df_tidy <- .keep_selected_times(df_tidy, times = times)
 
   # transform survival estimate as specified
-  df_tidy <- .transform_estimate(df_tidy, type = type)
+  df_tidy <- .transform_estimate(df_tidy, type = type, survfit = x)
 
   # improve strata label, if possible
   df_tidy <- .construct_strata_label(df_tidy, survfit = x)
@@ -170,7 +170,7 @@ tidy_survfit <- function(x,
   gsub(pattern = "(\\W)", replacement = "\\\\\\1", x = x)
 }
 
-.transform_estimate <- function(x, type) {
+.transform_estimate <- function(x, type, survfit) {
   # select transformation function ---------------------------------------------
   if (rlang::is_string(type)) {
     .transfun <-
@@ -209,7 +209,13 @@ tidy_survfit <- function(x,
       estimate_type_label =
         dplyr::case_when(
           rlang::is_string(.env$type) && .env$type %in% "survival" ~ "Survival Probability",
-          rlang::is_string(.env$type) && .env$type %in% "cuminc" ~ "Cumulative Incidence",
+          rlang::is_string(.env$type) &&
+            .env$type %in% "cuminc" &&
+            !is.null(.env$survfit$transitions) &&
+            sum(apply(.env$survfit$transitions, MARGIN = 1, FUN = sum) > 0L) == 1L ~ "Cumulative Incidence",
+          rlang::is_string(.env$type) &&
+            .env$type %in% "cuminc" &&
+            !is.null(.env$survfit$transitions) ~ "Probability in State",
           rlang::is_string(.env$type) && .env$type %in% "risk" ~ "Risk",
           rlang::is_string(.env$type) && .env$type %in% "cumhaz" ~ "Cumulative Hazard",
           TRUE ~ rlang::expr_deparse(.transfun)

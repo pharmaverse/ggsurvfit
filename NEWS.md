@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* For multi-state models created with `survfit()`, the y-axis label is now "Probability in State". (#205)
+
 * Updated legend position syntax to account for changes in ggplot v3.5.0.
 
 * The `tidy_survfit()` (and subsequently `ggsurvfit()`) now honor the `survfit(start.time)` if specified. (#192)
