@@ -80,7 +80,7 @@ test_that("ggcuminc() axis label correct with multi-state model ", {
                                     c("censor", "recur", "death")))
   cdata$trt <- 1*(cdata$rx=="Lev+5FU") # lump the Obs and Lev arms together
 
-  cfit <- survfit(Surv(tstart, tstop, state) ~ trt, cdata, id=id, model=TRUE)
+  cfit <- survfit(Surv(tstart, tstop, state) ~ trt, cdata, id=id)
 
   expect_equal(
     tidy_survfit(cfit, times = 1000)$estimate_type_label |> unique(),
