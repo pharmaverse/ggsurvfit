@@ -84,6 +84,6 @@ test_that("ggcuminc() axis label correct with multi-state model ", {
 
   expect_equal(
     tidy_survfit(cfit, times = 1000)$estimate_type_label |> unique(),
-    "Probability of State"
+    "Probability in State"
   )
 })
