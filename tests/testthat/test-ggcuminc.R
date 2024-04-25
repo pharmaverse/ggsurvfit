@@ -67,3 +67,23 @@ test_that("ggcuminc() works with multiple outcomes", {
   vdiffr::expect_doppelganger("cuminc2-ggcuminc_sf-all-outcomes", lst_ggcuminc_outcomes_sf[[2]])
   vdiffr::expect_doppelganger("cuminc3-ggcuminc_sf-all-outcomes", lst_ggcuminc_outcomes_sf[[3]])
 })
+
+test_that("ggcuminc() axis label correct with multi-state model ", {
+  d1 <- subset(survival::colon, etype==1)
+  d2 <- subset(survival::colon, etype==2)
+  cdata <- survival::tmerge(subset(d1,,c(id, rx, extent, node4)), d2, id = id,
+                            death = event(time, status))
+  cdata <- survival::tmerge(cdata, d1, id = id, recur=event(time, status))
+
+  # a death and recurrence on the same day is counted as a recurrence
+  cdata$state <- with(cdata, factor(ifelse(recur==1,1, 2*death),  0:2,
+                                    c("censor", "recur", "death")))
+  cdata$trt <- 1*(cdata$rx=="Lev+5FU") # lump the Obs and Lev arms together
+
+  cfit <- survfit(Surv(tstart, tstop, state) ~ trt, cdata, id=id, model=TRUE)
+
+  expect_equal(
+    tidy_survfit(cfit, times = 1000)$estimate_type_label |> unique(),
+    "Probability of State"
+  )
+})
