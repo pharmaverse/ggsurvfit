@@ -57,12 +57,12 @@ tidy_survfit <- function(x,
     df_tidy <-
       df_tidy %>%
       dplyr::filter(!.data$state %in% "(s0)") %>%
-      dplyr::select(-dplyr::all_of("n.risk")) %>%
+      dplyr::select(-dplyr::all_of(c("n.risk", "n.censor"))) %>%
       dplyr::left_join(
-        df_tidy %>% dplyr::filter(.data$state %in% "(s0)") %>% dplyr::select(dplyr::any_of(c("strata", "time", "n.risk"))),
+        df_tidy %>% dplyr::filter(.data$state %in% "(s0)") %>% dplyr::select(dplyr::any_of(c("strata", "time", "n.risk", "n.censor"))),
         by = intersect(c("strata", "time"), names(df_tidy))
       ) %>%
-      dplyr::relocate("n.risk", .after = "time") %>%
+      dplyr::relocate(dplyr::any_of(c("n.risk", "n.censor")), .after = "time") %>%
       dplyr::rename(outcome = "state")
   }
 
