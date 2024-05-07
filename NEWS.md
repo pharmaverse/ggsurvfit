@@ -8,7 +8,7 @@
 
 * We now allow for negative follow-up times in `tidy_survfit()` (and subsequently `ggsurvfit()`). When negative follow-up times are present users should specify `survfit(start.time)` and we print a note to this effect when not set. (#192) 
 
-* As of {survival} v3.6-4, the number censored are now returned as a matrix for multi-state models (i.e. competing risks models). The `tidy_survfit()` function has been updated to account for this new structure and the minimum version of {survival} has been increased to the latest version.
+* As of {survival} v3.6-4, the number censored are now returned as a matrix for multi-state models (i.e. competing risks models). The `tidy_survfit()` function has been updated to account for this new structure and the minimum version of {survival} has been increased to the latest version. (#199)
 
 # ggsurvfit 1.0.0
 
