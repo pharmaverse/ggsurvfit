@@ -1,6 +1,6 @@
 # ggsurvfit (development version)
 
-* For multi-state models created with `survfit()`, the y-axis label is now "Probability in State". (#205)
+* For multi-state models created with `survfit()`, the y-axis label is now "Probability in State" for non-competing risks models. (#205)
 
 * Updated legend position syntax to account for changes in {ggplot2} v3.5.0.
 
