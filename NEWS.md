@@ -2,11 +2,13 @@
 
 * For multi-state models created with `survfit()`, the y-axis label is now "Probability in State". (#205)
 
-* Updated legend position syntax to account for changes in ggplot v3.5.0.
+* Updated legend position syntax to account for changes in {ggplot2} v3.5.0.
 
 * The `tidy_survfit()` (and subsequently `ggsurvfit()`) now honor the `survfit(start.time)` if specified. (#192)
 
 * We now allow for negative follow-up times in `tidy_survfit()` (and subsequently `ggsurvfit()`). When negative follow-up times are present users should specify `survfit(start.time)` and we print a note to this effect when not set. (#192) 
+
+* As of {survival} v3.6-4, the number censored are now returned as a matrix for multi-state models (i.e. competing risks models). The `tidy_survfit()` function has been updated to account for this new structure and the minimum version of {survival} has been increased to the latest version. (#199)
 
 # ggsurvfit 1.0.0
 
