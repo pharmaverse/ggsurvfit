@@ -40,13 +40,17 @@ tidy_survfit <- function(x,
   }
   if (inherits(x, "survfitms")) type <- "cuminc"
   else if (is.character(type)) type <- match.arg(type)
-  if (!is.null(times) && any(times < 0)) {
-    cli_abort("The {.var times} cannot be negative.")
-  }
+
 
   # create base tidy tibble ----------------------------------------------------
+  if (is.null(x$start.time) && min(x$time) < 0) {
+    cli::cli_inform(c(
+      "!" ="Setting start time to {.val {min(x$time)}}.",
+      "i" = "Specify {.code ggsurvfit::survfit2(start.time)} to override this default."
+    ))
+  }
   df_tidy <-
-    survival::survfit0(x, start.time = 0) %>%
+    survival::survfit0(x) %>%
     broom::tidy()
 
   # if a competing risks model, filter on the outcome of interest
@@ -54,12 +58,12 @@ tidy_survfit <- function(x,
     df_tidy <-
       df_tidy %>%
       dplyr::filter(!.data$state %in% "(s0)") %>%
-      dplyr::select(-dplyr::all_of("n.risk")) %>%
+      dplyr::select(-dplyr::all_of(c("n.risk", "n.censor"))) %>%
       dplyr::left_join(
-        df_tidy %>% dplyr::filter(.data$state %in% "(s0)") %>% dplyr::select(dplyr::any_of(c("strata", "time", "n.risk"))),
+        df_tidy %>% dplyr::filter(.data$state %in% "(s0)") %>% dplyr::select(dplyr::any_of(c("strata", "time", "n.risk", "n.censor"))),
         by = intersect(c("strata", "time"), names(df_tidy))
       ) %>%
-      dplyr::relocate("n.risk", .after = "time") %>%
+      dplyr::relocate(dplyr::any_of(c("n.risk", "n.censor")), .after = "time") %>%
       dplyr::rename(outcome = "state")
   }
 
@@ -75,7 +79,7 @@ tidy_survfit <- function(x,
   df_tidy <- .keep_selected_times(df_tidy, times = times)
 
   # transform survival estimate as specified
-  df_tidy <- .transform_estimate(df_tidy, type = type)
+  df_tidy <- .transform_estimate(df_tidy, type = type, survfit = x)
 
   # improve strata label, if possible
   df_tidy <- .construct_strata_label(df_tidy, survfit = x)
@@ -167,7 +171,7 @@ tidy_survfit <- function(x,
   gsub(pattern = "(\\W)", replacement = "\\\\\\1", x = x)
 }
 
-.transform_estimate <- function(x, type) {
+.transform_estimate <- function(x, type, survfit) {
   # select transformation function ---------------------------------------------
   if (rlang::is_string(type)) {
     .transfun <-
@@ -207,7 +211,13 @@ tidy_survfit <- function(x,
       estimate_type_label =
         dplyr::case_when(
           rlang::is_string(.env$type) && .env$type %in% "survival" ~ "Survival Probability",
-          rlang::is_string(.env$type) && .env$type %in% "cuminc" ~ "Cumulative Incidence",
+          rlang::is_string(.env$type) &&
+            .env$type %in% "cuminc" &&
+            !is.null(.env$survfit$transitions) &&
+            sum(apply(.env$survfit$transitions, MARGIN = 1, FUN = sum) > 0L) == 1L ~ "Cumulative Incidence",
+          rlang::is_string(.env$type) &&
+            .env$type %in% "cuminc" &&
+            !is.null(.env$survfit$transitions) ~ "Probability in State",
           rlang::is_string(.env$type) && .env$type %in% "risk" ~ "Risk",
           rlang::is_string(.env$type) && .env$type %in% "cumhaz" ~ "Cumulative Hazard",
           rlang::is_string(.env$type) && .env$type %in% "cloglog" ~ "Log Minus Log Survival",

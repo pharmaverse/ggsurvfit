@@ -49,10 +49,11 @@ survfit2(formula, ...)
     \item{\code{cluster}}{used to group observations for the infinitesimal
     jackknife variance estimate, defaults to the value of id.}
     \item{\code{robust}}{logical, should the function compute a robust variance.
-    For multi-state survival curves this is true by default.
+    For multi-state survival curves or interval censored data
+    this is true by default.
     For single state data see details, below.}
     \item{\code{istate}}{for multi-state models, identifies the initial state of
-    each subject or observation}
+    each subject or observation.  This also forces \code{time0 =TRUE}.}
     \item{\code{timefix}}{process times through the \code{aeqSurv} function to
   eliminate potential roundoff issues.}
     \item{\code{etype}}{
@@ -61,6 +62,14 @@ survfit2(formula, ...)
   }
     \item{\code{model}}{include a copy of the model frame in the output}
     \item{\code{error}}{this argument is no longer used}
+    \item{\code{entry}}{if TRUE, the output will contain \code{n.enter} which is
+    the number of observations entering the risk set at any time; extra
+    rows of output are created, if needed, for each unique entry time.
+    Only applicable if there is an \code{id} statement.
+  }
+    \item{\code{time0}}{if TRUE, the output will include estimates at the
+    starting point of the curve or `time 0'.  See discussion below.
+  }
   }}
 }
 \value{
