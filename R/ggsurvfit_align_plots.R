@@ -46,10 +46,14 @@
 ggsurvfit_align_plots <- function(pltlist) {
   # set all x axis ranges to be the same
   x_range <-
-    ggplot2::ggplot_build(pltlist[[1]])$layout$panel_params[[1]]$x.range
+    suppressWarnings(
+      ggplot2::ggplot_build(pltlist[[1]])$layout$panel_params[[1]]$x.range
+    )
   for (i in setdiff(seq_along(pltlist), 1L)) {
     y_range <-
-      ggplot2::ggplot_build(pltlist[[i]])$layout$panel_params[[1]]$y.range
+      suppressWarnings(
+        ggplot2::ggplot_build(pltlist[[i]])$layout$panel_params[[1]]$y.range
+      )
 
     pltlist[[i]] <-
       pltlist[[i]] +
@@ -61,7 +65,7 @@ ggsurvfit_align_plots <- function(pltlist) {
   }
 
   # turn plots into grobs and determine number of columns
-  plots_grobs <- lapply(pltlist, ggplot2::ggplotGrob)
+  plots_grobs <- lapply(pltlist, function(x) suppressWarnings(ggplot2::ggplotGrob(x)))
   ncols <- lapply(plots_grobs, function(x) dim(x)[[2]])
   maxcols <- max(unlist(ncols))
 

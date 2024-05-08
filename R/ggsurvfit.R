@@ -195,7 +195,7 @@ ggsurvfit <- function(x, type = "survival",
 .is_ggsurvfit <- function(p, fun_name, required_cols = NULL) {
   if (
     !inherits(p, c("ggsurvfit", "ggcuminc")) ||
-    (!is.null(required_cols) && any(!required_cols %in% names(ggplot2::ggplot_build(p)$plot$data)))
+    (!is.null(required_cols) && any(!required_cols %in% names(suppressWarnings(ggplot2::ggplot_build(p))$plot$data)))
   ) {
     cli::cli_abort(c(
       "x" = "Cannot use {.code {fun_name}} in this context.",

@@ -8,7 +8,7 @@ test_that("add_legend_title() works", {
     NA
   )
   expect_equal(
-    ggplot2::ggplot_build(sf1)$plot$labels$colour,
+    suppressWarnings(ggplot2::ggplot_build(sf1))$plot$labels$colour,
     "Time from Surgery to Treatment"
   )
 
@@ -23,11 +23,11 @@ test_that("add_legend_title() works", {
     NA
   )
   expect_equal(
-    ggplot2::ggplot_build(sf2)$plot$labels$colour,
+    suppressWarnings(ggplot2::ggplot_build(sf2))$plot$labels$colour,
     "Time from Surgery to Treatment"
   )
   expect_equal(
-    ggplot2::ggplot_build(sf2)$plot$labels$fill,
+    suppressWarnings(ggplot2::ggplot_build(sf2))$plot$labels$fill,
     "Time from Surgery to Treatment"
   )
 
@@ -42,15 +42,15 @@ test_that("add_legend_title() works", {
     NA
   )
   expect_equal(
-    ggplot2::ggplot_build(sf3)$plot$labels$colour,
+    suppressWarnings(ggplot2::ggplot_build(sf3))$plot$labels$colour,
     "Time from Surgery to Treatment"
   )
   expect_equal(
-    ggplot2::ggplot_build(sf3)$plot$labels$fill,
+    suppressWarnings(ggplot2::ggplot_build(sf3))$plot$labels$fill,
     "Time from Surgery to Treatment"
   )
   expect_equal(
-    ggplot2::ggplot_build(sf3)$plot$labels$linetype,
+    suppressWarnings(ggplot2::ggplot_build(sf3))$plot$labels$linetype,
     "Time from Surgery to Treatment"
   )
 
@@ -65,15 +65,17 @@ test_that("add_legend_title() works", {
     NA
   )
   expect_equal(
-    ggplot2::ggplot_build(cuminc1)$plot$labels$colour,
+    suppressWarnings(
+      ggplot2::ggplot_build(cuminc1)$plot$labels$colour
+    ),
     "Chemotherapy Treatment"
   )
   expect_equal(
-    ggplot2::ggplot_build(cuminc1)$plot$labels$fill,
+    suppressWarnings(ggplot2::ggplot_build(cuminc1))$plot$labels$fill,
     "Chemotherapy Treatment"
   )
   expect_equal(
-    ggplot2::ggplot_build(cuminc1)$plot$labels$linetype,
+    suppressWarnings(ggplot2::ggplot_build(cuminc1))$plot$labels$linetype,
     NULL
   )
 
@@ -86,11 +88,11 @@ test_that("add_legend_title() works", {
 
   # when no variable label present, the title is the variable name
   expect_equal(
-    ggplot2::ggplot_build(
+    suppressWarnings(ggplot2::ggplot_build(
       survfit2(Surv(mpg, am) ~ cyl, data = mtcars) %>%
         ggsurvfit() +
         add_legend_title()
-    )$plot$labels$colour,
+    ))$plot$labels$colour,
     "cyl"
   )
 })
