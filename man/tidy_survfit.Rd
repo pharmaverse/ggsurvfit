@@ -19,7 +19,7 @@ which returns all observed times.}
 \item{type}{type of statistic to report.
 Available for Kaplan-Meier estimates only.
 Default is \code{"survival"}.
-Must be one of the following:\tabular{ll}{
+Must be one of the following or a function:\tabular{ll}{
    type \tab transformation \cr
    \code{"survival"} \tab \code{x} \cr
    \code{"risk"} \tab \code{1 - x} \cr

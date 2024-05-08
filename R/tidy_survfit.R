@@ -12,7 +12,7 @@
 #' @param type type of statistic to report.
 #' Available for Kaplan-Meier estimates only.
 #' Default is `"survival"`.
-#' Must be one of the following:
+#' Must be one of the following or a function:
 #' ```{r, echo = FALSE}
 #' dplyr::tribble(
 #'   ~type,          ~transformation,
