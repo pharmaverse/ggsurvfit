@@ -347,8 +347,7 @@ If the hazards are proportional across groups, this plot will yield parallel cur
 ```{r, warning=FALSE}
 survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
   ggsurvfit(type = "cloglog") +
-  scale_x_continuous(transform = "log") +
-  labs(x = "log(Survival time, months)")
+  scale_x_continuous(transform = "log")
 ```
 
 ## Adjusted Cox Models
