@@ -37,7 +37,7 @@ Read more on multi-state models \href{https://cran.r-project.org/package=surviva
 \section{Details}{
 
 
-\emph{Why do we not use \code{cmprsk::cuminc()}?}
+\emph{Why not use \code{cmprsk::cuminc()}?}
 
 The implementation of \code{cmprsk::cuminc()} does not provide the data required
 to construct the risk table. Moreover, the \code{tidycmprsk::cuminc()} has a
