@@ -1,3 +1,5 @@
+# ggsurvfit (development version)
+
 # ggsurvfit 1.1.0
 
 * We now allow for negative follow-up times in `tidy_survfit()` (and subsequently `ggsurvfit()`). When negative follow-up times are present users should specify `survfit(start.time)` and we print a note to this effect when not set. (#192) 
