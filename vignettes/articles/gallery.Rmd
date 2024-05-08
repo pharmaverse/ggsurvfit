@@ -339,6 +339,18 @@ tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, tidycmprsk::trial) %>%
 options("ggsurvfit.switch-color-linetype" = NULL)
 ```
 
+## Check Proportional Hazards
+
+The complementary log-log plot plots the logarithm of the negative logarithm of the estimated survivor function against the logarithm of survival time.
+If the hazards are proportional across groups, this plot will yield parallel curves.
+
+```{r, warning=FALSE}
+survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
+  ggsurvfit(type = "cloglog") +
+  scale_x_continuous(transform = "log") +
+  labs(x = "log(Survival time, months)")
+```
+
 ## Adjusted Cox Models
 
 The ggsurvfit supports printing adjusted Cox Proportion Hazards Regression models.

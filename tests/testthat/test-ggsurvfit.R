@@ -31,6 +31,15 @@ test_that("ggsurvfit() works", {
   vdiffr::expect_doppelganger("sf3-ggsurvfit_cumhaz", lst_survfit2_cumhaz[[3]])
 
   expect_error(
+    lst_survfit2_cloglog <-
+      list(sf1, sf2, sf3) %>% lapply(function(x) ggsurvfit(x, type = "cloglog")),
+    NA
+  )
+  vdiffr::expect_doppelganger("sf1-ggsurvfit_cloglog", lst_survfit2_cloglog[[1]])
+  vdiffr::expect_doppelganger("sf2-ggsurvfit_cloglog", lst_survfit2_cloglog[[2]])
+  vdiffr::expect_doppelganger("sf3-ggsurvfit_cloglog", lst_survfit2_cloglog[[3]])
+
+  expect_error(
     lst_survfit2_custom <-
       list(sf1, sf2, sf3) %>% lapply(function(x) ggsurvfit(x, type = function(x) 1 - x)),
     NA
