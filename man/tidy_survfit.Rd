@@ -4,7 +4,11 @@
 \alias{tidy_survfit}
 \title{Tidy a survfit object}
 \usage{
-tidy_survfit(x, times = NULL, type = c("survival", "risk", "cumhaz"))
+tidy_survfit(
+  x,
+  times = NULL,
+  type = c("survival", "risk", "cumhaz", "cloglog")
+)
 }
 \arguments{
 \item{x}{a 'survfit' object created with \code{survfit2()}}
@@ -15,11 +19,12 @@ which returns all observed times.}
 \item{type}{type of statistic to report.
 Available for Kaplan-Meier estimates only.
 Default is \code{"survival"}.
-Must be one of the following:\tabular{ll}{
+Must be one of the following or a function:\tabular{ll}{
    type \tab transformation \cr
    \code{"survival"} \tab \code{x} \cr
    \code{"risk"} \tab \code{1 - x} \cr
    \code{"cumhaz"} \tab \code{-log(x)} \cr
+   \code{"cloglog"} \tab \code{log(-log(x))} \cr
 }}
 }
 \value{

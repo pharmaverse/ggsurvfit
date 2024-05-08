@@ -15,7 +15,7 @@
 #'
 #' @section Details:
 #'
-#' *Why do we not use `cmprsk::cuminc()`?*
+#' *Why not use `cmprsk::cuminc()`?*
 #'
 #' The implementation of `cmprsk::cuminc()` does not provide the data required
 #' to construct the risk table. Moreover, the `tidycmprsk::cuminc()` has a
