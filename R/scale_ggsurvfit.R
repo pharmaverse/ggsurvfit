@@ -52,7 +52,7 @@ update_scale_ggsurvfit <- function(p, scale_ggsurvfit_empty_list) {
   y_scale_defaults <-
     list(
       expand = c(0.025, 0),
-      label =
+      labels =
         switch(rlang::is_installed("scales", version = "1.1.0"), scales::label_percent()) %||%
         label_percent_imposter
     )
