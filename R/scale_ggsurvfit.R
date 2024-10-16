@@ -40,8 +40,9 @@
 #' # To remedy this, consider the following example code for a simulated large-size survival dataset:
 #' # Here, adjust the size in `add_risktable(size = 2.5)` (as an example) can decrease the font size of the risk table
 #' # and make the numbers all fit in the plot region. The scale of the `size` argument differs by cases.
+#' df_colon_large <- df_colon[sample(1:nrow(df_colon), size = 15*nrow(df_colon), replace = TRUE), ]
 #' ggsurvfit <-
-#'   survfit2(Surv(time, status) ~ surg, data = df_colon[sample(1:nrow(df_colon), size = 15*nrow(df_colon), replace = TRUE), ]) %>%
+#'   survfit2(Surv(time, status) ~ surg, data = df_colon_large) %>%
 #'   ggsurvfit() + add_risktable(size = 2.5) +
 #'   scale_ggsurvfit()
 #' @inherit ggsurvfit seealso
