@@ -30,6 +30,20 @@ For example, it's common you'll need to specify the x-axis break points.
 To reset any of the above settings to their ggplot2 default, set the value
 to \code{NULL}, e.g. \code{y_scales = list(limits = NULL)}.
 }
+\details{
+Specical case: in the risk table, large numbers (with more than 4 digits) may not
+be shown completely, with some digits truncated outside the plot region.
+To remedy this, consider the following example code for a simulated large-size survival dataset:
+Here, adjust the expand size in \code{scale_ggsurvfit(x_scales = list(expand = c(0.05, 0)))} (for example)
+can modify the position of numbers in the risk table
+and make them all fit in the plot region. The scale of the \code{expand} argument differs by cases.
+
+df_colon_large <- df_colon\link{sample(1:nrow(df_colon), size = 15*nrow(df_colon), replace = TRUE), }
+ggsurvfit <-
+survfit2(Surv(time, status) ~ surg, data = df_colon_large) \%>\%
+ggsurvfit() + add_risktable() +
+scale_ggsurvfit()
+}
 \examples{
 ggsurvfit <-
   survfit2(Surv(time, status) ~ surg, data = df_colon) \%>\%
@@ -42,6 +56,7 @@ ggsurvfit + scale_ggsurvfit()
 # specify additional scales
 ggsurvfit +
   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
+
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
