@@ -55,14 +55,6 @@ ggcuminc <- function(x, outcome = NULL,
     )
   }
 
-  # Generate an error if the input is a `survfit.coxphms` regression model: ----
-  if (inherits(x, "survfitcoxms")) {
-    cli_abort(
-      "Argument {.arg x} does not support {.cls survfit.coxphms} object.
-  Please fit a multi-state model with another project, such as {.fn coxph}."
-    )
-  }
-
   # prep data to be passed to ggplot() -----------------------------------------
   if (inherits(x, "tidycuminc"))
     df <- tidy_cuminc(x = x)
