@@ -79,6 +79,7 @@ ggcuminc <- function(x, outcome = NULL,
   if (any(!outcome %in% unique(df$outcome))) {
     cli_abort("Argument {.arg x} does not support {.cls survfit.coxphms} object.")
   }
+
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 
   # construct aes() call -------------------------------------------------------
