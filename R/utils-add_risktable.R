@@ -18,7 +18,7 @@
   }
 
   # get data to place in risktables --------------------------------------------
-  times <- times %||% plot_build$layout$panel_params[[1]]$x$breaks
+  times <- times %||% plot_build$layout$panel_params[[1]]$x.sec$breaks
 
   df_times <-
     .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups = combine_groups)
