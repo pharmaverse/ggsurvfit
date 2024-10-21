@@ -37,12 +37,6 @@ To remedy this, consider the following example code for a simulated large-size s
 Here, adjust the expand size in \code{scale_ggsurvfit(x_scales = list(expand = c(0.05, 0)))} (for example)
 can modify the position of numbers in the risk table
 and make them all fit in the plot region. The scale of the \code{expand} argument differs by cases.
-
-df_colon_large <- df_colon\link{sample(1:nrow(df_colon), size = 15*nrow(df_colon), replace = TRUE), }
-ggsurvfit <-
-survfit2(Surv(time, status) ~ surg, data = df_colon_large) \%>\%
-ggsurvfit() + add_risktable() +
-scale_ggsurvfit()
 }
 \examples{
 ggsurvfit <-
