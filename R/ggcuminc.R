@@ -77,7 +77,7 @@ ggcuminc <- function(x, outcome = NULL,
     cli_inform("Plotting outcome {.val {outcome}}.")
   }
   if (any(!outcome %in% unique(df$outcome))) {
-    cli_abort("Argument {.code outcome} must be one or more of {.val {unique(df$outcome)}}")
+    cli_abort("Argument {.arg x} does not support {.cls survfit.coxphms} object.")
   }
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 
