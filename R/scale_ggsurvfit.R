@@ -7,6 +7,8 @@
 #' - `scale_y_continuous(expand = c(0.025, 0), limits = c(0, 1), label = scales::label_percent())`.
 #' - `scale_x_continuous(expand = c(0.015, 0), n.breaks = 8)`
 #'
+#' *NOTE*: The y-axis limits are only set for survival curves.
+#'
 #' If you use this function, you **must** include **all** scale specifications
 #' that would appear in `scale_x_continuous()` or `scale_y_continuous()`.
 #' For example, it's common you'll need to specify the x-axis break points.
