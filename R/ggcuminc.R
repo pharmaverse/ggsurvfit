@@ -55,6 +55,14 @@ ggcuminc <- function(x, outcome = NULL,
     )
   }
 
+  # Generate an error if the input is a `survfit.coxphms` regression model: ----
+  if (inherits(x, "survfitcoxms")) {
+    cli_abort(
+      "Argument {.arg x} does not support {.cls survfit.coxphms} object.
+  Please fit a multi-state model with another project, such as {.fn coxph}."
+    )
+  }
+
   # prep data to be passed to ggplot() -----------------------------------------
   if (inherits(x, "tidycuminc"))
     df <- tidy_cuminc(x = x)
@@ -71,6 +79,7 @@ ggcuminc <- function(x, outcome = NULL,
   if (any(!outcome %in% unique(df$outcome))) {
     cli_abort("Argument {.code outcome} must be one or more of {.val {unique(df$outcome)}}")
   }
+
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
 
   # construct aes() call -------------------------------------------------------
