@@ -40,7 +40,7 @@ add_risktable_strata_symbol <- function(symbol = NULL, size = 15, face = "bold",
 }
 
 #' @export
-ggplot_add.add_risktable_strata_symbol <- function (object, plot, object_name) {
+ggplot_add.add_risktable_strata_symbol <- function (object, plot, ...) {
   update_add_risktable_strata_symbol(plot, object)
 }
 

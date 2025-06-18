@@ -19,7 +19,7 @@ add_legend_title <- function(title = NULL) {
 }
 
 #' @export
-ggplot_add.add_legend_title <- function (object, plot, object_name) {
+ggplot_add.add_legend_title <- function (object, plot, ...) {
   update_add_legend_title(plot, object)
 }
 

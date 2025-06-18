@@ -25,7 +25,7 @@ add_censor_mark <- function(...) {
 }
 
 #' @export
-ggplot_add.add_censor_mark <- function (object, plot, object_name) {
+ggplot_add.add_censor_mark <- function (object, plot, ...) {
   update_add_censor_mark(plot, object)
 }
 

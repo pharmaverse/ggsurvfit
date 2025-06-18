@@ -44,7 +44,7 @@ scale_ggsurvfit <- function(x_scales = list(), y_scales = list()){
 
 
 #' @export
-ggplot_add.scale_ggsurvfit <- function (object, plot, object_name) {
+ggplot_add.scale_ggsurvfit <- function (object, plot, ...) {
   update_scale_ggsurvfit(plot, object)
 }
 
