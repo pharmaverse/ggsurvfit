@@ -55,15 +55,6 @@ test_that("ggsurvfit() works", {
   vdiffr::expect_doppelganger("sf2-ggsurvfit_linetype", lst_survfit2_linetype[[1]])
   vdiffr::expect_doppelganger("sf3-ggsurvfit_linetype", lst_survfit2_linetype[[2]])
 
-  expect_error(
-    lst_survfit_KMunicate <-
-      list(sf1, sf2, sf3) %>%
-      lapply(function(x) ggsurvfit(x, theme = theme_ggsurvfit_KMunicate())),
-    NA
-  )
-  vdiffr::expect_doppelganger("sf1-ggsurvfit-KMunicate", lst_survfit_KMunicate[[1]])
-  vdiffr::expect_doppelganger("sf2-ggsurvfit-KMunicate", lst_survfit_KMunicate[[2]])
-  vdiffr::expect_doppelganger("sf3-ggsurvfit-KMunicate", lst_survfit_KMunicate[[3]])
 
   # test that the variable names are stripped when using transformations
   vdiffr::expect_doppelganger(
@@ -193,3 +184,30 @@ test_that("ggsurvfit() works with geoms with new data", {
   vdiffr::expect_doppelganger("sf2-ggsurvfit_new_data_geom1", p1)
   vdiffr::expect_doppelganger("sf2-ggsurvfit_new_data_geom2", p2)
 })
+
+test_that("KMunicate theme is working and reproducible", {
+
+  expect_no_error(
+    lst_survfit_KMunicate <-
+      list(sf1, sf2, sf3) %>%
+      lapply(function(x) ggsurvfit(x, theme = theme_ggsurvfit_KMunicate()))
+  )
+
+  vdiffr::expect_doppelganger("sf1-ggsurvfit-KMunicate", lst_survfit_KMunicate[[1]])
+  vdiffr::expect_doppelganger("sf2-ggsurvfit-KMunicate", lst_survfit_KMunicate[[2]])
+  vdiffr::expect_doppelganger("sf3-ggsurvfit-KMunicate", lst_survfit_KMunicate[[3]])
+
+  #plot from the documentation
+  p <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+    ggsurvfit(linetype_aes = TRUE) +
+    add_confidence_interval() +
+    add_risktable(
+      risktable_stats = c("n.risk", "cum.censor", "cum.event")
+    ) +
+    theme_ggsurvfit_KMunicate() +
+    scale_y_continuous(limits = c(0, 1)) +
+    scale_x_continuous(expand = c(0.02, 0)) +
+    theme(legend.position="inside", legend.position.inside = c(0.85, 0.85))
+  vdiffr::expect_doppelganger("vignette-ggsurvfit-KMunicate", p)
+})
+
