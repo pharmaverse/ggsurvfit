@@ -22,6 +22,8 @@ This scale applies modifications often seen in these figures.
 \item \code{scale_x_continuous(expand = c(0.015, 0), n.breaks = 8)}
 }
 
+\emph{NOTE}: The y-axis limits are only set for survival curves.
+
 If you use this function, you \strong{must} include \strong{all} scale specifications
 that would appear in \code{scale_x_continuous()} or \code{scale_y_continuous()}.
 For example, it's common you'll need to specify the x-axis break points.
