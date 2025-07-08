@@ -29,7 +29,7 @@
 }
 
 .extract_arguments_from_attr <- function(x, attr_name) {
-  lapply(x$layers, function(x) attr(x, attr_name, exact = TRUE)) %>%
+  lapply(unname(x$layers), function(x) attr(x, attr_name, exact = TRUE)) %>%
     unlist(recursive = FALSE)
 }
 
