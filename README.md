@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/pharmaverse/ggsurvfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pharmaverse/ggsurvfit/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/pharmaverse/ggsurvfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/pharmaverse/ggsurvfit?branch=main)
+coverage](https://codecov.io/gh/pharmaverse/ggsurvfit/graph/badge.svg)](https://app.codecov.io/gh/pharmaverse/ggsurvfit)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggsurvfit)](https://CRAN.R-project.org/package=ggsurvfit)
 [![](https://cranlogs.r-pkg.org/badges/ggsurvfit)](https://cran.r-project.org/package=ggsurvfit)
