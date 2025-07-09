@@ -1,10 +1,6 @@
 comment: false
 
 coverage:
-  range: 0..100
-  round: up
-  precision: 0
-
   status:
     project:
       default:
