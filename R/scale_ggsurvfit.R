@@ -45,11 +45,14 @@
 #' can modify the position of numbers in the risk table
 #' and make them all fit in the plot region. The scale of the `expand` argument differs by cases.
 #'
+#' ```r
 #' df_colon_large <- df_colon[sample(1:nrow(df_colon), size = 15*nrow(df_colon), replace = TRUE), ]
 #' ggsurvfit <-
 #'   survfit2(Surv(time, status) ~ surg, data = df_colon_large) %>%
 #'   ggsurvfit() + add_risktable() +
 #'   scale_ggsurvfit()
+#' ```
+#'
 #' @inherit ggsurvfit seealso
 scale_ggsurvfit <-
   function(x_scales = list(), y_scales = list()){
