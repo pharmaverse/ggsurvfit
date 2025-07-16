@@ -37,7 +37,7 @@ add_quantile <- function(y_value = NULL, x_value = NULL, ...) {
 }
 
 #' @export
-ggplot_add.add_quantile <- function (object, plot, object_name) {
+ggplot_add.add_quantile <- function (object, plot, ...) {
   update_add_quantile(plot, object)
 }
 

@@ -138,7 +138,7 @@ add_risktable <- function(times = NULL,
 }
 
 #' @export
-ggplot_add.add_risktable <- function (object, plot, object_name) {
+ggplot_add.add_risktable <- function (object, plot, ...) {
   update_add_risktable(plot, object)
 }
 

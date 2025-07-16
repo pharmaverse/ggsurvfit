@@ -52,7 +52,7 @@ add_pvalue <- function(location = c("caption", "annotation"),
 }
 
 #' @export
-ggplot_add.add_pvalue <- function (object, plot, object_name) {
+ggplot_add.add_pvalue <- function (object, plot, ...) {
   update_add_pvalue(plot, object)
 }
 

@@ -31,7 +31,7 @@ add_confidence_interval <- function(type = c("ribbon", "lines"), ...) {
 }
 
 #' @export
-ggplot_add.add_confidence_interval <- function (object, plot, object_name) {
+ggplot_add.add_confidence_interval <- function (object, plot, ...) {
   update_add_confidence_interval(plot, object)
 }
 
