@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Updated the help of `scale_ggsurvfit()` explaining why risktable Ns may be cut off for large numbers. (#216)
+
 * Correcting an argument name partial match in `ggplot2::scale_*(labels)`. (#211, @DanChaltiel)
 
 # ggsurvfit 1.1.0
