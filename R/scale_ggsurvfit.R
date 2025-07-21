@@ -42,7 +42,9 @@
 #' be shown completely, with some digits truncated outside the plot region.
 #' To remedy this, consider adjusting the expand size:
 #'
+#' ```r
 #' scale_ggsurvfit(x_scales = list(expand = c(0.05, 0)))
+#' ```
 #'
 #' This can modify the position of numbers in the risk table
 #' and make them all fit in the plot region. The scale of the `expand` argument differs by cases.
