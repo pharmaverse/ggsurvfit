@@ -43,20 +43,26 @@ test_that("add_pvalue() works", {
     NA
   )
 
-  # ensure `add_pvalue()` works with all events
+ # ensure `add_pvalue()` works with all events
   expect_no_message(
-    pvalue_cuminc <-
+    pvalue_cuminc1 <-
       tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
       ggcuminc(outcome = "death from cancer") +
       add_pvalue()
   )
 
+  # Verify p-value is added to the plot
+  expect_true(grepl("p", pvalue_cuminc1$labels$caption %||% ""))
+
   expect_no_message(
-    pvalue_cuminc <-
+    pvalue_cuminc_other<-
       tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
       ggcuminc(outcome = "death other causes") +
       add_pvalue()
   )
+
+  # Verify p-value is added to the plot
+  expect_true(grepl("p", pvalue_cuminc_other$labels$caption %||% ""))
 
   skip_on_ci()
   vdiffr::expect_doppelganger("sf2-pvalue-caption", tbl_p1)
