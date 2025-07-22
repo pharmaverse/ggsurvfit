@@ -23,20 +23,6 @@
 #' @return a ggplot2 figure
 #' @export
 #'
-#' @rdname scale_ggsurvfit
-#' @examples
-#' ggsurvfit <-
-#'   survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
-#'   ggsurvfit(linewidth = 1) +
-#'   add_confidence_interval()
-#'
-#' # use the function defaults
-#' ggsurvfit + scale_ggsurvfit()
-#'
-#' # specify additional scales
-#' ggsurvfit +
-#'   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
-#' #'
 #' @details
 #' Special case: in the risk table, large numbers (with more than 4 digits) may not
 #' be shown completely, with some digits truncated outside the plot region.
@@ -50,6 +36,18 @@
 #' and make them all fit in the plot region. The scale of the `expand` argument differs by cases.
 #'
 #' @inherit ggsurvfit seealso
+#' @examples
+#' ggsurvfit <-
+#'   survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+#'   ggsurvfit(linewidth = 1) +
+#'   add_confidence_interval()
+#'
+#' # use the function defaults
+#' ggsurvfit + scale_ggsurvfit()
+#'
+#' # specify additional scales
+#' ggsurvfit +
+#'   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
 scale_ggsurvfit <- function(x_scales = list(), y_scales = list()){
   scale_ggsurvfit_empty_list <- list()
   structure(scale_ggsurvfit_empty_list, x_scales = x_scales, y_scales = y_scales, class = "scale_ggsurvfit")

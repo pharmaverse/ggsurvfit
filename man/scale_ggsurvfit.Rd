@@ -55,7 +55,6 @@ ggsurvfit + scale_ggsurvfit()
 # specify additional scales
 ggsurvfit +
   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
-#'
 }
 \seealso{
 Visit the \href{https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html}{gallery} for examples modifying the default figures
