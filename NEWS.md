@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Fixed `add_risktable()` to respect x-axis breaks when x-axis is duplicated. (#221, @ZilinHuang)
+
 * Fixed `add_pvalue()` function to work with all outcomes in `ggcuminc()`, not just the first outcome level. (#239, @samrickman)
 
 * Correcting an argument name partial match in `ggplot2::scale_*(labels)`. (#211, @DanChaltiel)
