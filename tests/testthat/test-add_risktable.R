@@ -202,8 +202,6 @@ test_that("add_risktable() works with ggcuminc() and multiple outcomes", {
     NA
   )
 
-
-
   # only check on mac
   skip_on_ci()
   vdiffr::expect_doppelganger("cuminc1-risktable-all-outcomes", lst_cuminc_risktable_outcomes[[1]])
