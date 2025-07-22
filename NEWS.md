@@ -2,6 +2,10 @@
 
 * Correcting an argument name partial match in `ggplot2::scale_*(labels)`. (#211, @DanChaltiel)
 
+* Correcting the object name clash that was causing a snapshot error. (#240)
+
+* Adding in a line to verify that the p-value is added to the plot. (#240)
+
 # ggsurvfit 1.1.0
 
 * We now allow for negative follow-up times in `tidy_survfit()` (and subsequently `ggsurvfit()`). When negative follow-up times are present users should specify `survfit(start.time)` and we print a note to this effect when not set. (#192) 
