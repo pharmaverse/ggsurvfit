@@ -2,9 +2,7 @@
 
 * Correcting an argument name partial match in `ggplot2::scale_*(labels)`. (#211, @DanChaltiel)
 
-* Correcting the object name clash that was causing a snapshot error. (#240)
-
-* Adding in a line to verify that the p-value is added to the plot. (#240)
+* Fixed `add_pvalue()` function to work with all outcomes in `ggcuminc()`, not just the first outcome level. (#239, @samrickman)
 
 # ggsurvfit 1.1.0
 
