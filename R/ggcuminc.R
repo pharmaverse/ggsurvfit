@@ -50,8 +50,10 @@ ggcuminc <- function(x, outcome = NULL,
   # check inputs ---------------------------------------------------------------
   if (!inherits(x, c("tidycuminc", "survfitms"))) {
     cli_abort(
-      c("!" = "Argument {.code x} must be {.cls tidycuminc}.",
-        "i" = "Create the object with {.code tidycmprsk::cuminc()}.")
+      c(
+        "!" = "Argument {.code x} must be {.cls tidycuminc}.",
+        "i" = "Create the object with {.code tidycmprsk::cuminc()}."
+      )
     )
   }
 
@@ -64,12 +66,11 @@ ggcuminc <- function(x, outcome = NULL,
   }
 
   # prep data to be passed to ggplot() -----------------------------------------
-  if (inherits(x, "tidycuminc"))
+  if (inherits(x, "tidycuminc")) {
     df <- tidy_cuminc(x = x)
-  else if (inherits(x, "survfitms"))
+  } else if (inherits(x, "survfitms")) {
     df <- tidy_survfit(x = x)
-  # adding the model object to df
-  df <- df %>% dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
+  }
 
   # subset on outcome of interest ----------------------------------------------
   if (is.null(outcome)) {
@@ -80,6 +81,9 @@ ggcuminc <- function(x, outcome = NULL,
     cli_abort("Argument {.arg x} does not support {.cls survfit.coxphms} object.")
   }
   df <- dplyr::filter(df, .data$outcome %in% .env$outcome)
+
+  # adding the model object to df
+  df <- df %>% dplyr::mutate(survfit = c(list(x), rep_len(list(), dplyr::n() - 1L)))
 
   # construct aes() call -------------------------------------------------------
   aes_args <- .construct_aes(df, linetype_aes = linetype_aes, outcome = outcome)

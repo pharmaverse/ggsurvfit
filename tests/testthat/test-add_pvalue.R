@@ -43,6 +43,27 @@ test_that("add_pvalue() works", {
     NA
   )
 
+ # ensure `add_pvalue()` works with all events
+  expect_no_message(
+    pvalue_cuminc1 <-
+      tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
+      ggcuminc(outcome = "death from cancer") +
+      add_pvalue()
+  )
+
+  # Verify p-value is added to the plot
+  expect_true(grepl("p", pvalue_cuminc1$labels$caption %||% ""))
+
+  expect_no_message(
+    pvalue_cuminc_other<-
+      tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
+      ggcuminc(outcome = "death other causes") +
+      add_pvalue()
+  )
+
+  # Verify p-value is added to the plot
+  expect_true(grepl("p", pvalue_cuminc_other$labels$caption %||% ""))
+
   skip_on_ci()
   vdiffr::expect_doppelganger("sf2-pvalue-caption", tbl_p1)
   vdiffr::expect_doppelganger("sf2-pvalue-annotation", tbl_p2)
@@ -55,20 +76,20 @@ test_that("add_pvalue() works", {
 test_that("add_pvalue() throws proper errors", {
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
-       ggsurvfit() +
-       add_pvalue(caption = letters)) %>%
+      ggsurvfit() +
+      add_pvalue(caption = letters)) %>%
       ggsurvfit_build()
   )
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
-       ggsurvfit() +
-       add_pvalue(pvalue_fun = letters)) %>%
+      ggsurvfit() +
+      add_pvalue(pvalue_fun = letters)) %>%
       ggsurvfit_build()
   )
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
-       ggsurvfit() +
-       add_pvalue(prepend_p = letters)) %>%
+      ggsurvfit() +
+      add_pvalue(prepend_p = letters)) %>%
       ggsurvfit_build()
   )
 })
