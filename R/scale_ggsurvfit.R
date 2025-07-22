@@ -36,6 +36,19 @@
 #' # specify additional scales
 #' ggsurvfit +
 #'   scale_ggsurvfit(x_scales = list(breaks = seq(0, 8, by = 2)))
+#' #'
+#' @details
+#' Special case: in the risk table, large numbers (with more than 4 digits) may not
+#' be shown completely, with some digits truncated outside the plot region.
+#' To remedy this, consider adjusting the expand size:
+#'
+#' ```r
+#' scale_ggsurvfit(x_scales = list(expand = c(0.05, 0)))
+#' ```
+#'
+#' This can modify the position of numbers in the risk table
+#' and make them all fit in the plot region. The scale of the `expand` argument differs by cases.
+#'
 #' @inherit ggsurvfit seealso
 scale_ggsurvfit <- function(x_scales = list(), y_scales = list()){
   scale_ggsurvfit_empty_list <- list()
