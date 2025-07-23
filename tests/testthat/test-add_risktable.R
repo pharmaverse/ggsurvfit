@@ -97,6 +97,19 @@ test_that("add_risktable() works with ggsurvfit()", {
   )
   expect_error(print(`sf1-risktable-height`), NA)
 
+  expect_error(
+    p_with_dup_axis <-
+      sf2 %>%
+      ggsurvfit() +
+      add_risktable() +
+      ggplot2::scale_x_continuous(
+        name = "Time (Months)",
+        breaks = seq(0, 30, 6),
+        sec.axis = ggplot2::sec_axis(~ . / 12, name = "Time (Years)")
+      ),
+    NA
+  )
+  expect_error(print(p_with_dup_axis), NA)
 
   # only check on mac
   skip_on_ci()
@@ -108,6 +121,7 @@ test_that("add_risktable() works with ggsurvfit()", {
   vdiffr::expect_doppelganger("add_risktable-overall1", risktable_overall1)
   vdiffr::expect_doppelganger("add_risktable-overall2", risktable_overall2)
   vdiffr::expect_doppelganger("add_risktable-weights", risktable_with_weights)
+  vdiffr::expect_doppelganger("sf2-risktable-duplicated-axis", p_with_dup_axis)
 })
 
 test_that("add_risktable() throws error messages", {
@@ -319,4 +333,3 @@ test_that("add_risktable() works with ggsurvfit() `start.time` and negative time
   vdiffr::expect_doppelganger("sf-negative_time", sf_negative_time)
   vdiffr::expect_doppelganger("sf-start_time", sf_start_time)
 })
-
