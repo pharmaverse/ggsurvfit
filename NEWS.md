@@ -1,6 +1,6 @@
 # ggsurvfit (development version)
 
-* Fixed `add_risktable()` to respect x-axis breaks when x-axis is duplicated. (#221, @ZilinHuang)
+* Fixed `add_risktable()` to respect x-axis breaks when x-axis is duplicated. (#221)
 
 * Fixed `add_pvalue()` function to work with all outcomes in `ggcuminc()`, not just the first outcome level. (#239, @samrickman)
 
