@@ -87,3 +87,29 @@ test_that("ggcuminc() axis label correct with multi-state model ", {
     "Probability in State"
   )
 })
+
+test_that("ggcuminc() throws error with survfit.coxphms objects", {
+  skip_if_not_installed("survival")
+  
+  # Create a Cox model with competing risks data
+  cox_model <- survival::coxph(
+    Surv(ttdeath, death_cr) ~ trt, 
+    data = tidycmprsk::trial
+  )
+  
+  # Create survfit object from Cox model (this creates survfit.coxphms class)
+  survfit_coxphms_obj <- survival::survfit(cox_model)
+  
+  # Test that the specific error message is thrown
+  expect_error(
+    ggcuminc(survfit_coxphms_obj),
+    "Argument.*does not support.*survfit\\.coxphms.*object"
+  )
+  
+  # Testing the exact error message (for more precision)
+  expect_error(
+    ggcuminc(survfit_coxphms_obj),
+    "Argument `x` does not support `survfit.coxphms` object.",
+    fixed = TRUE
+  )
+})
