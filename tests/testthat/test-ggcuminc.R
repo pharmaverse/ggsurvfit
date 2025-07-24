@@ -117,6 +117,6 @@ test_that("ggcuminc() throws error with survfit.coxphms objects", {
   # Test that the specific error message is thrown
   expect_error(
     ggcuminc(survfit_coxphms_obj),
-    "Argument.*does not support.*survfit\\.coxphms.*object"
+    "Object passed in argument.*must be class.*tidycuminc.*or.*survfitms.*survfitcoxms.*not supported"
   )
 })
