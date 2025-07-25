@@ -8,7 +8,7 @@
 
 * Correcting an argument name partial match in `ggplot2::scale_*(labels)`. (#211, @DanChaltiel)
 
-
+* Updates to account for changes in ggplot2 v4.0.0. (#241)
 
 # ggsurvfit 1.1.0
 
