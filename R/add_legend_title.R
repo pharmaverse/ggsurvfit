@@ -69,15 +69,5 @@ update_add_legend_title <- function(p, add_legend_title_empty_list) {
   }
 
   # apply labels and return updated figure
-  result <- ggplot2::update_labels(p, labels = lst_labs)
-
-  # explicitly remove labels for aesthetics that aren't actually mapped
-  all_possible_aes <- c("fill", "linetype", "alpha", "size", "shape")
-  for (aes_name in all_possible_aes) {
-    if (!aes_name %in% mapped_aes && aes_name %in% names(result$labels)) {
-      result$labels[[aes_name]] <- NULL
-    }
-  }
-
-  result
+  ggplot2::update_labels(p, labels = lst_labs)
 }
