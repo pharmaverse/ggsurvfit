@@ -28,7 +28,7 @@ Imports:
     broom (>= 1.0.0),
     cli (>= 3.0.0),
     dplyr (>= 1.0.3),
-    ggplot2 (>= 3.5.0),
+    ggplot2 (>= 3.5.2.9002),
     glue (>= 1.6.0),
     gtable,
     patchwork (>= 1.1.0),
@@ -47,6 +47,7 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
+Remotes: tidyverse/ggplot2
 Config/Needs/website: cowplot, ggeasy, gghighlight
 Config/testthat/edition: 3
 Encoding: UTF-8
