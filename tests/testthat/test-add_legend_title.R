@@ -1,21 +1,19 @@
 test_that("add_legend_title() works", {
   # title is placed for typical usage
   expect_error(
-    sf1 <-
-      survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+    sf1 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
       ggsurvfit() +
       add_legend_title(),
     NA
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(sf1))$plot$labels$colour,
+    ggplot2::ggplot_build(sf1)$plot$labels$colour,
     "Time from Surgery to Treatment"
   )
 
   # title is placed with CI as well
   expect_error(
-    sf2 <-
-      survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+    sf2 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
       ggsurvfit() +
       add_confidence_interval() +
       add_censor_mark() +
@@ -23,18 +21,17 @@ test_that("add_legend_title() works", {
     NA
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(sf2))$plot$labels$colour,
+    ggplot2::ggplot_build(sf2)$plot$labels$colour,
     "Time from Surgery to Treatment"
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(sf2))$plot$labels$fill,
+    ggplot2::ggplot_build(sf2)$plot$labels$fill,
     "Time from Surgery to Treatment"
   )
 
   # title is placed with linetype correctly
   expect_error(
-    sf3 <-
-      survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+    sf3 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
       ggsurvfit(linetype_aes = TRUE) +
       add_confidence_interval() +
       add_censor_mark() +
@@ -42,22 +39,21 @@ test_that("add_legend_title() works", {
     NA
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(sf3))$plot$labels$colour,
+    ggplot2::ggplot_build(sf3)$plot$labels$colour,
     "Time from Surgery to Treatment"
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(sf3))$plot$labels$fill,
+    ggplot2::ggplot_build(sf3)$plot$labels$fill,
     "Time from Surgery to Treatment"
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(sf3))$plot$labels$linetype,
+    ggplot2::ggplot_build(sf3)$plot$labels$linetype,
     "Time from Surgery to Treatment"
   )
 
   # linetype NOT added for ggcuminc with multiple outcomes
   expect_error(
-    cuminc1 <-
-      tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
+    cuminc1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
       ggcuminc(outcome = c("death from cancer", "death other causes")) +
       add_confidence_interval() +
       add_risktable() +
@@ -65,17 +61,15 @@ test_that("add_legend_title() works", {
     NA
   )
   expect_equal(
-    suppressWarnings(
-      ggplot2::ggplot_build(cuminc1)$plot$labels$colour
-    ),
+    ggplot2::ggplot_build(cuminc1)$plot$labels$colour,
     "Chemotherapy Treatment"
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(cuminc1))$plot$labels$fill,
+    ggplot2::ggplot_build(cuminc1)$plot$labels$fill,
     "Chemotherapy Treatment"
   )
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(cuminc1))$plot$labels$linetype,
+    ggplot2::ggplot_build(cuminc1)$plot$labels$linetype,
     NULL
   )
 
@@ -88,11 +82,67 @@ test_that("add_legend_title() works", {
 
   # when no variable label present, the title is the variable name
   expect_equal(
-    suppressWarnings(ggplot2::ggplot_build(
+    ggplot2::ggplot_build(
       survfit2(Surv(mpg, am) ~ cyl, data = mtcars) %>%
         ggsurvfit() +
         add_legend_title()
-    ))$plot$labels$colour,
+    )$plot$labels$colour,
     "cyl"
   )
 })
+
+test_that("add_legend_title() produces no warnings with ggplot2 4.0.0", {
+  # Basic plot should not produce warnings about unknown labels
+  expect_no_warning({
+    sf1 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+      ggsurvfit() +
+      add_legend_title()
+  })
+
+  # Plot with CI should not produce warnings
+  expect_no_warning({
+    sf2 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+      ggsurvfit() +
+      add_confidence_interval() +
+      add_legend_title()
+  })
+
+  # Plot with linetype should not produce warnings
+  expect_no_warning({
+    sf3 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+      ggsurvfit(linetype_aes = TRUE) +
+      add_legend_title()
+  })
+})
+
+test_that("add_legend_title() only sets labels for existing aesthetics", {
+  # Basic plot should only have colour label, not fill or linetype
+  sf1 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+    ggsurvfit() +
+    add_legend_title("Test Title")
+
+  built_plot <- ggplot2::ggplot_build(sf1)
+  expect_true("colour" %in% names(built_plot$plot$labels))
+  expect_false("fill" %in% names(built_plot$plot$labels))
+  expect_false("linetype" %in% names(built_plot$plot$labels))
+
+  # Plot with CI should have both colour and fill labels
+  sf2 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+    ggsurvfit() +
+    add_confidence_interval() +
+    add_legend_title("Test Title")
+
+  built_plot2 <- ggplot2::ggplot_build(sf2)
+  expect_true("colour" %in% names(built_plot2$plot$labels))
+  expect_true("fill" %in% names(built_plot2$plot$labels))
+
+  # Plot with linetype should have colour and linetype labels
+  sf3 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+    ggsurvfit(linetype_aes = TRUE) +
+    add_legend_title("Test Title")
+
+  built_plot3 <- ggplot2::ggplot_build(sf3)
+  expect_true("colour" %in% names(built_plot3$plot$labels))
+  expect_true("linetype" %in% names(built_plot3$plot$labels))
+})
+
