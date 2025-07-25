@@ -19,7 +19,7 @@ add_legend_title <- function(title = NULL) {
 }
 
 #' @export
-ggplot_add.add_legend_title <- function (object, plot, object_name) {
+ggplot_add.add_legend_title <- function (object, plot, object_name, ...) {
   update_add_legend_title(plot, object)
 }
 
@@ -35,7 +35,7 @@ update_add_legend_title <- function(p, add_legend_title_empty_list) {
   lst_labs <- list()
   p_build <- suppressWarnings(ggplot2::ggplot_build(p))
 
-  # Get aesthetics that are actually mapped to variables 
+  # Get aesthetics that are actually mapped to variables
   mapped_aes <- c()
 
   # Check main plot mapping for aesthetics mapped to actual variables
