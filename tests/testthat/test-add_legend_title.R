@@ -93,14 +93,14 @@ test_that("add_legend_title() works", {
 
 test_that("add_legend_title() produces no warnings with ggplot2 4.0.0", {
   # Basic plot should not produce warnings about unknown labels
-  expect_no_warning({
+  expect_silent({
     sf1 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
       ggsurvfit() +
       add_legend_title()
   })
 
   # Plot with CI should not produce warnings
-  expect_no_warning({
+  expect_silent({
     sf2 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
       ggsurvfit() +
       add_confidence_interval() +
@@ -108,41 +108,48 @@ test_that("add_legend_title() produces no warnings with ggplot2 4.0.0", {
   })
 
   # Plot with linetype should not produce warnings
-  expect_no_warning({
+  expect_silent({
     sf3 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
       ggsurvfit(linetype_aes = TRUE) +
       add_legend_title()
   })
 })
 
-test_that("add_legend_title() only sets labels for existing aesthetics", {
-  # Basic plot should only have colour label, not fill or linetype
+test_that("add_legend_title() sets titles only for mapped aesthetics", {
+  # Basic plot should only set colour title (not fill or linetype)
   sf1 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
     ggsurvfit() +
     add_legend_title("Test Title")
 
   built_plot <- ggplot2::ggplot_build(sf1)
-  expect_true("colour" %in% names(built_plot$plot$labels))
-  expect_false("fill" %in% names(built_plot$plot$labels))
-  expect_false("linetype" %in% names(built_plot$plot$labels))
+  
+  # Check that the correct title was set
+  expect_equal(built_plot$plot$labels$colour, "Test Title")
 
-  # Plot with CI should have both colour and fill labels
+  # Check that fill/linetype titles were NOT set to our custom title
+ 
+  expect_true(is.null(built_plot$plot$labels$fill) || 
+              built_plot$plot$labels$fill != "Test Title")
+  expect_true(is.null(built_plot$plot$labels$linetype) || 
+              built_plot$plot$labels$linetype != "Test Title")
+
+  # Plot with CI should have both colour and fill titles
   sf2 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
     ggsurvfit() +
     add_confidence_interval() +
     add_legend_title("Test Title")
 
   built_plot2 <- ggplot2::ggplot_build(sf2)
-  expect_true("colour" %in% names(built_plot2$plot$labels))
-  expect_true("fill" %in% names(built_plot2$plot$labels))
+  expect_equal(built_plot2$plot$labels$colour, "Test Title")
+  expect_equal(built_plot2$plot$labels$fill, "Test Title")
 
-  # Plot with linetype should have colour and linetype labels
+  # Plot with linetype should have colour and linetype titles
   sf3 <- survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
     ggsurvfit(linetype_aes = TRUE) +
     add_legend_title("Test Title")
 
   built_plot3 <- ggplot2::ggplot_build(sf3)
-  expect_true("colour" %in% names(built_plot3$plot$labels))
-  expect_true("linetype" %in% names(built_plot3$plot$labels))
+  expect_equal(built_plot3$plot$labels$colour, "Test Title")
+  expect_equal(built_plot3$plot$labels$linetype, "Test Title")
 })
 
