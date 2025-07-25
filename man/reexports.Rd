@@ -18,7 +18,7 @@ below to see their documentation.
 \describe{
   \item{dplyr}{\code{\link[dplyr:reexports]{\%>\%}}}
 
-  \item{ggplot2}{\code{\link[ggplot2:gg-add]{\%+\%}}, \code{\link[ggplot2]{ggplot_add}}}
+  \item{ggplot2}{\code{\link[ggplot2:gg-add]{\%+\%}}, \code{\link[ggplot2:update_ggplot]{ggplot_add}}}
 
   \item{grid}{\code{\link[grid]{grid.draw}}}
 

@@ -2,7 +2,7 @@
 #'
 #' Add a default or custom title to the figure legend.
 #'
-#' @param title a string to override the default legend title. Default is `NULL`
+#' @param title a string to override the default legend title. Default is NULL
 #'
 #' @return a ggplot2 figure
 #' @export
@@ -19,7 +19,7 @@ add_legend_title <- function(title = NULL) {
 }
 
 #' @export
-ggplot_add.add_legend_title <- function (object, plot, object_name) {
+ggplot_add.add_legend_title <- function (object, plot, object_name, ...) {
   update_add_legend_title(plot, object)
 }
 
@@ -35,15 +35,36 @@ update_add_legend_title <- function(p, add_legend_title_empty_list) {
   lst_labs <- list()
   p_build <- suppressWarnings(ggplot2::ggplot_build(p))
 
-  # if colour or fill present add the title for those aes()
-  if ("colour" %in% names(p_build$plot$labels)) {
+  # Get aesthetics that are actually mapped to variables
+  mapped_aes <- c()
+
+  # Check main plot mapping for aesthetics mapped to actual variables
+  for (aes_name in names(p$mapping)) {
+    if (aes_name != "is_ggsurvfit") {  # Exclude internal ggsurvfit aesthetic
+      mapped_aes <- c(mapped_aes, aes_name)
+    }
+  }
+
+  # Check layer mappings for aesthetics mapped to actual variables
+  for (layer in p$layers) {
+    for (aes_name in names(layer$mapping)) {
+      if (aes_name != "is_ggsurvfit") {  # Exclude internal ggsurvfit aesthetic
+        mapped_aes <- c(mapped_aes, aes_name)
+      }
+    }
+  }
+
+  mapped_aes <- unique(mapped_aes)
+
+  # Only set labels for aesthetics that are actually mapped
+  if ("colour" %in% mapped_aes) {
     lst_labs[["colour"]] <- legend_title
   }
-  if ("fill" %in% names(p_build$plot$labels)) {
+  if ("fill" %in% mapped_aes) {
     lst_labs[["fill"]] <- legend_title
   }
   # if there is a linetype aes() AND it's not from ggcuminc() with multiple outcomes, add title
-  if ("linetype" %in% names(p_build$plot$labels) && (!inherits(p, "ggcuminc") || !length(unique(p$data$outcome)) > 1L)) {
+  if ("linetype" %in% mapped_aes && (!inherits(p, "ggcuminc") || !length(unique(p$data$outcome)) > 1L)) {
     lst_labs[["linetype"]] <- legend_title
   }
 

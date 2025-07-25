@@ -7,7 +7,7 @@
 add_legend_title(title = NULL)
 }
 \arguments{
-\item{title}{a string to override the default legend title. Default is \code{NULL}}
+\item{title}{a string to override the default legend title. Default is NULL}
 }
 \value{
 a ggplot2 figure
