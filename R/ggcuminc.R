@@ -47,15 +47,13 @@
 ggcuminc <- function(x, outcome = NULL,
                      linetype_aes = FALSE,
                      theme = theme_ggsurvfit_default(), ...) {
-  # check inputs ---------------------------------------------------------------
-  if (!inherits(x, c("tidycuminc", "survfitms"))) {
-    cli_abort(
-      c(
-        "!" = "Argument {.code x} must be {.cls tidycuminc}.",
-        "i" = "Create the object with {.code tidycmprsk::cuminc()}."
-      )
-    )
-  }
+# Combined check:
+if (!inherits(x, c("tidycuminc", "survfitms")) || inherits(x, "survfitcoxms")) {
+  cli_abort(
+    c("!" = "Object passed in argument {.arg x} must be class {.cls tidycuminc} or {.cls survfitms}. The {.cls survfitcoxms} class is not supported.",
+      "i" = "Create the cumulative incidence object using {.fun tidycmprsk::cuminc}.")
+  )
+}
 
   # prep data to be passed to ggplot() -----------------------------------------
   if (inherits(x, "tidycuminc")) {
