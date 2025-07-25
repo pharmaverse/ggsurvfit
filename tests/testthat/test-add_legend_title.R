@@ -145,3 +145,4 @@ test_that("add_legend_title() only sets labels for existing aesthetics", {
   expect_true("colour" %in% names(built_plot3$plot$labels))
   expect_true("linetype" %in% names(built_plot3$plot$labels))
 })
+

@@ -35,7 +35,7 @@ update_add_legend_title <- function(p, add_legend_title_empty_list) {
   lst_labs <- list()
   p_build <- suppressWarnings(ggplot2::ggplot_build(p))
 
-  # Get aesthetics that are actually mapped to variables (not just present)
+  # Get aesthetics that are actually mapped to variables 
   mapped_aes <- c()
 
   # Check main plot mapping for aesthetics mapped to actual variables
@@ -71,8 +71,7 @@ update_add_legend_title <- function(p, add_legend_title_empty_list) {
   # apply labels and return updated figure
   result <- ggplot2::update_labels(p, labels = lst_labs)
 
-  # Explicitly remove labels for aesthetics that aren't actually mapped
-  # This prevents warnings in ggplot2 4.0.0 about unknown labels
+  # explicitly remove labels for aesthetics that aren't actually mapped
   all_possible_aes <- c("fill", "linetype", "alpha", "size", "shape")
   for (aes_name in all_possible_aes) {
     if (!aes_name %in% mapped_aes && aes_name %in% names(result$labels)) {
