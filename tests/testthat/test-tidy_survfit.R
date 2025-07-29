@@ -220,3 +220,61 @@ test_that("tidy_survfit() messaging", {
       invisible()
   )
 })
+
+
+
+test_that("tidy_survfit() confidence intervals are correctly ordered for multi-state models (issue #215)", {
+  # Test 1: Generic test using existing test data (broader coverage)
+  sfms1 <- survfit2(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
+  sfms2 <- survfit2(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
+
+  # Test that multi-state CIs are properly ordered
+  expect_true(
+    sfms1 %>%
+      tidy_survfit() %>%
+      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
+      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
+      dplyr::pull(ci_correct) %>%
+      all(),
+    info = "Multi-state model CIs should be correctly ordered"
+  )
+
+  expect_true(
+    sfms2 %>%
+      tidy_survfit() %>%
+      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
+      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
+      dplyr::pull(ci_correct) %>%
+      all(),
+    info = "Stratified multi-state model CIs should be correctly ordered"
+  )
+
+  # Test 2: User's specific example from original issue #215 (regression test)
+  data(Melanoma, package = "MASS")
+  Melanoma$status <- factor(Melanoma$status, c(2, 1, 3), c("Alive", "Melanoma", "Other"))
+  sfit_melanoma <- survfit(Surv(time, status, type = "mstate") ~ 1, data = Melanoma)
+
+  result_melanoma <- tidy_survfit(sfit_melanoma, times = 5 * 365.241)
+
+  expect_true(
+    result_melanoma %>%
+      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
+      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
+      dplyr::pull(ci_correct) %>%
+      all(),
+    info = "User's melanoma example should have correctly ordered CIs"
+  )
+
+  # Test 3: Verify regular models still work (no regression)
+  sf_regular <- survfit2(Surv(time, status) ~ sex, data = df_lung)
+
+  expect_true(
+    sf_regular %>%
+      tidy_survfit(type = "risk") %>%
+      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
+      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
+      dplyr::pull(ci_correct) %>%
+      all(),
+    info = "Regular survival models should still work correctly"
+  )
+})
