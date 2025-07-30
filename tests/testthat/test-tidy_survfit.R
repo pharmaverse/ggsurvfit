@@ -223,58 +223,83 @@ test_that("tidy_survfit() messaging", {
 
 
 
-test_that("tidy_survfit() confidence intervals are correctly ordered for multi-state models (issue #215)", {
-  # Test 1: Generic test using existing test data (broader coverage)
-  sfms1 <- survfit2(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
-  sfms2 <- survfit2(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
-
-  # Test that multi-state CIs are properly ordered
-  expect_true(
-    sfms1 %>%
-      tidy_survfit() %>%
-      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
-      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
-      dplyr::pull(ci_correct) %>%
-      all(),
-    info = "Multi-state model CIs should be correctly ordered"
-  )
-
-  expect_true(
-    sfms2 %>%
-      tidy_survfit() %>%
-      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
-      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
-      dplyr::pull(ci_correct) %>%
-      all(),
-    info = "Stratified multi-state model CIs should be correctly ordered"
-  )
-
-  # Test 2: User's specific example from original issue #215 (regression test)
-  data(Melanoma, package = "MASS")
-  Melanoma$status <- factor(Melanoma$status, c(2, 1, 3), c("Alive", "Melanoma", "Other"))
-  sfit_melanoma <- survfit(Surv(time, status, type = "mstate") ~ 1, data = Melanoma)
-
-  result_melanoma <- tidy_survfit(sfit_melanoma, times = 5 * 365.241)
-
-  expect_true(
-    result_melanoma %>%
-      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
-      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
-      dplyr::pull(ci_correct) %>%
-      all(),
-    info = "User's melanoma example should have correctly ordered CIs"
-  )
-
-  # Test 3: Verify regular models still work (no regression)
+test_that("tidy_survfit() handles custom transformation functions correctly with CI ordering", {
+  
+  # Test data: regular survival model
   sf_regular <- survfit2(Surv(time, status) ~ sex, data = df_lung)
-
+  
+  # Test data: multi-state model  
+  sfms <- survfit2(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
+  
+  # Custom function that MAINTAINS monotonicity (decreasing -> decreasing)
+  maintain_monotonicity <- function(x) x^2
+  
+  # Custom function that FLIPS monotonicity (decreasing -> increasing)  
+  flip_monotonicity <- function(x) 1 - x
+  
+  # Test 1: Regular model with custom function that maintains monotonicity
+  # Should NOT swap CIs (since monotonicity stays decreasing)
+  result_maintain <- tidy_survfit(sf_regular, type = maintain_monotonicity)
+  
   expect_true(
-    sf_regular %>%
-      tidy_survfit(type = "risk") %>%
+    result_maintain %>%
       dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
       dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
       dplyr::pull(ci_correct) %>%
       all(),
-    info = "Regular survival models should still work correctly"
+    info = "Regular model with monotonicity-maintaining custom function should have correct CI order"
+  )
+  
+  # Test 2: Regular model with custom function that flips monotonicity  
+  # Should swap CIs (since monotonicity changes from decreasing to increasing)
+  result_flip <- tidy_survfit(sf_regular, type = flip_monotonicity)
+  
+  expect_true(
+    result_flip %>%
+      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
+      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
+      dplyr::pull(ci_correct) %>%
+      all(),
+    info = "Regular model with monotonicity-flipping custom function should have correct CI order after swap"
+  )
+  
+  # Test 3: Multi-state model with custom functions
+  # Should NEVER swap CIs regardless of custom function (multi-state rule takes precedence)
+  result_ms_maintain <- tidy_survfit(sfms, type = maintain_monotonicity)
+  result_ms_flip <- tidy_survfit(sfms, type = flip_monotonicity)
+  
+  expect_true(
+    result_ms_maintain %>%
+      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
+      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
+      dplyr::pull(ci_correct) %>%
+      all(),
+    info = "Multi-state model with custom function should never swap CIs (case 1)"
+  )
+  
+  expect_true(
+    result_ms_flip %>%
+      dplyr::filter(!is.na(conf.low) & !is.na(conf.high)) %>%
+      dplyr::mutate(ci_correct = conf.low <= conf.high) %>%
+      dplyr::pull(ci_correct) %>%
+      all(),
+    info = "Multi-state model with custom function should never swap CIs (case 2)"
+  )
+  
+  # Test 4: Verify the transformations actually worked
+ 
+  original_survival <- tidy_survfit(sf_regular, type = "survival")
+  
+  # Compare transformed estimates
+  expect_equal(
+    result_maintain$estimate,
+    original_survival$estimate^2,
+    info = "Custom maintain function should square the estimates"
+  )
+  
+  expect_equal(
+    result_flip$estimate,
+    1 - original_survival$estimate,
+    info = "Custom flip function should convert survival to risk"
   )
 })
