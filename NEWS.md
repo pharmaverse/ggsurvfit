@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Fixed confidence interval labels being incorrectly swapped for multi-state models in 'tidy_survfit()'. Multi-state models now preserve the correct ordering of conf.low and conf.high from the underlying broom::tidy() output. (#215)
+
 * Improved error message when `ggcuminc()` is called with `survfit.coxphms` objects. (#222)
 
 * Fixed `add_risktable()` to respect x-axis breaks when x-axis is duplicated. (#221)
