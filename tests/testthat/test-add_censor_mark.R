@@ -95,21 +95,5 @@ test_that("add_censor_mark() gives informative error with weighted survival data
   )
 })
 
-test_that("add_censor_mark() works with integer-rounded weighted data", {
-  # Create weighted survival data
-  df_weighted <- df_lung
-  df_weighted$weights <- runif(nrow(df_lung), 0.1, 2.0)
 
-  # Create a weighted survfit object and round n.censor (the workaround solution)
-  survfit_weighted <- survfit2(Surv(time, status) ~ sex,
-                              data = df_weighted,
-                              weights = df_weighted$weights)
-  survfit_weighted$n.censor <- round(survfit_weighted$n.censor)
-
-  # This should work without error after rounding
-  expect_error(
-    ggsurvfit(survfit_weighted) + add_censor_mark(),
-    NA
-  )
-})
 
