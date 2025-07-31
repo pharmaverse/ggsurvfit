@@ -52,6 +52,7 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
     stop(
       "add_censor_mark() cannot be used with weighted survival data.\n",
       "Weighted data produces non-integer n.censor values that are incompatible with tidyr::uncount().\n\n",
+      "Additionally, the definition of a single censoring mark becomes unclear with weighted data.\n\n",
       "Workaround options:\n",
       "1. Round the censoring counts: survfit_object$n.censor <- round(survfit_object$n.censor)\n",
       "2. Add censor marks manually using ggplot2::geom_point() with your original data\n",
