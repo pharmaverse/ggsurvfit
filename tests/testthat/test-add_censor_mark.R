@@ -15,7 +15,6 @@ test_that("add_censor_mark() works with ggsurvfit()", {
   vdiffr::expect_doppelganger("sf1-censor_mark", lst_survfit2_censor_mark[[1]])
   vdiffr::expect_doppelganger("sf2-censor_mark", lst_survfit2_censor_mark[[2]])
   vdiffr::expect_doppelganger("sf3-censor_mark", lst_survfit2_censor_mark[[3]])
-
 })
 
 test_that("add_censor_mark() errors with ggsurvfit()", {
@@ -27,13 +26,9 @@ test_that("add_censor_mark() errors with ggsurvfit()", {
   )
 })
 
-
-
-
 cuminc1 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ 1, data = tidycmprsk::trial)
 cuminc2 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
 cuminc3 <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt + grade, data = tidycmprsk::trial)
-
 
 test_that("add_censor_mark() works with ggcuminc()", {
   expect_error(
@@ -50,7 +45,7 @@ test_that("add_censor_mark() works with ggcuminc()", {
   vdiffr::expect_doppelganger("cuminc3-censor_mark", lst_cuminc_censor_mark[[3]])
 })
 
-test_that("add_censor_mark() works with ggcuminc()", {
+test_that("add_censor_mark() works with ggcuminc() multiple outcomes", {
   expect_error(
     lst_cuminc_censor_mark_outcome <-
       list(cuminc1, cuminc2, cuminc3) %>%
@@ -66,34 +61,33 @@ test_that("add_censor_mark() works with ggcuminc()", {
 })
 
 test_that("add_censor_mark() gives informative error with weighted survival data", {
-  # Create weighted survival data that will produce non-integer n.censor
-  df_weighted <- df_lung
-  df_weighted$weights <- runif(nrow(df_lung), 0.1, 2.0)  # Random weights
+  # create data that will definitely produce fractional n.censor
+  df_weighted <- df_lung[1:50, ]
+  df_weighted$weights <- c(rep(0.3, 25), rep(0.7, 25))
 
-  # Create a weighted survfit object
   survfit_weighted <- survfit2(Surv(time, status) ~ sex,
-                              data = df_weighted,
-                              weights = df_weighted$weights)
+                               data = df_weighted,
+                               weights = df_weighted$weights)
 
-  # Create the base ggsurvfit plot
+  # force fractional n.censor for testing
+  survfit_weighted$n.censor[1] <- 1.5
+
   p <- ggsurvfit(survfit_weighted)
 
-  # Test that add_censor_mark() throws the expected error with key message components
+  # used print() to force the error
   expect_error(
-    p + add_censor_mark(),
+    print(p + add_censor_mark()),
     "cannot be used with weighted survival data"
   )
 
   expect_error(
-    p + add_censor_mark(),
-    "Round the censoring counts"
+    print(p + add_censor_mark()),
+    "tidyr::uncount"
   )
 
   expect_error(
-    p + add_censor_mark(),
-    "tidyr::uncount"
+    print(p + add_censor_mark()),
+    "definition.*unclear"
   )
 })
-
-
 
