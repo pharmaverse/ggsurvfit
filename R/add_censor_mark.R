@@ -6,12 +6,6 @@
 #' @param ... arguments passed to passed to
 #' `ggplot2::geom_point(...)` with defaults `shape = 3` and `size = 2`
 #'
-#' @details
-#' This function is not compatible with weighted survival data, as it relies on
-#' `tidyr::uncount()` which requires integer weights. If you're working with
-#' weighted data, consider rounding the censoring counts or adding censor marks
-#' manually using `ggplot2::geom_point()`.
-#'
 #' @return a ggplot2 figure
 #' @export
 #'
@@ -42,29 +36,25 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
   # getting user-passed arguments
   dots <- attr(add_censor_mark_empty_list, "dots")
 
-  # Extract the plot data to check for weighted data issues
-  plot_data <- suppressWarnings(ggplot2::ggplot_build(p))$plot$data
-
-  # Check if any n.censor values are non-integer (indicating weighted data)
-  non_integer_censors <- any(plot_data$n.censor != floor(plot_data$n.censor), na.rm = TRUE)
-
-  if (non_integer_censors) {
-    stop(
-      "add_censor_mark() cannot be used with weighted survival data.\n",
-      "Weighted data produces non-integer n.censor values that are incompatible with tidyr::uncount().\n\n",
-      "Additionally, the definition of a single censoring mark becomes unclear with weighted data.\n\n",
-      "Workaround options:\n",
-      "1. Round the censoring counts: survfit_object$n.censor <- round(survfit_object$n.censor)\n",
-      "2. Add censor marks manually using ggplot2::geom_point() with your original data\n",
-      call. = FALSE
-    )
-  }
-
   # add censor marks with `geom_point()`
   p +
     rlang::inject(
       ggplot2::geom_point(
-        data = ~ tidyr::uncount(.x, weights = .data$n.censor),
+        data = \(.x) {
+          # Check if any n.censor values are non-integer (indicating weighted data)
+          if (!rlang::is_integerish(.x$n.censor)) {
+            stop(
+              "add_censor_mark() cannot be used with weighted survival data.\n",
+              "Weighted data produces non-integer n.censor values that are incompatible with tidyr::uncount().\n",
+              "Additionally, the definition of a single censoring mark becomes unclear with weighted data.\n\n",
+              "Workaround options:\n",
+              "1. Add censor marks manually using ggplot2::geom_point() with your original unweighted data\n",
+              "See https://github.com/pharmaverse/ggsurvfit/issues/237 for detailed examples.",
+              call. = FALSE
+            )
+          }
+          tidyr::uncount(.x, weights = .data$n.censor)
+        },
         ggplot2::aes(!!!.construct_censor_mark_aes(p)),
         !!!dots
       )
