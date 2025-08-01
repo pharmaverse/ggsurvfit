@@ -29,7 +29,6 @@ ggplot_add.add_censor_mark <- function (object, plot, ...) {
   update_add_censor_mark(plot, object)
 }
 
-
 update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
   # confirm class and structure of object
   .is_ggsurvfit(p, fun_name = "add_censor_mark()", required_cols = c("time", "estimate", "n.censor"))
@@ -41,7 +40,21 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
   p +
     rlang::inject(
       ggplot2::geom_point(
-        data = ~ tidyr::uncount(.x, weights = .data$n.censor),
+        data = \(.x) {
+          # Check if any n.censor values are non-integer (indicating weighted data)
+          if (!rlang::is_integerish(.x$n.censor)) {
+            stop(
+              "add_censor_mark() cannot be used with weighted survival data.\n",
+              "Weighted data produces non-integer n.censor values that are incompatible with tidyr::uncount().\n",
+              "Additionally, the definition of a single censoring mark becomes unclear with weighted data.\n\n",
+              "Workaround options:\n",
+              "1. Add censor marks manually using ggplot2::geom_point() with your original unweighted data\n",
+              "See https://github.com/pharmaverse/ggsurvfit/issues/237 for detailed examples.",
+              call. = FALSE
+            )
+          }
+          tidyr::uncount(.x, weights = .data$n.censor)
+        },
         ggplot2::aes(!!!.construct_censor_mark_aes(p)),
         !!!dots
       )
