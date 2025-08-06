@@ -128,6 +128,35 @@ survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
   scale_ggsurvfit()
 ```
 
+## Combining Multiple Survival Endpoints
+
+To display multiple survival endpoints (e.g., Overall Survival and Progression-Free Survival) on the same plot, stack your data so each patient has multiple rows—one for each endpoint.
+
+```{r combine-endpoints}
+library(dplyr)
+
+# Create a stacked data frame with 2 outcomes
+stacked_adtte <-
+  adtte |> 
+  select(USUBJID, PARAM, AVAL, CNSR) |>
+  bind_rows(
+    adtte |> 
+      select(USUBJID, PARAM, AVAL, CNSR) |>
+      mutate(
+        AVAL = AVAL / (1 + runif(n())),
+        PARAM = "Progression-Free Survival (years)"
+      )
+  )
+
+
+survfit2(Surv_CNSR(AVAL, CNSR) ~ PARAM, data = stacked_adtte) |> 
+  ggsurvfit() +
+  add_confidence_interval() +
+  add_risktable(risktable_group = "strata", risktable_height = 0.25) +
+  scale_ggsurvfit()
+
+```
+
 ## Quantiles and Censor Markings
 
 Add guidelines for survival quantiles and markings for censored patients using `add_quantile()` and `add_censor_mark()`.
