@@ -25,10 +25,9 @@ add_censor_mark <- function(...) {
 }
 
 #' @export
-ggplot_add.add_censor_mark <- function (object, plot, ...) {
+ggplot_add.add_censor_mark <- function(object, plot, ...) {
   update_add_censor_mark(plot, object)
 }
-
 
 update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
   # confirm class and structure of object
@@ -41,7 +40,16 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
   p +
     rlang::inject(
       ggplot2::geom_point(
-        data = ~ tidyr::uncount(.x, weights = .data$n.censor),
+        data = \(.x) {
+          # Check if any n.censor values are non-integer (indicating weighted data)
+          if (!rlang::is_integerish(.x$n.censor)) {
+            cli::cli_abort(
+              c("The {.fun add_censor_mark} function does not support weighted models.",
+                i = "See {.url https://github.com/pharmaverse/ggsurvfit/issues/237} for details.")
+            )
+          }
+          tidyr::uncount(.x, weights = .data$n.censor)
+        },
         ggplot2::aes(!!!.construct_censor_mark_aes(p)),
         !!!dots
       )
@@ -61,6 +69,7 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
       isFALSE(getOption("ggsurvfit.switch-color-linetype", default = FALSE))) {
     lst_aes <- c(lst_aes, list(color = rlang::expr(.data$strata)))
   }
+
   if ("outcome" %in% names(suppressWarnings(ggplot2::ggplot_build(p))$plot$data) &&
       length(unique(suppressWarnings(ggplot2::ggplot_build(p))$plot$data$outcome)) > 1L &&
       isTRUE(getOption("ggsurvfit.switch-color-linetype", default = FALSE))) {
