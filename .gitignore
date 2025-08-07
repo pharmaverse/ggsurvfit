@@ -8,8 +8,3 @@ tests/testthat/Rplots.pdf
 delete.png
 revdep
 .DS_Store
-
-# Test artifacts
-*.Rout.fail
-testthat-problems.rds
-tests/testthat/testthat-problems.rds
