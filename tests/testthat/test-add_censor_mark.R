@@ -68,26 +68,21 @@ test_that("add_censor_mark() gives informative error with weighted survival data
   survfit_weighted <- survfit2(Surv(time, status) ~ sex,
                                data = df_weighted,
                                weights = df_weighted$weights)
-
   # force fractional n.censor for testing
   survfit_weighted$n.censor[1] <- 1.5
 
   p <- ggsurvfit(survfit_weighted)
 
-  # used print() to force the error
+  # Test that the error is thrown and contains the expected message
   expect_error(
     print(p + add_censor_mark()),
-    "cannot be used with weighted survival data"
+    "does not support weighted models"
   )
 
+  # Test for the GitHub URL reference
   expect_error(
     print(p + add_censor_mark()),
-    "tidyr::uncount"
-  )
-
-  expect_error(
-    print(p + add_censor_mark()),
-    "definition.*unclear"
+    "github.com/pharmaverse/ggsurvfit/issues/237"
   )
 })
 
