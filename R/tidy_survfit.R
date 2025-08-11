@@ -228,9 +228,20 @@ tidy_survfit <- function(x,
   # adding the monotonicity
   x <- .add_monotonicity_type(x, type = type)
 
-  # switch conf.low and conf.high levels if needed
-  if (x$monotonicity_type[1] %in% "increasing" && all(c("conf.low", "conf.high") %in% colnames(x))) {
-    x <- dplyr::rename(x, conf.low = "conf.high", conf.high = "conf.low")
+  # FIX FOR ISSUE #215: Handle confidence interval swapping properly
+  if (all(c("conf.low", "conf.high") %in% colnames(x))) {
+    
+    # Multi-state models should NOT have their CIs swapped because they come 
+    # correctly ordered from broom::tidy(). The bug was that they were being
+    # incorrectly swapped by the monotonicity logic below.
+    if (!inherits(survfit, "survfitms")) {
+      # For regular (non-multi-state) survival models, only swap if monotonicity is increasing 
+      if (x$monotonicity_type[1] %in% "increasing") {
+        x <- dplyr::rename(x, conf.low = "conf.high", conf.high = "conf.low")
+      }
+    }
+    # Note: Multi-state models (survfitms) are explicitly excluded from CI swapping
+    # because their CIs come correctly ordered from broom::tidy()
   }
 
   # return data frame ----------------------------------------------------------
