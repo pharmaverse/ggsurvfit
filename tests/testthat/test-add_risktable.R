@@ -336,7 +336,7 @@ test_that("add_risktable() works with ggsurvfit() `start.time` and negative time
 
 
 test_that("add_risktable() works with multiple survival endpoints (Issue #212)", {
-  # Test the exact scenario from Issue #212
+  
   os_data <- df_lung %>% dplyr::mutate(PARAM = "Overall Survival")
   pfs_data <- df_lung %>% dplyr::mutate(time = time * 0.7, PARAM = "Progression-Free Survival")
   combined_data <- dplyr::bind_rows(os_data, pfs_data)
@@ -366,4 +366,4 @@ test_that("add_risktable() height calculation is robust", {
                   info = paste("Failed for group:", group, "stats:", paste(stats, collapse = ",")))
     }
   }
-}
+})
