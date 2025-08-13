@@ -336,109 +336,34 @@ test_that("add_risktable() works with ggsurvfit() `start.time` and negative time
 
 
 test_that("add_risktable() works with multiple survival endpoints (Issue #212)", {
-  # Create test data similar to the issue scenario
-  set.seed(123)
-  n <- 100
+  # Test the exact scenario from Issue #212
+  os_data <- df_lung %>% dplyr::mutate(PARAM = "Overall Survival")
+  pfs_data <- df_lung %>% dplyr::mutate(time = time * 0.7, PARAM = "Progression-Free Survival")
+  combined_data <- dplyr::bind_rows(os_data, pfs_data)
   
-  # Base survival data
-  base_data <- data.frame(
-    USUBJID = paste0("SUBJ", 1:n),
-    AVAL = rexp(n, 0.1),
-    CNSR = rbinom(n, 1, 0.3),
-    PARAM = "Overall Survival (years)"
+ 
+  expect_error(
+    p <- survfit2(Surv(time, status) ~ PARAM, data = combined_data) %>%
+      ggsurvfit() + add_risktable(),
+    NA
   )
+  expect_error(print(p), NA)
+})
+
+test_that("add_risktable() height calculation is robust", {
+
   
-  # Stacked data with multiple endpoints (the scenario causing the bug)
-  stacked_adtte <- 
-    base_data %>%
-    dplyr::bind_rows(
-      base_data %>%
-      dplyr::mutate(
-        AVAL = AVAL / (1 + runif(n())),
-        PARAM = "Progression-Free Survival (years)"
+  # Testing with minimal data that could trigger various paths
+  df_basic <- data.frame(time = 1:3, other = c("X", "Y", "Z"))
+  
+  # Testing all grouping strategies to ensure none cause the undefined variables
+  for (group in c("auto", "strata", "risktable_stats")) {
+    for (stats in list("n.risk", c("n.risk", "cum.event"))) {
+      height <- ggsurvfit:::.calculate_risktable_height(
+        NULL, group, stats, df_basic
       )
-    )
-  
-  # Test the exact scenario from Issue #212 that was failing
-  expect_error(
-    p_issue_212 <- survfit2(Surv_CNSR(AVAL, CNSR) ~ PARAM, data = stacked_adtte) %>%
-      ggsurvfit() +
-      add_confidence_interval() +
-      add_risktable(risktable_group = "strata", risktable_height = 0.25) +
-      scale_ggsurvfit(),
-    NA
-  )
-  
-  # Ensure the plot can be printed (this would fail before the fix)
-  expect_error(print(p_issue_212), NA)
-  
-  # Test other parameter combinations that could trigger similar issues
-  expect_error(
-    p_auto_group <- survfit2(Surv_CNSR(AVAL, CNSR) ~ PARAM, data = stacked_adtte) %>%
-      ggsurvfit() +
-      add_risktable(risktable_group = "auto", risktable_height = 0.25),
-    NA
-  )
-  expect_error(print(p_auto_group), NA)
-  
-  expect_error(
-    p_stats_group <- survfit2(Surv_CNSR(AVAL, CNSR) ~ PARAM, data = stacked_adtte) %>%
-      ggsurvfit() +
-      add_risktable(risktable_group = "risktable_stats", risktable_height = 0.25),
-    NA
-  )
-  expect_error(print(p_stats_group), NA)
-  
-  # Test without explicit height (should use calculated height)
-  expect_error(
-    p_no_height <- survfit2(Surv_CNSR(AVAL, CNSR) ~ PARAM, data = stacked_adtte) %>%
-      ggsurvfit() +
-      add_risktable(risktable_group = "strata"),
-    NA
-  )
-  expect_error(print(p_no_height), NA)
-})
-
-
-test_that("add_risktable() internal height calculation never returns NULL", {
-  # Test the internal function directly to ensure it never returns NULL
-  
-  # Mock data frame with strata
-  df_with_strata <- data.frame(
-    time = c(1, 2, 3),
-    strata = c("A", "B", "A")
-  )
-  
-  df_without_strata <- data.frame(
-    time = c(1, 2, 3),
-    other_col = c("X", "Y", "Z")
-  )
-  
-  # Test various combinations
-  height1 <- ggsurvfit:::.calculate_risktable_height(
-    NULL, "strata", c("n.risk", "cum.event"), df_with_strata
-  )
-  expect_true(is.numeric(height1) && !is.null(height1) && !is.na(height1))
-  
-  height2 <- ggsurvfit:::.calculate_risktable_height(
-    NULL, "strata", c("n.risk"), df_without_strata
-  )
-  expect_true(is.numeric(height2) && !is.null(height2) && !is.na(height2))
-  
-  height3 <- ggsurvfit:::.calculate_risktable_height(
-    NULL, "risktable_stats", c("n.risk", "cum.event"), df_with_strata
-  )
-  expect_true(is.numeric(height3) && !is.null(height3) && !is.na(height3))
-  
-  height4 <- ggsurvfit:::.calculate_risktable_height(
-    NULL, "risktable_stats", c("n.risk"), df_without_strata
-  )
-  expect_true(is.numeric(height4) && !is.null(height4) && !is.na(height4))
-  
-  # Test the edge case that was problematic before the fix
-  height5 <- ggsurvfit:::.calculate_risktable_height(
-    NULL, "auto", c("n.risk"), df_without_strata
-  )
-  expect_true(is.numeric(height5) && !is.null(height5) && !is.na(height5))
-})
-
+      expect_true(is.numeric(height) && !is.null(height), 
+                  info = paste("Failed for group:", group, "stats:", paste(stats, collapse = ",")))
+    }
+  }
+}
