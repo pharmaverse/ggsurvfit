@@ -1,6 +1,6 @@
 # ggsurvfit (development version)
 
-* Added support as a gallery example for combining multiple survival endpoints in `add_risktable()` and fixed related height calculation error. (#212)
+* Added support as a gallery example for combining multiple survival endpoints in `add_risktable()`. (#212)
 
 * Fixed confidence interval labels being incorrectly swapped for multi-state models in 'tidy_survfit()'. Multi-state models now preserve the correct ordering of conf.low and conf.high from the underlying broom::tidy() output. (#215)
 
