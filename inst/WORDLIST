@@ -15,6 +15,7 @@ Surv
 Survfit
 adjuvant
 behaviour
+conf
 cowplot
 cuminc
 geom's
@@ -25,11 +26,9 @@ ggeasy
 gghighlight
 ggplot
 ggplots
-glyphs
 grey
 gtable
 linetype
-monotonicity
 neoadjuvant
 pathologic
 randomisation
