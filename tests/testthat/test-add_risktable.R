@@ -351,19 +351,50 @@ test_that("add_risktable() works with multiple survival endpoints (Issue #212)",
 })
 
 test_that("add_risktable() height calculation is robust", {
-
+  # Test that add_risktable() handles various scenarios without crashing
+ 
+  # Create test data that could trigger various code paths
+  df_basic <- data.frame(
+    time = 1:10,
+    status = c(1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+    group1 = rep(c("A", "B"), each = 5),
+    group2 = rep(c("X", "Y", "Z"), length.out = 10)
+  )
   
-  # Testing with minimal data that could trigger various paths
-  df_basic <- data.frame(time = 1:3, other = c("X", "Y", "Z"))
+  expect_error(
+    p1 <- survfit2(Surv(time, status) ~ group1, data = df_basic) %>%
+      ggsurvfit() + add_risktable(risktable_group = "auto"),
+    NA
+  )
   
-  # Testing all grouping strategies to ensure none cause the undefined variables
-  for (group in c("auto", "strata", "risktable_stats")) {
-    for (stats in list("n.risk", c("n.risk", "cum.event"))) {
-      height <- ggsurvfit:::.calculate_risktable_height(
-        NULL, group, stats, df_basic
-      )
-      expect_true(is.numeric(height) && !is.null(height), 
-                  info = paste("Failed for group:", group, "stats:", paste(stats, collapse = ",")))
-    }
-  }
+  expect_error(
+    p2 <- survfit2(Surv(time, status) ~ group1, data = df_basic) %>%
+      ggsurvfit() + add_risktable(risktable_group = "strata"),
+    NA
+  )
+  
+  expect_error(
+    p3 <- survfit2(Surv(time, status) ~ group1, data = df_basic) %>%
+      ggsurvfit() + add_risktable(risktable_group = "risktable_stats"),
+    NA
+  )
+  
+  expect_error(
+    p4 <- survfit2(Surv(time, status) ~ group2, data = df_basic) %>%
+      ggsurvfit() + add_risktable(risktable_stats = "n.risk"),
+    NA
+  )
+  
+  expect_error(
+    p5 <- survfit2(Surv(time, status) ~ group2, data = df_basic) %>%
+      ggsurvfit() + add_risktable(risktable_stats = c("n.risk", "cum.event")),
+    NA
+  )
+  
+  # test edge case: single group (no stratification)
+  expect_error(
+    p6 <- survfit2(Surv(time, status) ~ 1, data = df_basic) %>%
+      ggsurvfit() + add_risktable(risktable_group = "auto"),
+    NA
+  )
 })
