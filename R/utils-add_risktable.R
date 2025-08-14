@@ -74,9 +74,6 @@
 .calculate_risktable_height <- function(risktable_height, risktable_group, risktable_stats, df_times) {
   if (!is.null(risktable_height)) return(risktable_height)
 
-  # initialise variables to prevent undefined variable errors
-  group_n <- 1
-  stat_n <- 1
 
   if (risktable_group == "strata" & !"strata" %in% names(df_times))
     group_n <- 1
