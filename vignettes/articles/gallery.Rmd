@@ -330,12 +330,13 @@ To display multiple survival endpoints (e.g., Overall Survival and Progression-F
 stacked_adtte <- 
   adtte %>%
   dplyr::select(USUBJID, PARAM, AVAL, CNSR) %>%
+  dplyr::mutate(PARAM = "Overall Survival") %>%  
   dplyr::bind_rows(
     adtte %>%
     dplyr::select(USUBJID, PARAM, AVAL, CNSR) %>%
     dplyr::mutate(
       AVAL = AVAL / (1 + runif(dplyr::n())),
-      PARAM = "Progression-Free Survival (years)"
+      PARAM = "Progression-Free Survival"  
     )
   )
 
