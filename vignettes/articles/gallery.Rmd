@@ -133,28 +133,24 @@ survfit2(Surv(time, status) ~ sex, data = df_lung) %>%
 To display multiple survival endpoints (e.g., Overall Survival and Progression-Free Survival) on the same plot, stack your data so each patient has multiple rows—one for each endpoint.
 
 ```{r combine-endpoints}
-library(dplyr)
-
-# Create a stacked data frame with 2 outcomes
-stacked_adtte <-
-  adtte |> 
-  select(USUBJID, PARAM, AVAL, CNSR) |>
-  bind_rows(
-    adtte |> 
-      select(USUBJID, PARAM, AVAL, CNSR) |>
-      mutate(
-        AVAL = AVAL / (1 + runif(n())),
-        PARAM = "Progression-Free Survival (years)"
-      )
+# Create stacked data with multiple endpoints
+stacked_adtte <- 
+  adtte %>%
+  dplyr::select(USUBJID, PARAM, AVAL, CNSR) %>%
+  dplyr::bind_rows(
+    adtte %>%
+    dplyr::select(USUBJID, PARAM, AVAL, CNSR) %>%
+    dplyr::mutate(
+      AVAL = AVAL / (1 + runif(dplyr::n())),
+      PARAM = "Progression-Free Survival (years)"
+    )
   )
 
-
-survfit2(Surv_CNSR(AVAL, CNSR) ~ PARAM, data = stacked_adtte) |> 
+survfit2(Surv_CNSR(AVAL, CNSR) ~ PARAM, data = stacked_adtte) %>%
   ggsurvfit() +
   add_confidence_interval() +
   add_risktable(risktable_group = "strata", risktable_height = 0.25) +
   scale_ggsurvfit()
-
 ```
 
 ## Quantiles and Censor Markings
