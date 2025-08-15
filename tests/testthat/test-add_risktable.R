@@ -333,3 +333,20 @@ test_that("add_risktable() works with ggsurvfit() `start.time` and negative time
   vdiffr::expect_doppelganger("sf-negative_time", sf_negative_time)
   vdiffr::expect_doppelganger("sf-start_time", sf_start_time)
 })
+
+
+test_that("add_risktable() works with multiple survival endpoints (Issue #212)", {
+  
+  os_data <- df_lung %>% dplyr::mutate(PARAM = "Overall Survival")
+  pfs_data <- df_lung %>% dplyr::mutate(time = time * 0.7, PARAM = "Progression-Free Survival")
+  combined_data <- dplyr::bind_rows(os_data, pfs_data)
+  
+ 
+  expect_error(
+    p <- survfit2(Surv(time, status) ~ PARAM, data = combined_data) %>%
+      ggsurvfit() + add_risktable(),
+    NA
+  )
+  expect_error(print(p), NA)
+})
+
