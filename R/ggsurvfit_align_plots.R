@@ -1,3 +1,15 @@
+# Internal function to combine plots using patchwork::free() for better alignment
+ggsurvfit_combine_plots <- function(main_plot, 
+                                   risk_table, 
+                                   free_type = "space", 
+                                   free_side = "l",
+                                   heights = c(6, 1)) {
+  
+  patchwork::free(main_plot, type = free_type, side = free_side) / 
+    risk_table + 
+    patchwork::plot_layout(heights = heights)
+}
+
 #' Align Plots
 #'
 #' Function accepts a list of ggplot objects, and aligns each plot to the same
@@ -54,7 +66,6 @@ ggsurvfit_align_plots <- function(pltlist) {
       suppressWarnings(
         ggplot2::ggplot_build(pltlist[[i]])$layout$panel_params[[1]]$y.range
       )
-
     pltlist[[i]] <-
       pltlist[[i]] +
       ggplot2::coord_cartesian(
@@ -63,35 +74,40 @@ ggsurvfit_align_plots <- function(pltlist) {
         expand = FALSE
       )
   }
-
+  
+  # Use improved patchwork alignment for better results
+  if (length(pltlist) >= 2) {
+    ggsurvfit_combine_plots(
+      main_plot = pltlist[[1]],
+      risk_table = pltlist[[2]],
+      free_type = "space",
+      free_side = "l",
+      heights = c(6, 1)
+    )
+  }
+  
   # turn plots into grobs and determine number of columns
   plots_grobs <- lapply(pltlist, function(x) suppressWarnings(ggplot2::ggplotGrob(x)))
   ncols <- lapply(plots_grobs, function(x) dim(x)[[2]])
   maxcols <- max(unlist(ncols))
-
   # Function to add more columns to compensate for eg missing legend
   .addcols <- function(x) {
     diffcols <- maxcols - dim(x)[[2]]
-
     if (diffcols > 0) {
       for (i in seq(1:diffcols)) {
         x <- gtable::gtable_add_cols(x, widths = grid::unit(1, "null"), pos = 8)
       }
     }
-
     x
   }
-
   ### TableGrob 1 has 11 columns while the others have only 9 because lacking legend+spacer
   ## => add two columns and then resize
   plots_grobs_xcols <- lapply(plots_grobs, .addcols)
-
   ### assign max length to ensure alignment
   max_width <- do.call(grid::unit.pmax, lapply(plots_grobs_xcols, "[[", "widths"))
   for (i in seq(1, length(plots_grobs_xcols))) {
     plots_grobs_xcols[[i]]$widths <- max_width
   }
-
   xcol_widths <- grid::convertWidth(
     plots_grobs_xcols[[1]]$widths,
     unitTo = "cm",
@@ -103,8 +119,6 @@ ggsurvfit_align_plots <- function(pltlist) {
     valueOnly = FALSE
   )
   x <- xcol_widths[[4]] - grob_widths[[4]]
-
   plots_grobs_xcols[[1]]$grobs[[13]]$children[[1]]$x <- grid::unit(x, "cm")
-
   plots_grobs_xcols
 }
