@@ -1,9 +1,9 @@
-# this function returns a combined primary plot with risktables below.
+
 .construct_risktable <- function(x, times, risktable_stats, stats_label, group,
                                  combine_groups, risktable_group,
                                  risktable_height, theme, combine_plots,
                                  risktable_symbol_args, ...) {
-  # check iputs ----------------------------------------------------------------
+  # check inputs ----------------------------------------------------------------
   if (!is.null(risktable_height) &&
       (length(risktable_height) > 1 || !is.numeric(risktable_height) || !dplyr::between(risktable_height, 0, 1))) {
     cli_abort("The {.code add_risktable(risktable_height=)} argument must be a scalar between 0 and 1.")
@@ -21,7 +21,6 @@
   times <- times %||% plot_build$layout$panel_params[[1]]$x$breaks
   df_times <-
     .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups = combine_groups)
-
 
   # determine grouping if not specified ----------------------------------------
   if (risktable_group == "auto") {
@@ -50,25 +49,62 @@
       ...
     )
 
-  # align all the plots --------------------------------------------------------
-  gg_risktable_list_aligned <-
-    c(list(x), gg_risktable_list) %>%
-    ggsurvfit_align_plots()
+  # PATCHWORK::FREE() integration 
+  if (isTRUE(combine_plots)) {
+    # Apply patchwork::free() to main plot to solve alignment issues
+    
+    main_plot_free <- patchwork::free(x, type = "label", side = "l")
+    
+    # Combine using patchwork directly 
+    if (length(gg_risktable_list) == 1) {
+      # Single risk table case
+      gg_combined <- main_plot_free / gg_risktable_list[[1]]
+      gg_combined <- gg_combined + patchwork::plot_layout(
+        heights = c(1 - risktable_height, risktable_height)
+      )
+    } else {
+      # Multiple risk tables case
+      gg_combined <- main_plot_free
+      for (i in seq_along(gg_risktable_list)) {
+        gg_combined <- gg_combined / gg_risktable_list[[i]]
+      }
+      
+      # Calculate heights
+      n_tables <- length(gg_risktable_list)
+      table_height_each <- risktable_height / n_tables
+      all_heights <- c(1 - risktable_height, rep(table_height_each, n_tables))
+      
+      gg_combined <- gg_combined + patchwork::plot_layout(heights = all_heights)
+    }
+    
+    return(gg_combined)
+  }
 
-  # combine all plots into single figure ---------------------------------------
-  if (isFALSE(combine_plots)) return(gg_risktable_list_aligned)
-
-  risktable_n <- length(gg_risktable_list_aligned) - 1
-  gg_final <-
-    gg_risktable_list_aligned %>%
-    patchwork::wrap_plots(
-      ncol = 1,
-      heights =
-        c(1 - risktable_height,
-          rep_len(risktable_height / risktable_n, length.out = risktable_n))
-    )
-
-  gg_final
+  # FALLBACK: Use original method when combine_plots = FALSE 
+  # ensures backward compatibility
+  
+  # use existing ggsurvfit_align_plots function
+  plot_list <- c(list(x), gg_risktable_list)
+  lst_plots <- ggsurvfit_align_plots(plot_list)
+  
+  # apply heights using patchwork on the grobs
+  n_plots <- length(lst_plots)
+  if (n_plots == 1) {
+    return(lst_plots[[1]])
+  }
+  
+  # calculate heights for the grob layout
+  n_risktables <- n_plots - 1
+  risktable_height_each <- risktable_height / n_risktables
+  
+  # combine grobs with heights using patchwork::wrap_plots
+  heights <- c(1 - risktable_height, rep(risktable_height_each, n_risktables))
+  
+  patchwork::wrap_plots(
+    plotlist = lst_plots,
+    ncol = 1,
+    heights = heights
+  )
 }
 
 .calculate_risktable_height <- function(risktable_height, risktable_group, risktable_stats, df_times) {
