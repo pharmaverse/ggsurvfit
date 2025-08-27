@@ -53,7 +53,7 @@
   if (isTRUE(combine_plots)) {
     # Apply patchwork::free() to main plot to solve alignment issues
     
-    main_plot_free <- patchwork::free(x, type = "label", side = "l")
+    main_plot_free <- patchwork::free(x, type = "space", side = "l")
     
     # Combine using patchwork directly 
     if (length(gg_risktable_list) == 1) {
@@ -81,30 +81,14 @@
   }
 
   # FALLBACK: Use original method when combine_plots = FALSE 
-  # ensures backward compatibility
+  # Ensures backward compatibility - return grobs directly
   
-  # use existing ggsurvfit_align_plots function
   plot_list <- c(list(x), gg_risktable_list)
-  lst_plots <- ggsurvfit_align_plots(plot_list)
+  lst_plots <- ggsurvfit_align_plots(plot_list)  # Returns grobs
   
-  # apply heights using patchwork on the grobs
-  n_plots <- length(lst_plots)
-  if (n_plots == 1) {
-    return(lst_plots[[1]])
-  }
-  
-  # calculate heights for the grob layout
-  n_risktables <- n_plots - 1
-  risktable_height_each <- risktable_height / n_risktables
-  
-  # combine grobs with heights using patchwork::wrap_plots
-  heights <- c(1 - risktable_height, rep(risktable_height_each, n_risktables))
-  
-  patchwork::wrap_plots(
-    plotlist = lst_plots,
-    ncol = 1,
-    heights = heights
-  )
+  # Return grobs as-is for backward compatibility
+  # Users who set combine_plots = FALSE expect separate grob objects
+  return(lst_plots)
 }
 
 .calculate_risktable_height <- function(risktable_height, risktable_group, risktable_stats, df_times) {
