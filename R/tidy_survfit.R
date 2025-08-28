@@ -161,7 +161,7 @@ tidy_survfit <- function(x,
   }
 
   # make the stratum a factor so it will sort properly later
-  # x$strata <- factor(x$strata, levels = unique(x$strata))
+  # TO REMOVE IF FIX WORKS: x$strata <- factor(x$strata, levels = unique(x$strata))
   if (!is.null(strata_variables) && length(strata_variables) == 1) {
     grouping_var <- strata_variables[1]
     if (grouping_var %in% names(data) && is.factor(data[[grouping_var]])) {
