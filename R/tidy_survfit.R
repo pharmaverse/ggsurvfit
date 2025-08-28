@@ -161,7 +161,19 @@ tidy_survfit <- function(x,
   }
 
   # make the stratum a factor so it will sort properly later
-  x$strata <- factor(x$strata, levels = unique(x$strata))
+  # x$strata <- factor(x$strata, levels = unique(x$strata))
+  if (!is.null(strata_variables) && length(strata_variables) == 1) {
+    grouping_var <- strata_variables[1]
+    if (grouping_var %in% names(data) && is.factor(data[[grouping_var]])) {
+      orig_levels <- levels(data[[grouping_var]])
+      preserved_levels <- orig_levels[orig_levels %in% unique(x$strata)]
+      x$strata <- factor(x$strata, levels = preserved_levels)
+    } else {
+      x$strata <- factor(x$strata, levels = unique(x$strata))  # fallback
+    }
+  } else {
+    x$strata <- factor(x$strata, levels = unique(x$strata))  # fallback
+  }
 
   # return tidy tibble
   x
