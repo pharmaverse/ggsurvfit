@@ -161,13 +161,43 @@ tidy_survfit <- function(x,
   }
 
   # make the stratum a factor so it will sort properly later
-  # TO REMOVE IF FIX WORKS: x$strata <- factor(x$strata, levels = unique(x$strata))
+  # OLD CODE - TO REMOVE IF FIX WORKS: 
+  # x$strata <- factor(x$strata, levels = unique(x$strata))
+  
+  # IMPROVED FIX: Preserve original factor level ordering (issue #213)
   if (!is.null(strata_variables) && length(strata_variables) == 1) {
     grouping_var <- strata_variables[1]
     if (grouping_var %in% names(data) && is.factor(data[[grouping_var]])) {
       orig_levels <- levels(data[[grouping_var]])
-      preserved_levels <- orig_levels[orig_levels %in% unique(x$strata)]
-      x$strata <- factor(x$strata, levels = preserved_levels)
+      current_strata_values <- unique(x$strata)
+      
+      # More robust matching - try exact match first, then partial match
+      preserved_levels <- character(0)
+      
+      for (orig_level in orig_levels) {
+        # Try exact match first
+        exact_match <- current_strata_values[current_strata_values == orig_level]
+        if (length(exact_match) > 0) {
+          preserved_levels <- c(preserved_levels, exact_match[1])
+        } else {
+          # Try partial match (for cases where strata format might be different)
+          partial_match <- current_strata_values[grepl(orig_level, current_strata_values, fixed = TRUE)]
+          if (length(partial_match) > 0) {
+            preserved_levels <- c(preserved_levels, partial_match[1])
+          }
+        }
+      }
+      
+      # Add any remaining strata that didn't match (safety net)
+      remaining_strata <- setdiff(current_strata_values, preserved_levels)
+      final_levels <- c(preserved_levels, remaining_strata)
+      
+      # Only use the preserved order if we found matches
+      if (length(preserved_levels) > 0) {
+        x$strata <- factor(x$strata, levels = final_levels)
+      } else {
+        x$strata <- factor(x$strata, levels = unique(x$strata))  # fallback
+      }
     } else {
       x$strata <- factor(x$strata, levels = unique(x$strata))  # fallback
     }
