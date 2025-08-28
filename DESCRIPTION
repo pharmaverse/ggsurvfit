@@ -4,6 +4,7 @@ Version: 1.1.0.9004
 Authors@R: c(
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-0862-2018")),
+    person("Shreya", "Sreeram", , "shreyasreeram27@gmail.com", role = "aut"),
     person("Mark", "Baillie", , "bailliem@gmail.com", role = "aut"),
     person("Charlotta", "Fruechtenicht", , "charlotta.fruechtenicht@roche.com", role = "aut",
            comment = c(ORCID = "0000-0002-6689-6423")),
@@ -28,7 +29,7 @@ Imports:
     broom (>= 1.0.0),
     cli (>= 3.0.0),
     dplyr (>= 1.0.3),
-    ggplot2 (>= 3.5.2.9002),
+    ggplot2 (>= 3.5.2),
     glue (>= 1.6.0),
     gtable,
     patchwork (>= 1.1.0),
@@ -47,7 +48,6 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
-Remotes: tidyverse/ggplot2
 Config/Needs/website: cowplot, ggeasy, gghighlight
 Config/testthat/edition: 3
 Encoding: UTF-8
