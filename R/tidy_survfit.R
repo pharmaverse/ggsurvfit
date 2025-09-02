@@ -102,7 +102,6 @@ tidy_survfit <- function(x,
   # if not a survift2 object, do not attempt to extract information from survfit object
   if (!inherits(survfit, c("survfit2", "tidycuminc"))) {
     x$strata_label <- "strata"
-    # make the stratum a factor so it will sort properly later
     x$strata <- factor(x$strata, levels = unique(x$strata))
     return(x)
   }
@@ -160,52 +159,73 @@ tidy_survfit <- function(x,
     }
   }
 
-  # make the stratum a factor so it will sort properly later
-  # OLD CODE - TO REMOVE IF FIX WORKS: 
-  # x$strata <- factor(x$strata, levels = unique(x$strata))
+  # Preserve original factor level ordering 
+  factor_reordered <- FALSE
   
-  # IMPROVED FIX: Preserve original factor level ordering (issue #213)
-  if (!is.null(strata_variables) && length(strata_variables) == 1) {
-    grouping_var <- strata_variables[1]
-    if (grouping_var %in% names(data) && is.factor(data[[grouping_var]])) {
-      orig_levels <- levels(data[[grouping_var]])
-      current_strata_values <- unique(x$strata)
-      
-      # More robust matching - try exact match first, then partial match
-      preserved_levels <- character(0)
-      
-      for (orig_level in orig_levels) {
-        # Try exact match first
-        exact_match <- current_strata_values[current_strata_values == orig_level]
-        if (length(exact_match) > 0) {
-          preserved_levels <- c(preserved_levels, exact_match[1])
-        } else {
-          # Try partial match (for cases where strata format might be different)
-          partial_match <- current_strata_values[grepl(orig_level, current_strata_values, fixed = TRUE)]
-          if (length(partial_match) > 0) {
-            preserved_levels <- c(preserved_levels, partial_match[1])
-          }
+  # Determine the actual grouping variable for strata
+  # For Cox models with strata(), we need to identify which variable is the strata variable
+  grouping_var <- NULL
+  if (!is.null(strata_variables) && length(strata_variables) >= 1) {
+    # Check if this is a Cox model with strata() by looking at the formula
+    formula_text <- deparse(formula)
+    if (grepl("strata\\(", formula_text)) {
+      # Extract the strata variable from strata() function
+      strata_match <- regmatches(formula_text, regexpr("strata\\([^)]+\\)", formula_text))
+      if (length(strata_match) > 0) {
+        # Extract variable name from strata(variable_name)
+        strata_var <- gsub("strata\\(([^)]+)\\)", "\\1", strata_match)
+        strata_var <- trimws(strata_var)
+        if (strata_var %in% names(data)) {
+          grouping_var <- strata_var
         }
       }
-      
-      # Add any remaining strata that didn't match (safety net)
-      remaining_strata <- setdiff(current_strata_values, preserved_levels)
-      final_levels <- c(preserved_levels, remaining_strata)
-      
-      # Only use the preserved order if we found matches
-      if (length(preserved_levels) > 0) {
-        x$strata <- factor(x$strata, levels = final_levels)
-      } else {
-        x$strata <- factor(x$strata, levels = unique(x$strata))  # fallback
-      }
     } else {
-      x$strata <- factor(x$strata, levels = unique(x$strata))  # fallback
+      # regular survival model - use the first strata variable
+      grouping_var <- strata_variables[1]
     }
-  } else {
-    x$strata <- factor(x$strata, levels = unique(x$strata))  # fallback
   }
 
-  # return tidy tibble
+  if (!is.null(grouping_var) && grouping_var %in% names(data) && is.factor(data[[grouping_var]])) {
+    orig_levels <- levels(data[[grouping_var]])
+    current_strata_values <- if (is.factor(x$strata)) levels(x$strata) else unique(x$strata)
+
+    # try exact match first, then partial match
+    preserved_levels <- character(0)
+
+    for (orig_level in orig_levels) {
+      # Try exact match first
+      exact_match <- current_strata_values[current_strata_values == orig_level]
+      if (length(exact_match) > 0) {
+        preserved_levels <- c(preserved_levels, exact_match[1])
+      } else {
+        # Try partial match
+        partial_match <- current_strata_values[grepl(orig_level, current_strata_values, fixed = TRUE)]
+        if (length(partial_match) > 0) {
+          preserved_levels <- c(preserved_levels, partial_match[1])
+        }
+      }
+    }
+
+    # Add any remaining strata that didn't match 
+    remaining_strata <- setdiff(current_strata_values, preserved_levels)
+    final_levels <- c(preserved_levels, remaining_strata)
+
+    # Only use preserved order if we found matches
+    if (length(preserved_levels) > 0) {
+      x$strata <- factor(x$strata, levels = final_levels)
+      factor_reordered <- TRUE
+    } else {
+      x$strata <- factor(x$strata, levels = unique(x$strata))
+    }
+  } else {
+    x$strata <- factor(x$strata, levels = unique(x$strata))
+  }
+
+  # Only reorder data if we actually changed the factor levels
+  if (factor_reordered) {
+    x <- x %>% dplyr::arrange(.data$strata)
+  }
+
   x
 }
 
