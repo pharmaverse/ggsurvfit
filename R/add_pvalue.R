@@ -106,9 +106,20 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
                           rho = rho)
   }
   else if (inherits(survfit, "tidycuminc")) {
-    p.value <-
-      tidycmprsk::glance(survfit) %>%
-      dplyr::pull("p.value_1") %>%
+
+    # work out which event
+    outcome <- p$data$outcome[1]
+    summary_table <- tidycmprsk::glance(survfit)
+
+    # competing risks so has to be one or the other
+    if (summary_table$outcome_1 == outcome) {
+        p_col <- "p.value_1"
+    } else {
+        p_col <- "p.value_2"
+    }
+
+    p.value <- summary_table %>%
+      dplyr::pull(p_col) %>%
       pvalue_fun() %>%
       {dplyr::case_when(
         !prepend_p ~ .,
