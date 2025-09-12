@@ -1,18 +1,16 @@
 # ggsurvfit (development version)
 
-* Added support as a gallery example for combining multiple survival endpoints in `add_risktable()`. (#212)
+* Updates to account for changes in ggplot2 v4.0.0. (#241)
 
-* Fixed confidence interval labels being incorrectly swapped for multi-state models in 'tidy_survfit()'. Multi-state models now preserve the correct ordering of conf.low and conf.high from the underlying broom::tidy() output. (#215)
+* Added an example to the gallery for combining multiple survival endpoints. (#212)
+
+* Fixed confidence interval labels being incorrectly swapped for multi-state models in `tidy_survfit()`. Multi-state models now preserve the correct ordering of `conf.low` and `conf.high` from the underlying `broom::tidy()` output. (#215)
 
 * Improved error message when `ggcuminc()` is called with `survfit.coxphms` objects. (#222)
 
 * Fixed `add_risktable()` to respect x-axis breaks when x-axis is duplicated. (#221)
 
-* Fixed `add_pvalue()` function to work with all outcomes in `ggcuminc()`, not just the first outcome level. (#239, @samrickman)
-
 * Correcting an argument name partial match in `ggplot2::scale_*(labels)`. (#211, @DanChaltiel)
-
-* Updates to account for changes in ggplot2 v4.0.0. (#241)
 
 # ggsurvfit 1.1.0
 
