@@ -64,6 +64,9 @@ test_that("add_pvalue() works", {
   # Verify p-value is added to the plot
   expect_true(grepl("p", pvalue_cuminc_other$labels$caption %||% ""))
 
+  # Make sure p-values are different for different risks
+  expect_true(pvalue_cuminc1$labels$caption != pvalue_cuminc_other$labels$caption)
+
   skip_on_ci()
   vdiffr::expect_doppelganger("sf2-pvalue-caption", tbl_p1)
   vdiffr::expect_doppelganger("sf2-pvalue-annotation", tbl_p2)
