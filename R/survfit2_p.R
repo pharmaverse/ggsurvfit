@@ -38,6 +38,9 @@ survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, rho = 0) {
         "i" = "Create a {.cls survfit2} object with {.code survfit2()}.")
     )
   }
+  if (inherits(x, "survfitms")) {
+    cli_abort("The {.fun survfit2_p} does not support multi-state models.")
+  }
 
   survival::survdiff(
     formula = .extract_formula_from_survfit(x),

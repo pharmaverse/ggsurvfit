@@ -2,6 +2,8 @@
 
 * Updates to account for changes in ggplot2 v4.0.0. (#241)
 
+* Improved messaging when users pass competing risks models to `add_pvalue()` when more than one outcome is on display.
+
 * Added an example to the gallery for combining multiple survival endpoints. (#212)
 
 * Fixed confidence interval labels being incorrectly swapped for multi-state models in `tidy_survfit()`. Multi-state models now preserve the correct ordering of `conf.low` and `conf.high` from the underlying `broom::tidy()` output. (#215)

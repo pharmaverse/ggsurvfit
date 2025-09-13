@@ -30,4 +30,11 @@ test_that("survfit2_p() works", {
 
 test_that("survfit2_p() throws error", {
   expect_error(survfit2_p(mtcars))
+
+  expect_snapshot(
+    error = TRUE,
+    survfit2(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
+      ggcuminc() +
+      add_pvalue()
+  )
 })
