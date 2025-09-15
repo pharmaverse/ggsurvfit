@@ -299,3 +299,141 @@ test_that("tidy_survfit() handles custom transformation functions correctly with
     1 - original_survival$estimate
   )
 })
+
+test_that("tidy_survfit() preserves factor level ordering", {
+  # Test case 1: Non-alphabetical factor levels
+  df_test <- df_lung %>%
+    dplyr::mutate(
+      sex_ordered = factor(sex,
+                          levels = c("Male", "Female"),  # Male should come first
+                          labels = c("Male", "Female"))
+    )
+
+  sf_ordered <- survfit2(Surv(time, status) ~ sex_ordered, data = df_test)
+  result <- tidy_survfit(sf_ordered)
+
+  # Check that Male comes before Female in the factor levels
+  expect_equal(
+    levels(result$strata),
+    c("Male", "Female")
+  )
+
+  # Test case 2: Reverse alphabetical order
+  df_test2 <- df_lung %>%
+    dplyr::mutate(
+      sex_reverse = factor(sex,
+                          levels = c("Female", "Male"),  # Female should come first
+                          labels = c("Female", "Male"))
+    )
+
+  sf_reverse <- survfit2(Surv(time, status) ~ sex_reverse, data = df_test2)
+  result2 <- tidy_survfit(sf_reverse)
+
+  # Check that Female comes before Male in the factor levels
+  expect_equal(
+    levels(result2$strata),
+    c("Female", "Male")
+  )
+
+  # Test case 3: Custom labels with non-alphabetical order
+  df_test3 <- df_lung %>%
+    dplyr::mutate(
+      treatment = factor(ifelse(sex == "Male", "Drug B", "Drug A"),
+                        levels = c("Drug B", "Drug A"),  # Drug B should come first
+                        labels = c("Drug B", "Drug A"))
+    )
+
+  sf_custom <- survfit2(Surv(time, status) ~ treatment, data = df_test3)
+  result3 <- tidy_survfit(sf_custom)
+
+  # Check that Drug B comes before Drug A
+  expect_equal(
+    levels(result3$strata),
+    c("Drug B", "Drug A")
+  )
+})
+
+test_that("tidy_cuminc() preserves factor level ordering", {
+  # Test the exact case from issue #213
+  trial_test <- tidycmprsk::trial %>%
+    dplyr::mutate(
+      trt_ordered = factor(trt,
+                          levels = c("Drug B", "Drug A"),  # Drug B should come first
+                          labels = c("Drug B", "Drug A"))
+    )
+
+  cuminc_obj <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt_ordered,
+                                   data = trial_test)
+  result <- tidy_cuminc(cuminc_obj)
+
+  # Check that Drug B comes before Drug A in the factor levels
+  expect_equal(
+    levels(result$strata),
+    c("Drug B", "Drug A")
+  )
+
+  # Also check that unique values appear in the correct order
+  expect_equal(
+    as.character(unique(result$strata)),
+    c("Drug B", "Drug A")
+  )
+})
+
+test_that("factor ordering fix handles edge cases", {
+  # Test case 1: Single group (no strata)
+  sf_single <- survfit2(Surv(time, status) ~ 1, data = df_lung)
+  expect_error(tidy_survfit(sf_single), NA)
+
+  # Test case 2: Multiple grouping variables (should fall back to original behavior)
+  sf_multi <- survfit2(Surv(time, status) ~ sex + ph.ecog, data = df_lung)
+  result_multi <- tidy_survfit(sf_multi)
+
+  # Should not error and should have strata
+  expect_true("strata" %in% names(result_multi))
+  expect_true(is.factor(result_multi$strata))
+
+  # Test case 3: Non-factor grouping variable (should fall back)
+  df_char <- df_lung %>%
+    dplyr::mutate(sex_char = as.character(sex))
+
+  sf_char <- survfit2(Surv(time, status) ~ sex_char, data = df_char)
+  result_char <- tidy_survfit(sf_char)
+
+  expect_true("strata" %in% names(result_char))
+  expect_true(is.factor(result_char$strata))
+
+  # Test case 4: Factor with unused levels
+  df_unused <- df_lung %>%
+    dplyr::mutate(
+      sex_extra = factor(sex,
+                        levels = c("Male", "Female", "Other"),
+                        labels = c("Male", "Female", "Other"))
+    )
+
+  sf_unused <- survfit2(Surv(time, status) ~ sex_extra, data = df_unused)
+  result_unused <- tidy_survfit(sf_unused)
+
+  # Should only include levels that actually appear in the data
+  expect_true(all(levels(result_unused$strata) %in% c("Male", "Female")))
+  expect_false("Other" %in% levels(result_unused$strata))
+})
+
+test_that("backward compatibility maintained", {
+  # Test that regular survival objects still work the same way
+  sf_regular <- survfit(Surv(time, status) ~ sex, data = df_lung)
+
+  expect_error(tidy_survfit(sf_regular), NA)
+
+  result <- tidy_survfit(sf_regular)
+  expect_true("strata" %in% names(result))
+  expect_true(is.factor(result$strata))
+
+  # Test multi-state models still work
+  sfms <- survfit2(Surv(ttdeath, death_cr) ~ trt, data = tidycmprsk::trial)
+  expect_error(tidy_survfit(sfms), NA)
+
+  result_ms <- tidy_survfit(sfms)
+  expect_true("strata" %in% names(result_ms))
+  expect_true(is.factor(result_ms$strata))
+})
+
