@@ -3,26 +3,25 @@
                                  combine_groups, risktable_group,
                                  risktable_height, theme, combine_plots,
                                  risktable_symbol_args, ...) {
-  # check iputs ----------------------------------------------------------------
+  # check inputs ----------------------------------------------------------------
   if (!is.null(risktable_height) &&
       (length(risktable_height) > 1 || !is.numeric(risktable_height) || !dplyr::between(risktable_height, 0, 1))) {
     cli_abort("The {.code add_risktable(risktable_height=)} argument must be a scalar between 0 and 1.")
   }
-
+  
   # build the ggplot to inspect the internals ----------------------------------
   plot_build <- suppressWarnings(ggplot2::ggplot_build(x))
-
+  
   # if plot is faceted, return plot without risktable --------------------------
   if (.is_faceted(plot_build)) {
     return(structure(x, class = setdiff(class(x), c("ggsurvfit", "ggcuminc"))))
   }
-
+  
   # get data to place in risktables --------------------------------------------
   times <- times %||% plot_build$layout$panel_params[[1]]$x$breaks
   df_times <-
     .prepare_data_for_risk_tables(data = x$data, times = times, combine_groups = combine_groups)
-
-
+  
   # determine grouping if not specified ----------------------------------------
   if (risktable_group == "auto") {
     risktable_group <-
@@ -32,14 +31,63 @@
         TRUE ~ "strata"
       )
   }
-
+  
   # determine risktable height -------------------------------------------------
   risktable_height <-
     .calculate_risktable_height(risktable_height, risktable_group, risktable_stats, df_times)
-
+  
   # create list of ggplots, one plot for each risktable ------------------------
   df_stat_labels <- .construct_stat_labels(risktable_stats, stats_label)
-
+  
+  # PATCHWORK::FREE() APPROACH WITH COORDINATE INTEGRATION --------------------
+  if (isTRUE(combine_plots)) {
+    # Extract coordinate system from main plot BEFORE risk table construction
+    main_x_breaks <- plot_build$layout$panel_params[[1]]$x$breaks
+    main_x_range <- plot_build$layout$panel_params[[1]]$x$range
+    
+    # Create risk tables WITH coordinate system built in (user's approach)
+    gg_risktable_list <-
+      .create_list_of_gg_risk_tables(
+        df_times, risktable_stats, times,
+        df_stat_labels, theme, risktable_group,
+        color_block_mapping =
+          .match_strata_level_to_color(plot_build, risktable_group, risktable_symbol_args),
+        risktable_symbol_args = risktable_symbol_args,
+        x_breaks = main_x_breaks,  # Pass coordinate info
+        x_range = main_x_range,    # Pass coordinate info
+        ...
+      )
+    
+    # Apply patchwork::free() to main plot (prevents y-axis title shifting)
+    main_plot_free <- patchwork::free(x, type = "space", side = "l")
+    
+    # Combine using patchwork exactly like the user's successful example
+    if (length(gg_risktable_list) == 1) {
+      # Single risk table case
+      gg_combined <- main_plot_free / gg_risktable_list[[1]]
+      gg_combined <- gg_combined + patchwork::plot_layout(
+        heights = c(1 - risktable_height, risktable_height)
+      )
+    } else {
+      # Multiple risk tables case
+      gg_combined <- main_plot_free
+      for (i in seq_along(gg_risktable_list)) {
+        gg_combined <- gg_combined / gg_risktable_list[[i]]
+      }
+      
+      # Calculate heights
+      n_tables <- length(gg_risktable_list)
+      table_height_each <- risktable_height / n_tables
+      all_heights <- c(1 - risktable_height, rep(table_height_each, n_tables))
+      
+      gg_combined <- gg_combined + patchwork::plot_layout(heights = all_heights)
+    }
+    
+    return(gg_combined)
+  }
+  
+  # FALLBACK: ORIGINAL METHOD FOR combine_plots = FALSE -----------------------
+  # Create risk tables without coordinate integration for backward compatibility
   gg_risktable_list <-
     .create_list_of_gg_risk_tables(
       df_times, risktable_stats, times,
@@ -47,17 +95,18 @@
       color_block_mapping =
         .match_strata_level_to_color(plot_build, risktable_group, risktable_symbol_args),
       risktable_symbol_args = risktable_symbol_args,
+      # No coordinate parameters for original method
       ...
     )
-
+  
   # align all the plots --------------------------------------------------------
   gg_risktable_list_aligned <-
     c(list(x), gg_risktable_list) %>%
     ggsurvfit_align_plots()
-
+  
   # combine all plots into single figure ---------------------------------------
   if (isFALSE(combine_plots)) return(gg_risktable_list_aligned)
-
+  
   risktable_n <- length(gg_risktable_list_aligned) - 1
   gg_final <-
     gg_risktable_list_aligned %>%
@@ -67,7 +116,7 @@
         c(1 - risktable_height,
           rep_len(risktable_height / risktable_n, length.out = risktable_n))
     )
-
+  
   gg_final
 }
 
@@ -162,7 +211,9 @@ lst_stat_labels_default <-
                                            df_stat_labels, theme,
                                            risktable_group,
                                            color_block_mapping,
-                                           risktable_symbol_args, ...) {
+                                           risktable_symbol_args, 
+                                           x_breaks = NULL, 
+                                           x_range = NULL, ...) {
   grouping_variable <-
     switch(risktable_group,
            "strata" = "strata",
@@ -223,6 +274,13 @@ lst_stat_labels_default <-
             )
           ) +
           rlang::inject(ggplot2::geom_text(!!!geom_text_args))
+
+        # Apply coordinate system during construction 
+        if (!is.null(x_breaks) && !is.null(x_range)) {
+          gg <- gg + 
+            ggplot2::scale_x_continuous(breaks = x_breaks) +
+            ggplot2::coord_cartesian(xlim = x_range, expand = FALSE, clip = "off")
+        }
 
         # apply styling to the plot
         gg +
