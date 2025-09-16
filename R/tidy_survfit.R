@@ -103,7 +103,7 @@ tidy_survfit <- function(x,
   if (!inherits(survfit, c("survfit2", "tidycuminc"))) {
     x$strata_label <- "strata"
     # make the stratum a factor so it will sort properly later
-    x$strata <- factor(x$strata, levels = unique(x$strata))
+    x$strata <- factor(as.character(x$strata), levels = levels(x$strata))
     return(x)
   }
 
