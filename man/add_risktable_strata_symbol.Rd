@@ -29,7 +29,7 @@ Replace the stratum level names with a color symbol in the risk tables.
 Use this function when stratum level names are long.
 }
 \examples{
-\dontshow{if (!names(grDevices::dev.cur()) \%in\% c("pdf", "postscript")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!names(grDevices::dev.cur()) \%in\% c("pdf", "postscript")) withAutoprint(\{ # examplesIf}
 p <-
   survfit2(Surv(time, status) ~ sex, data = df_lung) \%>\%
   ggsurvfit(linewidth = 1) +
