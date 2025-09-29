@@ -1,3 +1,5 @@
+# ggsurvfit (development version)
+
 # ggsurvfit 1.2.0
 
 * Updates to account for changes in ggplot2 v4.0.0. (#241)
