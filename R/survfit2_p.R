@@ -42,31 +42,24 @@ survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, rho = 0) {
     cli_abort("The {.fun survfit2_p} does not support multi-state models.")
   }
 
-  #extract subset argument from the original survfit call 
-  call_list <- x$call %>% as.list()
-  subset_arg <- call_list[["subset"]]
-  
-  #call survdiff with subset argument if it exists
-  if (!is.null(subset_arg)) {
-    # do.call to properly pass the subset argument
-    survdiff_result <- do.call(
-      survival::survdiff,
-      list(
-        formula = .extract_formula_from_survfit(x),
-        data = .extract_data_from_survfit(x),
-        subset = subset_arg,
-        rho = rho
-      ),
-      envir = x$.Environment
-    )
-  } else {
-    survdiff_result <- survival::survdiff(
+  # call survdiff
+  survdiff_args <-
+    list(
       formula = .extract_formula_from_survfit(x),
       data = .extract_data_from_survfit(x),
+      subset = as.list(x$call)[["subset"]],
       rho = rho
+    ) %>%
+    # remove NULL entries
+    {Filter(Negate(is.null), x = .)} # styler: off
+
+  survdiff_result <-
+    do.call(
+      what = survival::survdiff,
+      args = survdiff_args,
+      envir = x$.Environment
     )
-  }
-  
+
   survdiff_result %>%
     broom::glance() %>%
     dplyr::pull("p.value") %>%
