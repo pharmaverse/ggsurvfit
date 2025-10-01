@@ -41,8 +41,7 @@ a ggplot2 figure
 P-values are calculated with \code{survival::survdiff()} or \code{tidycmprsk::glance()}.
 Examples of custom placement located in the help file for \code{survfit_p()}.
 
-When a competing risks figure includes multiple outcomes, only the p-value
-comparing stratum for the \emph{first} outcome can be placed.
+Competing risks modeld displaying multiple outcomes are not supported by \code{add_pvalue()}.
 }
 \examples{
 survfit2(Surv(time, status) ~ surg, df_colon) \%>\%

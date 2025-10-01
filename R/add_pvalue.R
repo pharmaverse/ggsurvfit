@@ -7,8 +7,7 @@
 #' P-values are calculated with `survival::survdiff()` or `tidycmprsk::glance()`.
 #' Examples of custom placement located in the help file for `survfit_p()`.
 #'
-#' When a competing risks figure includes multiple outcomes, only the p-value
-#' comparing stratum for the _first_ outcome can be placed.
+#' Competing risks modeld displaying multiple outcomes are not supported by `add_pvalue()`.
 #'
 #' @param location string indicating where to place p-value. Must be one of
 #' `c("caption", "annotation")`
