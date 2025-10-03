@@ -299,3 +299,13 @@ test_that("tidy_survfit() handles custom transformation functions correctly with
     1 - original_survival$estimate
   )
 })
+
+test_that("ggcuminc() preserves factor level ordering", {
+  trial_test <- tidycmprsk::trial %>%
+    dplyr::mutate(trt = factor(trt, levels = c("Drug B", "Drug A")))
+
+  p <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, data = trial_test) %>%
+    ggcuminc()
+
+  expect_equal(levels(p$data$strata), c("Drug B", "Drug A"))
+})

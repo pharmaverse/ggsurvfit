@@ -81,6 +81,37 @@ if (!inherits(x, c("tidycuminc", "survfitms")) || inherits(x, "survfitcoxms")) {
   # construction ggplot object -------------------------------------------------
   gg <- .construct_ggplot(x = x, df = df, aes_args = aes_args, theme = theme, ...)
 
+  #fix factor level ordering -----------
+  if (inherits(x, "tidycuminc") && "strata" %in% names(gg$data)) {
+    tryCatch({
+      #Extract the stratifying variables from the original formula
+      original_formula <- x$formula
+      formula_rhs <- original_formula
+      rlang::f_lhs(formula_rhs) <- NULL
+      strata_vars <- all.vars(formula_rhs)
+      
+      #check each stratifying variable for original factor levels
+      for (var_name in strata_vars) {
+        if (var_name %in% names(x$data) && is.factor(x$data[[var_name]])) {
+          original_levels <- levels(x$data[[var_name]])
+          current_strata_values <- unique(as.character(gg$data$strata))
+          
+          # If all current strata values exist in original levels, reorder them
+          if (all(current_strata_values %in% original_levels)) {
+            
+            correct_order <- intersect(original_levels, current_strata_values)
+            gg$data$strata <- factor(gg$data$strata, levels = correct_order)
+            break  
+          }
+        }
+      }
+    }, error = function(e) {
+      #if anything goes wrong, continuing with current behavior
+  
+      invisible(NULL)
+    })
+  }
+
   # assign class and return object ---------------------------------------------
   class(gg) <- c("ggcuminc", class(gg))
 
