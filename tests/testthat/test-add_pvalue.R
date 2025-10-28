@@ -92,4 +92,11 @@ test_that("add_pvalue() throws proper errors", {
       add_pvalue(prepend_p = letters)) %>%
       ggsurvfit_build()
   )
+
+  expect_snapshot(
+    error = TRUE,
+    tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, tidycmprsk::trial) %>%
+      ggcuminc(outcome = c("death other causes", "death from cancer")) +
+      add_pvalue()
+  )
 })

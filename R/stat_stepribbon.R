@@ -3,6 +3,9 @@
 #' Provides stairstep values for ribbon plots
 #'
 #' @name stepribbon
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics, rather than
+#' combining with them. This is most useful for helper functions that define
+#' both data and aesthetics and shouldn't inherit behaviour from the default plot specification.
 #' @inheritParams ggplot2::geom_ribbon
 #' @param geom which geom to use; defaults to "`ribbon`"
 #' @param direction `hv` for horizontal-vertical steps, `vh` for

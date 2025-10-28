@@ -7,8 +7,7 @@
 #' P-values are calculated with `survival::survdiff()` or `tidycmprsk::glance()`.
 #' Examples of custom placement located in the help file for `survfit_p()`.
 #'
-#' When a competing risks figure includes multiple outcomes, only the p-value
-#' comparing stratum for the _first_ outcome can be placed.
+#' Competing risks modeld displaying multiple outcomes are not supported by `add_pvalue()`.
 #'
 #' @param location string indicating where to place p-value. Must be one of
 #' `c("caption", "annotation")`
@@ -78,7 +77,6 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
     cli_abort(c("!" = "The {.code add_pvalue(prepend_p=)} argument must be a logical."))
   }
 
-
   # extract survfit object
   build <- suppressWarnings(ggplot2::ggplot_build(p))
   survfit <- build$plot[["data"]][["survfit"]][[1]]
@@ -98,6 +96,23 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
     return(p)
   }
 
+  # check only a single outcome is selected
+  if (inherits(survfit, "tidycuminc")) {
+    outcomes_chosen <- suppressWarnings(ggplot2::ggplot_build(p))$plot$data$outcome |> unique()
+    outcomes_all <- tidycmprsk::tidy(survfit) |>
+      dplyr::pull("outcome") |>
+      unique()
+    outcomes_chosen_position <- which(outcomes_all %in% outcomes_chosen)
+    if (length(outcomes_chosen) > 1L) {
+      cli_abort(
+        c("{.fun add_pvalue} supports reporting a single competing event
+                p-value and the plot contains {.val {outcomes_chosen}}.",
+          i = "To place more than one p-value, calculate the p-values with {.code tidycmprsk::tidy},
+               and insert them into the plot using {.pkg ggplot2} functions.")
+      )
+    }
+  }
+
   # calculate p-value
   if (inherits(survfit, "survfit2")) {
     p.value <- survfit2_p(survfit,
@@ -108,7 +123,7 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
   else if (inherits(survfit, "tidycuminc")) {
     p.value <-
       tidycmprsk::glance(survfit) %>%
-      dplyr::pull("p.value_1") %>%
+      dplyr::pull(paste0("p.value_", outcomes_chosen_position)) %>%
       pvalue_fun() %>%
       {dplyr::case_when(
         !prepend_p ~ .,

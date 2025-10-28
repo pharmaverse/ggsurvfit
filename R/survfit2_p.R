@@ -38,12 +38,29 @@ survfit2_p <- function(x, pvalue_fun = format_p, prepend_p = TRUE, rho = 0) {
         "i" = "Create a {.cls survfit2} object with {.code survfit2()}.")
     )
   }
+  if (inherits(x, "survfitms")) {
+    cli_abort("The {.fun survfit2_p} does not support multi-state models.")
+  }
 
-  survival::survdiff(
-    formula = .extract_formula_from_survfit(x),
-    data = .extract_data_from_survfit(x),
-    rho = rho
-  ) %>%
+  # call survdiff
+  survdiff_args <-
+    list(
+      formula = .extract_formula_from_survfit(x),
+      data = .extract_data_from_survfit(x),
+      subset = as.list(x$call)[["subset"]],
+      rho = rho
+    ) %>%
+    # remove NULL entries
+    {Filter(Negate(is.null), x = .)} # styler: off
+
+  survdiff_result <-
+    do.call(
+      what = survival::survdiff,
+      args = survdiff_args,
+      envir = x$.Environment
+    )
+
+  survdiff_result %>%
     broom::glance() %>%
     dplyr::pull("p.value") %>%
     pvalue_fun() %>%

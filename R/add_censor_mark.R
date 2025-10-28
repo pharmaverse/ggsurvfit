@@ -40,7 +40,7 @@ update_add_censor_mark <- function(p, add_censor_mark_empty_list) {
   p +
     rlang::inject(
       ggplot2::geom_point(
-        data = \(.x) {
+        data = function(.x) {
           # Check if any n.censor values are non-integer (indicating weighted data)
           if (!rlang::is_integerish(.x$n.censor)) {
             cli::cli_abort(
