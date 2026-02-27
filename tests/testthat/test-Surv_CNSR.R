@@ -23,16 +23,16 @@ test_that("The function is compatible with the survival package", {
 test_that("The results of the estimation match between Surv_CNSR and Surv with inverted censoring", {
   expect_equal(
     with(adtte, Surv_CNSR()),
-    with(adtte, Surv(AVAL, 1 - CNSR))
+    with(adtte, Surv(AVAL, CNSR == 0))
   )
 
   km1 <- survfit2(formula = Surv_CNSR() ~ 1, data = adtte)
-  km2 <- survfit2(formula = Surv(AVAL, 1 - CNSR) ~ 1, data = adtte)
+  km2 <- survfit2(formula = Surv(AVAL, CNSR == 0) ~ 1, data = adtte)
   km1$call <- km2$call <- km1$.Environment <- km2$.Environment <- NULL
   expect_equal(km1, km2)
 
   km1 <- survfit2(formula = Surv_CNSR() ~ STR01, data = adtte)
-  km2 <- survfit2(formula = Surv(AVAL, 1 - CNSR) ~ STR01, data = adtte)
+  km2 <- survfit2(formula = Surv(AVAL, CNSR == 0) ~ STR01, data = adtte)
   km1$call <- km2$call <- km1$.Environment <- km2$.Environment <- NULL
   expect_equal(km1, km2)
 })
@@ -74,6 +74,9 @@ test_that("An error when the column name specified through CNSR in the environme
   expect_error(survfit(Surv_CDISC(AVAL = time) ~ 1, data = survival::lung %>% dplyr::mutate(CNSR = as.character(status))))
 })
 
-test_that("An error when the column name specified through CNSR is not coded as 0/1", {
-  expect_error(survfit(Surv_CNSR(time, status) ~ 1, data = survival::lung))
+test_that("An error when the column name specified through CNSR < 0", {
+  expect_error(survfit(
+    Surv_CNSR(time, status) ~ 1,
+    data = survival::lung %>% dplyr::mutate(status = status - 2)
+  ))
 })

@@ -12,7 +12,7 @@
 #' [survival](https://cran.r-project.org/package=survival) package.
 #'
 #' The `AVAL` and `CNSR` arguments are passed to
-#' `survival::Surv(time = AVAL, event = 1 - CNSR, type = "right", origin = 0)`.
+#' `survival::Surv(time = AVAL, event = CNSR == 0, type = "right", origin = 0)`.
 #'
 #' @section Details:
 #'
@@ -29,11 +29,11 @@
 #'
 #' The CDISC ADaM ADTTE data model adopts a different coding convention for
 #' the event/status indicator. Using this convention, the event/status variable
-#' is named `'CNSR'` and uses the following coding: `censor = 1`, `status/event = 0`.
+#' is named `'CNSR'` and uses the following coding: `censor >= 1`, `status/event = 0`.
 #'
 #' @param AVAL The follow-up time. The follow-up time is assumed to originate from zero.
 #' When no argument is passed, the default value is a column/vector named `AVAL`.
-#' @param CNSR The censoring indicator where `1=censored` and `0=death/event`.
+#' @param CNSR The censoring indicator where `>=1=censored` and `0=death/event`.
 #' When no argument is passed, the default value is a column/vector named `CNSR`.
 #'
 #' @return Object of class 'Surv'
@@ -68,11 +68,8 @@ Surv_CNSR <- function(AVAL, CNSR) {
     stop("Expecting arguments 'AVAL' and 'CNSR' to be numeric.")
   }
 
-  if (stats::na.omit(CNSR) %>% setdiff(c(0, 1)) %>%
-      {
-        !rlang::is_empty(.)
-      }) {
-    stop("Expecting 'CNSR' argument to be binary with values `0/1`.")
+  if (any(stats::na.omit(CNSR) < 0)) {
+    stop("Expecting 'CNSR' argument to be non-negative (>=0).")
   }
 
   if (any(AVAL < 0)) {
@@ -80,5 +77,5 @@ Surv_CNSR <- function(AVAL, CNSR) {
   }
 
   # pass args to `survival::Surv()` --------------------------------------------
-  survival::Surv(time = AVAL, event = 1 - CNSR, type = "right", origin = 0)
+  survival::Surv(time = AVAL, event = CNSR == 0, type = "right", origin = 0)
 }

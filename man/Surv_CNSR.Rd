@@ -10,7 +10,7 @@ Surv_CNSR(AVAL, CNSR)
 \item{AVAL}{The follow-up time. The follow-up time is assumed to originate from zero.
 When no argument is passed, the default value is a column/vector named \code{AVAL}.}
 
-\item{CNSR}{The censoring indicator where \code{1=censored} and \code{0=death/event}.
+\item{CNSR}{The censoring indicator where \verb{>=1=censored} and \code{0=death/event}.
 When no argument is passed, the default value is a column/vector named \code{CNSR}.}
 }
 \value{
@@ -27,7 +27,7 @@ status/event variable convention used in the
 \href{https://cran.r-project.org/package=survival}{survival} package.
 
 The \code{AVAL} and \code{CNSR} arguments are passed to
-\code{survival::Surv(time = AVAL, event = 1 - CNSR, type = "right", origin = 0)}.
+\code{survival::Surv(time = AVAL, event = CNSR == 0, type = "right", origin = 0)}.
 }
 \section{Details}{
 
@@ -45,7 +45,7 @@ all subjects are assumed to have an event.
 
 The CDISC ADaM ADTTE data model adopts a different coding convention for
 the event/status indicator. Using this convention, the event/status variable
-is named \code{'CNSR'} and uses the following coding: \code{censor = 1}, \code{status/event = 0}.
+is named \code{'CNSR'} and uses the following coding: \code{censor >= 1}, \code{status/event = 0}.
 }
 
 \examples{
