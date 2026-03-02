@@ -68,8 +68,8 @@ Surv_CNSR <- function(AVAL, CNSR) {
     stop("Expecting arguments 'AVAL' and 'CNSR' to be numeric.")
   }
 
-  if (any(stats::na.omit(CNSR) < 0)) {
-    stop("Expecting 'CNSR' argument to be non-negative (>=0).")
+  if (any(!rlang::is_integerish(CNSR)) || any(stats::na.omit(CNSR) < 0)) {
+    stop("Expecting 'CNSR' argument to be non-negative integer (>=0).")
   }
 
   if (any(AVAL < 0)) {

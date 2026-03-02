@@ -1,7 +1,7 @@
 # ggsurvfit (development version)
 
 * `Surv_CNSR()` updated to accept values `>= 1` as censoring values (according
-to CDISC recommendation). (#271)
+to CDISC recommendation). (#271, @bundfussr)
 
 # ggsurvfit 1.2.0
 
