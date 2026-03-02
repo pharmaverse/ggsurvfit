@@ -100,7 +100,7 @@ The package also includes gems for those using the [CDISC ADaM ADTTE v1.0](https
 
 If columns `"PARAM"` or `"PARAMCD"` are present in the data frame passed to `survfit2()`, their values will be used to construct default labels in the `ggsurvfit()` figure. 
 
-The event indicator in ADTTE data sets is named `"CNSR"` and is coded in the opposite way the survival package expects outcomes---`1 = 'censored'` and `0 = 'event'`.
+The event indicator in ADTTE data sets is named `"CNSR"` and is coded in the opposite way the survival package expects outcomes---`>=1 = 'censored'` and `0 = 'event'`.
 This difference creates an opportunity for errors to be introduced in an analysis.
 The **ggsurvfit** package exports a function called `Surv_CNSR()` to resolve this concern.
 The function creates a survival object (e.g. `survival::Surv()`) that uses CDISC ADaM ADTTE coding conventions as the default values.
