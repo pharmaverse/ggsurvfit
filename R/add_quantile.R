@@ -154,6 +154,55 @@ update_add_quantile <- function(p, add_quantile_empty_list) {
   df_quantile
 }
 
+.find_quantile_x <- function(
+  x,
+  y,
+  y_value,
+  x_max,
+  monotonicity_type,
+  tolerance = sqrt(.Machine$double.eps)
+) {
+  if (monotonicity_type == "decreasing") {
+    # x1: first time y drops to or below y_value
+    idx1 <- which(y <= y_value + tolerance)
+    if (length(idx1) == 0L) return(NA_real_)
+    x1 <- x[idx1[1]]
+
+    # x2: first time y drops strictly below y_value
+    idx2 <- which(y < y_value - tolerance)
+    if (length(idx2) == 0L) {
+      # plateau runs to end of follow-up
+      return((x1 + x_max) / 2)
+    }
+    x2 <- x[idx2[1]]
+
+    if (x2 > x1 + tolerance) {
+      # genuine plateau at y_value: use midpoint
+      return((x1 + x2) / 2)
+    }
+    # no plateau: curve steps through y_value immediately
+    return(x1)
+  } else {
+    # increasing
+    # x1: first time y rises to or above y_value
+    idx1 <- which(y >= y_value - tolerance)
+    if (length(idx1) == 0L) return(NA_real_)
+    x1 <- x[idx1[1]]
+
+    # x2: first time y rises strictly above y_value
+    idx2 <- which(y > y_value + tolerance)
+    if (length(idx2) == 0L) {
+      return((x1 + x_max) / 2)
+    }
+    x2 <- x[idx2[1]]
+
+    if (x2 > x1 + tolerance) {
+      return((x1 + x2) / 2)
+    }
+    return(x1)
+  }
+}
+
 .create_y_value_df <- function(data, y_value) {
   if (is.null(y_value))
     return(
@@ -161,83 +210,81 @@ update_add_quantile <- function(p, add_quantile_empty_list) {
                     xend = numeric(), yend = numeric())
     )
 
-  # create vertical line segments
-  df_quantile <-
-    data %>%
-    .add_monotonicity_type(estimate_var = "y") %>%
-    dplyr::select(dplyr::any_of(c("x", "y", "group", "outcome", "monotonicity_type"))) %>%
-    .add_requested_y_value(y_value = y_value) %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of(c("group", "outcome", "y")))) %>%
-    dplyr::filter(.data$y %in% .env$y_value, dplyr::row_number() == 1L) %>%
-    dplyr::ungroup() %>%
-    dplyr::select("x", "y") %>%
+  # Determine monotonicity type from data
+  # Use column if it exists; otherwise derive via .add_monotonicity_type()
+  # Note: monotonicity_type may not be present when .create_y_value_df() is
+  # called directly with tidy_survfit() output (e.g. in unit tests)
+  mono_type <- if ("monotonicity_type" %in% names(data)) {
+    data[["monotonicity_type"]][1]
+  } else {
+    NA_character_
+  }
+  if (is.na(mono_type) || is.null(mono_type)) {
+    mono_type <- .add_monotonicity_type(data, estimate_var = "y")[[
+      "monotonicity_type"
+    ]][1]
+  }
+
+  # Determine groups
+  # When group strata not present, treat data as one group
+  has_group <- "group" %in% names(data)
+  if (has_group) {
+    groups <- unique(data[["group"]])
+  } else {
+    groups <- list(NULL) # single sentinel value => process all rows once
+  }
+
+  # Compute the quantile x-value per group using helper
+  results <- lapply(groups, function(g) {
+    if (has_group) {
+      grp_data <- data[data[["group"]] == g, ]
+    } else {
+      grp_data <- data
+    }
+    grp_data <- grp_data[order(grp_data[["x"]]), ]
+    x_max <- max(grp_data[["x"]], na.rm = TRUE)
+    qx <- .find_quantile_x(
+      x = grp_data[["x"]],
+      y = grp_data[["y"]],
+      y_value = y_value,
+      x_max = x_max,
+      monotonicity_type = mono_type
+    )
+    if (!is.na(qx)) {
+      dplyr::tibble(x = qx, y = y_value)
+    } else {
+      dplyr::tibble(x = numeric(), y = numeric())
+    }
+  })
+
+  df_quantile <- dplyr::bind_rows(results)
+
+  if (nrow(df_quantile) == 0L) {
+    return(
+      dplyr::tibble(
+        x = numeric(),
+        y = numeric(),
+        xend = numeric(),
+        yend = numeric()
+      )
+    )
+  }
+
+  # Create vertical line segments (from each quantile point down to y = 0)
+  df_quantile <- df_quantile %>%
     dplyr::mutate(xend = .data$x, yend = 0)
 
-  # add row for horizontal line segment
-  if (nrow(df_quantile) > 0) {
-    df_quantile <-
-      df_quantile %>%
-      dplyr::bind_rows(
-        dplyr::tibble(
-          x = 0, y = y_value,
-          xend = max(df_quantile$x), yend = y_value
-        )
+  # Add horizontal line segment (from x = 0 across to the rightmost quantile)
+  df_quantile <-
+    df_quantile %>%
+    dplyr::bind_rows(
+      dplyr::tibble(
+        x = 0,
+        y = y_value,
+        xend = max(df_quantile$x),
+        yend = y_value
       )
-  }
+    )
 
   df_quantile
 }
-
-.add_requested_y_value <- function(data, y_value) {
-  monotonicity_type <- data$monotonicity_type[1]
-  arrange_sign <-
-    dplyr::case_when(
-      monotonicity_type == "decreasing" ~ -1L,
-      monotonicity_type == "increasing" ~ 1L
-    )
-
-  data %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
-    dplyr::mutate(
-      y_extreme =
-        dplyr::case_when(
-          .env$monotonicity_type == "decreasing" ~ min(.data$y, na.rm = TRUE),
-          .env$monotonicity_type == "increasing" ~ max(.data$y, na.rm = TRUE)
-        )
-    ) %>%
-    {dplyr::rows_upsert(
-      .,
-      dplyr::select(., dplyr::any_of(c("group", "monotonicity_type", "y_extreme"))) %>%
-        dplyr::distinct() %>%
-        dplyr::mutate(y = .env$y_value),
-      by = intersect(c("group", "y"), names(.))
-    )} %>%
-    {dplyr::arrange(
-      .,
-      !!!rlang::syms(intersect(c("group", "y"), names(.))),
-      arrange_sign *.data$x # need to sort x based on the monotonicity of the curve
-    )} %>%
-    dplyr::group_by(dplyr::across(dplyr::any_of("group"))) %>%
-    tidyr::fill(
-      "x",
-      .direction =
-        dplyr::case_when(
-          monotonicity_type == "decreasing" ~ "down",
-          monotonicity_type == "increasing" ~ "up"
-        )
-    ) %>%
-    dplyr::mutate(
-      x =
-        dplyr::case_when(
-          .data$monotonicity_type == "decreasing" ~
-            ifelse(.data$y < .data$y_extreme, NA, .data$x),
-          .data$monotonicity_type == "increasing" ~
-            ifelse(.data$y > .data$y_extreme, NA, .data$x)
-        )
-    ) %>%
-    tidyr::drop_na("x") %>%
-    dplyr::arrange(dplyr::across(dplyr::any_of(c("group", "x", "y"))))
-}
-
-
-
