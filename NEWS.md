@@ -1,5 +1,7 @@
 # ggsurvfit (development version)
 
+* Fixed `add_pvalue()` reporting the Gray-test p-value for the wrong competing event when the outcome ordering from `tidycmprsk::tidy()` and `tidycmprsk::glance()` differed. The p-value is now matched to the plotted outcome by name. (#277)
+
 * Fixed `add_quantile()` to use the midpoint of plateau segments when the curve plotted is flat at the requested quantile, consistent with results from `survival::quantile.survfit()` (#270)
 
 * `Surv_CNSR()` updated to accept values `>= 1` as censoring values (according
