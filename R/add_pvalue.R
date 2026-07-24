@@ -99,10 +99,6 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
   # check only a single outcome is selected
   if (inherits(survfit, "tidycuminc")) {
     outcomes_chosen <- suppressWarnings(ggplot2::ggplot_build(p))$plot$data$outcome |> unique()
-    outcomes_all <- tidycmprsk::tidy(survfit) |>
-      dplyr::pull("outcome") |>
-      unique()
-    outcomes_chosen_position <- which(outcomes_all %in% outcomes_chosen)
     if (length(outcomes_chosen) > 1L) {
       cli_abort(
         c("{.fun add_pvalue} supports reporting a single competing event
@@ -121,9 +117,19 @@ update_add_pvalue <- function(p, add_pvalue_empty_list) {
                           rho = rho)
   }
   else if (inherits(survfit, "tidycuminc")) {
+    glance_df <- tidycmprsk::glance(survfit)
+    # `tidy()` and `glance()` may order outcomes differently, so match the chosen
+    # outcome to the `glance()` p-value column by name rather than by position (#277)
+    n_outcomes <- sum(grepl("^outcome_[0-9]+$", names(glance_df)))
+    outcome_position <-
+      which(vapply(
+        seq_len(n_outcomes),
+        function(i) identical(glance_df[[paste0("outcome_", i)]], outcomes_chosen),
+        logical(1L)
+      ))
     p.value <-
-      tidycmprsk::glance(survfit) %>%
-      dplyr::pull(paste0("p.value_", outcomes_chosen_position)) %>%
+      glance_df %>%
+      dplyr::pull(paste0("p.value_", outcome_position)) %>%
       pvalue_fun() %>%
       {dplyr::case_when(
         !prepend_p ~ .,

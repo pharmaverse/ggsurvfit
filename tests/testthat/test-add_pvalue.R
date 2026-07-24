@@ -73,6 +73,63 @@ test_that("add_pvalue() works", {
 })
 
 
+test_that("add_pvalue() matches the p-value to the plotted outcome by name (#277)", {
+  # relevel `death_cr` so the factor ordering (used by `tidy()`) differs from the
+  # failcode ordering (used by `glance()` p.value_* columns)
+  trial_relevel <- tidycmprsk::trial
+  trial_relevel$death_cr <-
+    factor(
+      as.character(trial_relevel$death_cr),
+      levels = c("censor", "death other causes", "death from cancer")
+    )
+
+  cuminc_fit <- tidycmprsk::cuminc(Surv(ttdeath, death_cr) ~ trt, trial_relevel)
+  glance_df <- tidycmprsk::glance(cuminc_fit)
+
+  # expected p-values keyed by outcome name, matched from glance() by name
+  n_outcomes <- sum(grepl("^outcome_[0-9]+$", names(glance_df)))
+  expected_p <- vapply(
+    seq_len(n_outcomes),
+    function(i) glance_df[[paste0("p.value_", i)]],
+    numeric(1L)
+  )
+  names(expected_p) <- vapply(
+    seq_len(n_outcomes),
+    function(i) glance_df[[paste0("outcome_", i)]],
+    character(1L)
+  )
+
+  # sanity check: tidy() and glance() orderings actually differ for this fit,
+  # otherwise the regression test would not exercise the bug
+  expect_false(
+    identical(
+      unique(tidycmprsk::tidy(cuminc_fit)[["outcome"]]),
+      unname(names(expected_p))
+    )
+  )
+
+  reported_p <- vapply(
+    names(expected_p),
+    function(outcome) {
+      caption <-
+        (ggcuminc(cuminc_fit, outcome = outcome) +
+           add_pvalue(pvalue_fun = function(x) as.character(x), prepend_p = FALSE))$labels$caption
+      as.numeric(caption)
+    },
+    numeric(1L)
+  )
+
+  # each plotted outcome reports its own Gray-test p-value
+  expect_equal(reported_p, expected_p)
+
+  # and the two outcomes' p-values are not swapped
+  expect_false(isTRUE(all.equal(
+    reported_p[["death from cancer"]],
+    expected_p[["death other causes"]]
+  )))
+})
+
+
 test_that("add_pvalue() throws proper errors", {
   expect_error(
     (survfit2(Surv(time, status) ~ surg, df_colon) %>%
