@@ -16,3 +16,4 @@ codemeta.json
 ^revdep$
 ^\.DS_Store$
 .DS_Store
+^AGENTS\.md$

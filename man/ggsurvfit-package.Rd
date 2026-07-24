@@ -23,6 +23,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Daniel D. Sjoberg \email{danield.sjoberg@gmail.com} (\href{https://orcid.org/0000-0003-0862-2018}{ORCID}) [copyright holder]
   \item Shreya Sreeram \email{shreyasreeram27@gmail.com}
   \item Mark Baillie \email{bailliem@gmail.com}
   \item Charlotta Fruechtenicht \email{charlotta.fruechtenicht@roche.com} (\href{https://orcid.org/0000-0002-6689-6423}{ORCID})

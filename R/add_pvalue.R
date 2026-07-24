@@ -7,7 +7,7 @@
 #' P-values are calculated with `survival::survdiff()` or `tidycmprsk::glance()`.
 #' Examples of custom placement located in the help file for `survfit_p()`.
 #'
-#' Competing risks modeld displaying multiple outcomes are not supported by `add_pvalue()`.
+#' Competing risks models displaying multiple outcomes are not supported by `add_pvalue()`.
 #'
 #' @param location string indicating where to place p-value. Must be one of
 #' `c("caption", "annotation")`

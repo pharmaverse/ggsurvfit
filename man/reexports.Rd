@@ -16,12 +16,12 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dplyr}{\code{\link[dplyr:reexports]{\%>\%}}}
+  \item{dplyr}{\code{\link[dplyr:\%>\%]{\%>\%}}}
 
-  \item{ggplot2}{\code{\link[ggplot2:gg-add]{\%+\%}}, \code{\link[ggplot2:update_ggplot]{ggplot_add}}}
+  \item{ggplot2}{\code{\link[ggplot2:\%+\%]{\%+\%}}, \code{\link[ggplot2:ggplot_add]{ggplot_add()}}}
 
-  \item{grid}{\code{\link[grid]{grid.draw}}}
+  \item{grid}{\code{\link[grid:grid.draw]{grid.draw()}}}
 
-  \item{survival}{\code{\link[survival]{Surv}}, \code{\link[survival]{survfit}}}
+  \item{survival}{\code{\link[survival:Surv]{Surv()}}, \code{\link[survival:survfit]{survfit()}}}
 }}
 
