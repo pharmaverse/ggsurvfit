@@ -1,3 +1,5 @@
+# ggsurvfit (development version)
+
 # ggsurvfit 1.2.1
 
 * Fixed `add_pvalue()` reporting the Gray-test p-value for the wrong competing event when the outcome ordering from `tidycmprsk::tidy()` and `tidycmprsk::glance()` differed. The p-value is now matched to the plotted outcome by name. (#277)
